@@ -1,0 +1,569 @@
+<ui version="4.0" >
+ <class>Form</class>
+ <widget class="QWidget" name="Form" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>591</height>
+   </rect>
+  </property>
+  <property name="focusPolicy" >
+   <enum>Qt::NoFocus</enum>
+  </property>
+  <property name="contextMenuPolicy" >
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" colspan="3" >
+    <widget class="QStackedWidget" name="stackedWidget" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page" >
+      <layout class="QGridLayout" name="gridLayout_3" >
+       <item row="0" column="0" >
+        <widget class="QGroupBox" name="groupBox" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font" >
+          <font>
+           <italic>true</italic>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >color: rgb(0, 0, 127);</string>
+         </property>
+         <property name="title" >
+          <string/>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2" >
+          <item rowspan="2" row="1" column="0" >
+           <widget class="QPushButton" name="pushButton_5" >
+            <property name="focusPolicy" >
+             <enum>Qt::TabFocus</enum>
+            </property>
+            <property name="toolTip" >
+             <string>Opciones generales de configuración</string>
+            </property>
+            <property name="whatsThis" >
+             <string/>
+            </property>
+            <property name="accessibleName" >
+             <string>General</string>
+            </property>
+            <property name="accessibleDescription" >
+             <string>Opciones generales</string>
+            </property>
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="nadir.qrc" >
+              <normaloff>:/png Icons/images/png/preferences-yellow.png</normaloff>:/png Icons/images/png/preferences-yellow.png</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="shortcut" >
+             <string>Alt+G</string>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="flat" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item rowspan="2" row="1" column="1" >
+           <widget class="QPushButton" name="pushButton" >
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="nadir.qrc" >
+              <normaloff>:/png Icons/images/png/keys.png</normaloff>:/png Icons/images/png/keys.png</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="flat" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item rowspan="2" row="1" column="2" >
+           <widget class="QPushButton" name="pushButton_2" >
+            <property name="enabled" >
+             <bool>true</bool>
+            </property>
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="nadir.qrc" >
+              <normaloff>:/png Icons/images/png/mouse.png</normaloff>:/png Icons/images/png/mouse.png</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="flat" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item rowspan="2" row="1" column="3" >
+           <widget class="QPushButton" name="pushButton_3" >
+            <property name="enabled" >
+             <bool>true</bool>
+            </property>
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="nadir.qrc" >
+              <normaloff>:/png Icons/images/png/webcam.png</normaloff>:/png Icons/images/png/webcam.png</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="flat" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item rowspan="2" row="1" column="4" >
+           <widget class="QPushButton" name="pushButton_4" >
+            <property name="enabled" >
+             <bool>true</bool>
+            </property>
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="nadir.qrc" >
+              <normaloff>:/png Icons/images/png/mic.png</normaloff>:/png Icons/images/png/mic.png</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="flat" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item rowspan="2" row="1" column="5" >
+           <widget class="QPushButton" name="pushButton_6" >
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="nadir.qrc" >
+              <normaloff>:/png Icons/images/png/info.png</normaloff>:/png Icons/images/png/info.png</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="flat" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_5" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>General</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QLabel" name="label" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font" >
+             <font>
+              <italic>true</italic>
+             </font>
+            </property>
+            <property name="text" >
+             <string>Teclado</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" >
+           <widget class="QLabel" name="label_2" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font" >
+             <font>
+              <italic>true</italic>
+             </font>
+            </property>
+            <property name="text" >
+             <string>Ratón</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3" >
+           <widget class="QLabel" name="label_3" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font" >
+             <font>
+              <italic>true</italic>
+             </font>
+            </property>
+            <property name="text" >
+             <string>Cámara</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4" >
+           <widget class="QLabel" name="label_4" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Micrófono</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5" >
+           <widget class="QLabel" name="label_6" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Acerca de</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QFrame" name="frame" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4" >
+          <item row="0" column="0" >
+           <widget class="QStackedWidget" name="stackedWidget_2" >
+            <widget class="QWidget" name="page_3" />
+            <widget class="QWidget" name="page_4" />
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2" >
+      <widget class="QListWidget" name="listWidget" >
+       <property name="geometry" >
+        <rect>
+         <x>80</x>
+         <y>50</y>
+         <width>80</width>
+         <height>545</height>
+        </rect>
+       </property>
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>80</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="sizeIncrement" >
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="midLineWidth" >
+        <number>50</number>
+       </property>
+       <property name="iconSize" >
+        <size>
+         <width>64</width>
+         <height>64</height>
+        </size>
+       </property>
+       <property name="movement" >
+        <enum>QListView::Static</enum>
+       </property>
+       <property name="flow" >
+        <enum>QListView::TopToBottom</enum>
+       </property>
+       <property name="viewMode" >
+        <enum>QListView::IconMode</enum>
+       </property>
+       <property name="modelColumn" >
+        <number>0</number>
+       </property>
+       <property name="uniformItemSizes" >
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap" >
+        <bool>true</bool>
+       </property>
+       <property name="selectionRectVisible" >
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled" >
+        <bool>false</bool>
+       </property>
+       <item>
+        <property name="text" >
+         <string>General</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="nadir.qrc" >
+          <normaloff>:/png Icons/images/png/preferences-yellow.png</normaloff>:/png Icons/images/png/preferences-yellow.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Teclado</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="nadir.qrc" >
+          <normaloff>:/png Icons/images/png/keys.png</normaloff>:/png Icons/images/png/keys.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Ratón</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="nadir.qrc" >
+          <normaloff>:/png Icons/images/png/mouse.png</normaloff>:/png Icons/images/png/mouse.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Cámara</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="nadir.qrc" >
+          <normaloff>:/png Icons/images/png/webcam.png</normaloff>:/png Icons/images/png/webcam.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Micrófono</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="nadir.qrc" >
+          <normaloff>:/png Icons/images/png/mic.png</normaloff>:/png Icons/images/png/mic.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Acerca de</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="nadir.qrc" >
+          <normaloff>:/png Icons/images/png/info.png</normaloff>:/png Icons/images/png/info.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <spacer name="horizontalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>511</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" >
+    <widget class="QPushButton" name="pushButton_8" >
+     <property name="minimumSize" >
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Cancelar</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2" >
+    <widget class="QPushButton" name="pushButton_7" >
+     <property name="minimumSize" >
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Aceptar</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>listWidget</tabstop>
+ </tabstops>
+ <resources>
+  <include location="nadir.qrc" />
+ </resources>
+ <connections/>
+</ui>

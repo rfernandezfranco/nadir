@@ -1,0 +1,165 @@
+<ui version="4.0" >
+ <class>MainWidget</class>
+ <widget class="QWidget" name="MainWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>773</width>
+    <height>50</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle" >
+   <string>Nadir</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="2" >
+    <widget class="QPushButton" name="clickButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Clic</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4" >
+    <widget class="QPushButton" name="rightClickButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Derecha</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6" >
+    <widget class="QPushButton" name="dbClickButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Doble</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="12" >
+    <widget class="QPushButton" name="confButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Configuración</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="8" >
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="9" >
+    <widget class="QPushButton" name="autoButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Auto</string>
+     </property>
+     <property name="flat" >
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="5" >
+    <widget class="QPushButton" name="dragButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Arrastrar</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="13" >
+    <widget class="QPushButton" name="exitButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Salir</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="11" >
+    <widget class="QPushButton" name="scanAreaButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Toda la
+Pantalla</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="10" >
+    <widget class="QPushButton" name="doClickButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>SIMULAR
+CLIC</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>clickButton</tabstop>
+  <tabstop>rightClickButton</tabstop>
+  <tabstop>dragButton</tabstop>
+  <tabstop>dbClickButton</tabstop>
+  <tabstop>autoButton</tabstop>
+  <tabstop>confButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="nadir.qrc" />
+ </resources>
+ <connections/>
+</ui>

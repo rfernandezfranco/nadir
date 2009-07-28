@@ -1,0 +1,38 @@
+
+INSTALL DEPENDENCIES
+
+  Qt4 Libraries - libqt4-dev
+  X11 Record extension library - libxtst-dev
+  X11 EvIE extension library - libxevie-dev
+
+CONFIGURE YOUR SYSTEM
+
+  Before running Nadir, Xevie extension must be enabled in your system.
+
+  1. Enable X11 EvIE extension
+
+    In order to enable Xevie extension, you must edit your /etc/X11/xorg.conf
+    file by addind these lines at the end of the file:
+
+      Section "Extensions"
+        Option "XEVIE" "Enable"
+      EndSection
+
+    Please, backup xorg.conf file before making this change!
+
+  2. Restart X11
+
+BUILD THE APPLICATION
+
+  Run:
+
+    $ qmake-qt4
+    $ make
+
+  Run as root:
+
+    # make install
+
+RUN THE APPLICATION
+
+  $ nadir
