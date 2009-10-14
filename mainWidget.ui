@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>773</width>
-    <height>50</height>
+    <width>740</width>
+    <height>60</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -28,7 +28,7 @@
       </sizepolicy>
      </property>
      <property name="text" >
-      <string>Clic</string>
+      <string>Izquierdo</string>
      </property>
     </widget>
    </item>
@@ -41,7 +41,7 @@
       </sizepolicy>
      </property>
      <property name="text" >
-      <string>Derecha</string>
+      <string>Derecho</string>
      </property>
     </widget>
    </item>
@@ -58,7 +58,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="12" >
+   <item row="0" column="10" >
     <widget class="QPushButton" name="confButton" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
@@ -78,22 +78,6 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="9" >
-    <widget class="QPushButton" name="autoButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text" >
-      <string>Auto</string>
-     </property>
-     <property name="flat" >
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="5" >
     <widget class="QPushButton" name="dragButton" >
      <property name="sizePolicy" >
@@ -107,7 +91,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="13" >
+   <item row="0" column="11" >
     <widget class="QPushButton" name="exitButton" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
@@ -120,8 +104,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="11" >
-    <widget class="QPushButton" name="scanAreaButton" >
+   <item row="0" column="9" >
+    <widget class="QPushButton" name="activeButton" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
        <horstretch>0</horstretch>
@@ -129,22 +113,13 @@
       </sizepolicy>
      </property>
      <property name="text" >
-      <string>Toda la
-Pantalla</string>
+      <string>Activo</string>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="10" >
-    <widget class="QPushButton" name="doClickButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+     <property name="checkable" >
+      <bool>true</bool>
      </property>
-     <property name="text" >
-      <string>SIMULAR
-CLIC</string>
+     <property name="checked" >
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -155,7 +130,6 @@ CLIC</string>
   <tabstop>rightClickButton</tabstop>
   <tabstop>dragButton</tabstop>
   <tabstop>dbClickButton</tabstop>
-  <tabstop>autoButton</tabstop>
   <tabstop>confButton</tabstop>
  </tabstops>
  <resources>

@@ -31,6 +31,9 @@ class ConfWidget : public QWidget
 
   public:
     ConfWidget( QWidget *parent = 0 );
+    void loadSettings();
+		void closeEvent();
+		QString backgroundColor();
 /*
     void getScreenSize();
     void setScreenWidth( int w );
@@ -47,14 +50,16 @@ class ConfWidget : public QWidget
 
   protected:
     void keyPressEvent(QKeyEvent *event );
-
+*/
+	signals:
+		void closing();
   private slots:
-    void about();
-    void scan();
-
-    */
+    void setColor();
+    void save();
+  
   private:
     Ui::ConfWidget ui;
+		QString lineColor;
     /*
     enum { LEFT=0, RIGHT, DOUBLE, DRAG, DROP } mouseEvent;
     enum { STOP=0, START, SCAN1, SCAN2, EVENT } state;

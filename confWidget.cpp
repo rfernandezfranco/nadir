@@ -18,98 +18,93 @@
  */
  
 #include <QtGui>
+#include <QSettings>
+#include <QColorDialog>
 #include "confWidget.h"
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 
-//using namespace std;
+using namespace std;
 
 ConfWidget::ConfWidget( QWidget *parent ):
   QWidget( parent )
 {
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
-/*
-  connect( ui.autoButton, SIGNAL(clicked()),
-      this, SLOT(scan()) );     
-  connect( ui.confButton, SIGNAL(clicked()),
-      this, SLOT(about()) );
-*/
+
+	// Temporally remove Camera Tab
+	ui.tabWidget->removeTab(4);
+
+  connect( ui.colorButton, SIGNAL(clicked()),
+      this, SLOT(setColor()) );
+
   connect( ui.cancelButton, SIGNAL(clicked()),
       this, SLOT(close()) );
 
-  setFixedSize( size() );
+  connect( ui.saveButton, SIGNAL(clicked()),
+      this, SLOT(save()) );
+
+  connect( this, SIGNAL(closing()),
+      parentWidget(), SLOT(loadSettings()) );
+
+ 	QCoreApplication::setOrganizationName( "Nadir" );
+	QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
+	QCoreApplication::setApplicationName( "Nadir" );
+
+//setFixedSize( size() );
+  loadSettings();
 }
+
+
+ void ConfWidget::loadSettings()
+ {
+	 QSettings settings;
+
+   settings.beginGroup( "Main" );
+	 ui.speedSlider->setValue( settings.value( "speed" ).toInt() );
+	 ui.thickBox->setValue( settings.value( "thickness" ).toInt() );
+	 ui.continuousBox->setChecked( settings.value( "continuous" ).toBool() );
+	 lineColor.clear();
+	 lineColor.append( settings.value( "color", "255,0,0").toString() );
+	 ui.colorButton->setStyleSheet( backgroundColor() );
+
+	 settings.endGroup();
+
+   settings.beginGroup("confWidget");
+	 resize( settings.value( "size", QSize( 770, 670 ) ).toSize() );
+	 move( settings.value( "pos" ).toPoint() );
+	 settings.endGroup();
+ }
+
+void ConfWidget::save()
+{
+	//Save settings
+	QSettings settings;
+	settings.beginGroup( "Main" );
+	settings.setValue( "speed", ui.speedSlider->value() );
+	settings.setValue( "thickness",  ui.thickBox->value() );
+	int i = ( ui.continuousBox->isChecked() ) ? 1 : 0;
+	settings.setValue( "continuous", i );
+	settings.setValue( "color", lineColor );
+	settings.endGroup();
+
+	settings.beginGroup( "confWidget" );
+	settings.setValue( "size", size() );
+	settings.setValue( "pos", pos() );
+	settings.endGroup();
+
+	//cout << "cont guardado: " << i << endl;
+  //fflush( stdout );	
+
+	//Update behaviour of scan lines
+	//parentWidget()->loadSettings();
+	
+	emit closing();
+	close();
+}
+
 /*
-void ConfWidget::getScreenSize()
-{
-  QDesktopWidget *desk = QApplication::desktop();
-  setScreenWidth( desk->width() );
-  setScreenHeight( desk->height() );
-}
-
-void ConfWidget::setScreenWidth( int w )
-{
-  screenWidth = w;
-}
-
-int ConfWidget::getScreenWidth( void )
-{
-  return screenWidth;
-}
-
-void ConfWidget::setScreenHeight( int h )
-{
-  screenHeight = h;
-}
-
-int ConfWidget::getScreenHeight( void )a
-{
-  return screenHeight;
-}
-
-void ConfWidget::setSpeed( int s )
-{
-  speed = s;
-}
-
-int ConfWidget::getSpeed( void )
-{
-  return speed;
-}
-
-
-void ConfWidget::scan()
-{
-  mouseEvent = DRAG;
-  //hLine = new ScanLine( this, HORIZONTAL );
-  vLine = new ScanLine( this, VERTICAL );
-  vLine->show();
-  vLine->startScan();
-}
-
-void ConfWidget::about()
-{
-  vLine->stopScan();
-  QMessageBox::about
-    ( this, "About Nadir",
-      "<p style=\"font-size:smaller;\">Copyright &copy; 2009 Juan Rold&aacute;n Ruiz &lt;<a "
-      "href=\"mailto:juan.roldan@gmail.com\">juan.roldan@gmail.com</a>&gt;</p>"
-      "<p><br/><br/><b>Nadir</b> is free software; you can "
-      "redistribute it and/or  modify it under the terms of the <em>GNU "
-      "General Public License</em> as published by the Free Software "
-      "Foundation; either version 3 of the License, or (at your option) any "
-      "later version.</p>"
-      "<p><b>Nadir</b> is distributed in the hope that it will be useful, but "
-      "<em>without any warranty</em>; without even the implied warranty of "
-      "<em>merchantibility</em> or <em>fitness for a particular "
-      "purpose</em>. See the GNU General Public License for more details.</p>"
-      "<p>You should have received a copy of the GNU General Public License "
-      "along with <b>Nadir</b>; if not, contact one of the authors of this "
-      "software.</p>"
-      "<ul><li>Juan Roldan <a href=\"mailto:juan.roldan@gmail.com\">"
-      "juan.roldan@gmail.com</a></li></ul>" );
-}
-
 void ConfWidget::keyPressEvent( QKeyEvent *event )
 {
   QWidget::keyPressEvent(event);
@@ -125,3 +120,40 @@ void ConfWidget::keyPressEvent( QKeyEvent *event )
  fflush( stdout );
 }
 */
+void ConfWidget::setColor()
+{
+	QRgb rgb = QColorDialog::getRgba(); 
+	QString s;
+
+	lineColor.clear();
+	lineColor.append( s.setNum(qRed(rgb)) );
+	lineColor.append( "," );
+	lineColor.append( s.setNum(qGreen(rgb)) );
+	lineColor.append( "," );
+	lineColor.append( s.setNum(qBlue(rgb)) );
+
+	ui.colorButton->setStyleSheet( backgroundColor() );
+}
+
+QString ConfWidget::backgroundColor()
+{
+	QString s;
+
+  s.clear();
+	s.append( "background-color: rgb(" );
+	s.append( lineColor );
+	s.append( ");" );
+
+	return s;
+}
+
+void ConfWidget::closeEvent()
+{
+	QSettings settings;
+
+	settings.beginGroup( "confWidget" );
+	settings.setValue( "size", size() );
+	settings.setValue( "pos", pos() );
+	settings.endGroup();
+}
+

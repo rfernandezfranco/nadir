@@ -10,6 +10,6 @@ LIBS += -lXtst -lXevie
 
 # Input
 HEADERS += confWidget.h mainWidget.h scanLine.h xevieClass.h
-FORMS += aboutWidget.ui confWidget.ui confWidget_copia.ui mainWidget.ui
+FORMS += aboutWidget.ui confWidget.ui mainWidget.ui
 SOURCES += confWidget.cpp main.cpp mainWidget.cpp scanLine.cpp xevieClass.cpp
 RESOURCES += nadir.qrc

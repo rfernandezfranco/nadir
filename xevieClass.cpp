@@ -104,7 +104,7 @@ bool XevieClass::grabEvent()
 
 void XevieClass::printKeyEvent (XEvent *ev)
 {
-/*  XKeyEvent *key_ev;
+  XKeyEvent *key_ev;
   char buffer[20];
   int bufsize = 19;
   KeySym key;
@@ -119,7 +119,6 @@ void XevieClass::printKeyEvent (XEvent *ev)
   printf ("        Char Count: %d KeySym: %x char: |%c|\n", char_count,
       (unsigned int)key, buffer[0]);
   fflush( stdout );
-  */
 }
 
 void XevieClass::end()
@@ -138,3 +137,14 @@ void XevieClass::move( int x, int y )
 {
   XTestFakeMotionEvent( dpy, scr, x, y, 10 );
 }
+
+bool XevieClass::escape()
+{
+	ke = (XKeyEvent *)&event;
+
+	if(ke->keycode == 9)
+		return true;
+	else
+		return false;
+}
+

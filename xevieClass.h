@@ -40,6 +40,7 @@ class XevieClass
     void printKeyEvent (XEvent *ev);
     void click();
     void move( int x, int y );
+		bool escape();
 
   //private:
     Display *dpy;

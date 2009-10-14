@@ -18,42 +18,77 @@
  */
  
 #include <QtGui>
-//#include <QtGui/QMessageBox>
 #include "mainWidget.h"
 #include <iostream>
 
 using namespace std;
 
-//class ScanLine;
-
 MainWidget::MainWidget()
 {
   ui.setupUi(this);
 
-  connect( ui.autoButton, SIGNAL(clicked()),
-      this, SLOT(scan()) );     
-  connect( ui.doClickButton, SIGNAL(clicked()),
-      this, SLOT(stop()) );     
   connect( ui.confButton, SIGNAL(clicked()),
       this, SLOT(configure()) );
   connect( ui.exitButton, SIGNAL(clicked()),
       this, SLOT(close()) );
 
-
   xc = new XevieClass();
   if ( !xc->start() )
     close();
 
-  //setFixedSize( size() );
   hLine = new ScanLine( this, HORIZONTAL, xc );
   vLine = new ScanLine( this, VERTICAL, xc );
 
   XevieSelectInput(xc->dpy, KeyPressMask );
   scanTimer = new QTimer(this);
   connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
-  speed = 30;
+
+	QCoreApplication::setOrganizationName( "Nadir" );
+	QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
+	QCoreApplication::setApplicationName( "Nadir" );
+	loadSettings();
+
+	scan();
+}
+
+ void MainWidget::loadSettings()
+ {
+	 QSettings settings;
+
+   settings.beginGroup("Main");
+	 //restoreState( settings.value( "wm_state" ).toByteArray() );
+	 resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
+	 move( settings.value( "pos" ).toPoint() );
+	 speed = settings.value( "speed", 30 ).toInt();
+	 continuous = settings.value( "continuous", 1 ).toBool();
+	 active = settings.value( "active", 1 ).toBool();
+	 settings.endGroup();
+	 hLine->loadSettings();
+	 vLine->loadSettings();
+ }
+
+ void MainWidget::saveSettings()
+ {
+   QSettings settings;
+
+   settings.beginGroup( "Main" );
+   //settings.setValue( "wm_state", saveState() );
+	 settings.setValue( "size", size() );
+	 settings.setValue( "pos", pos() );
+	 settings.setValue( "speed", speed );
+	 int c = ( continuous==true ) ? 1 : 0;
+	 settings.setValue( "continuous", c );
+	 int a = ( active==true ) ? 1 : 0;
+	 settings.setValue( "active", a );
+   settings.endGroup();
+ }
+
+/*
+void MainWidget::activate()
+{
 
 }
+*/
 
 void MainWidget::getScreenSize()
 {
@@ -92,47 +127,20 @@ int MainWidget::getSpeed( void )
   return speed;
 }
 
-
 void MainWidget::scan()
 {
-  //mouseEvent = DRAG;
-  //vLine = new ScanLine( this, VERTICAL );
-  //xc->grabEvent();
   state = SCAN1;
   scanTimer->start(speed);
-  //changeState();
-  /*
-    XNextEvent(xc->dpy, &xc->event);
-    xc->xcme = (XClientMessageEvent *)&xc->event;
-    // for readOnly users, send events back to Xserver immediately
-    printf("(%4d)", count++);
-    switch(xc->event.type) {
-      case KeyPress:
-        usleep(xc->_delay);
-        printf(" KeyPress\n");
-        xc->printKeyEvent (&xc->event);
-        ke = (XKeyEvent *)&xc->event;
-        if( ke->keycode == 9 )
-          //quit = 1;
-          stop();
-        break;
-      case KeyRelease: printf(" KeyRelease\n"); break;
-      case ButtonPress: usleep(xc->_delay); printf(" ButtonPress\n");
-                        xc->printKeyEvent (&xc->event);
-                        break;
-      case ButtonRelease: printf(" ButtonRelease\n"); break;
-      case MotionNotify: printf(" MotionNotify\n"); break;
-      case ClientMessage: printf("ClientMessage: <%s>\n", &xc->xcme->data.b[1]); break;
-      default: printf(" unknown event %x\n", xc->event.type); break;
-    }
-    XevieSendEvent(xc->dpy, &xc->event, XEVIE_UNMODIFIED);
-  */
 }
 
 void MainWidget::grabEvent()
 {
-  if( xc->grabEvent() )
-    changeState();
+  if( xc->grabEvent() ){
+		if(	xc->escape() )
+			cout << "salir" << endl;
+		else
+    	changeState();
+	};
 }
 
 void MainWidget::stop()
@@ -148,28 +156,6 @@ void MainWidget::configure( void )
    confWidget->show();
 }
 
-void MainWidget::about()
-{
-  //hLine->stopScan();
-  QMessageBox::about
-    ( this, "About Nadir",
-      "<p style=\"font-size:smaller;\">Copyright &copy; 2009 Juan Rold&aacute;n Ruiz &lt;<a "
-      "href=\"mailto:juan.roldan@gmail.com\">juan.roldan@gmail.com</a>&gt;</p>"
-      "<p><br/><br/><b>Nadir</b> is free software; you can "
-      "redistribute it and/or  modify it under the terms of the <em>GNU "
-      "General Public License</em> as published by the Free Software "
-      "Foundation; either version 3 of the License, or (at your option) any "
-      "later version.</p>"
-      "<p><b>Nadir</b> is distributed in the hope that it will be useful, but "
-      "<em>without any warranty</em>; without even the implied warranty of "
-      "<em>merchantibility</em> or <em>fitness for a particular "
-      "purpose</em>. See the GNU General Public License for more details.</p>"
-      "<p>You should have received a copy of the GNU General Public License "
-      "along with <b>Nadir</b>; if not, contact one of the authors of this "
-      "software.</p>"
-      "<ul><li>Juan Roldan <a href=\"mailto:juan.roldan@gmail.com\">"
-      "juan.roldan@gmail.com</a></li></ul>" );
-}
 /*
 void MainWidget::keyPressEvent( QKeyEvent *event )
 {
@@ -207,11 +193,29 @@ void MainWidget::changeState()
       hLine->hide();
       vLine->hide();
       xc->move( vLine->getX(), hLine->getY() );
-      cout << vLine->getX() << "," << hLine->getY();
       xc->click();
-      state = SCAN1;
+      state = (continuous) ? SCAN1 : STOP;
       changeState();
       break;
+  };
+}
+
+void MainWidget::closeEvent(QCloseEvent *e)
+{
+  QMessageBox msgBox;
+  msgBox.setWindowTitle("Nadir");
+  msgBox.setText("Seguro que desea salir?");
+  msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+  msgBox.setDefaultButton(QMessageBox::No);
+
+  switch( msgBox.exec() ){
+	  case QMessageBox::Yes:
+	    saveSettings();
+		  e->accept();
+		  break;
+	  case QMessageBox::No:
+		  e->ignore();
+		  break;
   };
 }
 
@@ -220,3 +224,4 @@ MainWidget::~MainWidget()
   XevieEnd(xc->dpy);
   xc->end();
 }
+

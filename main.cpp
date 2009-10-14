@@ -18,6 +18,7 @@
  */
  
 #include <QApplication>
+//#include "settings.h"
 #include "mainWidget.h"
 #include <iostream>
 #include <stdio.h>

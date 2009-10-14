@@ -39,6 +39,7 @@ class ScanLine : public QWidget
   public:
     ScanLine( QWidget *parent = 0, lineType type=HORIZONTAL, XevieClass *xc=0 );
     QPixmap *mainPixmap;
+		void loadSettings();
     void init( lineType type );
     void getScreenSize();
     void setScreenWidth( int w );
@@ -47,10 +48,14 @@ class ScanLine : public QWidget
     int getScreenHeight( void );
     void setSpeed( int s );
     int getSpeed( void );
+    void setThickness( int t );
+    int getThickness( void );
+    //void reStartScan( lineType type );
     void startScan( void );
     void stopScan( void );
     int getX( void );
     int getY( void );
+		QString backgroundColor();
 
   protected:
     void keyPressEvent(QKeyEvent *event );
@@ -61,7 +66,6 @@ class ScanLine : public QWidget
     enum { LEFT=0, RIGHT, DOUBLE, DRAG, DROP } mouseEvent;
 
   protected slots:
-    void about();
     void hScan ( void );
     void vScan ( void );
 
@@ -72,12 +76,14 @@ class ScanLine : public QWidget
     int y1;
     int _thickness;
     int _length;
+		QString lineColor;
     int screenWidth;
     int screenHeight;
     int speed;
     int step;
     QTimer *timer;
     XevieClass *xevie;
+		lineType myType;
 };
 
 #endif // SCANLINE_H

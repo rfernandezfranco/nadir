@@ -18,6 +18,7 @@
  */
  
 #include <QtGui>
+#include "mainWidget.h"
 #include "scanLine.h"
 #include <QDesktopWidget>
 #include <iostream>
@@ -35,9 +36,16 @@ ScanLine::ScanLine( QWidget *parent, lineType type, XevieClass *xc ):
   setWindowFlags( flags );
   setFocusPolicy(Qt::StrongFocus);
 
-  speed = 20;
-  step = 3;
- _thickness = 10;
+	QCoreApplication::setOrganizationName( "Nadir" );
+	QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
+	QCoreApplication::setApplicationName( "Nadir" );
+
+	loadSettings();
+
+	//cout << "speed: " << speed << endl;
+	//cout << "thickness: " << _thickness << endl;
+	//fflush(stdout);
+  step = 2;
 
   init( type );
   
@@ -49,11 +57,23 @@ ScanLine::ScanLine( QWidget *parent, lineType type, XevieClass *xc ):
     
 }
 
+void ScanLine::loadSettings()
+ {
+	 QSettings settings;
+   settings.beginGroup("Main");
+	 speed = settings.value( "speed", 5 ).toInt();
+	 _thickness = settings.value( "thickness", 5 ).toInt();
+	 lineColor = settings.value( "color", "255,0,0" ).toString();
+   setStyleSheet( backgroundColor() );
+	 settings.endGroup();
+ }
+
 void ScanLine::init( lineType type )
 {
   // Set line thickness and line length
   getScreenSize();
   timer = new QTimer(this);
+	myType = type;
 
   x0 = y0 = 0;
 
@@ -74,12 +94,31 @@ void ScanLine::init( lineType type )
   }
 
   // Set line colour
-  setStyleSheet("QWidget { background-color: red; }");
+  setStyleSheet( backgroundColor() );
 
+}
+
+QString ScanLine::backgroundColor()
+{
+	QString s;
+
+  s.clear();
+	s.append( "QWidget { background-color: rgb(" );
+	s.append( lineColor );
+	s.append( ") };" );
+
+	return s;
 }
 
 void ScanLine::startScan( void )
 {
+	loadSettings();
+
+	if(myType == HORIZONTAL)
+  	resize( _length, _thickness );	
+	else
+  	resize( _thickness, _length );	
+
   x0 = 0;
   y0 = 0;
   timer->start(speed);
@@ -127,6 +166,16 @@ int ScanLine::getSpeed( void )
   return speed;
 }
 
+void ScanLine::setThickness( int t )
+{
+  _thickness = t;
+}
+
+int ScanLine::getThickness( void )
+{
+  return _thickness;
+}
+
 int ScanLine::getX( void )
 {
   return x0;
@@ -166,26 +215,6 @@ void ScanLine::vScan( void )
 }
 
 
-void ScanLine::about()
-{
-  QMessageBox::about
-    ( this, "Acerca de Nadir",
-      "<p>Copyright &copy; 2009. <b>iFreeScanLine</b> is free software; you can "
-      "redistribute it and/or  modify it under the terms of the <em>GNU "
-      "General Public License</em> as published by the Free Software "
-      "Foundation; either version 2 of the License, or (at your option) any "
-      "later version.</p>"
-      "<p><b>iFreeScanLine</b> is distributed in the hope that it will be useful, but "
-      "<em>without any warranty</em>; without even the implied warranty of "
-      "<em>merchantibility</em> or <em>fitness for a particular "
-      "purpose</em>. See the GNU General Public License for more details.</p>"
-      "<p>You should have received a copy of the GNU General Public License "
-      "along with <b>mando</b>; if not, contact one of the authors of this "
-      "software.</p>"
-      "<ul><li>Juan Roldan <a href=\"mailto:juan.roldan@gmail.com\">"
-      "juan.roldan@gmail.com</a></li></ul>"
-    );
-}
 /*
 void ScanLine::paintEvent( QPaintEvent * )
 {
