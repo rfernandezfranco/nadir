@@ -25,7 +25,7 @@
 #include <X11/Xlib.h>
 #include <QTimer>
 #include <QWidget>
-#include "xevieClass.h"
+#include "keyboardGrabber.h"
 
 //class QGraphicsView;
 
@@ -37,7 +37,7 @@ class ScanLine : public QWidget
 {
   Q_OBJECT
   public:
-    ScanLine( QWidget *parent = 0, lineType type=HORIZONTAL, XevieClass *xc=0 );
+    ScanLine( QWidget *parent = 0, lineType type=HORIZONTAL, KeyboardGrabber *grabber=0 );
     QPixmap *mainPixmap;
 		void loadSettings();
     void init( lineType type );
@@ -82,7 +82,7 @@ class ScanLine : public QWidget
     int speed;
     int step;
     QTimer *timer;
-    XevieClass *xevie;
+    KeyboardGrabber *kbdGrabber;
 		lineType myType;
 };
 

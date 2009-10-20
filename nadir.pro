@@ -6,10 +6,10 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
 INCLUDEPATH += .
-LIBS += -lXtst -lXevie
+LIBS += -lX11 -lXtst -L/usr/X11R6/lib
 
 # Input
-HEADERS += confWidget.h mainWidget.h scanLine.h xevieClass.h
+HEADERS += confWidget.h mainWidget.h scanLine.h keyboardGrabber.h
 FORMS += confWidget.ui mainWidget.ui
-SOURCES += confWidget.cpp main.cpp mainWidget.cpp scanLine.cpp xevieClass.cpp
+SOURCES += confWidget.cpp main.cpp mainWidget.cpp scanLine.cpp keyboardGrabber.cpp
 RESOURCES += nadir.qrc

@@ -32,14 +32,15 @@ MainWidget::MainWidget()
   connect( ui.exitButton, SIGNAL(clicked()),
       this, SLOT(close()) );
 
-  xc = new XevieClass();
-  if ( !xc->start() )
+  kbd = new KeyboardGrabber();
+  if ( !kbd->start() )
     close();
 
-  hLine = new ScanLine( this, HORIZONTAL, xc );
-  vLine = new ScanLine( this, VERTICAL, xc );
+  hLine = new ScanLine( this, HORIZONTAL, kbd );
+  vLine = new ScanLine( this, VERTICAL, kbd );
 
-  XevieSelectInput(xc->dpy, KeyPressMask );
+  //XevieSelectInput(xc->dpy, KeyPressMask );
+	
   scanTimer = new QTimer(this);
   connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
 
@@ -135,19 +136,21 @@ void MainWidget::scan()
 
 void MainWidget::grabEvent()
 {
-  if( xc->grabEvent() ){
-		if(	xc->escape() )
+  //if( kbd->grabEvent() ){
+  kbd->grabEvent();
+		if(	kbd->escape() )
 			cout << "salir" << endl;
 		else
     	changeState();
-	};
+	//};
 }
 
 void MainWidget::stop()
 {
   //hLine->stopScan();
   //printf("XevieEnd(xc->dpy) finished \n");
-  XevieEnd(xc->dpy);
+  //XevieEnd(xc->dpy);
+	kbd->stop();
 }
 
 void MainWidget::configure( void )
@@ -192,8 +195,8 @@ void MainWidget::changeState()
     case EVENT:
       hLine->hide();
       vLine->hide();
-      xc->move( vLine->getX(), hLine->getY() );
-      xc->click();
+      kbd->move( vLine->getX(), hLine->getY() );
+      kbd->click();
       state = (continuous) ? SCAN1 : STOP;
       changeState();
       break;
@@ -221,7 +224,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
 
 MainWidget::~MainWidget()
 {
-  XevieEnd(xc->dpy);
-  xc->end();
+  //XevieEnd(xc->dpy);
+  kbd->stop();
 }
 

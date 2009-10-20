@@ -17,45 +17,44 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#ifndef XEVIECLASS_H
-#define XEVIECLASS_H
+#ifndef KEYBOARDGRABBERCLASS_H
+#define KEYBOARDGRABBERCLASS_H
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <X11/Xlib.h>
-#include <X11/Xproto.h>
 #include <X11/X.h>
-#include <X11/extensions/Xevie.h>
-#include <X11/Xutil.h>
+#include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
+#include <X11/keysymdef.h>
+#include <X11/XKBlib.h>
+#include <X11/Intrinsic.h>
+#include <X11/StringDefs.h>
+#include <X11/Xutil.h>
+#include <X11/Shell.h>
 
-class XevieClass
+class KeyboardGrabber
 {
   public:
-    XevieClass();
-    bool start();
-    void end();
-    bool grabEvent();
-    void printKeyEvent (XEvent *ev);
-    void click();
-    void move( int x, int y );
+    KeyboardGrabber();
+    ~KeyboardGrabber();
+		bool start();
+		void stop();
+		void grabEvent();
+		void move( int x, int y );
+		void click();
 		bool escape();
 
-  //private:
-    Display *dpy;
-    long _delay;
-    int major, minor;
-    XEvent  event;
-    XClientMessageEvent *xcme;
-    XKeyEvent *ke;
-
-    int x11_fd;
-    fd_set in_fds;
-    struct timeval tv;
-    bool grabbed;
-    int scr;
+	private:
+		Display *disp;
+		int screen;
+		XEvent xe;
+		XKeyEvent *ke;
+		int iKeyCode;
+		int iKeyState;
+		int iKeyTime;
+		KeySym keysym;
+		char *keyString;
 };
 
-#endif // XEVIECLASS_H
+#endif // KEYBOARDGRABBERCLASS_H
 

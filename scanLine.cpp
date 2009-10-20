@@ -26,7 +26,7 @@
 
 using namespace std;
 
-ScanLine::ScanLine( QWidget *parent, lineType type, XevieClass *xc ):
+ScanLine::ScanLine( QWidget *parent, lineType type, KeyboardGrabber *grabber ):
   QWidget( parent )
 {
   Qt::WindowFlags flags = Qt::ToolTip;
@@ -49,7 +49,7 @@ ScanLine::ScanLine( QWidget *parent, lineType type, XevieClass *xc ):
 
   init( type );
   
-  xevie = xc;
+  kbdGrabber = grabber;
 
   //xevie = new XevieClass();
   //if ( !xevie->start() )
@@ -191,8 +191,8 @@ void ScanLine::hScan( void )
   if( y0 < ( y1 - _thickness ) )
     y0 += step;
   else{
-    xevie->end();
-    xevie->start();
+    kbdGrabber->stop();
+    kbdGrabber->start();
     y0 = 0;
   }
 
@@ -205,8 +205,8 @@ void ScanLine::vScan( void )
   if( x0 < ( x1 - _thickness ) )
     x0 += step;
   else{
-    xevie->end();
-    xevie->start();
+    kbdGrabber->stop();
+    kbdGrabber->start();
     x0 = 0;
   }
 

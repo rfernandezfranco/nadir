@@ -23,7 +23,7 @@
 #include "ui_mainWidget.h"
 #include "scanLine.h"
 #include "confWidget.h"
-#include "xevieClass.h"
+//#include "xevieClass.h"
 //#include <QString>
 
 class MainWidget : public QWidget
@@ -49,7 +49,7 @@ class MainWidget : public QWidget
     ScanLine *hLine;
     ScanLine *vLine;
     ConfWidget *confWidget;
-    XevieClass *xc;
+    KeyboardGrabber *kbd;
 
 //  protected:
 //    void keyPressEvent(QKeyEvent *event );
