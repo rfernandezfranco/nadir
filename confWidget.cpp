@@ -52,7 +52,6 @@ ConfWidget::ConfWidget( QWidget *parent ):
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "Nadir" );
 
-  //setFixedSize( size() );
   loadSettings();
 }
 

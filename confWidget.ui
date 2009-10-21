@@ -633,7 +633,7 @@
       </attribute>
       <attribute name="icon" >
        <iconset resource="nadir.qrc" >
-        <normaloff>:/images/images/camera.svg</normaloff>:/images/images/camera.svg</iconset>
+        <normaloff>:/images/images/audio-input-microphone.svg</normaloff>:/images/images/audio-input-microphone.svg</iconset>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2" >
        <item row="0" column="2" colspan="7" >
@@ -847,7 +847,7 @@
       </attribute>
       <attribute name="icon" >
        <iconset resource="nadir.qrc" >
-        <normaloff>:/images/images/audio-input-microphone.svg</normaloff>:/images/images/audio-input-microphone.svg</iconset>
+        <normaloff>:/images/images/camera.svg</normaloff>:/images/images/camera.svg</iconset>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3" >
        <item row="0" column="0" colspan="4" >
