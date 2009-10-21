@@ -33,8 +33,8 @@ ConfWidget::ConfWidget( QWidget *parent ):
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
 
-	// Temporally remove Camera Tab
-	ui.tabWidget->removeTab(4);
+  // Temporally remove Camera Tab
+  ui.tabWidget->removeTab(4);
 
   connect( ui.colorButton, SIGNAL(clicked()),
       this, SLOT(setColor()) );
@@ -48,60 +48,54 @@ ConfWidget::ConfWidget( QWidget *parent ):
   connect( this, SIGNAL(closing()),
       parentWidget(), SLOT(loadSettings()) );
 
- 	QCoreApplication::setOrganizationName( "Nadir" );
-	QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-	QCoreApplication::setApplicationName( "Nadir" );
+  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
+  QCoreApplication::setApplicationName( "Nadir" );
 
-//setFixedSize( size() );
+  //setFixedSize( size() );
   loadSettings();
 }
 
 
- void ConfWidget::loadSettings()
- {
-	 QSettings settings;
+void ConfWidget::loadSettings()
+{
+  QSettings settings;
 
-   settings.beginGroup( "Main" );
-	 ui.speedSlider->setValue( settings.value( "speed" ).toInt() );
-	 ui.thickBox->setValue( settings.value( "thickness" ).toInt() );
-	 ui.continuousBox->setChecked( settings.value( "continuous" ).toBool() );
-	 lineColor.clear();
-	 lineColor.append( settings.value( "color", "255,0,0").toString() );
-	 ui.colorButton->setStyleSheet( backgroundColor() );
+  settings.beginGroup( "Main" );
+  ui.speedSlider->setValue( settings.value( "speed" ).toInt() );
+  ui.thickBox->setValue( settings.value( "thickness" ).toInt() );
+  ui.continuousBox->setChecked( settings.value( "continuous" ).toBool() );
+  lineColor.clear();
+  lineColor.append( settings.value( "color", "255,0,0").toString() );
+  ui.colorButton->setStyleSheet( backgroundColor() );
+  settings.endGroup();
 
-	 settings.endGroup();
-
-   settings.beginGroup("confWidget");
-	 resize( settings.value( "size", QSize( 770, 670 ) ).toSize() );
-	 move( settings.value( "pos" ).toPoint() );
-	 settings.endGroup();
+  settings.beginGroup("confWidget");
+  resize( settings.value( "size", QSize( 770, 670 ) ).toSize() );
+  move( settings.value( "pos" ).toPoint() );
+  settings.endGroup();
  }
 
+//Save settings
 void ConfWidget::save()
 {
-	//Save settings
-	QSettings settings;
-	settings.beginGroup( "Main" );
-	settings.setValue( "speed", ui.speedSlider->value() );
-	settings.setValue( "thickness",  ui.thickBox->value() );
-	int i = ( ui.continuousBox->isChecked() ) ? 1 : 0;
-	settings.setValue( "continuous", i );
-	settings.setValue( "color", lineColor );
-	settings.endGroup();
+  QSettings settings;
 
-	settings.beginGroup( "confWidget" );
-	settings.setValue( "size", size() );
-	settings.setValue( "pos", pos() );
-	settings.endGroup();
+  settings.beginGroup( "Main" );
+  settings.setValue( "speed", ui.speedSlider->value() );
+  settings.setValue( "thickness",  ui.thickBox->value() );
+  int i = ( ui.continuousBox->isChecked() ) ? 1 : 0;
+  settings.setValue( "continuous", i );
+  settings.setValue( "color", lineColor );
+  settings.endGroup();
 
-	//cout << "cont guardado: " << i << endl;
-  //fflush( stdout );	
+  settings.beginGroup( "confWidget" );
+  settings.setValue( "size", size() );
+  settings.setValue( "pos", pos() );
+  settings.endGroup();
 
-	//Update behaviour of scan lines
-	//parentWidget()->loadSettings();
-	
-	emit closing();
-	close();
+  emit closing();
+  close();
 }
 
 /*
@@ -122,38 +116,38 @@ void ConfWidget::keyPressEvent( QKeyEvent *event )
 */
 void ConfWidget::setColor()
 {
-	QRgb rgb = QColorDialog::getRgba(); 
-	QString s;
+  QRgb rgb = QColorDialog::getRgba(); 
+  QString s;
 
-	lineColor.clear();
-	lineColor.append( s.setNum(qRed(rgb)) );
-	lineColor.append( "," );
-	lineColor.append( s.setNum(qGreen(rgb)) );
-	lineColor.append( "," );
-	lineColor.append( s.setNum(qBlue(rgb)) );
+  lineColor.clear();
+  lineColor.append( s.setNum(qRed(rgb)) );
+  lineColor.append( "," );
+  lineColor.append( s.setNum(qGreen(rgb)) );
+  lineColor.append( "," );
+  lineColor.append( s.setNum(qBlue(rgb)) );
 
-	ui.colorButton->setStyleSheet( backgroundColor() );
+  ui.colorButton->setStyleSheet( backgroundColor() );
 }
 
 QString ConfWidget::backgroundColor()
 {
-	QString s;
+  QString s;
 
   s.clear();
-	s.append( "background-color: rgb(" );
-	s.append( lineColor );
-	s.append( ");" );
+  s.append( "background-color: rgb(" );
+  s.append( lineColor );
+  s.append( ");" );
 
-	return s;
+  return s;
 }
 
 void ConfWidget::closeEvent()
 {
-	QSettings settings;
+  QSettings settings;
 
-	settings.beginGroup( "confWidget" );
-	settings.setValue( "size", size() );
-	settings.setValue( "pos", pos() );
-	settings.endGroup();
+  settings.beginGroup( "confWidget" );
+  settings.setValue( "size", size() );
+  settings.setValue( "pos", pos() );
+  settings.endGroup();
 }
 

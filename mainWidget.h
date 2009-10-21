@@ -23,8 +23,6 @@
 #include "ui_mainWidget.h"
 #include "scanLine.h"
 #include "confWidget.h"
-//#include "xevieClass.h"
-//#include <QString>
 
 class MainWidget : public QWidget
 {
@@ -33,7 +31,7 @@ class MainWidget : public QWidget
   public:
     MainWidget();
     ~MainWidget();
-		void closeEvent( QCloseEvent *e);
+    void closeEvent( QCloseEvent *e);
     void getScreenSize();
     void setScreenWidth( int w );
     int getScreenWidth( void );
@@ -59,8 +57,8 @@ class MainWidget : public QWidget
     void scan();
     void stop();
     void grabEvent();
-		void loadSettings();
-		void saveSettings();
+    void loadSettings();
+    void saveSettings();
 
   private:
     Ui::MainWidget ui;

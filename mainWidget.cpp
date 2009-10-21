@@ -39,33 +39,31 @@ MainWidget::MainWidget()
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );
 
-  //XevieSelectInput(xc->dpy, KeyPressMask );
-	
   scanTimer = new QTimer(this);
   connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
 
-	QCoreApplication::setOrganizationName( "Nadir" );
-	QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-	QCoreApplication::setApplicationName( "Nadir" );
-	loadSettings();
-
-	scan();
+  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
+  QCoreApplication::setApplicationName( "Nadir" );
+  loadSettings();
+  scan();
 }
 
  void MainWidget::loadSettings()
  {
-	 QSettings settings;
+   QSettings settings;
 
    settings.beginGroup("Main");
-	 //restoreState( settings.value( "wm_state" ).toByteArray() );
-	 resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
-	 move( settings.value( "pos" ).toPoint() );
-	 speed = settings.value( "speed", 30 ).toInt();
-	 continuous = settings.value( "continuous", 1 ).toBool();
-	 active = settings.value( "active", 1 ).toBool();
-	 settings.endGroup();
-	 hLine->loadSettings();
-	 vLine->loadSettings();
+   //restoreState( settings.value( "wm_state" ).toByteArray() );
+   resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
+   move( settings.value( "pos" ).toPoint() );
+   speed = settings.value( "speed", 30 ).toInt();
+   continuous = settings.value( "continuous", 1 ).toBool();
+   active = settings.value( "active", 1 ).toBool();
+   settings.endGroup();
+
+   hLine->loadSettings();
+   vLine->loadSettings();
  }
 
  void MainWidget::saveSettings()
@@ -74,22 +72,15 @@ MainWidget::MainWidget()
 
    settings.beginGroup( "Main" );
    //settings.setValue( "wm_state", saveState() );
-	 settings.setValue( "size", size() );
-	 settings.setValue( "pos", pos() );
-	 settings.setValue( "speed", speed );
-	 int c = ( continuous==true ) ? 1 : 0;
-	 settings.setValue( "continuous", c );
-	 int a = ( active==true ) ? 1 : 0;
-	 settings.setValue( "active", a );
+   settings.setValue( "size", size() );
+   settings.setValue( "pos", pos() );
+   settings.setValue( "speed", speed );
+   int c = ( continuous==true ) ? 1 : 0;
+   settings.setValue( "continuous", c );
+   int a = ( active==true ) ? 1 : 0;
+   settings.setValue( "active", a );
    settings.endGroup();
  }
-
-/*
-void MainWidget::activate()
-{
-
-}
-*/
 
 void MainWidget::getScreenSize()
 {
@@ -138,11 +129,11 @@ void MainWidget::grabEvent()
 {
   //if( kbd->grabEvent() ){
   kbd->grabEvent();
-		if(	kbd->escape() )
-			cout << "salir" << endl;
-		else
-    	changeState();
-	//};
+  if(	kbd->escape() )
+    cout << "salir" << endl;
+  else
+    changeState();
+  //};
 }
 
 void MainWidget::stop()
@@ -150,13 +141,13 @@ void MainWidget::stop()
   //hLine->stopScan();
   //printf("XevieEnd(xc->dpy) finished \n");
   //XevieEnd(xc->dpy);
-	kbd->stop();
+  kbd->stop();
 }
 
 void MainWidget::configure( void )
 {
-   confWidget = new ConfWidget( this );
-   confWidget->show();
+  confWidget = new ConfWidget( this );
+  confWidget->show();
 }
 
 /*
@@ -212,13 +203,13 @@ void MainWidget::closeEvent(QCloseEvent *e)
   msgBox.setDefaultButton(QMessageBox::No);
 
   switch( msgBox.exec() ){
-	  case QMessageBox::Yes:
-	    saveSettings();
-		  e->accept();
-		  break;
-	  case QMessageBox::No:
-		  e->ignore();
-		  break;
+    case QMessageBox::Yes:
+      saveSettings();
+      e->accept();
+      break;
+    case QMessageBox::No:
+      e->ignore();
+      break;
   };
 }
 

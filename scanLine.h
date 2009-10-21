@@ -27,19 +27,17 @@
 #include <QWidget>
 #include "keyboardGrabber.h"
 
-//class QGraphicsView;
-
-class XevieClass;
-
+//class XevieClass;
 enum lineType { HORIZONTAL=0, VERTICAL };
 
 class ScanLine : public QWidget
 {
   Q_OBJECT
+
   public:
     ScanLine( QWidget *parent = 0, lineType type=HORIZONTAL, KeyboardGrabber *grabber=0 );
     QPixmap *mainPixmap;
-		void loadSettings();
+    void loadSettings();
     void init( lineType type );
     void getScreenSize();
     void setScreenWidth( int w );
@@ -55,11 +53,10 @@ class ScanLine : public QWidget
     void stopScan( void );
     int getX( void );
     int getY( void );
-		QString backgroundColor();
+    QString backgroundColor();
 
   protected:
     void keyPressEvent(QKeyEvent *event );
-
     //void paintEvent( QPaintEvent * );
     bool active;
     bool continuous;
@@ -76,14 +73,14 @@ class ScanLine : public QWidget
     int y1;
     int _thickness;
     int _length;
-		QString lineColor;
+    QString lineColor;
     int screenWidth;
     int screenHeight;
     int speed;
     int step;
     QTimer *timer;
     KeyboardGrabber *kbdGrabber;
-		lineType myType;
+    lineType myType;
 };
 
 #endif // SCANLINE_H

@@ -21,67 +21,68 @@
 
 KeyboardGrabber::KeyboardGrabber()
 {
-	keyString = (char *)malloc( 20 * sizeof(char));
+  keyString = (char *)malloc( 20 * sizeof(char));
 }
 
 bool KeyboardGrabber::start()
 {
-	disp = XOpenDisplay(NULL);
-	screen = DefaultScreen(disp);
+  disp = XOpenDisplay(NULL);
+  screen = DefaultScreen(disp);
 
-	if( disp == NULL )
-		return false;
+  if( disp == NULL )
+    return false;
 
-	XkbSetDetectableAutoRepeat(disp, TRUE, NULL);
+  XkbSetDetectableAutoRepeat(disp, TRUE, NULL);
 
-	return true;
+  return true;
 }
 
 
 void KeyboardGrabber::grabEvent()
 {
-	XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
-	GrabModeAsync, CurrentTime);
-	XNextEvent(disp, &xe);
-	iKeyCode = xe.xkey.keycode;
-	iKeyState = xe.xkey.state;
-	iKeyTime = xe.xkey.time;
-	int iKeyType = xe.type;
-	Window tmp = xe.xkey.window;
-	XUngrabKeyboard(disp, CurrentTime);
-	XPutBackEvent(disp, &xe);
-	XSelectInput(disp, tmp, KeyPressMask | KeyReleaseMask);
-	XGrabKey(disp, iKeyCode, None, tmp, TRUE, GrabModeAsync, GrabModeAsync);
-	XNextEvent(disp, &xe);
-	XAllowEvents(disp, ReplayKeyboard, iKeyTime);
+  XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
+  GrabModeAsync, CurrentTime);
+  XNextEvent(disp, &xe);
 
-	switch (iKeyType) {
-			case KeyPress:
-			fprintf(stderr, "Tecla pulsada: ");
-			break;
+  iKeyCode = xe.xkey.keycode;
+  iKeyState = xe.xkey.state;
+  iKeyTime = xe.xkey.time;
+  iKeyType = xe.type;
 
-			case KeyRelease:
-			fprintf(stderr, "Tecla soltada: ");
-			break;
-		};
+  Window tmp = xe.xkey.window;
+  XUngrabKeyboard(disp, CurrentTime);
+  XPutBackEvent(disp, &xe);
+  XSelectInput(disp, tmp, KeyPressMask | KeyReleaseMask);
+  XGrabKey(disp, iKeyCode, None, tmp, TRUE, GrabModeAsync, GrabModeAsync);
+  XNextEvent(disp, &xe);
+  XAllowEvents(disp, ReplayKeyboard, iKeyTime);
 
-	keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
-	keyString = XKeysymToString(keysym);
-	fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
+  switch (iKeyType) {
+    case KeyPress:
+      fprintf(stderr, "Tecla pulsada: ");
+      break;
+    case KeyRelease:
+      fprintf(stderr, "Tecla soltada: ");
+      break;
+  };
 
-	XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
-	XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
-	XSync(disp, FALSE);
-	XFlush(disp);
+  keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
+  keyString = XKeysymToString(keysym);
+  fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
 
-	// Salir al pulsar escape
-	if( iKeyCode == 9 ){
-		fprintf(stderr, "Adios!\n");
-		XCloseDisplay( disp );
-		exit(10);
-	};
-	
+  XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
+  XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
+  XSync(disp, FALSE);
+  XFlush(disp);
+
+  // Exit when pressing ESCAPE key
+  if( iKeyCode == 9 ){
+    fprintf(stderr, "Adios!\n");
+    XCloseDisplay( disp );
+    exit(10);
+  };
 }
+
 void KeyboardGrabber::stop()
 {
   XCloseDisplay(disp);
@@ -104,11 +105,11 @@ KeyboardGrabber::~KeyboardGrabber()
 
 bool KeyboardGrabber::escape()
 {
-	ke = (XKeyEvent *)&xe;
+  ke = (XKeyEvent *)&xe;
 
-	if(ke->keycode == 9)
-		return true;
-	else
-		return false;
+  if(ke->keycode == 9)
+    return true;
+
+  return false;
 }
 

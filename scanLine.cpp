@@ -36,45 +36,34 @@ ScanLine::ScanLine( QWidget *parent, lineType type, KeyboardGrabber *grabber ):
   setWindowFlags( flags );
   setFocusPolicy(Qt::StrongFocus);
 
-	QCoreApplication::setOrganizationName( "Nadir" );
-	QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-	QCoreApplication::setApplicationName( "Nadir" );
+  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
+  QCoreApplication::setApplicationName( "Nadir" );
 
-	loadSettings();
-
-	//cout << "speed: " << speed << endl;
-	//cout << "thickness: " << _thickness << endl;
-	//fflush(stdout);
+  loadSettings();
   step = 2;
-
   init( type );
-  
   kbdGrabber = grabber;
-
-  //xevie = new XevieClass();
-  //if ( !xevie->start() )
-  //  close();
-    
 }
 
 void ScanLine::loadSettings()
- {
-	 QSettings settings;
-   settings.beginGroup("Main");
-	 speed = settings.value( "speed", 5 ).toInt();
-	 _thickness = settings.value( "thickness", 5 ).toInt();
-	 lineColor = settings.value( "color", "255,0,0" ).toString();
-   setStyleSheet( backgroundColor() );
-	 settings.endGroup();
- }
+{
+  QSettings settings;
+
+  settings.beginGroup("Main");
+  speed = settings.value( "speed", 5 ).toInt();
+  _thickness = settings.value( "thickness", 5 ).toInt();
+  lineColor = settings.value( "color", "255,0,0" ).toString();
+  setStyleSheet( backgroundColor() );
+  settings.endGroup();
+}
 
 void ScanLine::init( lineType type )
 {
   // Set line thickness and line length
   getScreenSize();
   timer = new QTimer(this);
-	myType = type;
-
+  myType = type;
   x0 = y0 = 0;
 
   // Whether it's horizontal or vertical
@@ -95,29 +84,28 @@ void ScanLine::init( lineType type )
 
   // Set line colour
   setStyleSheet( backgroundColor() );
-
 }
 
 QString ScanLine::backgroundColor()
 {
-	QString s;
+  QString s;
 
   s.clear();
-	s.append( "QWidget { background-color: rgb(" );
-	s.append( lineColor );
-	s.append( ") };" );
+  s.append( "QWidget { background-color: rgb(" );
+  s.append( lineColor );
+  s.append( ") };" );
 
-	return s;
+  return s;
 }
 
 void ScanLine::startScan( void )
 {
-	loadSettings();
+  loadSettings();
 
-	if(myType == HORIZONTAL)
-  	resize( _length, _thickness );	
-	else
-  	resize( _thickness, _length );	
+  if(myType == HORIZONTAL)
+    resize( _length, _thickness );	
+  else
+    resize( _thickness, _length );	
 
   x0 = 0;
   y0 = 0;
@@ -214,7 +202,6 @@ void ScanLine::vScan( void )
   //xevie->move( x0, y0 );
 }
 
-
 /*
 void ScanLine::paintEvent( QPaintEvent * )
 {
@@ -232,11 +219,11 @@ void ScanLine::paintEvent( QPaintEvent * )
 void ScanLine::keyPressEvent( QKeyEvent *event )
 {
   switch (event->key()) {
-     case Qt::Key_Left:
-       cout << "LEFT Click from ScanLine" << endl;
-       fflush( stdout );
-       break;
-  }
+    case Qt::Key_Left:
+      cout << "LEFT Click from ScanLine" << endl;
+      fflush( stdout );
+      break;
+  };
 
   cout << "Click from ScanLine" << endl;
   fflush( stdout );

@@ -25,11 +25,14 @@
 class VirtualMouse
 {
   public:
-    VirtualMouse();
+    VirtualMouse( Display *d );
     ~VirtualMouse();
     void click();
     void move( int x, int y );
+
+  private:
+    Display *dpy;
 };
 
-#endif
+#endif // VIRTUALMOUSECLASS_H
 

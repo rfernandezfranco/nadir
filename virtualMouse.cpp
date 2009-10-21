@@ -23,6 +23,11 @@ VirtualMouse::VirtualMouse()
 {
 }
 
+VirtualMouse::VirtualMouse( Display *d )
+{
+  dpy = d;
+}
+
 void VirtualMouse::click()
 {
   XTestFakeButtonEvent( dpy, 1, True, 0 );

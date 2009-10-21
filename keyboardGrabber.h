@@ -52,6 +52,7 @@ class KeyboardGrabber
 		int iKeyCode;
 		int iKeyState;
 		int iKeyTime;
+		int iKeyType;
 		KeySym keysym;
 		char *keyString;
 };
