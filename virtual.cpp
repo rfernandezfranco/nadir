@@ -17,29 +17,41 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include "virtualMouse.h"
+#include "virtual.h"
 
-VirtualMouse::VirtualMouse()
+Virtual::Virtual()
 {
 }
 
-VirtualMouse::VirtualMouse( Display *d )
+Virtual::Virtual( Display *d )
 {
   dpy = d;
+  screen = DefaultScreen( dpy );
 }
 
-void VirtualMouse::click()
+void Virtual::open()
+{
+  dpy = XOpenDisplay( NULL );
+  screen = DefaultScreen( dpy );
+}
+
+void Virtual::close()
+{
+  XCloseDisplay( dpy );
+}
+
+void Virtual::click()
 {
   XTestFakeButtonEvent( dpy, 1, True, 0 );
   XTestFakeButtonEvent( dpy, 1, False, 250 );
 }
 
-void VirtualMouse::move( int x, int y )
+void Virtual::move( int x, int y )
 {
-  XTestFakeMotionEvent( dpy, scr, x, y, 10 );
+  XTestFakeMotionEvent( dpy, screen, x, y, 10 );
 }
 
-VirtualMouse::~VirtualMouse()
+Virtual::~Virtual()
 {
 }
 

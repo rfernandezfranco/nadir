@@ -17,45 +17,26 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#ifndef KEYBOARDGRABBERCLASS_H
-#define KEYBOARDGRABBERCLASS_H
+#ifndef VIRTUALCLASS_H
+#define VIRTUALCLASS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
-#include <X11/keysymdef.h>
-#include <X11/XKBlib.h>
-#include <X11/Intrinsic.h>
-#include <X11/StringDefs.h>
-#include <X11/Xutil.h>
-#include <X11/Shell.h>
 
-class KeyboardGrabber
+class Virtual
 {
   public:
-    KeyboardGrabber();
-    ~KeyboardGrabber();
-		bool start();
-		void stop();
-		void grabEvent();
-		void move( int x, int y );
-		void click();
-		bool escape();
+    Virtual();
+    Virtual( Display *d );
+    ~Virtual();
+    void open();
+    void close();
+    void click();
+    void move( int x, int y );
 
-	private:
-		Display *disp;
-		int screen;
-		XEvent xe;
-		XKeyEvent *ke;
-		int iKeyCode;
-		int iKeyState;
-		int iKeyTime;
-		int iKeyType;
-		KeySym keysym;
-		char *keyString;
+  private:
+    Display *dpy;
+    int screen;
 };
 
-#endif // KEYBOARDGRABBERCLASS_H
+#endif // VIRTUALCLASS_H
 

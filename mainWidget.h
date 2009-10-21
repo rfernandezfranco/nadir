@@ -23,6 +23,7 @@
 #include "ui_mainWidget.h"
 #include "scanLine.h"
 #include "confWidget.h"
+#include "grabber.h"
 
 class MainWidget : public QWidget
 {
@@ -47,7 +48,7 @@ class MainWidget : public QWidget
     ScanLine *hLine;
     ScanLine *vLine;
     ConfWidget *confWidget;
-    KeyboardGrabber *kbd;
+    Grabber *kbd;
 
 //  protected:
 //    void keyPressEvent(QKeyEvent *event );

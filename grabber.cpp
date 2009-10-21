@@ -17,14 +17,14 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include "keyboardGrabber.h"
+#include "grabber.h"
 
-KeyboardGrabber::KeyboardGrabber()
+Grabber::Grabber()
 {
   keyString = (char *)malloc( 20 * sizeof(char));
 }
 
-bool KeyboardGrabber::start()
+bool Grabber::start()
 {
   disp = XOpenDisplay(NULL);
   screen = DefaultScreen(disp);
@@ -38,7 +38,7 @@ bool KeyboardGrabber::start()
 }
 
 
-void KeyboardGrabber::grabEvent()
+void Grabber::grabEvent()
 {
   XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
   GrabModeAsync, CurrentTime);
@@ -83,27 +83,27 @@ void KeyboardGrabber::grabEvent()
   };
 }
 
-void KeyboardGrabber::stop()
+void Grabber::stop()
 {
   XCloseDisplay(disp);
 }
 
-void KeyboardGrabber::click()
+void Grabber::click()
 {
   XTestFakeButtonEvent( disp, 1, True, 0 );
   XTestFakeButtonEvent( disp, 1, False, 250 );
 }
 
-void KeyboardGrabber::move( int x, int y )
+void Grabber::move( int x, int y )
 {
   XTestFakeMotionEvent( disp, screen, x, y, 10 );
 }
 
-KeyboardGrabber::~KeyboardGrabber()
+Grabber::~Grabber()
 {
 }
 
-bool KeyboardGrabber::escape()
+bool Grabber::escape()
 {
   ke = (XKeyEvent *)&xe;
 

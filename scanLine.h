@@ -25,9 +25,8 @@
 #include <X11/Xlib.h>
 #include <QTimer>
 #include <QWidget>
-#include "keyboardGrabber.h"
+#include "grabber.h"
 
-//class XevieClass;
 enum lineType { HORIZONTAL=0, VERTICAL };
 
 class ScanLine : public QWidget
@@ -35,7 +34,7 @@ class ScanLine : public QWidget
   Q_OBJECT
 
   public:
-    ScanLine( QWidget *parent = 0, lineType type=HORIZONTAL, KeyboardGrabber *grabber=0 );
+    ScanLine( QWidget *parent = 0, lineType type=HORIZONTAL, Grabber *grabber=0 );
     QPixmap *mainPixmap;
     void loadSettings();
     void init( lineType type );
@@ -79,7 +78,7 @@ class ScanLine : public QWidget
     int speed;
     int step;
     QTimer *timer;
-    KeyboardGrabber *kbdGrabber;
+    Grabber *kbdGrabber;
     lineType myType;
 };
 

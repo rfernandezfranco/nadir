@@ -32,7 +32,7 @@ MainWidget::MainWidget()
   connect( ui.exitButton, SIGNAL(clicked()),
       this, SLOT(close()) );
 
-  kbd = new KeyboardGrabber();
+  kbd = new Grabber();
   if ( !kbd->start() )
     close();
 

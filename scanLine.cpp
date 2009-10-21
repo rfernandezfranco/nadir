@@ -26,7 +26,7 @@
 
 using namespace std;
 
-ScanLine::ScanLine( QWidget *parent, lineType type, KeyboardGrabber *grabber ):
+ScanLine::ScanLine( QWidget *parent, lineType type, Grabber *grabber ):
   QWidget( parent )
 {
   Qt::WindowFlags flags = Qt::ToolTip;

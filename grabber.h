@@ -17,22 +17,45 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#ifndef VIRTUALMOUSECLASS_H
-#define VIRTUALMOUSECLASS_H
+#ifndef GRABBERCLASS_H
+#define GRABBERCLASS_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <X11/X.h>
+#include <X11/Xlib.h>
+#include <X11/extensions/XTest.h>
+#include <X11/keysymdef.h>
+#include <X11/XKBlib.h>
+#include <X11/Intrinsic.h>
+#include <X11/StringDefs.h>
+#include <X11/Xutil.h>
+#include <X11/Shell.h>
 
-class VirtualMouse
+class Grabber
 {
   public:
-    VirtualMouse( Display *d );
-    ~VirtualMouse();
-    void click();
+    Grabber();
+    ~Grabber();
+    bool start();
+    void stop();
+    void grabEvent();
     void move( int x, int y );
+    void click();
+    bool escape();
 
   private:
-    Display *dpy;
+    Display *disp;
+    int screen;
+    XEvent xe;
+    XKeyEvent *ke;
+    int iKeyCode;
+    int iKeyState;
+    int iKeyTime;
+    int iKeyType;
+    KeySym keysym;
+    char *keyString;
 };
 
-#endif // VIRTUALMOUSECLASS_H
+#endif // GRABBERCLASS_H
 
