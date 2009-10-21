@@ -47,7 +47,6 @@ class ScanLine : public QWidget
     int getSpeed( void );
     void setThickness( int t );
     int getThickness( void );
-    //void reStartScan( lineType type );
     void startScan( void );
     void stopScan( void );
     int getX( void );
@@ -55,7 +54,6 @@ class ScanLine : public QWidget
     QString backgroundColor();
 
   protected:
-    void keyPressEvent(QKeyEvent *event );
     //void paintEvent( QPaintEvent * );
     bool active;
     bool continuous;

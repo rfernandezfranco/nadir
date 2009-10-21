@@ -33,54 +33,69 @@ bool Grabber::start()
     return false;
 
   XkbSetDetectableAutoRepeat(disp, TRUE, NULL);
+  x11_fd = ConnectionNumber(disp);
+  XFlush(disp);
+  grabbed = false;
 
   return true;
 }
 
-
-void Grabber::grabEvent()
+bool Grabber::grabEvent()
 {
+  // Create a File Description Set containing x11_fd
+  FD_ZERO(&in_fds);
+  FD_SET(x11_fd, &in_fds);
+
+  // Set timer
+  tv.tv_usec = 250;
+  tv.tv_sec = 0;
+
+  // Wait for X Event or a Timer
+  grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
+
   XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
   GrabModeAsync, CurrentTime);
-  XNextEvent(disp, &xe);
 
-  iKeyCode = xe.xkey.keycode;
-  iKeyState = xe.xkey.state;
-  iKeyTime = xe.xkey.time;
-  iKeyType = xe.type;
+  // Handle XEvents and flush the input 
+  while(XPending(disp))
+      XNextEvent(disp, &xe);
 
-  Window tmp = xe.xkey.window;
-  XUngrabKeyboard(disp, CurrentTime);
-  XPutBackEvent(disp, &xe);
-  XSelectInput(disp, tmp, KeyPressMask | KeyReleaseMask);
-  XGrabKey(disp, iKeyCode, None, tmp, TRUE, GrabModeAsync, GrabModeAsync);
-  XNextEvent(disp, &xe);
-  XAllowEvents(disp, ReplayKeyboard, iKeyTime);
+  if( grabbed ){
+    iKeyCode = xe.xkey.keycode;
+    iKeyState = xe.xkey.state;
+    iKeyTime = xe.xkey.time;
+    iKeyType = xe.type;
 
-  switch (iKeyType) {
-    case KeyPress:
-      fprintf(stderr, "Tecla pulsada: ");
-      break;
-    case KeyRelease:
-      fprintf(stderr, "Tecla soltada: ");
-      break;
+    switch (iKeyType) {
+      case KeyPress:
+        fprintf(stderr, "Tecla pulsada: ");
+        break;
+      case KeyRelease:
+        fprintf(stderr, "Tecla soltada: ");
+        break;
+    };
+
+    keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
+    keyString = XKeysymToString(keysym);
+    fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
+
+    XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
+    XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
+    XSync(disp, FALSE);
+    XFlush(disp);
+
+    // Exit when pressing ESCAPE key
+    if( iKeyCode == 9 ){
+      fprintf(stderr, "Adios!\n");
+      XCloseDisplay( disp );
+      exit(10);
+    };
   };
 
-  keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
-  keyString = XKeysymToString(keysym);
-  fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
-
-  XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
-  XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
-  XSync(disp, FALSE);
-  XFlush(disp);
-
-  // Exit when pressing ESCAPE key
-  if( iKeyCode == 9 ){
-    fprintf(stderr, "Adios!\n");
-    XCloseDisplay( disp );
-    exit(10);
-  };
+  if( grabbed && iKeyType == KeyPress)
+    return true;
+  else
+    return false;
 }
 
 void Grabber::stop()

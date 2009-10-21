@@ -185,7 +185,6 @@ void ScanLine::hScan( void )
   }
 
   move( x0, y0 );
-  //xevie->move( x0, y0 );
 }
 
 void ScanLine::vScan( void )
@@ -199,7 +198,6 @@ void ScanLine::vScan( void )
   }
 
   move( x0, y0 );
-  //xevie->move( x0, y0 );
 }
 
 /*
@@ -215,17 +213,4 @@ void ScanLine::paintEvent( QPaintEvent * )
   painter.fillRect( 0, 0, this->width(), this->height(), brush );
 }
 */
-
-void ScanLine::keyPressEvent( QKeyEvent *event )
-{
-  switch (event->key()) {
-    case Qt::Key_Left:
-      cout << "LEFT Click from ScanLine" << endl;
-      fflush( stdout );
-      break;
-  };
-
-  cout << "Click from ScanLine" << endl;
-  fflush( stdout );
-}
 

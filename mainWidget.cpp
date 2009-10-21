@@ -127,20 +127,12 @@ void MainWidget::scan()
 
 void MainWidget::grabEvent()
 {
-  //if( kbd->grabEvent() ){
-  kbd->grabEvent();
-  if(	kbd->escape() )
-    cout << "salir" << endl;
-  else
+  if( kbd->grabEvent() )
     changeState();
-  //};
 }
 
 void MainWidget::stop()
 {
-  //hLine->stopScan();
-  //printf("XevieEnd(xc->dpy) finished \n");
-  //XevieEnd(xc->dpy);
   kbd->stop();
 }
 
@@ -150,22 +142,6 @@ void MainWidget::configure( void )
   confWidget->show();
 }
 
-/*
-void MainWidget::keyPressEvent( QKeyEvent *event )
-{
-  QWidget::keyPressEvent(event);
-
-  switch (event->key()) {
-     case Qt::Key_Left:
-       cout << "LEFT Click fom MainWidget" << endl;
-       fflush( stdout );
-       break;
-  }
-
- cout << "Click fom MainWidget" << endl;
- fflush( stdout );
-}
-*/
 void MainWidget::changeState()
 {
   switch( state ){
@@ -215,7 +191,6 @@ void MainWidget::closeEvent(QCloseEvent *e)
 
 MainWidget::~MainWidget()
 {
-  //XevieEnd(xc->dpy);
   kbd->stop();
 }
 

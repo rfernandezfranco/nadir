@@ -39,7 +39,7 @@ class Grabber
     ~Grabber();
     bool start();
     void stop();
-    void grabEvent();
+    bool grabEvent();
     void move( int x, int y );
     void click();
     bool escape();
@@ -55,6 +55,11 @@ class Grabber
     int iKeyType;
     KeySym keysym;
     char *keyString;
+
+    int x11_fd;
+    fd_set in_fds;
+    struct timeval tv;
+    bool grabbed;
 };
 
 #endif // GRABBERCLASS_H
