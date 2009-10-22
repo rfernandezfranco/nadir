@@ -42,7 +42,7 @@ class Grabber
     bool grabEvent();
     void move( int x, int y );
     void click();
-    bool escape();
+    void setEscapeCode( int i );
 
   private:
     Display *disp;
@@ -55,6 +55,7 @@ class Grabber
     int iKeyType;
     KeySym keysym;
     char *keyString;
+    int escapeCode;
 
     int x11_fd;
     fd_set in_fds;

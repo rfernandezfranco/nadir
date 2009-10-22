@@ -78,6 +78,7 @@ class ScanLine : public QWidget
     QTimer *timer;
     Grabber *kbdGrabber;
     lineType myType;
+    int escapeCode;
 };
 
 #endif // SCANLINE_H

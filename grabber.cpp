@@ -47,7 +47,7 @@ bool Grabber::grabEvent()
   FD_SET(x11_fd, &in_fds);
 
   // Set timer
-  tv.tv_usec = 250;
+  tv.tv_usec = 100;
   tv.tv_sec = 0;
 
   // Wait for X Event or a Timer
@@ -84,14 +84,15 @@ bool Grabber::grabEvent()
     XSync(disp, FALSE);
     XFlush(disp);
 
-    // Exit when pressing ESCAPE key
-    if( iKeyCode == 9 ){
+    // Exit when pressing escape key
+    if( iKeyCode == escapeCode ){
       fprintf(stderr, "Adios!\n");
       XCloseDisplay( disp );
       exit(10);
     };
   };
 
+  // Return true when pressing any key buy the escape key
   if( grabbed && iKeyType == KeyPress)
     return true;
   else
@@ -118,13 +119,9 @@ Grabber::~Grabber()
 {
 }
 
-bool Grabber::escape()
+void Grabber::setEscapeCode( int i )
 {
-  ke = (XKeyEvent *)&xe;
-
-  if(ke->keycode == 9)
-    return true;
-
-  return false;
+  escapeCode = i;
 }
+
 

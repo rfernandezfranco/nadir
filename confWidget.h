@@ -34,23 +34,6 @@ class ConfWidget : public QWidget
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
-/*
-    void getScreenSize();
-    void setScreenWidth( int w );
-    int getScreenWidth( void );
-    void setScreenHeight( int h );
-    int getScreenHeight( void );
-    void setSpeed( int s );
-    int getSpeed( void );
-
-    bool active;
-    bool continuous;
-    ScanLine *hLine;
-    ScanLine *vLine;
-
-  protected:
-    void keyPressEvent(QKeyEvent *event );
-*/
 
   signals:
     void closing();
@@ -62,16 +45,7 @@ class ConfWidget : public QWidget
   private:
     Ui::ConfWidget ui;
     QString lineColor;
-    /*
-    enum { LEFT=0, RIGHT, DOUBLE, DRAG, DROP } mouseEvent;
-    enum { STOP=0, START, SCAN1, SCAN2, EVENT } state;
-    int x;
-    int y;
-    int screenWidth;
-    int screenHeight;
-    int speed;
-    int lineWidth;
-    */
 };
 
 #endif // CONFWIDGET_H
+

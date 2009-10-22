@@ -51,8 +51,9 @@ void ScanLine::loadSettings()
   QSettings settings;
 
   settings.beginGroup("Main");
-  speed = settings.value( "speed", 5 ).toInt();
-  _thickness = settings.value( "thickness", 5 ).toInt();
+  speed = settings.value( "speed", 10 ).toInt();
+  _thickness = settings.value( "thickness", 6 ).toInt();
+  escapeCode = settings.value( "escape", 9 ).toInt();
   lineColor = settings.value( "color", "255,0,0" ).toString();
   setStyleSheet( backgroundColor() );
   settings.endGroup();

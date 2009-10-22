@@ -30,8 +30,12 @@ class Virtual
     ~Virtual();
     void open();
     void close();
-    void click();
     void move( int x, int y );
+    void click();
+    void doubleClick();
+    void rightClick();
+    void startDrag();
+    void stopDrag();
 
   private:
     Display *dpy;

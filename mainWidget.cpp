@@ -54,14 +54,15 @@ MainWidget::MainWidget()
    QSettings settings;
 
    settings.beginGroup("Main");
-   //restoreState( settings.value( "wm_state" ).toByteArray() );
    resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
    move( settings.value( "pos" ).toPoint() );
-   speed = settings.value( "speed", 30 ).toInt();
-   continuous = settings.value( "continuous", 1 ).toBool();
+   speed = settings.value( "speed", 10 ).toInt();
+   continuous = settings.value( "continuous", 0 ).toBool();
    active = settings.value( "active", 1 ).toBool();
+   escapeCode = settings.value( "escape", 9 ).toInt();
    settings.endGroup();
 
+   kbd->setEscapeCode( escapeCode );
    hLine->loadSettings();
    vLine->loadSettings();
  }
@@ -71,10 +72,10 @@ MainWidget::MainWidget()
    QSettings settings;
 
    settings.beginGroup( "Main" );
-   //settings.setValue( "wm_state", saveState() );
    settings.setValue( "size", size() );
    settings.setValue( "pos", pos() );
    settings.setValue( "speed", speed );
+   settings.setValue( "escape", escapeCode );
    int c = ( continuous==true ) ? 1 : 0;
    settings.setValue( "continuous", c );
    int a = ( active==true ) ? 1 : 0;

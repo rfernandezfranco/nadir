@@ -40,15 +40,39 @@ void Virtual::close()
   XCloseDisplay( dpy );
 }
 
-void Virtual::click()
+void Virtual::move( int x, int y )
+{
+  XTestFakeMotionEvent( dpy, screen, x, y, 10 );
+}
+
+void Virtual::click(void)
 {
   XTestFakeButtonEvent( dpy, 1, True, 0 );
   XTestFakeButtonEvent( dpy, 1, False, 250 );
 }
 
-void Virtual::move( int x, int y )
+void Virtual::doubleClick(void)
 {
-  XTestFakeMotionEvent( dpy, screen, x, y, 10 );
+  XTestFakeButtonEvent( dpy, 1, True, 100 );
+  XTestFakeButtonEvent( dpy, 1, False, 100 );
+  XTestFakeButtonEvent( dpy, 1, True, 100 );
+  XTestFakeButtonEvent( dpy, 1, False, 100 );
+}
+
+void Virtual::rightClick(void)
+{
+  XTestFakeButtonEvent( dpy, 3, True, 0 );
+  XTestFakeButtonEvent( dpy, 3, False, 250 );
+}
+
+void Virtual::startDrag(void)
+{
+  XTestFakeButtonEvent( dpy, 1, True, 0 );
+}
+
+void Virtual::stopDrag(void)
+{
+  XTestFakeButtonEvent( dpy, 1, False, 0 );
 }
 
 Virtual::~Virtual()

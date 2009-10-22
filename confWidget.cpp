@@ -97,22 +97,6 @@ void ConfWidget::save()
   close();
 }
 
-/*
-void ConfWidget::keyPressEvent( QKeyEvent *event )
-{
-  QWidget::keyPressEvent(event);
-
-  switch (event->key()) {
-     case Qt::Key_Left:
-       cout << "LEFT Click fom ConfWidget" << endl;
-       fflush( stdout );
-       break;
-  }
-
- cout << "Click fom ConfWidget" << endl;
- fflush( stdout );
-}
-*/
 void ConfWidget::setColor()
 {
   QRgb rgb = QColorDialog::getRgba(); 

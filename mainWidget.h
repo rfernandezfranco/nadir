@@ -71,6 +71,7 @@ class MainWidget : public QWidget
     int screenHeight;
     int speed;
     int lineWidth;
+    int escapeCode;
     XKeyEvent *ke;
     int count;
     QTimer *scanTimer;
