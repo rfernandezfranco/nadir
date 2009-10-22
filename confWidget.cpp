@@ -70,6 +70,10 @@ void ConfWidget::loadSettings()
   ui.colorButton->setStyleSheet( backgroundColor() );
   settings.endGroup();
 
+  settings.beginGroup( "mainWidget" );
+  ui.minimizedBox->setChecked( settings.value( "minimized" ).toBool() );
+  settings.endGroup();
+
   settings.beginGroup("confWidget");
   resize( settings.value( "size", QSize( 770, 670 ) ).toSize() );
   move( settings.value( "pos" ).toPoint() );
@@ -87,6 +91,11 @@ void ConfWidget::save()
   int i = ( ui.continuousBox->isChecked() ) ? 1 : 0;
   settings.setValue( "continuous", i );
   settings.setValue( "color", lineColor );
+  settings.endGroup();
+
+  settings.beginGroup( "mainWidget" );
+  int m = ( ui.minimizedBox->isChecked() ) ? 1 : 0;
+  settings.setValue( "minimized", m );
   settings.endGroup();
 
   settings.beginGroup( "confWidget" );

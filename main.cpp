@@ -17,6 +17,7 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
+#include <QSettings>
 #include "mainWidget.h"
 
 using namespace std;
@@ -25,7 +26,20 @@ int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
   MainWidget win;
-  win.show();
+  QSettings settings;
+
+  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
+  QCoreApplication::setApplicationName( "Nadir" );
+  
+  settings.beginGroup( "mainWidget" );
+  bool min = settings.value( "minimized", false ).toBool();
+  settings.endGroup();
+
+  if( min )
+    win.showMinimized();
+  else
+    win.show();
 
   return app.exec();
 }
