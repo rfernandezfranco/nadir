@@ -18,6 +18,7 @@
  */
  
 #include <QtGui>
+#include <QStringList>
 #include <QSettings>
 #include <QColorDialog>
 #include "confWidget.h"
@@ -99,17 +100,22 @@ void ConfWidget::save()
 
 void ConfWidget::setColor()
 {
-  QRgb rgb = QColorDialog::getRgba(); 
+  bool ok;
   QString s;
+  QStringList l = lineColor.split( "," ); 
+  QRgb rgb = QColorDialog::getRgba( QColor::fromRgb(l.at(0).toInt(),
+                                    l.at(1).toInt(),
+                                    l.at(2).toInt()).rgb(), &ok ); 
+  if( ok ){
+    lineColor.clear();
+    lineColor.append( s.setNum(qRed(rgb)) );
+    lineColor.append( "," );
+    lineColor.append( s.setNum(qGreen(rgb)) );
+    lineColor.append( "," );
+    lineColor.append( s.setNum(qBlue(rgb)) );
 
-  lineColor.clear();
-  lineColor.append( s.setNum(qRed(rgb)) );
-  lineColor.append( "," );
-  lineColor.append( s.setNum(qGreen(rgb)) );
-  lineColor.append( "," );
-  lineColor.append( s.setNum(qBlue(rgb)) );
-
-  ui.colorButton->setStyleSheet( backgroundColor() );
+    ui.colorButton->setStyleSheet( backgroundColor() );
+  };
 }
 
 QString ConfWidget::backgroundColor()
