@@ -58,6 +58,7 @@ MainWidget::MainWidget()
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "Nadir" );
   loadSettings();
+  kbd->move( hLine->getScreenWidth(), hLine->getScreenHeight() );
   scan();
 }
 
@@ -234,6 +235,7 @@ void MainWidget::doEvent()
     default:
       cout << "nothing" << endl;
   };
+  kbd->move( hLine->getScreenWidth(), hLine->getScreenHeight() );
 }
 
 void MainWidget::closeEvent(QCloseEvent *e)
