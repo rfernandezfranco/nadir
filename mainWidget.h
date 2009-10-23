@@ -79,6 +79,7 @@ class MainWidget : public QWidget
     XKeyEvent *ke;
     int count;
     QTimer *scanTimer;
+    bool hidePointer;
 };
 
 #endif // MAINWIDGET_H

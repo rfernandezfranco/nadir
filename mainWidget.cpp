@@ -57,8 +57,12 @@ MainWidget::MainWidget()
   QCoreApplication::setOrganizationName( "Nadir" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "Nadir" );
+  getScreenSize();
   loadSettings();
-  kbd->move( hLine->getScreenWidth(), hLine->getScreenHeight() );
+
+  if( hidePointer )
+    kbd->move( getScreenWidth(), getScreenHeight() );
+
   scan();
 }
 
@@ -75,6 +79,7 @@ void MainWidget::loadSettings()
    escapeCode = settings.value( "escape", 9 ).toInt();
    ui.clickButton->setChecked( !settings.value( "click", 0 ).toBool() );
    ui.dbClickButton->setChecked( settings.value( "click", 0 ).toBool() );
+   hidePointer = settings.value( "hide", 0 ).toBool();
    setDefaultEvent( settings.value( "click", 0 ).toInt() );
    settings.endGroup();
 
@@ -229,13 +234,15 @@ void MainWidget::doEvent()
       break;
     case DROP:
       kbd->drop();
-      mouseEvent = DRAG;
+      mouseEvent = defaultEvent;
       cout << "drop" << endl;
       break;
     default:
       cout << "nothing" << endl;
   };
-  kbd->move( hLine->getScreenWidth(), hLine->getScreenHeight() );
+
+  if( hidePointer )
+    kbd->move( getScreenWidth(), getScreenHeight() );
 }
 
 void MainWidget::closeEvent(QCloseEvent *e)

@@ -66,6 +66,7 @@ void ConfWidget::loadSettings()
   ui.thickBox->setValue( settings.value( "thickness" ).toInt() );
   ui.continuousBox->setChecked( settings.value( "continuous" ).toBool() );
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
+  ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
   lineColor.clear();
   lineColor.append( settings.value( "color", "255,0,0").toString() );
   ui.colorButton->setStyleSheet( backgroundColor() );
@@ -93,6 +94,8 @@ void ConfWidget::save()
   settings.setValue( "continuous", i );
   i = ( ui.simpleClickBox->isChecked() ) ? 0 : 1;
   settings.setValue( "click", i );
+  i = ( ui.hidePointerBox->isChecked() ) ? 1 : 0;
+  settings.setValue( "hide", i );
   settings.setValue( "color", lineColor );
   settings.endGroup();
 

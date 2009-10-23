@@ -141,50 +141,7 @@
           <string>Opciones generales</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_9" >
-          <item row="4" column="0" >
-           <widget class="QLabel" name="label_18" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Tecla para detener el barrido</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0" >
-           <widget class="QLabel" name="label_19" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Área de barrido</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1" >
-           <widget class="QRadioButton" name="radioButton" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Toda la pantalla</string>
-            </property>
-            <property name="checked" >
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="3" >
-           <widget class="QRadioButton" name="radioButton_2" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Ventana con foco</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="4" >
+          <item row="6" column="4" >
            <spacer name="horizontalSpacer_3" >
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -197,6 +154,49 @@
             </property>
            </spacer>
           </item>
+          <item row="5" column="0" >
+           <widget class="QLabel" name="label_18" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="text" >
+             <string>Tecla para detener el barrido</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0" >
+           <widget class="QLabel" name="label_19" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="text" >
+             <string>Área de barrido</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1" >
+           <widget class="QRadioButton" name="radioButton" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="text" >
+             <string>Toda la pantalla</string>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="3" >
+           <widget class="QRadioButton" name="radioButton_2" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="text" >
+             <string>Ventana con foco</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0" >
            <widget class="QCheckBox" name="continuousBox" >
             <property name="text" >
@@ -207,7 +207,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0" >
+          <item row="4" column="0" >
            <widget class="QCheckBox" name="controlBox" >
             <property name="enabled" >
              <bool>false</bool>
@@ -241,7 +241,7 @@
             </property>
            </widget>
           </item>
-          <item rowspan="2" row="1" column="3" >
+          <item rowspan="3" row="1" column="3" >
            <widget class="QGroupBox" name="groupBox_4" >
             <property name="title" >
              <string>Clic por defecto</string>
@@ -267,20 +267,50 @@
             </layout>
            </widget>
           </item>
+          <item row="3" column="0" >
+           <widget class="QCheckBox" name="hidePointerBox" >
+            <property name="text" >
+             <string>Esconder cursor</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QPushButton" name="pushButton_2" >
+            <property name="text" >
+             <string>Activar /Desactivar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2" >
+           <spacer name="horizontalSpacer_13" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType" >
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="4" >
+           <spacer name="horizontalSpacer_14" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
-         <zorder>label_18</zorder>
-         <zorder>label_19</zorder>
-         <zorder>radioButton</zorder>
-         <zorder>radioButton_2</zorder>
-         <zorder>continuousBox</zorder>
-         <zorder>controlBox</zorder>
-         <zorder>minimizedBox</zorder>
-         <zorder>pushButton</zorder>
-         <zorder>pushButton_5</zorder>
-         <zorder>label_9</zorder>
-         <zorder>groupBox_4</zorder>
-         <zorder>groupBox_4</zorder>
-         <zorder>groupBox_4</zorder>
         </widget>
        </item>
        <item row="1" column="0" >
@@ -1041,12 +1071,12 @@ p, li { white-space: pre-wrap; }
    <slot>stepUp()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>353</x>
-     <y>462</y>
+     <x>347</x>
+     <y>525</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>219</x>
-     <y>459</y>
+     <x>216</x>
+     <y>525</y>
     </hint>
    </hints>
   </connection>
@@ -1057,12 +1087,12 @@ p, li { white-space: pre-wrap; }
    <slot>stepDown()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>438</x>
-     <y>462</y>
+     <x>433</x>
+     <y>525</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>219</x>
-     <y>459</y>
+     <x>216</x>
+     <y>525</y>
     </hint>
    </hints>
   </connection>
@@ -1089,12 +1119,12 @@ p, li { white-space: pre-wrap; }
    <slot>subtractStep()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>353</x>
-     <y>505</y>
+     <x>347</x>
+     <y>572</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>219</x>
-     <y>498</y>
+     <x>216</x>
+     <y>565</y>
     </hint>
    </hints>
   </connection>
@@ -1105,12 +1135,12 @@ p, li { white-space: pre-wrap; }
    <slot>addStep()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>438</x>
-     <y>505</y>
+     <x>433</x>
+     <y>572</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>219</x>
-     <y>498</y>
+     <x>216</x>
+     <y>565</y>
     </hint>
    </hints>
   </connection>
@@ -1125,8 +1155,24 @@ p, li { white-space: pre-wrap; }
      <y>209</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>131</x>
-     <y>208</y>
+     <x>175</x>
+     <y>228</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>hidePointerBox</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>221</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>112</x>
+     <y>257</y>
     </hint>
    </hints>
   </connection>

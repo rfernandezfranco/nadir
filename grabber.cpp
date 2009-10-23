@@ -52,7 +52,7 @@ bool Grabber::grabEvent()
   FD_SET(x11_fd, &in_fds);
 
   // Set timer
-  tv.tv_usec = 300;
+  tv.tv_usec = 100;
   tv.tv_sec = 0;
 
   // Wait for X Event or a Timer
