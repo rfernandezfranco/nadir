@@ -35,6 +35,11 @@ void Virtual::open()
   screen = DefaultScreen( dpy );
 }
 
+void Virtual::setDisplay( Display *d )
+{
+  dpy = d;
+}
+
 void Virtual::close()
 {
   XCloseDisplay( dpy );
@@ -65,12 +70,12 @@ void Virtual::rightClick(void)
   XTestFakeButtonEvent( dpy, 3, False, 250 );
 }
 
-void Virtual::startDrag(void)
+void Virtual::drag(void)
 {
   XTestFakeButtonEvent( dpy, 1, True, 0 );
 }
 
-void Virtual::stopDrag(void)
+void Virtual::drop(void)
 {
   XTestFakeButtonEvent( dpy, 1, False, 0 );
 }

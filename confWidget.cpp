@@ -65,6 +65,7 @@ void ConfWidget::loadSettings()
   ui.speedSlider->setValue( settings.value( "speed" ).toInt() );
   ui.thickBox->setValue( settings.value( "thickness" ).toInt() );
   ui.continuousBox->setChecked( settings.value( "continuous" ).toBool() );
+  ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   lineColor.clear();
   lineColor.append( settings.value( "color", "255,0,0").toString() );
   ui.colorButton->setStyleSheet( backgroundColor() );
@@ -90,12 +91,14 @@ void ConfWidget::save()
   settings.setValue( "thickness",  ui.thickBox->value() );
   int i = ( ui.continuousBox->isChecked() ) ? 1 : 0;
   settings.setValue( "continuous", i );
+  i = ( ui.simpleClickBox->isChecked() ) ? 0 : 1;
+  settings.setValue( "click", i );
   settings.setValue( "color", lineColor );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
-  int m = ( ui.minimizedBox->isChecked() ) ? 1 : 0;
-  settings.setValue( "minimized", m );
+  i = ( ui.minimizedBox->isChecked() ) ? 1 : 0;
+  settings.setValue( "minimized", i );
   settings.endGroup();
 
   settings.beginGroup( "confWidget" );

@@ -17,9 +17,10 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
-#include "mainWidget.h"
 #include <iostream>
+#include <QtGui>
+#include <QSound>
+#include "mainWidget.h"
 
 using namespace std;
 
@@ -31,10 +32,21 @@ MainWidget::MainWidget()
       this, SLOT(configure()) );
   connect( ui.exitButton, SIGNAL(clicked()),
       this, SLOT(close()) );
+  connect( ui.clickButton, SIGNAL(clicked()),
+      this, SLOT(setEvent()) );
+  connect( ui.dbClickButton, SIGNAL(clicked()),
+      this, SLOT(setEvent()) );
+  connect( ui.rightClickButton, SIGNAL(clicked()),
+      this, SLOT(setEvent()) );
+  connect( ui.dragButton, SIGNAL(clicked()),
+      this, SLOT(setEvent()) );
 
   kbd = new Grabber();
   if ( !kbd->start() )
     close();
+
+  //mouse = new Virtual();
+  //mouse->setDisplay( kbd->getDisplay() );
 
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );
@@ -49,7 +61,7 @@ MainWidget::MainWidget()
   scan();
 }
 
- void MainWidget::loadSettings()
+void MainWidget::loadSettings()
  {
    QSettings settings;
 
@@ -60,6 +72,9 @@ MainWidget::MainWidget()
    continuous = settings.value( "continuous", 0 ).toBool();
    active = settings.value( "active", 1 ).toBool();
    escapeCode = settings.value( "escape", 9 ).toInt();
+   ui.clickButton->setChecked( !settings.value( "click", 0 ).toBool() );
+   ui.dbClickButton->setChecked( settings.value( "click", 0 ).toBool() );
+   setDefaultEvent( settings.value( "click", 0 ).toInt() );
    settings.endGroup();
 
    kbd->setEscapeCode( escapeCode );
@@ -76,10 +91,10 @@ MainWidget::MainWidget()
    settings.setValue( "pos", pos() );
    settings.setValue( "speed", speed );
    settings.setValue( "escape", escapeCode );
-   int c = ( continuous==true ) ? 1 : 0;
-   settings.setValue( "continuous", c );
-   int a = ( active==true ) ? 1 : 0;
-   settings.setValue( "active", a );
+   int i = ( continuous==true ) ? 1 : 0;
+   settings.setValue( "continuous", i );
+   i = ( active==true ) ? 1 : 0;
+   settings.setValue( "active", i );
    settings.endGroup();
  }
 
@@ -164,10 +179,60 @@ void MainWidget::changeState()
       hLine->hide();
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
-      kbd->click();
+      doEvent();//kbd->click();
+      //QSound::play("click.wav");
       state = (continuous) ? SCAN1 : STOP;
       changeState();
       break;
+  };
+}
+
+void MainWidget::setEvent()
+{
+  if( ui.clickButton->isChecked() )
+    mouseEvent = LEFT; 
+  else if( ui.dbClickButton->isChecked() )
+    mouseEvent = DOUBLE; 
+  else if( ui.rightClickButton->isChecked() )
+    mouseEvent = RIGHT; 
+  else if( ui.dragButton->isChecked() )
+    mouseEvent = DRAG; 
+}
+
+void MainWidget::setDefaultEvent( int i )
+{
+  defaultEvent = ( i==0 ) ? LEFT : DOUBLE; 
+  mouseEvent = defaultEvent;
+}
+
+void MainWidget::doEvent()
+{
+  switch( mouseEvent ){
+    case LEFT:
+      kbd->click();
+      cout << "left" << endl;
+      break;
+    case DOUBLE:
+      kbd->doubleClick();
+      cout << "double" << endl;
+      break;
+    case RIGHT:
+      kbd->rightClick();
+      mouseEvent = defaultEvent;
+      cout << "right" << endl;
+      break;
+    case DRAG:
+      kbd->drag();
+      mouseEvent = DROP;
+      cout << "drag" << endl;
+      break;
+    case DROP:
+      kbd->drop();
+      mouseEvent = DRAG;
+      cout << "drop" << endl;
+      break;
+    default:
+      cout << "nothing" << endl;
   };
 }
 

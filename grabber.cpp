@@ -40,6 +40,11 @@ bool Grabber::start()
   return true;
 }
 
+Display *Grabber::getDisplay()
+{
+  return disp;
+}
+
 bool Grabber::grabEvent()
 {
   // Create a File Description Set containing x11_fd
@@ -47,7 +52,7 @@ bool Grabber::grabEvent()
   FD_SET(x11_fd, &in_fds);
 
   // Set timer
-  tv.tv_usec = 100;
+  tv.tv_usec = 300;
   tv.tv_sec = 0;
 
   // Wait for X Event or a Timer
@@ -65,19 +70,19 @@ bool Grabber::grabEvent()
     iKeyState = xe.xkey.state;
     iKeyTime = xe.xkey.time;
     iKeyType = xe.type;
-
+/* 
     switch (iKeyType) {
       case KeyPress:
-        fprintf(stderr, "Tecla pulsada: ");
+        fprintf(stderr, "Key pressed: ");
         break;
       case KeyRelease:
-        fprintf(stderr, "Tecla soltada: ");
+        fprintf(stderr, "key released: ");
         break;
     };
-
+*/
     keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
     keyString = XKeysymToString(keysym);
-    fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
+    //fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
 
     XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
     XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
@@ -86,7 +91,6 @@ bool Grabber::grabEvent()
 
     // Exit when pressing escape key
     if( iKeyCode == escapeCode ){
-      fprintf(stderr, "Adios!\n");
       XCloseDisplay( disp );
       exit(10);
     };
@@ -104,10 +108,9 @@ void Grabber::stop()
   XCloseDisplay(disp);
 }
 
-void Grabber::click()
+void Grabber::setEscapeCode( int i )
 {
-  XTestFakeButtonEvent( disp, 1, True, 0 );
-  XTestFakeButtonEvent( disp, 1, False, 250 );
+  escapeCode = i;
 }
 
 void Grabber::move( int x, int y )
@@ -115,13 +118,37 @@ void Grabber::move( int x, int y )
   XTestFakeMotionEvent( disp, screen, x, y, 10 );
 }
 
+void Grabber::click(void)
+{
+  XTestFakeButtonEvent( disp, 1, True, 0 );
+  XTestFakeButtonEvent( disp, 1, False, 250 );
+}
+
+void Grabber::doubleClick(void)
+{
+  XTestFakeButtonEvent( disp, 1, True, 100 );
+  XTestFakeButtonEvent( disp, 1, False, 100 );
+  XTestFakeButtonEvent( disp, 1, True, 100 );
+  XTestFakeButtonEvent( disp, 1, False, 100 );
+}
+
+void Grabber::rightClick(void)
+{
+  XTestFakeButtonEvent( disp, 3, True, 0 );
+  XTestFakeButtonEvent( disp, 3, False, 250 );
+}
+
+void Grabber::drag(void)
+{
+  XTestFakeButtonEvent( disp, 1, True, 0 );
+}
+
+void Grabber::drop(void)
+{
+  XTestFakeButtonEvent( disp, 1, False, 0 );
+}
+
 Grabber::~Grabber()
 {
 }
-
-void Grabber::setEscapeCode( int i )
-{
-  escapeCode = i;
-}
-
 

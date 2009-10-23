@@ -31,9 +31,9 @@
 #include <X11/StringDefs.h>
 #include <X11/Xutil.h>
 #include <X11/Shell.h>
+//#include "virtual.h"
 
-class Grabber
-{
+class Grabber {
   public:
     Grabber();
     ~Grabber();
@@ -42,7 +42,12 @@ class Grabber
     bool grabEvent();
     void move( int x, int y );
     void click();
+    void doubleClick();
+    void rightClick();
+    void drag();
+    void drop();
     void setEscapeCode( int i );
+    Display *getDisplay();
 
   private:
     Display *disp;

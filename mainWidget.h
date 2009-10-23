@@ -24,6 +24,7 @@
 #include "scanLine.h"
 #include "confWidget.h"
 #include "grabber.h"
+//#include "virtual.h"
 
 class MainWidget : public QWidget
 {
@@ -42,6 +43,8 @@ class MainWidget : public QWidget
     int getSpeed( void );
     void changeState();
     void doEvent();
+    enum MouseEvent { LEFT=0, DOUBLE, RIGHT, DRAG, DROP };
+    enum State { STOP=0, SCAN1, SCAN2, EVENT };
 
     bool active;
     bool continuous;
@@ -49,9 +52,7 @@ class MainWidget : public QWidget
     ScanLine *vLine;
     ConfWidget *confWidget;
     Grabber *kbd;
-
-//  protected:
-//    void keyPressEvent(QKeyEvent *event );
+    //Virtual *mouse;
 
   public slots:
     void configure( void );
@@ -60,11 +61,14 @@ class MainWidget : public QWidget
     void grabEvent();
     void loadSettings();
     void saveSettings();
+    void setDefaultEvent( int i );
+    void setEvent();
 
   private:
     Ui::MainWidget ui;
-    enum { LEFT=0, RIGHT, DOUBLE, DRAG, DROP } mouseEvent;
-    enum { STOP=0, SCAN1, SCAN2, EVENT } state;
+    MouseEvent mouseEvent;
+    MouseEvent defaultEvent;
+    State state;
     int x;
     int y;
     int screenWidth;
