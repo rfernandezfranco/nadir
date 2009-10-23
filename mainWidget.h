@@ -24,7 +24,6 @@
 #include "scanLine.h"
 #include "confWidget.h"
 #include "grabber.h"
-//#include "virtual.h"
 
 class MainWidget : public QWidget
 {
@@ -52,7 +51,6 @@ class MainWidget : public QWidget
     ScanLine *vLine;
     ConfWidget *confWidget;
     Grabber *kbd;
-    //Virtual *mouse;
 
   public slots:
     void configure( void );

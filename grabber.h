@@ -31,7 +31,6 @@
 #include <X11/StringDefs.h>
 #include <X11/Xutil.h>
 #include <X11/Shell.h>
-//#include "virtual.h"
 
 class Grabber {
   public:

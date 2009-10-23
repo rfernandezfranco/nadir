@@ -45,9 +45,6 @@ MainWidget::MainWidget()
   if ( !kbd->start() )
     close();
 
-  //mouse = new Virtual();
-  //mouse->setDisplay( kbd->getDisplay() );
-
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );
 
@@ -185,7 +182,7 @@ void MainWidget::changeState()
       hLine->hide();
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
-      doEvent();//kbd->click();
+      doEvent();
       //QSound::play("click.wav");
       state = (continuous) ? SCAN1 : STOP;
       changeState();

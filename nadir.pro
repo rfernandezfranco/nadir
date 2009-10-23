@@ -9,8 +9,7 @@ INCLUDEPATH += .
 LIBS += -lX11 -lXtst -L/usr/X11R6/lib
 
 # Input
-HEADERS += confWidget.h mainWidget.h scanLine.h grabber.h virtual.h
+HEADERS += confWidget.h mainWidget.h scanLine.h grabber.h
 FORMS += confWidget.ui mainWidget.ui
-SOURCES += confWidget.cpp main.cpp mainWidget.cpp scanLine.cpp grabber.cpp \
-           virtual.cpp
+SOURCES += confWidget.cpp main.cpp mainWidget.cpp scanLine.cpp grabber.cpp
 RESOURCES += nadir.qrc
