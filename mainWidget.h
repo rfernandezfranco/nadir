@@ -45,13 +45,6 @@ class MainWidget : public QWidget
     enum MouseEvent { LEFT=0, DOUBLE, RIGHT, DRAG, DROP };
     enum State { STOP=0, SCAN1, SCAN2, EVENT };
 
-    bool active;
-    bool continuous;
-    ScanLine *hLine;
-    ScanLine *vLine;
-    ConfWidget *confWidget;
-    Grabber *kbd;
-
   public slots:
     void configure( void );
     void scan();
@@ -67,6 +60,7 @@ class MainWidget : public QWidget
     MouseEvent mouseEvent;
     MouseEvent defaultEvent;
     State state;
+    Grabber *kbd;
     int x;
     int y;
     int screenWidth;
@@ -78,6 +72,11 @@ class MainWidget : public QWidget
     int count;
     QTimer *scanTimer;
     bool hidePointer;
+    bool active;
+    bool continuous;
+    ScanLine *hLine;
+    ScanLine *vLine;
+    ConfWidget *confWidget;
 };
 
 #endif // MAINWIDGET_H
