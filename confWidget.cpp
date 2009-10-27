@@ -34,8 +34,9 @@ ConfWidget::ConfWidget( QWidget *parent ):
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
 
-  // Temporally remove Camera Tab
-  ui.tabWidget->removeTab(4);
+  // Temporally remove Mouse and Camera Tabs
+  ui.tabWidget->removeTab(2);
+  ui.tabWidget->removeTab(3);
 
   connect( ui.colorButton, SIGNAL(clicked()),
       this, SLOT(setColor()) );
@@ -49,13 +50,15 @@ ConfWidget::ConfWidget( QWidget *parent ):
   connect( this, SIGNAL(closing()),
       parentWidget(), SLOT(loadSettings()) );
 
+  connect( ui.keyMode, SIGNAL(toggled(bool)),
+      this, SLOT(setMode(bool)) );
+
   QCoreApplication::setOrganizationName( "Nadir" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "Nadir" );
 
   loadSettings();
 }
-
 
 void ConfWidget::loadSettings()
 {
@@ -92,6 +95,8 @@ void ConfWidget::save()
   settings.setValue( "thickness",  ui.thickBox->value() );
   int i = ( ui.continuousBox->isChecked() ) ? 1 : 0;
   settings.setValue( "continuous", i );
+  i = ( ui.keyMode->isChecked() ) ? 0 : 1;
+  settings.setValue( "mode", i );
   i = ( ui.simpleClickBox->isChecked() ) ? 0 : 1;
   settings.setValue( "click", i );
   i = ( ui.hidePointerBox->isChecked() ) ? 1 : 0;
@@ -113,6 +118,14 @@ void ConfWidget::save()
   close();
 }
 
+void ConfWidget::setMode( bool b )
+{
+  if( b )
+    cout << "key mode" << endl;
+  else
+    cout << "mic mode" << endl;
+
+}
 void ConfWidget::setColor()
 {
   bool ok;

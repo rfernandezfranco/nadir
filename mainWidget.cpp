@@ -71,6 +71,7 @@ void MainWidget::loadSettings()
    resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
    move( settings.value( "pos" ).toPoint() );
    speed = settings.value( "speed", 10 ).toInt();
+   setMode( settings.value( "mode", 0 ).toInt() );
    continuous = settings.value( "continuous", 0 ).toBool();
    active = settings.value( "active", 1 ).toBool();
    escapeCode = settings.value( "escape", 9 ).toInt();
@@ -146,8 +147,16 @@ void MainWidget::scan()
 
 void MainWidget::grabEvent()
 {
-  if( kbd->grabEvent() )
-    changeState();
+  switch( mode ){
+    case KEY:
+      if( kbd->grabEvent() )
+        changeState();
+      break;
+    case MIC:
+      if( kbd->grabEvent() )
+        changeState();
+      break;
+  };
 }
 
 void MainWidget::stop()
@@ -202,6 +211,22 @@ void MainWidget::setEvent()
     mouseEvent = DRAG; 
 }
 
+void MainWidget::setMode( int i )
+{
+  mode = ( i==0 ) ? KEY : MIC; 
+  switch( mode ){
+    case 0:
+      mode = KEY;
+      break;
+    case 1:
+      mode = MIC;
+      break;
+    default:
+      mode = KEY;
+      break;
+  };
+}
+
 void MainWidget::setDefaultEvent( int i )
 {
   defaultEvent = ( i==0 ) ? LEFT : DOUBLE; 
@@ -222,6 +247,7 @@ void MainWidget::doEvent()
     case RIGHT:
       kbd->rightClick();
       mouseEvent = defaultEvent;
+      checkDefaultEventButton();
       cout << "right" << endl;
       break;
     case DRAG:
@@ -232,6 +258,7 @@ void MainWidget::doEvent()
     case DROP:
       kbd->drop();
       mouseEvent = defaultEvent;
+      checkDefaultEventButton();
       cout << "drop" << endl;
       break;
     default:
@@ -240,6 +267,20 @@ void MainWidget::doEvent()
 
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );
+}
+
+void MainWidget::checkDefaultEventButton()
+{
+  switch( defaultEvent ){
+    case LEFT:
+      ui.clickButton->setChecked( true );
+      break;
+    case DOUBLE:
+      ui.dbClickButton->setChecked( true );
+      break;
+    default:
+      break;
+  };
 }
 
 void MainWidget::closeEvent(QCloseEvent *e)
