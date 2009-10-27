@@ -21,6 +21,8 @@
 #include <QtGui>
 #include <QSound>
 #include "mainWidget.h"
+#include "settings.h"
+#include "config.h"
 
 using namespace std;
 
@@ -44,6 +46,10 @@ MainWidget::MainWidget()
   kbd = new Grabber();
   if ( !kbd->start() )
     close();
+
+  SettingsData settings;
+
+  mic = new Microphone( &settings );
 
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );
@@ -153,7 +159,7 @@ void MainWidget::grabEvent()
         changeState();
       break;
     case MIC:
-      if( kbd->grabEvent() )
+      if( mic->grabEvent() )
         changeState();
       break;
   };
@@ -161,7 +167,14 @@ void MainWidget::grabEvent()
 
 void MainWidget::stop()
 {
-  kbd->stop();
+  switch( mode ){
+    case KEY:
+      kbd->stop();
+      break;
+    case MIC:
+      mic->stop();
+      break;
+  };
 }
 
 void MainWidget::configure( void )
@@ -304,6 +317,6 @@ void MainWidget::closeEvent(QCloseEvent *e)
 
 MainWidget::~MainWidget()
 {
-  kbd->stop();
+  stop();
 }
 

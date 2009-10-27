@@ -24,6 +24,7 @@
 #include "scanLine.h"
 #include "confWidget.h"
 #include "grabber.h"
+#include "microphone.h"
 
 class MainWidget : public QWidget
 {
@@ -65,6 +66,7 @@ class MainWidget : public QWidget
     State state;
     Mode mode;
     Grabber *kbd;
+    Microphone *mic;
     int x;
     int y;
     int screenWidth;

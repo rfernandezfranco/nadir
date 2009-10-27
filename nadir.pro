@@ -3,13 +3,21 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = nadir
 DEPENDPATH += .
 INCLUDEPATH += .
-LIBS += -lX11 -lXtst -L/usr/X11R6/lib
+LIBS += -lX11 -lXtst -L/usr/X11R6/lib -ljack -lm -lasound -lpthread
 
 # Input
-HEADERS += confWidget.h mainWidget.h scanLine.h grabber.h
+HEADERS += confWidget.h mainWidget.h scanLine.h grabber.h \
+           capture.h config.h jackcapture.h microphone.h meter.h \
+           ringbuffer.h settings.h
+
 FORMS += confWidget.ui mainWidget.ui
-SOURCES += confWidget.cpp main.cpp mainWidget.cpp scanLine.cpp grabber.cpp
+
+SOURCES += confWidget.cpp main.cpp mainWidget.cpp scanLine.cpp grabber.cpp \
+           capture.cpp jackcapture.cpp microphone.cpp meter.cpp \
+           ringbuffer.cpp settings.cpp
+
 RESOURCES += nadir.qrc
+
