@@ -32,18 +32,26 @@ static const char ABOUTMSG[] = "Captura\n"
                           " is licensed under the GPL.\n";
 
 
-class Microphone 
+class Microphone : public QWidget 
 {
+  Q_OBJECT
+
   public:
-    Microphone(SettingsData* p_settings);
+    Microphone(SettingsData* p_settings, QWidget *parent);
     ~Microphone();
+    void init();
     int open_seq(snd_seq_t **seq_handle, int in_ports[],
             int out_ports[], int num_in, int num_out);
     bool grabEvent();
+    void setThreshold( double d);
  
   public slots: 
     void stop();
-    void captureToggled(bool on);
+    void capture(bool on);
+    void getDb(double d);
+
+  signals:
+    void doEvent(double);
 
   private:
     QLabel *currentFileLabel, *timeLabel, *bufLabel, *maxBufLabel, *statusLabel;
@@ -57,6 +65,8 @@ class Microphone
     snd_seq_t *seq_handle;
     bool jackMode;
     int in_ports[2], out_ports[2];
+    bool capturing;
+    double threshold;
 };
   
 #endif // MICROPHONE_H

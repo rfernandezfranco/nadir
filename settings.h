@@ -3,6 +3,7 @@
 
 #include <qobject.h>
 #include <qstring.h>
+#include <limits.h>
 
 class SettingsData : public QObject
 {

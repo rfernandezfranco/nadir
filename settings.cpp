@@ -2,7 +2,7 @@
 #include <getopt.h>
 
 #include "settings.h"
-#include "mainwindow.h"
+#include "microphone.h"
 
 static struct option options[] =
         {{"help", 0, 0, 'h'},

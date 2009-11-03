@@ -109,7 +109,7 @@ snd_pcm_t *Capture::open_pcm()
         snd_pcm_close(pcm_handle);
         return(NULL);
     }
-    qWarning("Using periodsize %d frames.", periodsize);
+    //qWarning("Using periodsize %d frames.", periodsize);
     return(pcm_handle);
 }
 
@@ -132,7 +132,7 @@ void Capture::run()
     memset(&schp, 0, sizeof(schp));
     schp.sched_priority = sched_get_priority_max(SCHED_FIFO);
     if (sched_setscheduler(0, SCHED_FIFO, &schp) != 0) {
-        qWarning("Can't set sched_setscheduler - using normal priority");
+        //qWarning("Can't set sched_setscheduler - using normal priority");
     } else {
         qDebug("Set SCHED_FIFO");
     }

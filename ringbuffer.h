@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QMutex>
 #include <QWaitCondition>
+#include <limits.h>
 
 #if QT_VERSION >= 0x040400
 #include <QAtomicInt>

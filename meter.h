@@ -23,28 +23,35 @@ class Meter : public QWidget
 {
   Q_OBJECT
 
+  public:
+    Meter(tickType p_tick, RingBuffer *p_ringbuffer, int channelIndex,
+      int p_sampleSize, int p_minDB, QWidget* parent=0);
+    ~Meter();
+    double dB();
+    void start();
+    void stop();
+
+  public slots: 
+    void updateMeter();
+    void resetGlobalMax();
+
+  signals:
+    void dBUpdated(double);
+
+  protected:
+    void setDb();
+
   private:
     RingBuffer *ringBuffer;
     int channel;
     int sampleSize;
     int minDB;
+    int max;
+    double _dB;
+    double meter_over;
     int curMax, globalMax, globalMaxResetCount;
     QTimer *timer;
     tickType tick;
-
-  protected:
-    virtual void paintEvent(QPaintEvent *);
-
-  public:
-    Meter(tickType p_tick, RingBuffer *p_ringbuffer, int channelIndex,
-      int p_sampleSize, int p_minDB, QWidget* parent=0);
-    ~Meter();
-    virtual QSize sizeHint() const;
-    virtual QSizePolicy sizePolicy() const;
-
-  public slots: 
-    void updateMeter();
-    void resetGlobalMax();
 };
   
 #endif

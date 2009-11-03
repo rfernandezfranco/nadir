@@ -49,7 +49,9 @@ MainWidget::MainWidget()
 
   SettingsData settings;
 
-  mic = new Microphone( &settings );
+  mic = new Microphone( &settings, this );
+  mic->setThreshold( 0.0 );
+  //setThreshold( 0 );
 
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );

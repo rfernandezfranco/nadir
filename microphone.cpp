@@ -1,27 +1,23 @@
 #include <alsa/asoundlib.h>
-#include <QBoxLayout>
-#include <QDir>
-#include <QGroupBox>
-#include <QFileDialog>
-#include <QPushButton>
 #include <QSocketNotifier>
-#include <QMenuBar>   
-#include <QMenu>
-
-
 #include "microphone.h"
 #include "meter.h"
 
-Microphone::Microphone(SettingsData* p_settings)
-{
-    int l1;
-    QString meterText;
+using namespace std;
 
+Microphone::Microphone(SettingsData* p_settings, QWidget *parent)
+{
     jackCapture = NULL;
     alsaCapture = NULL;
     ringBuffer = NULL;
-
     settings = p_settings;
+    init();
+
+    connect(this, SIGNAL(doEvent(double)), parent, SLOT(micEvent(double)));
+}
+
+void Microphone::init()
+{
     jackMode = settings->getEnableJack();
     open_seq(&seq_handle, in_ports, out_ports, 1, 0);
 
@@ -33,42 +29,19 @@ Microphone::Microphone(SettingsData* p_settings)
         jackCapture->setParent(this);
         jackCapture->initJack();
         settings->setRate(jackCapture->getRate());
-    }
-
-    QHBoxLayout *timeBoxLayout = new QHBoxLayout;
-    timeBoxLayout->setMargin(3);
-    timeBoxLayout->setSpacing(50);
-
-    if (!jackMode) {
-        captureToggle = new QCheckBox(this);
-        captureToggle->setText(tr("&Capture"));
-        QObject::connect(captureToggle, SIGNAL(toggled(bool)),
-                this, SLOT(captureToggled(bool)));
-        timeBoxLayout->addWidget(captureToggle);
-    } else {
         jackCapture->activateJack(ringBuffer);
-    }
+    };
 
-    for (l1 = 0; l1 < settings->getChannels(); l1++) {
+    for (int l1 = 0; l1 < settings->getChannels(); l1++) {
         meters.append(new Meter((tickType) (l1 & 1), ringBuffer, l1,
             settings->getSampleSize(), -settings->getMeterRange(), this));
     }
-
-    QVBoxLayout *guiBoxLayout = new QVBoxLayout;
-
-    guiBoxLayout->addLayout(timeBoxLayout);
-    QWidget *guiBox = new QWidget;
-    guiBox->setLayout(guiBoxLayout);
-	
-    setCentralWidget(guiBox);
 
     if (!jackMode) {
         alsaCapture = new Capture(settings, ringBuffer);
         QObject::connect(alsaCapture, SIGNAL(finished()), this,
                 SLOT(stop()));
-    }
-
-    show();
+    };
 }
 
 Microphone::~Microphone()
@@ -102,7 +75,7 @@ int Microphone::open_seq(snd_seq_t **seq_handle, int in_ports[],
         return(-1);
     }
 
-    err = snd_seq_set_client_name(*seq_handle, PACKAGE);
+    err = snd_seq_set_client_name(*seq_handle, "nadir");
     if (err < 0) {
         qWarning("Error setting ALSA client name (%s).", snd_strerror(err));
         return(-1);
@@ -131,25 +104,41 @@ int Microphone::open_seq(snd_seq_t **seq_handle, int in_ports[],
     return(0);
 }
 
-void Microphone::captureToggled(bool on)
+void Microphone::setThreshold( double d)
+{
+  threshold = d;
+}
+
+void Microphone::capture(bool on)
 {
     int l1;
 
     if (on) {
+        capturing = true;
         if (!jackMode) {
             if (!alsaCapture->isRunning()) {
                  alsaCapture->start();
             }
         }
+        for (l1 = 0; l1 < meters.size(); l1++) {
+            meters[l1]->start();
+        }
     } else {
+        capturing = false;
         if (!jackMode) {
             alsaCapture->stop();
         }
         ringBuffer->reset();
         for (l1 = 0; l1 < meters.size(); l1++) {
             meters[l1]->resetGlobalMax();
+            meters[l1]->stop();
         }
     }
+}
+
+void Microphone::getDb(double d)
+{
+    emit doEvent( d );
 }
 
 bool Microphone::grabEvent()
@@ -159,8 +148,8 @@ bool Microphone::grabEvent()
 
 void Microphone::stop()
 {
-    if (captureToggle->isChecked()) {
+    if ( capturing ) {
         qWarning("ALSA capture failed!");
     }
-    captureToggle->setChecked(false);
+    capturing = false;
 }

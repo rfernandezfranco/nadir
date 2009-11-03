@@ -1,23 +1,8 @@
-#include <qpolygon.h>
-#include <qwidget.h>
-#include <qstring.h>
-#include <qpainter.h>
-#include <qpaintdevice.h>
-#include <qpen.h>
-#include <qpixmap.h>
-#include <qbrush.h>
-#include <qtimer.h>
-#include <qsizepolicy.h>
-#include <qsize.h>
-#include <qboxlayout.h>
 #include <math.h>
-#include <iostream>
-
 #include "meter.h"
 
-
 Meter::Meter(tickType p_tick, RingBuffer *p_ringbuffer, int channelIndex,
-int p_sampleSize, int p_minDB, QWidget* parent) : QWidget (parent)
+             int p_sampleSize, int p_minDB, QWidget* parent) : QWidget (parent)
 {
     tick = p_tick;
     channel = channelIndex;
@@ -26,21 +11,17 @@ int p_sampleSize, int p_minDB, QWidget* parent) : QWidget (parent)
     sampleSize = p_sampleSize;
     globalMaxResetCount = 0;
     globalMax = 0;
-    setPalette(QPalette(QColor(0, 20, 100), QColor(0, 20, 100)));
     timer = new QTimer(this);
-    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(updateMeter()));
-    timer->start(200);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateMeter()));
+    connect(this, SIGNAL(dBUpdated(double)), parent, SLOT(getDb(double)));
 }
 
 Meter::~Meter()
 {
 }
 
-void Meter::paintEvent(QPaintEvent*)
+void Meter::setDb()
 {
-    double dB, meter_over;
-    int max;
-
     max = curMax;
     if (max < 0) {
         return;
@@ -49,12 +30,17 @@ void Meter::paintEvent(QPaintEvent*)
     meter_over = (sampleSize == 2) ? METER_OVER : METER_OVER32;
 
     if (max > 0) {
-        dB = 20.0 * log((double)max/meter_over)/log(10.0);  
-        if (dB < minDB)
-            dB = minDB;  
-
-        std::cout << dB << std::endl;
+        _dB = 20.0 * log((double)max/meter_over)/log(10.0);  
+        if (_dB < minDB)
+            _dB = minDB;  
     }
+
+    emit dBUpdated( _dB );
+}
+
+double Meter::dB()
+{
+  return _dB;
 }
 
 void Meter::updateMeter()
@@ -71,20 +57,17 @@ void Meter::updateMeter()
     }
 
     globalMaxResetCount++;
+    setDb();
+}
 
-    Meter::update();
+void Meter::start()
+{
     timer->start(200);
 }
 
-QSize Meter::sizeHint() const
+void Meter::stop()
 {
-    return QSize(METER_MINIMUM_WIDTH, METER_MINIMUM_HEIGHT); 
-}
-
-QSizePolicy Meter::sizePolicy() const
-{
-    return QSizePolicy(QSizePolicy::MinimumExpanding,
-            QSizePolicy::MinimumExpanding);
+    timer->stop();
 }
 
 void Meter::resetGlobalMax()
