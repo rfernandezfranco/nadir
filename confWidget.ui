@@ -5,27 +5,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
-    <height>564</height>
+    <width>661</width>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Configuración</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_6" >
-   <item row="2" column="0" colspan="2" >
-    <spacer name="horizontalSpacer" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0" >
-      <size>
-       <width>544</width>
-       <height>23</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="0" column="0" >
     <widget class="QLabel" name="label_8" >
      <property name="sizePolicy" >
@@ -54,7 +41,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1" colspan="3" >
+   <item row="0" column="1" colspan="2" >
     <widget class="QLabel" name="titleLabel" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Preferred" hsizetype="MinimumExpanding" >
@@ -78,33 +65,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="2" >
-    <widget class="QPushButton" name="cancelButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text" >
-      <string>&amp;Cancelar</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3" >
-    <widget class="QPushButton" name="saveButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text" >
-      <string>&amp;Guardar</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="4" >
+   <item row="1" column="0" colspan="3" >
     <widget class="QTabWidget" name="tabWidget" >
      <property name="enabled" >
       <bool>true</bool>
@@ -113,7 +74,7 @@
       <string notr="true" />
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>3</number>
      </property>
      <property name="iconSize" >
       <size>
@@ -141,79 +102,10 @@
           <string>Opciones generales</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_9" >
-          <item row="6" column="3" >
-           <spacer name="horizontalSpacer_3" >
-            <property name="orientation" >
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0" >
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="5" column="0" >
-           <widget class="QLabel" name="label_18" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Tecla para detener el barrido</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0" >
-           <widget class="QLabel" name="label_19" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Área de barrido</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1" >
-           <widget class="QRadioButton" name="radioButton" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Toda la pantalla</string>
-            </property>
-            <property name="checked" >
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="2" >
-           <widget class="QRadioButton" name="radioButton_2" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Ventana con foco</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0" >
            <widget class="QCheckBox" name="continuousBox" >
             <property name="text" >
              <string>Modo contínuo</string>
-            </property>
-            <property name="checked" >
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0" >
-           <widget class="QCheckBox" name="controlBox" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string>Control absoluto del ratón</string>
             </property>
             <property name="checked" >
              <bool>false</bool>
@@ -483,7 +375,7 @@
         <normaloff>:/images/images/keyboard.svg</normaloff>:/images/images/keyboard.svg</iconset>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4" >
-       <item row="0" column="1" colspan="4" >
+       <item row="0" column="1" colspan="3" >
         <widget class="QLabel" name="label_6" >
          <property name="font" >
           <font>
@@ -496,54 +388,26 @@
         </widget>
        </item>
        <item row="1" column="1" >
-        <widget class="QCheckBox" name="keyBox" >
-         <property name="text" >
-          <string>&amp;Activar</string>
-         </property>
-         <property name="checked" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" >
         <widget class="QLabel" name="label_20" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
          <property name="text" >
           <string>Tecla a utilizar</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1" >
+       <item row="2" column="1" >
         <widget class="QLabel" name="label_21" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
          <property name="text" >
           <string>Tecla de escape</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1" >
-        <widget class="QLabel" name="label_23" >
-         <property name="text" >
-          <string>Modo</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2" >
-        <widget class="QRadioButton" name="radioButton_3" >
-         <property name="text" >
-          <string>Presionar</string>
-         </property>
-         <property name="checked" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3" >
-        <widget class="QRadioButton" name="radioButton_4" >
-         <property name="text" >
-          <string>Presionar + soltar</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="4" >
+       <item row="3" column="3" >
         <spacer name="horizontalSpacer_12" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
@@ -556,7 +420,7 @@
          </property>
         </spacer>
        </item>
-       <item row="5" column="3" >
+       <item row="4" column="2" >
         <spacer name="verticalSpacer" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -569,7 +433,7 @@
          </property>
         </spacer>
        </item>
-       <item row="4" column="5" >
+       <item row="3" column="4" >
         <spacer name="horizontalSpacer_4" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
@@ -605,14 +469,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <widget class="QCheckBox" name="mouseBox" >
-         <property name="text" >
-          <string>&amp;Activar</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" >
+       <item row="3" column="0" >
         <spacer name="verticalSpacer_2" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -625,14 +482,17 @@
          </property>
         </spacer>
        </item>
-       <item row="3" column="0" >
+       <item row="2" column="0" >
         <widget class="QLabel" name="label_3" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
          <property name="text" >
           <string>Botón a utilizar</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="3" >
+       <item row="2" column="2" >
         <spacer name="horizontalSpacer_2" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
@@ -645,30 +505,6 @@
          </property>
         </spacer>
        </item>
-       <item row="4" column="0" >
-        <widget class="QLabel" name="label_25" >
-         <property name="text" >
-          <string>Modo</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1" >
-        <widget class="QRadioButton" name="radioButton_5" >
-         <property name="text" >
-          <string>Presionar</string>
-         </property>
-         <property name="checked" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2" >
-        <widget class="QRadioButton" name="radioButton_6" >
-         <property name="text" >
-          <string>Presionar + soltar</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="micTab" >
@@ -679,8 +515,8 @@
        <iconset resource="nadir.qrc" >
         <normaloff>:/images/images/audio-input-microphone.svg</normaloff>:/images/images/audio-input-microphone.svg</iconset>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_2" >
-       <item row="0" column="2" colspan="7" >
+      <layout class="QGridLayout" name="gridLayout_12" >
+       <item row="0" column="2" colspan="4" >
         <widget class="QLabel" name="label_4" >
          <property name="font" >
           <font>
@@ -694,72 +530,166 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0" colspan="9" >
-        <widget class="QCheckBox" name="audioBox" >
-         <property name="text" >
-          <string>&amp;Activar</string>
-         </property>
-        </widget>
-       </item>
-       <item rowspan="2" row="2" column="8" >
-        <widget class="QProgressBar" name="audioBar" >
-         <property name="minimumSize" >
-          <size>
-           <width>15</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>15</width>
-           <height>16777215</height>
-          </size>
-         </property>
+       <item row="1" column="2" >
+        <widget class="QWidget" native="1" name="widget" >
          <property name="layoutDirection" >
           <enum>Qt::LeftToRight</enum>
          </property>
-         <property name="autoFillBackground" >
-          <bool>false</bool>
-         </property>
-         <property name="value" >
-          <number>24</number>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textVisible" >
-          <bool>false</bool>
-         </property>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
+         <layout class="QGridLayout" name="gridLayout_2" >
+          <item row="0" column="1" >
+           <widget class="QSlider" name="audioSlider" >
+            <property name="value" >
+             <number>20</number>
+            </property>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3" >
+           <widget class="QLabel" name="label" >
+            <property name="text" >
+             <string>Umbral mínimo</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <spacer name="horizontalSpacer_5" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="2" >
+           <spacer name="horizontalSpacer_6" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+         <zorder>audioSlider</zorder>
+         <zorder>label</zorder>
+         <zorder>horizontalSpacer_5</zorder>
+         <zorder>horizontalSpacer_5</zorder>
+         <zorder>horizontalSpacer_6</zorder>
         </widget>
        </item>
-       <item rowspan="2" row="2" column="4" >
-        <widget class="QSlider" name="audioSlider" >
-         <property name="value" >
-          <number>20</number>
-         </property>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
+       <item row="1" column="4" colspan="3" >
+        <widget class="QWidget" native="1" name="widget_2" >
+         <layout class="QGridLayout" name="gridLayout_11" >
+          <item row="0" column="1" >
+           <widget class="QProgressBar" name="audioBar" >
+            <property name="minimumSize" >
+             <size>
+              <width>15</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>15</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="autoFillBackground" >
+             <bool>false</bool>
+            </property>
+            <property name="value" >
+             <number>24</number>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="textVisible" >
+             <bool>false</bool>
+            </property>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3" >
+           <widget class="QLabel" name="label_16" >
+            <property name="text" >
+             <string>Entrada de sonido</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <spacer name="horizontalSpacer_7" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="2" >
+           <spacer name="horizontalSpacer_8" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="2" column="2" >
-        <spacer name="horizontalSpacer_5" >
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
+       <item row="2" column="5" >
+        <widget class="QFrame" name="audioBox" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>20</horstretch>
+           <verstretch>20</verstretch>
+          </sizepolicy>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="minimumSize" >
           <size>
-           <width>40</width>
+           <width>20</width>
            <height>20</height>
           </size>
          </property>
-        </spacer>
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
        </item>
-       <item row="2" column="9" >
-        <spacer name="horizontalSpacer_6" >
+       <item row="2" column="4" >
+        <spacer name="horizontalSpacer_3" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
@@ -772,32 +702,6 @@
         </spacer>
        </item>
        <item row="2" column="6" >
-        <spacer name="horizontalSpacer_7" >
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="3" >
-        <spacer name="horizontalSpacer_8" >
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="5" >
         <spacer name="horizontalSpacer_9" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
@@ -810,7 +714,7 @@
          </property>
         </spacer>
        </item>
-       <item row="2" column="7" >
+       <item row="1" column="1" >
         <spacer name="horizontalSpacer_10" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
@@ -823,54 +727,7 @@
          </property>
         </spacer>
        </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="label_24" >
-         <property name="text" >
-          <string>Dispositivo</string>
-         </property>
-        </widget>
-       </item>
-       <item rowspan="2" row="2" column="1" >
-        <widget class="Line" name="line" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" >
-        <spacer name="verticalSpacer_5" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="4" column="3" colspan="3" >
-        <widget class="QLabel" name="label" >
-         <property name="text" >
-          <string>Umbral mínimo</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="7" colspan="3" >
-        <widget class="QLabel" name="label_16" >
-         <property name="text" >
-          <string>Entrada de sonido</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="10" >
+       <item row="1" column="7" >
         <spacer name="horizontalSpacer_11" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
@@ -879,6 +736,32 @@
           <size>
            <width>40</width>
            <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="3" >
+        <spacer name="horizontalSpacer_13" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" >
+        <spacer name="verticalSpacer_5" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>
@@ -894,7 +777,7 @@
         <normaloff>:/images/images/camera.svg</normaloff>:/images/images/camera.svg</iconset>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3" >
-       <item row="0" column="0" colspan="4" >
+       <item row="0" column="0" colspan="3" >
         <widget class="QLabel" name="label_5" >
          <property name="font" >
           <font>
@@ -906,8 +789,11 @@
          </property>
         </widget>
        </item>
-       <item rowspan="5" row="1" column="3" >
+       <item rowspan="5" row="1" column="2" >
         <widget class="QFrame" name="camFrame" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
          <property name="sizePolicy" >
           <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
            <horstretch>0</horstretch>
@@ -932,7 +818,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="3" >
+       <item row="3" column="0" colspan="2" >
         <widget class="QLabel" name="label_22" >
          <property name="text" >
           <string>Umbral mínimo</string>
@@ -952,20 +838,13 @@
          </property>
         </spacer>
        </item>
-       <item row="4" column="0" colspan="3" >
+       <item row="4" column="0" colspan="2" >
         <widget class="QSlider" name="camSlider" >
          <property name="value" >
           <number>15</number>
          </property>
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="2" >
-        <widget class="QCheckBox" name="camBox" >
-         <property name="text" >
-          <string>&amp;Activar</string>
          </property>
         </widget>
        </item>
@@ -1017,6 +896,45 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <spacer name="horizontalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>544</width>
+       <height>23</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1" >
+    <widget class="QPushButton" name="cancelButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>&amp;Cancelar</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2" >
+    <widget class="QPushButton" name="saveButton" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>&amp;Guardar</string>
+     </property>
     </widget>
    </item>
   </layout>
