@@ -11,8 +11,8 @@ screen and virtually produce any mouse event (click, drag...) in that location.
 
   The application will offer (so far) these modes to perform the scan:
   - Pressing any key of the keyboard
-  - Pressing any button of the mouse
-  - Making a certain movement (head or body) by using a webcam
+  - Pressing any button of the mouse (NOT IMPLEMENTED)
+  - Making a certain movement (head or body) by using a webcam (NOT IMPLEMENTED)
   - Producing a sound by using a microphone
 
   This software is being developed with C++, Qt4 and OpenCV
@@ -33,4 +33,8 @@ LICENSE
 HOW TO INSTALL
 
   See INSTALL file
+
+AUTHORS
+
+  See AUTHORS file
 

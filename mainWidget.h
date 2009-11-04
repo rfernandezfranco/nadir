@@ -25,6 +25,10 @@
 #include "confWidget.h"
 #include "grabber.h"
 #include "microphone.h"
+#include "settings.h"
+#include "config.h"
+
+#define WAIT_TIME 1000
 
 class MainWidget : public QWidget
 {
@@ -59,6 +63,10 @@ class MainWidget : public QWidget
     void setDefaultEvent( int i );
     void setEvent();
 
+    void endWait();
+    void micEvent(double);
+    void setThreshold( int i );
+
   private:
     Ui::MainWidget ui;
     MouseEvent mouseEvent;
@@ -67,6 +75,8 @@ class MainWidget : public QWidget
     Mode mode;
     Grabber *kbd;
     Microphone *mic;
+    double threshold;
+    bool waiting;
     int x;
     int y;
     int screenWidth;

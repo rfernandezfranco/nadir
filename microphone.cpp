@@ -1,7 +1,4 @@
-#include <alsa/asoundlib.h>
-#include <QSocketNotifier>
 #include "microphone.h"
-#include "meter.h"
 
 using namespace std;
 
@@ -13,7 +10,28 @@ Microphone::Microphone(SettingsData* p_settings, QWidget *parent)
     settings = p_settings;
     init();
 
+    waitTimer = new QTimer(this);
+    waiting = false;
+
     connect(this, SIGNAL(doEvent(double)), parent, SLOT(micEvent(double)));
+}
+
+Microphone::~Microphone()
+{
+    if (jackCapture != NULL) {
+        delete jackCapture;
+        jackCapture = NULL;
+    }
+
+    if (alsaCapture != NULL) {
+        delete alsaCapture;
+        alsaCapture = NULL;
+    }
+
+    if (ringBuffer != NULL) {
+        delete ringBuffer;
+        ringBuffer = NULL;
+    }
 }
 
 void Microphone::init()
@@ -42,24 +60,6 @@ void Microphone::init()
         QObject::connect(alsaCapture, SIGNAL(finished()), this,
                 SLOT(stop()));
     };
-}
-
-Microphone::~Microphone()
-{
-    if (jackCapture != NULL) {
-        delete jackCapture;
-        jackCapture = NULL;
-    }
-
-    if (alsaCapture != NULL) {
-        delete alsaCapture;
-        alsaCapture = NULL;
-    }
-
-    if (ringBuffer != NULL) {
-        delete ringBuffer;
-        ringBuffer = NULL;
-    }
 }
 
 int Microphone::open_seq(snd_seq_t **seq_handle, int in_ports[],
@@ -104,11 +104,6 @@ int Microphone::open_seq(snd_seq_t **seq_handle, int in_ports[],
     return(0);
 }
 
-void Microphone::setThreshold( double d)
-{
-  threshold = d;
-}
-
 void Microphone::capture(bool on)
 {
     int l1;
@@ -139,11 +134,6 @@ void Microphone::capture(bool on)
 void Microphone::getDb(double d)
 {
     emit doEvent( d );
-}
-
-bool Microphone::grabEvent()
-{
-  return false;
 }
 
 void Microphone::stop()

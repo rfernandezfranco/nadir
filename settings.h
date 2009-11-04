@@ -52,5 +52,4 @@ class SettingsData : public QObject
 
 };
 
-
 #endif

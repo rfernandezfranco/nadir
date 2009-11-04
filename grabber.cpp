@@ -40,12 +40,18 @@ bool Grabber::start()
   return true;
 }
 
+void Grabber::flush()
+{
+  XFlush(disp);
+}
+
 Display *Grabber::getDisplay()
 {
   return disp;
 }
 
-bool Grabber::grabEvent()
+/* Return 0:No event, 1:Key event, 2:Scape */
+unsigned int Grabber::grabEvent()
 {
   // Create a File Description Set containing x11_fd
   FD_ZERO(&in_fds);
@@ -92,15 +98,16 @@ bool Grabber::grabEvent()
     // Exit when pressing escape key
     if( iKeyCode == escapeCode ){
       XCloseDisplay( disp );
-      exit(10);
+      return 2;
+      //exit(10);
     };
   };
 
   // Return true when pressing any key buy the escape key
   if( grabbed && iKeyType == KeyPress)
-    return true;
+    return 1;//true;
   else
-    return false;
+    return 0;//false;
 }
 
 void Grabber::stop()

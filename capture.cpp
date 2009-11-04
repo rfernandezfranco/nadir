@@ -141,7 +141,7 @@ void Capture::run()
         while ((pcmreturn = snd_pcm_readi(capture_handle, periodBuf,
                         periodsize)) < 0) {
             snd_pcm_prepare(capture_handle);
-            qWarning("<<<<<<<<<<<<<<< Buffer Overrun >>>>>>>>>>>>>>>");
+            //qWarning("<<<<<<<<<<<<<<< Buffer Overrun >>>>>>>>>>>>>>>");
         }
 
         long count = periodsize * framesize;

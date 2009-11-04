@@ -12,6 +12,7 @@
 #include <QMainWindow>
 #include <QApplication>
 #include <alsa/asoundlib.h>
+#include <QSocketNotifier>
 
 #include "capture.h"
 #include "jackcapture.h"
@@ -42,8 +43,6 @@ class Microphone : public QWidget
     void init();
     int open_seq(snd_seq_t **seq_handle, int in_ports[],
             int out_ports[], int num_in, int num_out);
-    bool grabEvent();
-    void setThreshold( double d);
  
   public slots: 
     void stop();
@@ -66,7 +65,9 @@ class Microphone : public QWidget
     bool jackMode;
     int in_ports[2], out_ports[2];
     bool capturing;
+    bool waiting;
     double threshold;
+    QTimer *waitTimer;
 };
   
 #endif // MICROPHONE_H

@@ -17,6 +17,8 @@
 #define METER_OVER_WIDTH            30
 #define METER_TICK_WIDTH            25
 
+#define CAPTURE_TIME               150
+
 enum tickType { TICK_UP, TICK_DOWN };
 
 class Meter : public QWidget
@@ -51,6 +53,7 @@ class Meter : public QWidget
     double meter_over;
     int curMax, globalMax, globalMaxResetCount;
     QTimer *timer;
+    bool wait;
     tickType tick;
 };
   

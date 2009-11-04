@@ -1,6 +1,10 @@
 #include <math.h>
 #include "meter.h"
 
+#include <iostream>
+
+using namespace std;
+
 Meter::Meter(tickType p_tick, RingBuffer *p_ringbuffer, int channelIndex,
              int p_sampleSize, int p_minDB, QWidget* parent) : QWidget (parent)
 {
@@ -12,6 +16,7 @@ Meter::Meter(tickType p_tick, RingBuffer *p_ringbuffer, int channelIndex,
     globalMaxResetCount = 0;
     globalMax = 0;
     timer = new QTimer(this);
+    wait = false;
     connect(timer, SIGNAL(timeout()), this, SLOT(updateMeter()));
     connect(this, SIGNAL(dBUpdated(double)), parent, SLOT(getDb(double)));
 }
@@ -62,7 +67,7 @@ void Meter::updateMeter()
 
 void Meter::start()
 {
-    timer->start(200);
+    timer->start( CAPTURE_TIME );
 }
 
 void Meter::stop()

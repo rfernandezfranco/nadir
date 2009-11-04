@@ -21,8 +21,6 @@
 #include <QtGui>
 #include <QSound>
 #include "mainWidget.h"
-#include "settings.h"
-#include "config.h"
 
 using namespace std;
 
@@ -50,8 +48,9 @@ MainWidget::MainWidget()
   SettingsData settings;
 
   mic = new Microphone( &settings, this );
-  mic->setThreshold( 0.0 );
-  //setThreshold( 0 );
+  setThreshold( 0 );
+
+  waiting = false;
 
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );
@@ -62,7 +61,7 @@ MainWidget::MainWidget()
   QCoreApplication::setOrganizationName( "Nadir" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "Nadir" );
-  getScreenSize();
+
   loadSettings();
 
   if( hidePointer )
@@ -72,7 +71,7 @@ MainWidget::MainWidget()
 }
 
 void MainWidget::loadSettings()
- {
+{
    QSettings settings;
 
    settings.beginGroup("Main");
@@ -89,13 +88,15 @@ void MainWidget::loadSettings()
    setDefaultEvent( settings.value( "click", 0 ).toInt() );
    settings.endGroup();
 
+  getScreenSize();
+
    kbd->setEscapeCode( escapeCode );
    hLine->loadSettings();
    vLine->loadSettings();
- }
+}
 
- void MainWidget::saveSettings()
- {
+void MainWidget::saveSettings()
+{
    QSettings settings;
 
    settings.beginGroup( "Main" );
@@ -108,7 +109,40 @@ void MainWidget::loadSettings()
    i = ( active==true ) ? 1 : 0;
    settings.setValue( "active", i );
    settings.endGroup();
- }
+}
+
+void MainWidget::setThreshold( int i )
+{
+  threshold = i;
+}
+
+void MainWidget::micEvent( double d )
+{
+  //ui.audioBar->setValue( d );
+  if( d > threshold ){
+    if ( !waiting ) {
+      //ui.threshBox->setStyleSheet( "background-color: #DD0000;" );
+      //cout << "evento" << endl;
+      changeState();
+      waiting = true;
+      QTimer::singleShot( WAIT_TIME, this, SLOT(endWait()) );
+    }
+  }
+  /* 
+  else
+    if( !waiting )
+      //ui.threshBox->setStyleSheet( "background-color: #FFFFFF;" );
+      cout << "end wait" << endl;
+      */
+
+}
+
+void MainWidget::endWait()
+{
+  waiting = false;
+  //cout << "end wait" << endl;
+  //fflush( stdout );
+}
 
 void MainWidget::getScreenSize()
 {
@@ -150,7 +184,16 @@ int MainWidget::getSpeed( void )
 void MainWidget::scan()
 {
   state = SCAN1;
-  scanTimer->start(speed);
+  //scanTimer->start(speed);
+
+  switch( mode ){
+    case KEY:
+        scanTimer->start(speed);
+        break;
+    case MIC:
+        mic->capture( true );
+      break;
+  };
 }
 
 void MainWidget::grabEvent()
@@ -161,8 +204,7 @@ void MainWidget::grabEvent()
         changeState();
       break;
     case MIC:
-      if( mic->grabEvent() )
-        changeState();
+        //changeState();
       break;
   };
 }
@@ -280,6 +322,8 @@ void MainWidget::doEvent()
       cout << "nothing" << endl;
   };
 
+  kbd->flush();
+
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );
 }
@@ -309,6 +353,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
   switch( msgBox.exec() ){
     case QMessageBox::Yes:
       saveSettings();
+      mic->capture( false );
       e->accept();
       break;
     case QMessageBox::No:

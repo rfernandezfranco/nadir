@@ -38,7 +38,8 @@ class Grabber {
     ~Grabber();
     bool start();
     void stop();
-    bool grabEvent();
+    void flush();
+    unsigned int grabEvent();
     void move( int x, int y );
     void click();
     void doubleClick();
