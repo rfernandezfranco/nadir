@@ -23,6 +23,7 @@
 #include <QMainWindow>
 #include <QtGui/QWidget>
 #include <QWidget>
+#include "microphone.h"
 #include "ui_confWidget.h"
 
 class ConfWidget : public QWidget
@@ -30,7 +31,7 @@ class ConfWidget : public QWidget
   Q_OBJECT
 
   public:
-    ConfWidget( QWidget *parent = 0 );
+    ConfWidget( QWidget *parent = 0, Microphone *mic = 0 );
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
@@ -42,10 +43,16 @@ class ConfWidget : public QWidget
     void setMode(bool);
     void setColor();
     void save();
+    void updateAudioSlider(double);
+    void resetAudioBox();
+    void setThreshold( int i );
   
   private:
     Ui::ConfWidget ui;
     QString lineColor;
+    Microphone *myMic;
+    int threshold;
+    bool waiting;
 };
 
 #endif // CONFWIDGET_H

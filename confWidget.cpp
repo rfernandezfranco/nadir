@@ -26,9 +26,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define WAIT_TIME 1000
+
 using namespace std;
 
-ConfWidget::ConfWidget( QWidget *parent ):
+ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   QWidget( parent )
 {
   setWindowFlags( Qt::Window );
@@ -50,14 +52,34 @@ ConfWidget::ConfWidget( QWidget *parent ):
   connect( this, SIGNAL(closing()),
       parentWidget(), SLOT(loadSettings()) );
 
-  connect( ui.keyMode, SIGNAL(toggled(bool)),
-      this, SLOT(setMode(bool)) );
+  myMic = mic;
+  connect(myMic, SIGNAL(doEvent(double)),
+      this, SLOT(updateAudioSlider(double)));
 
   QCoreApplication::setOrganizationName( "Nadir" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "Nadir" );
 
   loadSettings();
+
+  ui.audioSlider->setMinimum( -40.0 );
+  ui.audioSlider->setMaximum( 1.0 );
+  ui.audioSlider->setValue( threshold );
+  ui.audioBar->setMinimum( -40.0 );
+  ui.audioBar->setMaximum( 1.0 );
+
+  connect( ui.keyMode, SIGNAL(toggled(bool)),
+      this, SLOT(setMode(bool)) );
+
+  connect( ui.audioSlider, SIGNAL(valueChanged(int)),
+      this, SLOT(setThreshold(int)) );
+
+  waiting = false;
+}
+
+void ConfWidget::resetAudioBox()
+{
+  waiting = false;
 }
 
 void ConfWidget::loadSettings()
@@ -70,9 +92,12 @@ void ConfWidget::loadSettings()
   ui.continuousBox->setChecked( settings.value( "continuous" ).toBool() );
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
+  ui.micMode->setChecked( settings.value( "mode" ).toBool() );
   lineColor.clear();
   lineColor.append( settings.value( "color", "255,0,0").toString() );
   ui.colorButton->setStyleSheet( backgroundColor() );
+  setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
+  ui.audioBar->setValue( threshold );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
@@ -84,6 +109,11 @@ void ConfWidget::loadSettings()
   move( settings.value( "pos" ).toPoint() );
   settings.endGroup();
  }
+
+void ConfWidget::setThreshold( int i )
+{
+  threshold = i;
+}
 
 //Save settings
 void ConfWidget::save()
@@ -102,6 +132,7 @@ void ConfWidget::save()
   i = ( ui.hidePointerBox->isChecked() ) ? 1 : 0;
   settings.setValue( "hide", i );
   settings.setValue( "color", lineColor );
+  settings.setValue( "audioThreshold", threshold );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
@@ -124,8 +155,26 @@ void ConfWidget::setMode( bool b )
     cout << "key mode" << endl;
   else
     cout << "mic mode" << endl;
-
 }
+
+void ConfWidget::updateAudioSlider( double d )
+{
+  ui.audioBar->setValue( d );
+   
+  if( d > threshold ){
+    if ( !waiting ) {
+      ui.audioBox->setStyleSheet( "background-color: #DD0000;" );
+      //cout << "evento" << endl;
+      waiting = true;
+      QTimer::singleShot( WAIT_TIME, this, SLOT(resetAudioBox()) );
+    }
+  }
+  else
+    if( !waiting )
+      ui.audioBox->setStyleSheet( "background-color: #FFFFFF;" );
+      
+}
+
 void ConfWidget::setColor()
 {
   bool ok;

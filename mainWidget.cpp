@@ -48,7 +48,6 @@ MainWidget::MainWidget()
   SettingsData settings;
 
   mic = new Microphone( &settings, this );
-  setThreshold( 0 );
 
   waiting = false;
 
@@ -72,43 +71,44 @@ MainWidget::MainWidget()
 
 void MainWidget::loadSettings()
 {
-   QSettings settings;
+  QSettings settings;
 
-   settings.beginGroup("Main");
-   resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
-   move( settings.value( "pos" ).toPoint() );
-   speed = settings.value( "speed", 10 ).toInt();
-   setMode( settings.value( "mode", 0 ).toInt() );
-   continuous = settings.value( "continuous", 0 ).toBool();
-   active = settings.value( "active", 1 ).toBool();
-   escapeCode = settings.value( "escape", 9 ).toInt();
-   ui.clickButton->setChecked( !settings.value( "click", 0 ).toBool() );
-   ui.dbClickButton->setChecked( settings.value( "click", 0 ).toBool() );
-   hidePointer = settings.value( "hide", 0 ).toBool();
-   setDefaultEvent( settings.value( "click", 0 ).toInt() );
-   settings.endGroup();
+  settings.beginGroup("Main");
+  resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
+  move( settings.value( "pos" ).toPoint() );
+  speed = settings.value( "speed", 10 ).toInt();
+  setMode( settings.value( "mode", 0 ).toInt() );
+  continuous = settings.value( "continuous", 0 ).toBool();
+  active = settings.value( "active", 1 ).toBool();
+  escapeCode = settings.value( "escape", 9 ).toInt();
+  ui.clickButton->setChecked( !settings.value( "click", 0 ).toBool() );
+  ui.dbClickButton->setChecked( settings.value( "click", 0 ).toBool() );
+  hidePointer = settings.value( "hide", 0 ).toBool();
+  setDefaultEvent( settings.value( "click", 0 ).toInt() );
+  setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
+  settings.endGroup();
 
   getScreenSize();
 
-   kbd->setEscapeCode( escapeCode );
-   hLine->loadSettings();
-   vLine->loadSettings();
+  kbd->setEscapeCode( escapeCode );
+  hLine->loadSettings();
+  vLine->loadSettings();
 }
 
 void MainWidget::saveSettings()
 {
-   QSettings settings;
+  QSettings settings;
 
-   settings.beginGroup( "Main" );
-   settings.setValue( "size", size() );
-   settings.setValue( "pos", pos() );
-   settings.setValue( "speed", speed );
-   settings.setValue( "escape", escapeCode );
-   int i = ( continuous==true ) ? 1 : 0;
-   settings.setValue( "continuous", i );
-   i = ( active==true ) ? 1 : 0;
-   settings.setValue( "active", i );
-   settings.endGroup();
+  settings.beginGroup( "Main" );
+  settings.setValue( "size", size() );
+  settings.setValue( "pos", pos() );
+  settings.setValue( "speed", speed );
+  settings.setValue( "escape", escapeCode );
+  int i = ( continuous==true ) ? 1 : 0;
+  settings.setValue( "continuous", i );
+  i = ( active==true ) ? 1 : 0;
+  settings.setValue( "active", i );
+  settings.endGroup();
 }
 
 void MainWidget::setThreshold( int i )
@@ -118,30 +118,18 @@ void MainWidget::setThreshold( int i )
 
 void MainWidget::micEvent( double d )
 {
-  //ui.audioBar->setValue( d );
   if( d > threshold ){
     if ( !waiting ) {
-      //ui.threshBox->setStyleSheet( "background-color: #DD0000;" );
-      //cout << "evento" << endl;
       changeState();
       waiting = true;
       QTimer::singleShot( WAIT_TIME, this, SLOT(endWait()) );
-    }
-  }
-  /* 
-  else
-    if( !waiting )
-      //ui.threshBox->setStyleSheet( "background-color: #FFFFFF;" );
-      cout << "end wait" << endl;
-      */
-
+    };
+  };
 }
 
 void MainWidget::endWait()
 {
   waiting = false;
-  //cout << "end wait" << endl;
-  //fflush( stdout );
 }
 
 void MainWidget::getScreenSize()
@@ -184,7 +172,6 @@ int MainWidget::getSpeed( void )
 void MainWidget::scan()
 {
   state = SCAN1;
-  //scanTimer->start(speed);
 
   switch( mode ){
     case KEY:
@@ -223,7 +210,7 @@ void MainWidget::stop()
 
 void MainWidget::configure( void )
 {
-  confWidget = new ConfWidget( this );
+  confWidget = new ConfWidget( this, mic );
   confWidget->show();
 }
 
@@ -249,7 +236,6 @@ void MainWidget::changeState()
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
-      //QSound::play("click.wav");
       state = (continuous) ? SCAN1 : STOP;
       changeState();
       break;
@@ -271,6 +257,7 @@ void MainWidget::setEvent()
 void MainWidget::setMode( int i )
 {
   mode = ( i==0 ) ? KEY : MIC; 
+
   switch( mode ){
     case 0:
       mode = KEY;
@@ -295,31 +282,31 @@ void MainWidget::doEvent()
   switch( mouseEvent ){
     case LEFT:
       kbd->click();
-      cout << "left" << endl;
+      //cout << "left" << endl;
       break;
     case DOUBLE:
       kbd->doubleClick();
-      cout << "double" << endl;
+      //cout << "double" << endl;
       break;
     case RIGHT:
       kbd->rightClick();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
-      cout << "right" << endl;
+      //cout << "right" << endl;
       break;
     case DRAG:
       kbd->drag();
       mouseEvent = DROP;
-      cout << "drag" << endl;
+      //cout << "drag" << endl;
       break;
     case DROP:
       kbd->drop();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
-      cout << "drop" << endl;
+      //cout << "drop" << endl;
       break;
-    default:
-      cout << "nothing" << endl;
+    //default:
+    //  cout << "nothing" << endl;
   };
 
   kbd->flush();
