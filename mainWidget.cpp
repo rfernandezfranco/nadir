@@ -310,6 +310,8 @@ void MainWidget::checkDefaultEventButton()
     case DOUBLE:
       ui.dbClickButton->setChecked( true );
       break;
+    default:
+      break;
   };
 }
 
