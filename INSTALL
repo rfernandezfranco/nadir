@@ -1,8 +1,11 @@
 
 INSTALL DEPENDENCIES
 
-  Qt4 Libraries - libqt4-dev
-  X11 Record extension library - libxtst-dev
+These packages names may change depending on your system:
+
+  libqt4-dev - Qt 4 development files
+  libjack-dev - JACK Audio Connection Kit (development files)
+  libasound2-dev - ALSA library development files
 
 BUILD THE APPLICATION
 

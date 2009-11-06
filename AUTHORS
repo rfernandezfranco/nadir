@@ -1,9 +1,9 @@
-Nadir is written by Juan Roldan Ruiz <juan.roldan@gmail.com>
+Nadir is written by Juan Roldan Ruiz <juan.roldan at gmail.com>
 
 Microphone mode is based on QARecord (http://alsamodular.sourceforge.net)
 Authors of QARecord:
-  Matthias Nagorni <mana@suse.de>
-  Frank Kober <goemusic@yahoo.fr>
-  Guido Scholz <guido.scholz@bayernline.de>
-  David Henningsson <qarecord@epost.diwic.se>
+  Matthias Nagorni <mana at suse.de>
+  Frank Kober <goemusic at yahoo.fr>
+  Guido Scholz <guido.scholz at bayernline.de>
+  David Henningsson <qarecord at epost.diwic.se>
 

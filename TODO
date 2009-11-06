@@ -1,6 +1,10 @@
-- Finish the keyboard mode
+BUGS
+- Changing scan mode is effective only when restarting the application
+- Pointer isn't hidden in mic mode
+- Some keyboard events aren't grabbed correctly. X timer issue
+
+NEW FEATURES
 - Implement mouse mode
 - Implement camera mode
-- Implement microphone mode
 - Internationalitation
 - System tray

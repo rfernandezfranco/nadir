@@ -1,2 +1,11 @@
+2009-10-10  Juan Roldan Ruiz <juan.roldan at gmail.com> 0.1-alpha2
+	- User can set scanning parameters with a configuration widget.
+	- Settings are stored in config file.
+	- Xevie extension has been replaced with Xlib.
+	- Achieved Microphone mode.
+	- Enabled more mouse events.
+	- Added option to start the application minimized.
+	- Added option to hide pointer after mouse event.
+	- Default mouse event can be set to single or double click.
 2009-06-03  Juan Roldan Ruiz <juan.roldan at gmail.com> 0.1-alpha1
 	- Achieved scan functionality by pressing the space bar.
