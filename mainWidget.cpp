@@ -175,7 +175,7 @@ void MainWidget::scan()
 
   switch( mode ){
     case KEY:
-        scanTimer->start(speed);
+        scanTimer->start( speed );
         break;
     case MIC:
         mic->capture( true );
@@ -185,15 +185,8 @@ void MainWidget::scan()
 
 void MainWidget::grabEvent()
 {
-  switch( mode ){
-    case KEY:
-      if( kbd->grabEvent() )
-        changeState();
-      break;
-    case MIC:
-        //changeState();
-      break;
-  };
+  if( kbd->grabEvent() )
+    changeState();
 }
 
 void MainWidget::stop()
@@ -256,17 +249,12 @@ void MainWidget::setEvent()
 
 void MainWidget::setMode( int i )
 {
-  mode = ( i==0 ) ? KEY : MIC; 
-
-  switch( mode ){
+  switch( i ){
     case 0:
       mode = KEY;
       break;
     case 1:
       mode = MIC;
-      break;
-    default:
-      mode = KEY;
       break;
   };
 }
@@ -305,8 +293,6 @@ void MainWidget::doEvent()
       checkDefaultEventButton();
       //cout << "drop" << endl;
       break;
-    //default:
-    //  cout << "nothing" << endl;
   };
 
   kbd->flush();
@@ -323,8 +309,6 @@ void MainWidget::checkDefaultEventButton()
       break;
     case DOUBLE:
       ui.dbClickButton->setChecked( true );
-      break;
-    default:
       break;
   };
 }
