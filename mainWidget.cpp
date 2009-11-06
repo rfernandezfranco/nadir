@@ -93,22 +93,8 @@ void MainWidget::loadSettings()
   kbd->setEscapeCode( escapeCode );
   hLine->loadSettings();
   vLine->loadSettings();
-}
 
-void MainWidget::saveSettings()
-{
-  QSettings settings;
-
-  settings.beginGroup( "Main" );
-  settings.setValue( "size", size() );
-  settings.setValue( "pos", pos() );
-  settings.setValue( "speed", speed );
-  settings.setValue( "escape", escapeCode );
-  int i = ( continuous==true ) ? 1 : 0;
-  settings.setValue( "continuous", i );
-  i = ( active==true ) ? 1 : 0;
-  settings.setValue( "active", i );
-  settings.endGroup();
+  forceClosing = false;
 }
 
 void MainWidget::setThreshold( int i )
@@ -185,8 +171,17 @@ void MainWidget::scan()
 
 void MainWidget::grabEvent()
 {
-  if( kbd->grabEvent() )
-    changeState();
+  switch( kbd->grabEvent() ){
+    case 2:
+      forceClosing = true;
+      close();
+      break;
+    case 1:
+      changeState();
+      break;
+    default:
+      break;
+  };
 }
 
 void MainWidget::stop()
@@ -317,22 +312,27 @@ void MainWidget::checkDefaultEventButton()
 
 void MainWidget::closeEvent(QCloseEvent *e)
 {
-  QMessageBox msgBox;
-  msgBox.setWindowTitle("Nadir");
-  msgBox.setText("Seguro que desea salir?");
-  msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-  msgBox.setDefaultButton(QMessageBox::No);
+  if( forceClosing ) {
+    mic->capture( false );
+    e->accept();
+  }
+  else {
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Nadir");
+    msgBox.setText("Seguro que desea salir?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
 
-  switch( msgBox.exec() ){
-    case QMessageBox::Yes:
-      saveSettings();
-      mic->capture( false );
-      e->accept();
-      break;
-    case QMessageBox::No:
-      e->ignore();
-      break;
-  };
+    switch( msgBox.exec() ){
+      case QMessageBox::Yes:
+        mic->capture( false );
+        e->accept();
+        break;
+      case QMessageBox::No:
+        e->ignore();
+        break;
+    };
+  }
 }
 
 MainWidget::~MainWidget()

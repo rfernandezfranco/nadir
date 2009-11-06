@@ -151,10 +151,12 @@ void ConfWidget::save()
 
 void ConfWidget::setMode( bool b )
 {
+/*
   if( b )
     cout << "key mode" << endl;
   else
     cout << "mic mode" << endl;
+*/
 }
 
 void ConfWidget::updateAudioSlider( double d )

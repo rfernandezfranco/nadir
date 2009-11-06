@@ -59,10 +59,8 @@ class MainWidget : public QWidget
     void stop();
     void grabEvent();
     void loadSettings();
-    void saveSettings();
     void setDefaultEvent( int i );
     void setEvent();
-
     void endWait();
     void micEvent(double);
     void setThreshold( int i );
@@ -77,6 +75,7 @@ class MainWidget : public QWidget
     Microphone *mic;
     double threshold;
     bool waiting;
+    bool forceClosing;
     int x;
     int y;
     int screenWidth;

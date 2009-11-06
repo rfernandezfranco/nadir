@@ -97,17 +97,15 @@ unsigned int Grabber::grabEvent()
 
     // Exit when pressing escape key
     if( iKeyCode == escapeCode ){
-      XCloseDisplay( disp );
       return 2;
-      //exit(10);
     };
   };
 
   // Return true when pressing any key buy the escape key
   if( grabbed && iKeyType == KeyPress)
-    return 1;//true;
+    return 1;
   else
-    return 0;//false;
+    return 0;
 }
 
 void Grabber::stop()
