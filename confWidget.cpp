@@ -153,7 +153,6 @@ void ConfWidget::updateAudioSlider( double d )
   if( d > threshold ){
     if ( !waiting ) {
       ui.audioBox->setStyleSheet( "background-color: #DD0000;" );
-      //cout << "evento" << endl;
       waiting = true;
       QTimer::singleShot( WAIT_TIME, this, SLOT(resetAudioBox()) );
     }
@@ -161,7 +160,6 @@ void ConfWidget::updateAudioSlider( double d )
   else
     if( !waiting )
       ui.audioBox->setStyleSheet( "background-color: #FFFFFF;" );
-      
 }
 
 void ConfWidget::setColor()

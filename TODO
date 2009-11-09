@@ -1,7 +1,5 @@
 BUGS
-- Scape key doesn't work in mic mode
 - Mic tab of configuration widget doesn't work in key mode
-- Changing scan mode is effective only when restarting the application
 - Pointer isn't hidden in mic mode
 - Some keyboard events aren't grabbed correctly. X timer issue
 

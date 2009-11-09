@@ -100,7 +100,6 @@ void MainWidget::reloadSettings()
 {
   mic->capture( false );
   stop();
-  scanTimer->stop();
   loadSettings();
   scan();
 }
@@ -112,12 +111,10 @@ void MainWidget::setThreshold( int i )
 
 void MainWidget::micEvent( double d )
 {
-  if( d > threshold ){
-    if ( !waiting ) {
-      changeState();
-      waiting = true;
-      QTimer::singleShot( WAIT_TIME, this, SLOT(endWait()) );
-    };
+  if( d > threshold  && !waiting ) {
+    changeState();
+    waiting = true;
+    QTimer::singleShot( WAIT_TIME, this, SLOT(endWait()) );
   };
 }
 
@@ -169,10 +166,11 @@ void MainWidget::scan()
 
   switch( mode ){
     case KEY:
-        scanTimer->start( speed );
-        break;
+      scanTimer->start( speed );
+      break;
     case MIC:
-        mic->capture( true );
+      scanTimer->start( speed );
+      mic->capture( true );
       break;
   };
 }
@@ -185,7 +183,8 @@ void MainWidget::grabEvent()
       close();
       break;
     case 1:
-      changeState();
+      if( mode == KEY )
+        changeState();
       break;
     default:
       break;
@@ -196,7 +195,7 @@ void MainWidget::stop()
 {
   switch( mode ){
     case KEY:
-      //kbd->stop();
+      scanTimer->stop();
       break;
     case MIC:
       mic->stop();
