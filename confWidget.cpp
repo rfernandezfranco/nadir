@@ -50,7 +50,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
       this, SLOT(save()) );
 
   connect( this, SIGNAL(closing()),
-      parentWidget(), SLOT(loadSettings()) );
+      parentWidget(), SLOT(reloadSettings()) );
 
   myMic = mic;
   connect(myMic, SIGNAL(doEvent(double)),

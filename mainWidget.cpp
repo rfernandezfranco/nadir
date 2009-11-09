@@ -62,11 +62,10 @@ MainWidget::MainWidget()
   QCoreApplication::setApplicationName( "Nadir" );
 
   loadSettings();
+  scan();
 
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );
-
-  scan();
 }
 
 void MainWidget::loadSettings()
@@ -95,6 +94,15 @@ void MainWidget::loadSettings()
   vLine->loadSettings();
 
   forceClosing = false;
+}
+
+void MainWidget::reloadSettings()
+{
+  mic->capture( false );
+  stop();
+  scanTimer->stop();
+  loadSettings();
+  scan();
 }
 
 void MainWidget::setThreshold( int i )
@@ -188,7 +196,7 @@ void MainWidget::stop()
 {
   switch( mode ){
     case KEY:
-      kbd->stop();
+      //kbd->stop();
       break;
     case MIC:
       mic->stop();

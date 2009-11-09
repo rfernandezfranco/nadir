@@ -59,6 +59,7 @@ class MainWidget : public QWidget
     void stop();
     void grabEvent();
     void loadSettings();
+    void reloadSettings();
     void setDefaultEvent( int i );
     void setEvent();
     void endWait();
