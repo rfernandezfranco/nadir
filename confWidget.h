@@ -40,7 +40,6 @@ class ConfWidget : public QWidget
     void closing();
 
   private slots:
-    void setMode(bool);
     void setColor();
     void save();
     void updateAudioSlider(double);

@@ -68,9 +68,6 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   ui.audioBar->setMinimum( -40.0 );
   ui.audioBar->setMaximum( 1.0 );
 
-  connect( ui.keyMode, SIGNAL(toggled(bool)),
-      this, SLOT(setMode(bool)) );
-
   connect( ui.audioSlider, SIGNAL(valueChanged(int)),
       this, SLOT(setThreshold(int)) );
 
@@ -147,16 +144,6 @@ void ConfWidget::save()
 
   emit closing();
   close();
-}
-
-void ConfWidget::setMode( bool b )
-{
-/*
-  if( b )
-    cout << "key mode" << endl;
-  else
-    cout << "mic mode" << endl;
-*/
 }
 
 void ConfWidget::updateAudioSlider( double d )
