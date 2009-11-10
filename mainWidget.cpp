@@ -98,10 +98,19 @@ void MainWidget::loadSettings()
 
 void MainWidget::reloadSettings()
 {
-  mic->capture( false );
-  stop();
+  Mode oldMode = mode;
   loadSettings();
-  scan();
+
+  // Any case but continuing in mic mode
+  if( !( oldMode == mode && mode == MIC ) ){
+    stop();
+    scan();
+  };
+
+  // From mic mode to key mode
+  if( oldMode != mode && mode == KEY ){
+    mic->capture(false);
+  };
 }
 
 void MainWidget::setThreshold( int i )
@@ -169,8 +178,8 @@ void MainWidget::scan()
       scanTimer->start( speed );
       break;
     case MIC:
-      scanTimer->start( speed );
       mic->capture( true );
+      scanTimer->start( speed );
       break;
   };
 }
@@ -178,15 +187,15 @@ void MainWidget::scan()
 void MainWidget::grabEvent()
 {
   switch( kbd->grabEvent() ){
-    case 2:
+    case 2://escape key
       forceClosing = true;
       close();
       break;
-    case 1:
+    case 1://any other key
       if( mode == KEY )
         changeState();
       break;
-    default:
+    default://no key
       break;
   };
 }
@@ -198,7 +207,7 @@ void MainWidget::stop()
       scanTimer->stop();
       break;
     case MIC:
-      mic->stop();
+      mic->capture(false);
       break;
   };
 }
@@ -344,6 +353,5 @@ void MainWidget::closeEvent(QCloseEvent *e)
 
 MainWidget::~MainWidget()
 {
-  stop();
 }
 
