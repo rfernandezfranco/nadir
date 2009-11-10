@@ -150,7 +150,7 @@ void Grabber::drag(void)
 
 void Grabber::drop(void)
 {
-  XTestFakeButtonEvent( disp, 1, False, 0 );
+  XTestFakeButtonEvent( disp, 1, False, 250 );
 }
 
 Grabber::~Grabber()
