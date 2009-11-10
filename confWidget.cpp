@@ -53,8 +53,9 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
       parentWidget(), SLOT(reloadSettings()) );
 
   myMic = mic;
-  connect(myMic, SIGNAL(doEvent(double)),
-      this, SLOT(updateAudioSlider(double)));
+  if( myMic->isCapturing() )
+    connect(myMic, SIGNAL(doEvent(double)),
+        this, SLOT(updateAudioSlider(double)));
 
   QCoreApplication::setOrganizationName( "Nadir" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );

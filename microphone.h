@@ -43,6 +43,7 @@ class Microphone : public QWidget
     void init();
     int open_seq(snd_seq_t **seq_handle, int in_ports[],
             int out_ports[], int num_in, int num_out);
+    bool isCapturing();
  
   public slots: 
     void stop();

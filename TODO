@@ -1,5 +1,4 @@
 BUGS
-- Mic tab of configuration widget doesn't work in key mode
 - Some keyboard events aren't grabbed correctly. X timer issue
 
 NEW FEATURES

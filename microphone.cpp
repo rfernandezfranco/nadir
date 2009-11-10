@@ -131,6 +131,11 @@ void Microphone::capture(bool on)
     }
 }
 
+bool Microphone::isCapturing()
+{
+  return capturing;
+}
+
 void Microphone::getDb(double d)
 {
     emit doEvent( d );
