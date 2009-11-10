@@ -61,6 +61,7 @@ MainWidget::MainWidget()
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "Nadir" );
 
+  loadInitialSettings();
   loadSettings();
   scan();
 
@@ -68,13 +69,28 @@ MainWidget::MainWidget()
     kbd->move( getScreenWidth(), getScreenHeight() );
 }
 
+void MainWidget::loadInitialSettings()
+{
+  QSettings settings;
+
+  settings.beginGroup("mainWidget");
+  resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
+  move( settings.value( "pos" ).toPoint() );
+  settings.endGroup();
+}
+
+
+
 void MainWidget::loadSettings()
 {
   QSettings settings;
 
-  settings.beginGroup("Main");
+  settings.beginGroup("mainWidget");
   resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
   move( settings.value( "pos" ).toPoint() );
+  settings.endGroup();
+
+  settings.beginGroup("Main");
   speed = settings.value( "speed", 10 ).toInt();
   setMode( settings.value( "mode", 0 ).toInt() );
   continuous = settings.value( "continuous", 0 ).toBool();
@@ -111,6 +127,16 @@ void MainWidget::reloadSettings()
   if( oldMode != mode && mode == KEY ){
     mic->capture(false);
   };
+}
+
+void MainWidget::saveSettings()
+{
+  QSettings settings;
+
+  settings.beginGroup( "mainWidget" );
+  settings.setValue( "size", size() );
+  settings.setValue( "pos", pos() );
+  settings.endGroup();
 }
 
 void MainWidget::setThreshold( int i )
@@ -328,6 +354,8 @@ void MainWidget::checkDefaultEventButton()
 
 void MainWidget::closeEvent(QCloseEvent *e)
 {
+  saveSettings();
+
   if( forceClosing ) {
     mic->capture( false );
     e->accept();

@@ -58,7 +58,9 @@ class MainWidget : public QWidget
     void scan();
     void stop();
     void grabEvent();
+    void loadInitialSettings();
     void loadSettings();
+    void saveSettings();
     void reloadSettings();
     void setDefaultEvent( int i );
     void setEvent();
