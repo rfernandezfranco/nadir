@@ -115,14 +115,18 @@ void ConfWidget::loadSettings()
 void ConfWidget::setThreshold( int i )
 {
   threshold = i;
+  QString w;
+
+  w.setNum( i );
+  w.append( " dB");
+  ui.audioLabel->setText( w );
 }
 
 void ConfWidget::setWaitTime( int i )
 {
   waitTime = i;
   QString w;
-  float t;
-  t = floor((float)waitTime/10)/100;
+  float t = floor((float)waitTime/10)/100;
   w.setNum( t );
   w.append( " segundo(s)");
   ui.waitLabel->setText( w );
