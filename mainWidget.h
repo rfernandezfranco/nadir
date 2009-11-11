@@ -28,8 +28,6 @@
 #include "settings.h"
 #include "config.h"
 
-#define WAIT_TIME 1000
-
 class MainWidget : public QWidget
 {
   Q_OBJECT
@@ -78,6 +76,7 @@ class MainWidget : public QWidget
     Microphone *mic;
     double threshold;
     bool waiting;
+    unsigned int waitTime;
     bool forceClosing;
     int x;
     int y;

@@ -1,5 +1,6 @@
 BUGS
 - Some keyboard events aren't grabbed correctly. X timer issue
+- Right click doesn't work
 
 NEW FEATURES
 - Implement mouse mode

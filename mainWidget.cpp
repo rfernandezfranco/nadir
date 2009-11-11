@@ -101,6 +101,7 @@ void MainWidget::loadSettings()
   hidePointer = settings.value( "hide", 0 ).toBool();
   setDefaultEvent( settings.value( "click", 0 ).toInt() );
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
+  waitTime = settings.value( "waitTime", 1000 ).toInt();
   settings.endGroup();
 
   getScreenSize();
@@ -149,7 +150,7 @@ void MainWidget::micEvent( double d )
   if( d > threshold  && !waiting ) {
     changeState();
     waiting = true;
-    QTimer::singleShot( WAIT_TIME, this, SLOT(endWait()) );
+    QTimer::singleShot( waitTime, this, SLOT(endWait()) );
   };
 }
 

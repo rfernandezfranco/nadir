@@ -23,6 +23,7 @@
 #include <QMainWindow>
 #include <QtGui/QWidget>
 #include <QWidget>
+#include <math.h>
 #include "microphone.h"
 #include "ui_confWidget.h"
 
@@ -45,12 +46,14 @@ class ConfWidget : public QWidget
     void updateAudioSlider(double);
     void resetAudioBox();
     void setThreshold( int i );
+    void setWaitTime( int i );
   
   private:
     Ui::ConfWidget ui;
     QString lineColor;
     Microphone *myMic;
     int threshold;
+    unsigned int waitTime;
     bool waiting;
 };
 

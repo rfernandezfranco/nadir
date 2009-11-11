@@ -32,7 +32,7 @@ bool Grabber::start()
   if( disp == NULL )
     return false;
 
-  XkbSetDetectableAutoRepeat(disp, TRUE, NULL);
+  //XkbSetDetectableAutoRepeat(disp, TRUE, NULL);
   x11_fd = ConnectionNumber(disp);
   XFlush(disp);
   grabbed = false;

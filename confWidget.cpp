@@ -26,7 +26,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define WAIT_TIME 1000
 
 using namespace std;
 
@@ -66,11 +65,14 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   ui.audioSlider->setMinimum( -40.0 );
   ui.audioSlider->setMaximum( 1.0 );
   ui.audioSlider->setValue( threshold );
+  ui.waitSlider->setValue( waitTime );
   ui.audioBar->setMinimum( -40.0 );
   ui.audioBar->setMaximum( 1.0 );
 
   connect( ui.audioSlider, SIGNAL(valueChanged(int)),
       this, SLOT(setThreshold(int)) );
+  connect( ui.waitSlider, SIGNAL(valueChanged(int)),
+      this, SLOT(setWaitTime(int)) );
 
   waiting = false;
 }
@@ -96,6 +98,8 @@ void ConfWidget::loadSettings()
   ui.colorButton->setStyleSheet( backgroundColor() );
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   ui.audioBar->setValue( threshold );
+  setWaitTime( settings.value( "waitTime", 1000 ).toInt() );
+  ui.audioBar->setValue( threshold );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
@@ -111,6 +115,17 @@ void ConfWidget::loadSettings()
 void ConfWidget::setThreshold( int i )
 {
   threshold = i;
+}
+
+void ConfWidget::setWaitTime( int i )
+{
+  waitTime = i;
+  QString w;
+  float t;
+  t = floor((float)waitTime/10)/100;
+  w.setNum( t );
+  w.append( " segundo(s)");
+  ui.waitLabel->setText( w );
 }
 
 //Save settings
@@ -131,6 +146,7 @@ void ConfWidget::save()
   settings.setValue( "hide", i );
   settings.setValue( "color", lineColor );
   settings.setValue( "audioThreshold", threshold );
+  settings.setValue( "waitTime", waitTime );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
@@ -155,7 +171,7 @@ void ConfWidget::updateAudioSlider( double d )
     if ( !waiting ) {
       ui.audioBox->setStyleSheet( "background-color: #DD0000;" );
       waiting = true;
-      QTimer::singleShot( WAIT_TIME, this, SLOT(resetAudioBox()) );
+      QTimer::singleShot( waitTime, this, SLOT(resetAudioBox()) );
     }
   }
   else
