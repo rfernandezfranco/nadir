@@ -12,6 +12,7 @@ Microphone::Microphone(SettingsData* p_settings, QWidget *parent)
 
     waitTimer = new QTimer(this);
     waiting = false;
+    capturing= false;
 
     connect(this, SIGNAL(doEvent(double)), parent, SLOT(micEvent(double)));
 }

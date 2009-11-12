@@ -1,6 +1,9 @@
 <ui version="4.0" >
  <class>ConfWidget</class>
  <widget class="QWidget" name="ConfWidget" >
+  <property name="windowModality" >
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -1198,11 +1201,6 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
   </layout>
-  <zorder>label_8</zorder>
-  <zorder>titleLabel</zorder>
-  <zorder>cancelButton</zorder>
-  <zorder>saveButton</zorder>
-  <zorder>tabWidget</zorder>
  </widget>
  <resources>
   <include location="nadir.qrc" />
