@@ -1,3 +1,11 @@
+2009-11-12  Juan Roldan Ruiz <juan.roldan at gmail.com> 0.1-alpha3
+	- Changing among modes is performed correctly.
+	- Scape key works in any mode
+	- Pointer can be hidden in any mode
+	- Mic configuration is disabled if mic mode isn't enabled.
+	- Waiting time can be set dinamically in mic mode.
+	- Single, double and right click seem to work in KDE
+	- Minor changes
 2009-10-10  Juan Roldan Ruiz <juan.roldan at gmail.com> 0.1-alpha2
 	- User can set scanning parameters with a configuration widget.
 	- Settings are stored in config file.

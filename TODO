@@ -1,6 +1,8 @@
 BUGS
 - Some keyboard events aren't grabbed correctly. X timer issue
-- Right click doesn't work
+- Right click and dragging doesn't work in Gnome and Fluxbox
+- Windows are blocked in Gnome and Fluxbox, they can't be dragged.
+- Dragging doesn't work in KDE
 
 NEW FEATURES
 - Implement mouse mode
