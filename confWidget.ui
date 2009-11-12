@@ -759,7 +759,7 @@
                </widget>
               </item>
               <item row="0" column="0" >
-               <spacer name="horizontalSpacer_5" >
+               <spacer name="horizontalSpacer_5a" >
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -772,7 +772,7 @@
                </spacer>
               </item>
               <item row="0" column="2" >
-               <spacer name="horizontalSpacer_6" >
+               <spacer name="horizontalSpacer_6a" >
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -787,8 +787,6 @@
              </layout>
              <zorder>audioSlider</zorder>
              <zorder>label</zorder>
-             <zorder>horizontalSpacer_5</zorder>
-             <zorder>horizontalSpacer_6</zorder>
             </widget>
            </item>
            <item rowspan="2" row="1" column="3" >
@@ -846,7 +844,7 @@
                </widget>
               </item>
               <item row="0" column="0" >
-               <spacer name="horizontalSpacer_5" >
+               <spacer name="horizontalSpacer_5b" >
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -859,7 +857,7 @@
                </spacer>
               </item>
               <item row="0" column="2" >
-               <spacer name="horizontalSpacer_6" >
+               <spacer name="horizontalSpacer_6b" >
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -874,8 +872,6 @@
              </layout>
              <zorder>waitSlider</zorder>
              <zorder>label_9</zorder>
-             <zorder>horizontalSpacer_5</zorder>
-             <zorder>horizontalSpacer_6</zorder>
             </widget>
            </item>
            <item rowspan="2" row="1" column="5" >
@@ -967,7 +963,6 @@
              </layout>
              <zorder>audioBar</zorder>
              <zorder>label_16</zorder>
-             <zorder>horizontalSpacer_8</zorder>
             </widget>
            </item>
            <item row="1" column="9" >
