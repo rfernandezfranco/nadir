@@ -89,12 +89,12 @@ void ConfWidget::loadSettings()
   QSettings settings;
 
   settings.beginGroup( "Main" );
-  ui.speedSlider->setValue( settings.value( "speed" ).toInt() );
-  ui.thickBox->setValue( settings.value( "thickness" ).toInt() );
-  ui.continuousBox->setChecked( settings.value( "continuous" ).toBool() );
+  ui.speedSlider->setValue( settings.value( "speed", 30 ).toInt() );
+  ui.thickBox->setValue( settings.value( "thickness", 4 ).toInt() );
+  ui.continuousBox->setChecked( settings.value( "continuous", 0 ).toBool() );
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
-  ui.micMode->setChecked( settings.value( "mode" ).toBool() );
+  ui.micMode->setChecked( settings.value( "mode", 0 ).toBool() );
   lineColor.clear();
   lineColor.append( settings.value( "color", "255,0,0").toString() );
   ui.colorButton->setStyleSheet( backgroundColor() );
@@ -105,7 +105,7 @@ void ConfWidget::loadSettings()
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
-  ui.minimizedBox->setChecked( settings.value( "minimized" ).toBool() );
+  ui.minimizedBox->setChecked( settings.value( "minimized", 0 ).toBool() );
   settings.endGroup();
 
   settings.beginGroup("confWidget");

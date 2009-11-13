@@ -91,7 +91,7 @@ void MainWidget::loadSettings()
   settings.endGroup();
 
   settings.beginGroup("Main");
-  speed = settings.value( "speed", 10 ).toInt();
+  speed = settings.value( "speed", 30 ).toInt();
   setMode( settings.value( "mode", 0 ).toInt() );
   continuous = settings.value( "continuous", 0 ).toBool();
   active = settings.value( "active", 1 ).toBool();
