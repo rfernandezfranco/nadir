@@ -8,8 +8,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>796</width>
-    <height>611</height>
+    <width>724</width>
+    <height>610</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -186,6 +186,31 @@
            <widget class="QPushButton" name="pushButton_2" >
             <property name="text" >
              <string>Activar /Desactivar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" >
+           <widget class="QLabel" name="label_28" >
+            <property name="text" >
+             <string>Tecla de escape</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" >
+           <widget class="QLineEdit" name="lineEdit_3" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="font" >
+             <font>
+              <italic>false</italic>
+             </font>
+            </property>
+            <property name="text" >
+             <string>ESCAPE</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -420,7 +445,7 @@
         <normaloff>:/images/images/keyboard.svg</normaloff>:/images/images/keyboard.svg</iconset>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4" >
-       <item row="0" column="1" colspan="3" >
+       <item row="0" column="0" colspan="2" >
         <widget class="QLabel" name="label_6" >
          <property name="font" >
           <font>
@@ -432,40 +457,43 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1" >
+       <item row="1" column="0" >
         <widget class="QLabel" name="label_20" >
          <property name="enabled" >
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text" >
           <string>Tecla a utilizar</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" >
-        <widget class="QLabel" name="label_21" >
+       <item row="1" column="1" >
+        <widget class="QLineEdit" name="lineEdit" >
          <property name="enabled" >
           <bool>false</bool>
          </property>
          <property name="text" >
-          <string>Tecla de escape</string>
+          <string>CUALQUIERA</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="3" column="3" >
-        <spacer name="horizontalSpacer_12" >
+       <item row="2" column="2" >
+        <spacer name="horizontalSpacer_4" >
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0" >
           <size>
-           <width>40</width>
+           <width>329</width>
            <height>20</height>
           </size>
          </property>
         </spacer>
        </item>
-       <item row="4" column="2" >
+       <item row="3" column="1" >
         <spacer name="verticalSpacer" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -473,20 +501,7 @@
          <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="4" >
-        <spacer name="horizontalSpacer_4" >
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>40</width>
-           <height>20</height>
+           <height>339</height>
           </size>
          </property>
         </spacer>
@@ -738,26 +753,6 @@
               <enum>Qt::LeftToRight</enum>
              </property>
              <layout class="QGridLayout" name="gridLayout_2" >
-              <item row="0" column="1" >
-               <widget class="QSlider" name="audioSlider" >
-                <property name="value" >
-                 <number>20</number>
-                </property>
-                <property name="orientation" >
-                 <enum>Qt::Vertical</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0" colspan="3" >
-               <widget class="QLabel" name="label" >
-                <property name="text" >
-                 <string>Umbral mínimo</string>
-                </property>
-                <property name="alignment" >
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0" >
                <spacer name="horizontalSpacer_5a" >
                 <property name="orientation" >
@@ -784,9 +779,27 @@
                 </property>
                </spacer>
               </item>
+              <item row="0" column="1" >
+               <widget class="QSlider" name="audioSlider" >
+                <property name="value" >
+                 <number>20</number>
+                </property>
+                <property name="orientation" >
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="3" >
+               <widget class="QLabel" name="label" >
+                <property name="text" >
+                 <string>Umbral mínimo</string>
+                </property>
+                <property name="alignment" >
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
              </layout>
-             <zorder>audioSlider</zorder>
-             <zorder>label</zorder>
             </widget>
            </item>
            <item rowspan="2" row="1" column="3" >
@@ -808,6 +821,32 @@
               <enum>Qt::LeftToRight</enum>
              </property>
              <layout class="QGridLayout" name="gridLayout_12" >
+              <item row="0" column="0" >
+               <spacer name="horizontalSpacer_5b" >
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="2" >
+               <spacer name="horizontalSpacer_6b" >
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
               <item row="0" column="1" >
                <widget class="QSlider" name="waitSlider" >
                 <property name="toolTip" >
@@ -843,35 +882,7 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="0" >
-               <spacer name="horizontalSpacer_5b" >
-                <property name="orientation" >
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0" >
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="0" column="2" >
-               <spacer name="horizontalSpacer_6b" >
-                <property name="orientation" >
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0" >
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
              </layout>
-             <zorder>waitSlider</zorder>
-             <zorder>label_9</zorder>
             </widget>
            </item>
            <item rowspan="2" row="1" column="5" >
@@ -892,6 +903,19 @@
              <layout class="QGridLayout" name="gridLayout_11" >
               <item row="0" column="0" >
                <spacer name="horizontalSpacer_7" >
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="2" >
+               <spacer name="horizontalSpacer_8" >
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -947,22 +971,7 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="2" >
-               <spacer name="horizontalSpacer_8" >
-                <property name="orientation" >
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0" >
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
              </layout>
-             <zorder>audioBar</zorder>
-             <zorder>label_16</zorder>
             </widget>
            </item>
            <item row="1" column="9" >
