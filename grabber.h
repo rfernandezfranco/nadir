@@ -41,6 +41,7 @@ class Grabber {
     void flush();
     unsigned int grabEvent();
     void move( int x, int y );
+    void key( int k );
     void click();
     void doubleClick();
     void rightClick();

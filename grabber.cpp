@@ -64,8 +64,11 @@ unsigned int Grabber::grabEvent()
   // Wait for X Event or a Timer
   grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
 
+  //XAllowEvents(disp, SyncBoth, CurrentTime);
   XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
-  GrabModeAsync, CurrentTime);
+                GrabModeAsync, CurrentTime);
+
+  //XGrabKey(disp, AnyKey, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
 
   // Handle XEvents and flush the input 
   while(XPending(disp))
@@ -76,7 +79,7 @@ unsigned int Grabber::grabEvent()
     iKeyState = xe.xkey.state;
     iKeyTime = xe.xkey.time;
     iKeyType = xe.type;
-/* 
+ 
     switch (iKeyType) {
       case KeyPress:
         fprintf(stderr, "Key pressed: ");
@@ -85,14 +88,20 @@ unsigned int Grabber::grabEvent()
         fprintf(stderr, "key released: ");
         break;
     };
-*/
+
     keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
     keyString = XKeysymToString(keysym);
-    //fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
+    fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
+    if(iKeyCode == 65){
+      XUngrabKeyboard(disp,CurrentTime);
+    if(iKeyCode != 65)
+    key( iKeyCode );
+    }
 
     XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
     XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
     XSync(disp, FALSE);
+    XAllowEvents(disp, ReplayKeyboard, CurrentTime);
     XFlush(disp);
 
     // Exit when pressing escape key
@@ -121,6 +130,12 @@ void Grabber::setEscapeCode( int i )
 void Grabber::move( int x, int y )
 {
   XTestFakeMotionEvent( disp, screen, x, y, 10 );
+}
+
+void Grabber::key( int k )
+{
+  XTestFakeKeyEvent( disp, k, True, 0 );
+  XTestFakeKeyEvent( disp, k, False, 250 );
 }
 
 void Grabber::click(void)
