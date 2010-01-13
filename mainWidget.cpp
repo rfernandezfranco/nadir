@@ -252,6 +252,7 @@ void MainWidget::changeState()
       state = SCAN1;
       break;
     case SCAN1:
+      kbd->snoop();
       hLine->startScan();
       hLine->show();
       state = SCAN2;
@@ -268,6 +269,8 @@ void MainWidget::changeState()
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
       state = (continuous) ? SCAN1 : STOP;
+      //kbd->stop();
+      //kbd->start();
       changeState();
       break;
   };

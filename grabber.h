@@ -36,9 +36,12 @@ class Grabber {
   public:
     Grabber();
     ~Grabber();
+    void snoop();
     bool start();
     void stop();
     void flush();
+    void snoop_all_windows(Window root, unsigned long type);
+    char *TranslateKeyCode(XEvent *ev);
     unsigned int grabEvent();
     void move( int x, int y );
     void key( int k );

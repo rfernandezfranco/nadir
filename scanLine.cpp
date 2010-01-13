@@ -34,7 +34,8 @@ ScanLine::ScanLine( QWidget *parent, lineType type, Grabber *grabber ):
   flags |= Qt::FramelessWindowHint;
 
   setWindowFlags( flags );
-  setFocusPolicy(Qt::NoFocus);
+  setFocusPolicy( Qt::NoFocus );
+  setAttribute( Qt::WA_ShowWithoutActivating );
 
   QCoreApplication::setOrganizationName( "Nadir" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );

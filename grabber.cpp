@@ -26,6 +26,9 @@ Grabber::Grabber()
 
 bool Grabber::start()
 {
+  //if( disp != NULL )
+  //  XCloseDisplay( disp );
+    
   disp = XOpenDisplay(NULL);
   screen = DefaultScreen(disp);
 
@@ -36,8 +39,15 @@ bool Grabber::start()
   x11_fd = ConnectionNumber(disp);
   XFlush(disp);
   grabbed = false;
+  
+  snoop();
 
   return true;
+}
+
+void Grabber::snoop()
+{
+  snoop_all_windows(DefaultRootWindow(disp), KeyPressMask); 
 }
 
 void Grabber::flush()
@@ -48,6 +58,65 @@ void Grabber::flush()
 Display *Grabber::getDisplay()
 {
   return disp;
+}
+
+void Grabber::snoop_all_windows(Window root, unsigned long type)
+{
+  static int level = 0;
+  Window parent, *children, *child2;
+  unsigned int nchildren;
+  int stat, i,j,k;
+
+  level++;
+
+  stat = XQueryTree(disp, root, &root, &parent, &children, &nchildren);
+  if (stat == FALSE)
+   {
+     fprintf(stderr, "Can't query window tree...\n");
+     return;
+   }
+
+  if (nchildren == 0)
+    return;
+
+  XSelectInput(disp, root, type);
+
+  for(i=0; i < nchildren; i++)
+   {
+     XSelectInput(disp, children[i], type);
+     snoop_all_windows(children[i], type);
+   }     
+
+  XFree((char *)children);
+}
+
+#define KEY_BUFF_SIZE 256
+static char key_buff[KEY_BUFF_SIZE];
+
+char *Grabber::TranslateKeyCode(XEvent *ev)
+{
+  int count;
+  char *tmp;
+  KeySym ks;
+
+  if (ev)
+   {
+     count = XLookupString((XKeyEvent *)ev, key_buff, KEY_BUFF_SIZE, &ks,NULL);
+     key_buff[count] = '\0';
+
+     if (count == 0)
+      {
+        tmp = XKeysymToString(ks);
+        if (tmp)
+          strcpy(key_buff, tmp);
+        else
+          strcpy(key_buff, "");
+      }
+
+     return key_buff;
+   }
+  else
+    return NULL;
 }
 
 /* Return 0:No event, 1:Key event, 2:Scape */
@@ -64,10 +133,11 @@ unsigned int Grabber::grabEvent()
   // Wait for X Event or a Timer
   grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
 
-  //XAllowEvents(disp, SyncBoth, CurrentTime);
-  XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
-                GrabModeAsync, CurrentTime);
-
+  XAllowEvents(disp, SyncBoth, CurrentTime);
+  //XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
+  //              GrabModeAsync, CurrentTime);
+  //XSelectInput( disp, DefaultRootWindow(disp), KeyPressMask);
+  
   //XGrabKey(disp, AnyKey, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
 
   // Handle XEvents and flush the input 
@@ -108,6 +178,7 @@ unsigned int Grabber::grabEvent()
     if( iKeyCode == escapeCode ){
       return 2;
     };
+    snoop();
   };
 
   // Return true when pressing any key buy the escape key
