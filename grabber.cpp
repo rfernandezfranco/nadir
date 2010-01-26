@@ -47,7 +47,12 @@ bool Grabber::start()
 
 void Grabber::snoop()
 {
-  snoop_all_windows(DefaultRootWindow(disp), KeyPressMask); 
+  snoop_all_windows(DefaultRootWindow(disp), KeyPressMask);
+}
+
+void Grabber::noSnoop()
+{
+  snoop_all_windows(DefaultRootWindow(disp), NoEventMask);
 }
 
 void Grabber::flush()
@@ -168,11 +173,12 @@ unsigned int Grabber::grabEvent()
     key( iKeyCode );
     }
 
-    XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
-    XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
-    XSync(disp, FALSE);
-    XAllowEvents(disp, ReplayKeyboard, CurrentTime);
-    XFlush(disp);
+
+    //XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
+    //XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
+    //XSync(disp, FALSE);
+    //XAllowEvents(disp, ReplayKeyboard, CurrentTime);
+    //XFlush(disp);
 
     // Exit when pressing escape key
     if( iKeyCode == escapeCode ){

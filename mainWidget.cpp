@@ -264,13 +264,13 @@ void MainWidget::changeState()
       state = EVENT;
       break;
     case EVENT:
+      kbd->noSnoop();
       hLine->hide();
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
       state = (continuous) ? SCAN1 : STOP;
-      //kbd->stop();
-      //kbd->start();
+      kbd->snoop();
       changeState();
       break;
   };

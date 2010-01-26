@@ -29,13 +29,14 @@ using namespace std;
 ScanLine::ScanLine( QWidget *parent, lineType type, Grabber *grabber ):
   QWidget( parent )
 {
-  Qt::WindowFlags flags = Qt::ToolTip;
+
+  Qt::WindowFlags flags;
+  flags |= Qt::ToolTip;
   flags |= Qt::WindowStaysOnTopHint;
   flags |= Qt::FramelessWindowHint;
-
   setWindowFlags( flags );
-  setFocusPolicy( Qt::NoFocus );
   setAttribute( Qt::WA_ShowWithoutActivating );
+  setFocusPolicy( Qt::NoFocus );
 
   QCoreApplication::setOrganizationName( "Nadir" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );

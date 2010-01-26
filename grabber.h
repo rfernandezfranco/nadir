@@ -37,6 +37,7 @@ class Grabber {
     Grabber();
     ~Grabber();
     void snoop();
+    void noSnoop();
     bool start();
     void stop();
     void flush();
