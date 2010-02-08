@@ -68,9 +68,9 @@ Display *Grabber::getDisplay()
 void Grabber::snoop_all_windows(Window root, unsigned long type)
 {
   static int level = 0;
-  Window parent, *children, *child2;
-  unsigned int nchildren;
-  int stat, i,j,k;
+  Window parent, *children;
+  unsigned int i, nchildren;
+  int stat;
 
   level++;
 
@@ -138,13 +138,13 @@ unsigned int Grabber::grabEvent()
   // Wait for X Event or a Timer
   grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
 
-  XAllowEvents(disp, SyncBoth, CurrentTime);
+  XGrabKey(disp, 65, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
+  //XAllowEvents(disp, SyncBoth, CurrentTime);
   //XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
   //              GrabModeAsync, CurrentTime);
   //XSelectInput( disp, DefaultRootWindow(disp), KeyPressMask);
-  
-  //XGrabKey(disp, AnyKey, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
 
+  //XAllowEvents(disp, AsyncBoth, CurrentTime);
   // Handle XEvents and flush the input 
   while(XPending(disp))
       XNextEvent(disp, &xe);
@@ -155,24 +155,25 @@ unsigned int Grabber::grabEvent()
     iKeyTime = xe.xkey.time;
     iKeyType = xe.type;
  
-    switch (iKeyType) {
-      case KeyPress:
-        fprintf(stderr, "Key pressed: ");
-        break;
-      case KeyRelease:
-        fprintf(stderr, "key released: ");
-        break;
-    };
+#ifdef DEBUG
+      switch (iKeyType) {
+        case KeyPress:
+          fprintf(stderr, "Key pressed: ");
+          break;
+        case KeyRelease:
+          fprintf(stderr, "key released: ");
+          break;
+      };
+#endif
 
     keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
     keyString = XKeysymToString(keysym);
     fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
-    if(iKeyCode == 65){
-      XUngrabKeyboard(disp,CurrentTime);
-    if(iKeyCode != 65)
-    key( iKeyCode );
-    }
-
+    
+    //if(iKeyCode == 65)
+    //  XUngrabKeyboard(disp,CurrentTime);
+    //else
+    //  key( iKeyCode );
 
     //XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
     //XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);

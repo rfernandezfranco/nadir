@@ -21,6 +21,8 @@
 #include <QSettings>
 #include "mainWidget.h"
 
+#define DEBUG
+
 using namespace std;
 
 int main(int argc, char *argv[])
