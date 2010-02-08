@@ -26,16 +26,12 @@ Grabber::Grabber()
 
 bool Grabber::start()
 {
-  //if( disp != NULL )
-  //  XCloseDisplay( disp );
-    
   disp = XOpenDisplay(NULL);
   screen = DefaultScreen(disp);
 
   if( disp == NULL )
     return false;
 
-  //XkbSetDetectableAutoRepeat(disp, TRUE, NULL);
   x11_fd = ConnectionNumber(disp);
   XFlush(disp);
   grabbed = false;
@@ -139,12 +135,7 @@ unsigned int Grabber::grabEvent()
   grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
 
   XGrabKey(disp, 65, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
-  //XAllowEvents(disp, SyncBoth, CurrentTime);
-  //XGrabKeyboard(disp, DefaultRootWindow(disp), TRUE, GrabModeAsync,
-  //              GrabModeAsync, CurrentTime);
-  //XSelectInput( disp, DefaultRootWindow(disp), KeyPressMask);
 
-  //XAllowEvents(disp, AsyncBoth, CurrentTime);
   // Handle XEvents and flush the input 
   while(XPending(disp))
       XNextEvent(disp, &xe);
@@ -170,27 +161,17 @@ unsigned int Grabber::grabEvent()
     keyString = XKeysymToString(keysym);
     fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
     
-    //if(iKeyCode == 65)
-    //  XUngrabKeyboard(disp,CurrentTime);
-    //else
-    //  key( iKeyCode );
-
-    //XSetInputFocus(disp, PointerRoot, RevertToParent, iKeyTime);
-    //XSendEvent(disp, xe.xkey.subwindow, FALSE, xe.type, &xe);
-    //XSync(disp, FALSE);
-    //XAllowEvents(disp, ReplayKeyboard, CurrentTime);
-    //XFlush(disp);
-
-    // Exit when pressing escape key
+    // Return 2 when pressing escape key
     if( iKeyCode == escapeCode ){
       return 2;
     };
     snoop();
   };
 
-  // Return true when pressing any key buy the escape key
+  // Return 1 when pressing any key but escape key
   if( grabbed && iKeyType == KeyPress)
     return 1;
+  // Return 0 if no key has been pressed
   else
     return 0;
 }

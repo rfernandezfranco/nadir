@@ -17,7 +17,6 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-//#include "main.h"
 #include <QSettings>
 #include "mainWidget.h"
 

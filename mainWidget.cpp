@@ -79,8 +79,6 @@ void MainWidget::loadInitialSettings()
   settings.endGroup();
 }
 
-
-
 void MainWidget::loadSettings()
 {
   QSettings settings;
@@ -311,28 +309,23 @@ void MainWidget::doEvent()
   switch( mouseEvent ){
     case LEFT:
       kbd->click();
-      //cout << "left" << endl;
       break;
     case DOUBLE:
       kbd->doubleClick();
-      //cout << "double" << endl;
       break;
     case RIGHT:
       kbd->rightClick();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
-      //cout << "right" << endl;
       break;
     case DRAG:
       kbd->drag();
       mouseEvent = DROP;
-      //cout << "drag" << endl;
       break;
     case DROP:
       kbd->drop();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
-      //cout << "drop" << endl;
       break;
   };
 

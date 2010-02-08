@@ -149,3 +149,4 @@ void Microphone::stop()
     }
     capturing = false;
 }
+
