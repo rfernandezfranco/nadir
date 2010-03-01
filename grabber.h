@@ -20,6 +20,10 @@
 #ifndef GRABBERCLASS_H
 #define GRABBERCLASS_H
 
+#define KEYCODE 65
+#define KEYPRESSTIME 250
+#define KEYPRESSTIME2 100
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <X11/X.h>

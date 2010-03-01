@@ -1,11 +1,13 @@
 BUGS
 - Some keyboard events aren't grabbed correctly. X timer issue
-- Right click and dragging doesn't work in Gnome and Fluxbox
-- Windows are blocked in Gnome and Fluxbox, they can't be dragged.
-- Dragging doesn't work in KDE
+- Nadir doesn't receive any signal in key mode when a context menu is shown
 
 NEW FEATURES
 - Implement mouse mode
 - Implement camera mode
 - Internationalitation
 - System tray
+- Inner scanning when using certain applications (i.e. virtual keyboard)
+- (key mode) )Grab release before 2nd press
+- i18n
+- deb

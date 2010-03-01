@@ -1,3 +1,6 @@
+2010-02-08  Juan Roldan Ruiz <juan.roldan at gmail.com> 0.1-alpha4
+	- Improved keyboard grabber
+	- Fixed focus problem
 2009-11-12  Juan Roldan Ruiz <juan.roldan at gmail.com> 0.1-alpha3
 	- Changing among modes is performed correctly.
 	- Scape key works in any mode

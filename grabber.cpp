@@ -134,7 +134,7 @@ unsigned int Grabber::grabEvent()
   // Wait for X Event or a Timer
   grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
 
-  XGrabKey(disp, 65, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
+  XGrabKey(disp, KEYCODE, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
 
   // Handle XEvents and flush the input 
   while(XPending(disp))
@@ -194,27 +194,27 @@ void Grabber::move( int x, int y )
 void Grabber::key( int k )
 {
   XTestFakeKeyEvent( disp, k, True, 0 );
-  XTestFakeKeyEvent( disp, k, False, 250 );
+  XTestFakeKeyEvent( disp, k, False, KEYPRESSTIME );
 }
 
 void Grabber::click(void)
 {
   XTestFakeButtonEvent( disp, 1, True, 0 );
-  XTestFakeButtonEvent( disp, 1, False, 250 );
+  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME );
 }
 
 void Grabber::doubleClick(void)
 {
-  XTestFakeButtonEvent( disp, 1, True, 100 );
-  XTestFakeButtonEvent( disp, 1, False, 100 );
-  XTestFakeButtonEvent( disp, 1, True, 100 );
-  XTestFakeButtonEvent( disp, 1, False, 100 );
+  XTestFakeButtonEvent( disp, 1, True, KEYPRESSTIME2 );
+  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME2 );
+  XTestFakeButtonEvent( disp, 1, True, KEYPRESSTIME2 );
+  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME2 );
 }
 
 void Grabber::rightClick(void)
 {
   XTestFakeButtonEvent( disp, 3, True, 0 );
-  XTestFakeButtonEvent( disp, 3, False, 250 );
+  XTestFakeButtonEvent( disp, 3, False, KEYPRESSTIME );
 }
 
 void Grabber::drag(void)
@@ -224,7 +224,7 @@ void Grabber::drag(void)
 
 void Grabber::drop(void)
 {
-  XTestFakeButtonEvent( disp, 1, False, 250 );
+  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME );
 }
 
 Grabber::~Grabber()
