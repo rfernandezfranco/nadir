@@ -21,3 +21,5 @@ SOURCES += main.cpp mainWidget.cpp confWidget.cpp scanLine.cpp grabber.cpp \
 
 RESOURCES += nadir.qrc
 
+TRANSLATIONS = i18n/es.ts \
+               i18n/en.ts

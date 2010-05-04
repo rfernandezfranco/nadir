@@ -19,6 +19,8 @@
  
 #include <QSettings>
 #include "mainWidget.h"
+#include <QTranslator>
+#include <QLocale>
 
 #define DEBUG
 
@@ -27,6 +29,13 @@ using namespace std;
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
+
+  // Internationalitation
+  QString locale = QLocale::system().name();
+  QTranslator translator;
+  translator.load(QString("i18n/") + locale);
+  app.installTranslator(&translator);
+
   MainWidget win;
   QSettings settings;
 
