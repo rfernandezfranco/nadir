@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
   settings.endGroup();
 
   if( min )
-    win.showMinimized();
+    win.hide();
   else
     win.show();
 
