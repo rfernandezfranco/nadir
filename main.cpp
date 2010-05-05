@@ -39,9 +39,9 @@ int main(int argc, char *argv[])
   MainWidget win;
   QSettings settings;
 
-  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationName( "siesta" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-  QCoreApplication::setApplicationName( "Nadir" );
+  QCoreApplication::setApplicationName( "nadir" );
   
   settings.beginGroup( "mainWidget" );
   bool min = settings.value( "minimized", false ).toBool();

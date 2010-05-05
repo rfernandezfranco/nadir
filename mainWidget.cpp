@@ -57,9 +57,9 @@ MainWidget::MainWidget()
   scanTimer = new QTimer(this);
   connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
 
-  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationName( "siesta" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-  QCoreApplication::setApplicationName( "Nadir" );
+  QCoreApplication::setApplicationName( "nadir" );
 
   loadInitialSettings();
   loadSettings();

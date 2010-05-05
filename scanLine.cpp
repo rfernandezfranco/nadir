@@ -38,9 +38,9 @@ ScanLine::ScanLine( QWidget *parent, lineType type, Grabber *grabber ):
   setAttribute( Qt::WA_ShowWithoutActivating );
   setFocusPolicy( Qt::NoFocus );
 
-  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationName( "siesta" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-  QCoreApplication::setApplicationName( "Nadir" );
+  QCoreApplication::setApplicationName( "nadir" );
 
   loadSettings();
   step = 2;

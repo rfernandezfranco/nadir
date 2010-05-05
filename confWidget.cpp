@@ -58,9 +58,9 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
     ui.micWidget->setCurrentIndex( 1 );
   }
 
-  QCoreApplication::setOrganizationName( "Nadir" );
+  QCoreApplication::setOrganizationName( "siesta" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-  QCoreApplication::setApplicationName( "Nadir" );
+  QCoreApplication::setApplicationName( "nadir" );
 
   loadSettings();
 
