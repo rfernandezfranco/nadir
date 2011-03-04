@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name= Nadir Screen scanner
+Comment=Screen scanner utility by using a keyboard or a microphone
+Name[es]=Barrido de pantalla Nadir
+Comment[es]=Barrido de pantalla mediante teclado o micŕofono
+Exec=nadir
+Categories=Accessibility;Utility;
+Icon=nadir

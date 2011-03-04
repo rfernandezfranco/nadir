@@ -11,7 +11,9 @@ BUILD THE APPLICATION
 
   Run:
 
-    $ qmake-qt4
+    $ mkdir build
+    $ cd build
+    $ cmake ..
     $ make
 
   Run as root:
