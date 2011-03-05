@@ -1,6 +1,7 @@
 BUGS
 - Some keyboard events aren't grabbed correctly. X timer issue
 - Nadir doesn't receive any signal in key mode when a context menu is shown
+- X Error (BadAccess) when Compiz is enabled
 
 NEW FEATURES
 - Implement mouse mode
