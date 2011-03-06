@@ -30,9 +30,29 @@ LICENSE
   See COPYING file
 
 
-HOW TO INSTALL
+INSTALL
 
-  See INSTALL file
+- Dependencies (packages names may change depending on your system):
+
+    cmake - A cross-platform, open-source make system
+    libqt4-dev - Qt 4 development files
+    libjack-dev - JACK Audio Connection Kit (development files)
+    libasound2-dev - ALSA library development files
+
+- Building the application:
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
+
+- Installing the application (as root):
+
+    # make install
+
+- Running the application:
+
+  $ nadir
 
 AUTHORS
 

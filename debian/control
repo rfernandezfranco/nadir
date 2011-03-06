@@ -3,7 +3,7 @@ Section: x11
 Priority: extra
 Maintainer: Juan Roldan Ruiz <juan.roldan@gmail.com>
 Build-Depends: debhelper (>= 7), cmake, libqt4-dev, libasound2-dev, libjack-dev
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://sourceforge.net/projects/nadir
 
 Package: nadir
@@ -16,8 +16,9 @@ Description: Screen scanner utility
  .
  This software is a screen scanner utility for people who are not able to use
  the mouse whithout a minimum of accuracy. The application makes an horizontal
- and a vertical scan of the screen so that the user can reach any location of the
- screen and virtually produce any mouse event (click, drag...) in that location.
+ and a vertical scan of the screen so that the user can reach any location of 
+ the screen and virtually produce any mouse event (click, drag...) in that 
+ location.
  .
  The application offers these modes to perform the scan:
  - Pressing any key of the keyboard
