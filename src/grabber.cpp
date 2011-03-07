@@ -134,7 +134,7 @@ unsigned int Grabber::grabEvent()
   // Wait for X Event or a Timer
   grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
 
-  XGrabKey(disp, KEYCODE, AnyModifier, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
+  XGrabKey(disp, KEYCODE, KeyPress, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
 
   // Handle XEvents and flush the input 
   while(XPending(disp))
