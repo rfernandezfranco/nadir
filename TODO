@@ -3,6 +3,7 @@ BUGS
 - Nadir doesn't receive any signal in key mode when a context menu is shown
   because when GTK+ creates a pop-up menu, it uses XGrabKeyboard and 
   XGrabPointer to grab the keyboard and mouse [1].
+- Install tray icon menu images
 
   [1] http://mail.gnome.org/archives/gtk-devel-list/2010-June/msg00154.html
 
