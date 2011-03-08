@@ -91,7 +91,7 @@ void MainWidget::loadSettings()
   settings.beginGroup("mainWidget");
   resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
   move( settings.value( "pos" ).toPoint() );
-  showTrayIcon = settings.value( "systray", 0 ).toBool();
+  showTrayIcon = settings.value( "systray", 1 ).toBool();
   settings.endGroup();
 
   settings.beginGroup("Main");
