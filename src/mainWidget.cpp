@@ -52,6 +52,7 @@ MainWidget::MainWidget()
 
   waiting = false;
   trayIcon = NULL;
+  firstConf = true;
 
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );
@@ -253,9 +254,10 @@ void MainWidget::stop()
 void MainWidget::configure( void )
 {
 
-  if(!confWidget){
+  if(firstConf){
     confWidget = new ConfWidget( this, mic );
     qDebug() << "CONF: nueva";
+    firstConf = false;
   }
   else
     qDebug() << "CONF ya existe";

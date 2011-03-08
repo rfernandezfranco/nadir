@@ -107,6 +107,7 @@ class MainWidget : public QWidget
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
     bool showTrayIcon;
+    bool firstConf;
 };
 
 #endif // MAINWIDGET_H
