@@ -32,8 +32,10 @@ using namespace std;
 ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   QWidget( parent )
 {
+  qDebug() << "* 1";
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
+  qDebug() << "* 2";
 
   // Temporally remove Mouse and Camera Tabs
   ui.tabWidget->removeTab(2);
@@ -56,6 +58,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
 
   connect(ui.hiddenBox, SIGNAL(toggled(bool)),
       this, SLOT(hiddenBoxToggled()));
+  qDebug() << "* 3";
 
   myMic = mic;
   if( myMic->isCapturing() ){
@@ -67,8 +70,10 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   QCoreApplication::setOrganizationName( "siesta" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
   QCoreApplication::setApplicationName( "nadir" );
+  qDebug() << "* 4";
 
   loadSettings();
+  qDebug() << "* 5";
 
   ui.audioSlider->setMinimum( -40.0 );
   ui.audioSlider->setMaximum( 1.0 );
@@ -81,11 +86,14 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
       this, SLOT(setThreshold(int)) );
   connect( ui.waitSlider, SIGNAL(valueChanged(int)),
       this, SLOT(setWaitTime(int)) );
+  qDebug() << "* 5";
 
   waiting = false;
 
   // Shrink window to minimum needed size
   resize(0,0);
+  qDebug() << "* 6";
+
 }
 
 void ConfWidget::minimizedBoxToggled()

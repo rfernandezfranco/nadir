@@ -252,8 +252,13 @@ void MainWidget::stop()
 
 void MainWidget::configure( void )
 {
-  if(!confWidget)
+
+  if(!confWidget){
     confWidget = new ConfWidget( this, mic );
+    qDebug() << "CONF: nueva";
+  }
+  else
+    qDebug() << "CONF ya existe";
 
   confWidget->show();
 }
