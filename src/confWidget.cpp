@@ -83,6 +83,9 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
       this, SLOT(setWaitTime(int)) );
 
   waiting = false;
+
+  // Shrink window to minimum needed size
+  resize(0,0);
 }
 
 void ConfWidget::minimizedBoxToggled()
