@@ -17,6 +17,7 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
+#include <QDebug>
 #include <QSettings>
 #include "mainWidget.h"
 #include <QTranslator>
@@ -35,6 +36,8 @@ int main(int argc, char *argv[])
   QTranslator translator;
   translator.load(QString("i18n/") + locale);
   app.installTranslator(&translator);
+  
+  QApplication::setQuitOnLastWindowClosed(false);
 
   MainWidget win;
   QSettings settings;
@@ -45,13 +48,16 @@ int main(int argc, char *argv[])
   
   settings.beginGroup( "mainWidget" );
   bool min = settings.value( "minimized", false ).toBool();
+  bool hidden = settings.value( "hidden", false ).toBool();
   settings.endGroup();
 
   if( min )
-    win.hide();
+    win.showMinimized();
   else
-    win.show();
+    if( hidden )
+      win.hide();
+    else
+      win.show();
 
   return app.exec();
 }
-

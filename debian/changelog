@@ -1,3 +1,16 @@
+nadir (0.2-1) unstable; urgency=low
+
+  * Fixed Compiz error
+  * Hidden version in configuration window 
+  * Configuration window header removed
+  * Window icon 
+  * System tray icon 
+  * .gitignore file
+  * .pro file for Qt Creator 
+  * minimized | hidden start option
+
+ -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Mon, 07 Mar 2011 18:23:10 +0100
+
 nadir (0.1-1) unstable; urgency=low
 
   * CMake configuration files

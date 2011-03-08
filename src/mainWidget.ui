@@ -1,151 +1,156 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MainWidget</class>
- <widget class="QWidget" name="MainWidget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="MainWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>602</width>
+    <width>681</width>
     <height>46</height>
    </rect>
   </property>
-  <property name="sizePolicy" >
-   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Nadir</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" >
-    <widget class="QPushButton" name="clickButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+  <property name="windowIcon">
+   <iconset resource="nadir.qrc">
+    <normaloff>:/images/images/nadir.png</normaloff>:/images/images/nadir.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QPushButton" name="clickButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Izquierdo</string>
      </property>
-     <property name="checkable" >
+     <property name="checkable">
       <bool>true</bool>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>true</bool>
      </property>
-     <property name="autoExclusive" >
+     <property name="autoExclusive">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="2" >
-    <widget class="QPushButton" name="rightClickButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+   <item row="0" column="2">
+    <widget class="QPushButton" name="rightClickButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Derecho</string>
      </property>
-     <property name="checkable" >
+     <property name="checkable">
       <bool>true</bool>
      </property>
-     <property name="autoExclusive" >
+     <property name="autoExclusive">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="4" >
-    <widget class="QPushButton" name="dragButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+   <item row="0" column="4">
+    <widget class="QPushButton" name="dragButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Arrastrar</string>
      </property>
-     <property name="checkable" >
+     <property name="checkable">
       <bool>true</bool>
      </property>
-     <property name="autoExclusive" >
+     <property name="autoExclusive">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="5" >
-    <widget class="Line" name="line" >
-     <property name="orientation" >
+   <item row="0" column="5">
+    <widget class="Line" name="line">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
-   <item row="0" column="6" >
-    <widget class="QPushButton" name="activeButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+   <item row="0" column="6">
+    <widget class="QPushButton" name="activeButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Activo</string>
      </property>
-     <property name="checkable" >
+     <property name="checkable">
       <bool>true</bool>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="7" >
-    <widget class="QPushButton" name="confButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+   <item row="0" column="7">
+    <widget class="QPushButton" name="confButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Configuración</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="8" >
-    <widget class="QPushButton" name="exitButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+   <item row="0" column="8">
+    <widget class="QPushButton" name="exitButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Salir</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1" >
-    <widget class="QPushButton" name="dbClickButton" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+   <item row="0" column="1">
+    <widget class="QPushButton" name="dbClickButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Doble</string>
      </property>
-     <property name="checkable" >
+     <property name="checkable">
       <bool>true</bool>
      </property>
-     <property name="autoExclusive" >
+     <property name="autoExclusive">
       <bool>true</bool>
      </property>
     </widget>
@@ -153,7 +158,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="nadir.qrc" />
+  <include location="nadir.qrc"/>
  </resources>
  <connections/>
 </ui>

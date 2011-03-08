@@ -51,6 +51,12 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   connect( this, SIGNAL(closing()),
       parentWidget(), SLOT(reloadSettings()) );
 
+  connect(ui.minimizedBox, SIGNAL(toggled(bool)),
+      this, SLOT(minimizedBoxToggled()));
+
+  connect(ui.hiddenBox, SIGNAL(toggled(bool)),
+      this, SLOT(hiddenBoxToggled()));
+
   myMic = mic;
   if( myMic->isCapturing() ){
     connect(myMic, SIGNAL(doEvent(double)),
@@ -77,6 +83,18 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
       this, SLOT(setWaitTime(int)) );
 
   waiting = false;
+}
+
+void ConfWidget::minimizedBoxToggled()
+{
+    if(ui.minimizedBox->isChecked())
+        ui.hiddenBox->setChecked(false);
+}
+
+void ConfWidget::hiddenBoxToggled()
+{
+    if(ui.hiddenBox->isChecked())
+        ui.minimizedBox->setChecked(false);
 }
 
 void ConfWidget::resetAudioBox()
@@ -106,6 +124,8 @@ void ConfWidget::loadSettings()
 
   settings.beginGroup( "mainWidget" );
   ui.minimizedBox->setChecked( settings.value( "minimized", 0 ).toBool() );
+  ui.hiddenBox->setChecked( settings.value( "hidden", 0 ).toBool() );
+  ui.systrayBox->setChecked( settings.value( "systray", 1 ).toBool() );
   settings.endGroup();
 
   settings.beginGroup("confWidget");
@@ -158,6 +178,10 @@ void ConfWidget::save()
   settings.beginGroup( "mainWidget" );
   i = ( ui.minimizedBox->isChecked() ) ? 1 : 0;
   settings.setValue( "minimized", i );
+  i = ( ui.hiddenBox->isChecked() ) ? 1 : 0;
+  settings.setValue( "hidden", i );
+  i = ( ui.systrayBox->isChecked() ) ? 1 : 0;
+  settings.setValue( "systray", i );
   settings.endGroup();
 
   settings.beginGroup( "confWidget" );
@@ -215,6 +239,12 @@ QString ConfWidget::backgroundColor()
   s.append( ");" );
 
   return s;
+}
+
+void ConfWidget::showAboutText()
+{
+    showNormal();
+    ui.tabWidget->setCurrentWidget(ui.aboutTab);
 }
 
 void ConfWidget::closeEvent()

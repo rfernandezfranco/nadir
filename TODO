@@ -1,13 +1,15 @@
 BUGS
 - Some keyboard events aren't grabbed correctly. X timer issue
 - Nadir doesn't receive any signal in key mode when a context menu is shown
-- X Error (BadAccess) when Compiz is enabled
+  because when GTK+ creates a pop-up menu, it uses XGrabKeyboard and 
+  XGrabPointer to grab the keyboard and mouse [1].
+
+  [1] http://mail.gnome.org/archives/gtk-devel-list/2010-June/msg00154.html
 
 NEW FEATURES
 - Implement mouse mode
 - Implement camera mode
 - Internationalitation
-- System tray
 - Inner scanning when using certain applications (i.e. virtual keyboard)
 - (key mode) )Grab release before 2nd press
 - i18n

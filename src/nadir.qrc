@@ -1,19 +1,21 @@
 <RCC>
-  <qresource prefix="images" >
-    <file>images/about.svg</file>
-    <file>images/preferences.svg</file>
-    <file>images/mouse.svg</file>
-    <file>images/camera.svg</file>
-    <file>images/keyboard.svg</file>
-    <file>images/audio-input-microphone.svg</file>
-    <file>images/nadir.png</file>
-  </qresource>
-  <qresource prefix="png Icons" >
-    <file>images/png/keys.png</file>
-    <file>images/png/mic.png</file>
-    <file>images/png/mouse.png</file>
-    <file>images/png/preferences-yellow.png</file>
-    <file>images/png/webcam.png</file>
-    <file>images/png/info.png</file>
-  </qresource>
+    <qresource prefix="/images">
+        <file>images/about.svg</file>
+        <file>images/preferences.svg</file>
+        <file>images/mouse.svg</file>
+        <file>images/camera.svg</file>
+        <file>images/keyboard.svg</file>
+        <file>images/audio-input-microphone.svg</file>
+        <file>images/nadir.png</file>
+        <file>images/menu-configure.png</file>
+        <file>images/menu-quit.png</file>
+    </qresource>
+    <qresource prefix="/png Icons">
+        <file>images/png/keys.png</file>
+        <file>images/png/mic.png</file>
+        <file>images/png/mouse.png</file>
+        <file>images/png/preferences-yellow.png</file>
+        <file>images/png/webcam.png</file>
+        <file>images/png/info.png</file>
+    </qresource>
 </RCC>

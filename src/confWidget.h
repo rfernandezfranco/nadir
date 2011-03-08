@@ -47,7 +47,12 @@ class ConfWidget : public QWidget
     void resetAudioBox();
     void setThreshold( int i );
     void setWaitTime( int i );
-  
+    void minimizedBoxToggled();
+    void hiddenBoxToggled();
+
+  public slots:
+    void showAboutText();
+
   private:
     Ui::ConfWidget ui;
     QString lineColor;

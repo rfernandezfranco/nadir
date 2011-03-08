@@ -27,6 +27,10 @@
 #include "microphone.h"
 #include "settings.h"
 #include "config.h"
+#include <QSystemTrayIcon>
+
+class QAction;
+class QMenu;
 
 class MainWidget : public QWidget
 {
@@ -65,6 +69,8 @@ class MainWidget : public QWidget
     void endWait();
     void micEvent(double);
     void setThreshold( int i );
+    void createTrayIcon();
+    void iconActivated(QSystemTrayIcon::ActivationReason reason);
 
   private:
     Ui::MainWidget ui;
@@ -94,6 +100,13 @@ class MainWidget : public QWidget
     ScanLine *hLine;
     ScanLine *vLine;
     ConfWidget *confWidget;
+
+    QAction *restoreAction;
+    QAction *configAction;
+    QAction *quitAction;
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayIconMenu;
+    bool showTrayIcon;
 };
 
 #endif // MAINWIDGET_H

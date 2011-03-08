@@ -1,0 +1,8 @@
+*.swp
+*.o
+ui_*
+moc_*
+qrc_*
+Makefile
+nadir
+*.pro.user

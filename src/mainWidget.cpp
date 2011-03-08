@@ -27,6 +27,7 @@ using namespace std;
 MainWidget::MainWidget()
 {
   ui.setupUi(this);
+  setWindowFlags(Qt::Window);
 
   connect( ui.confButton, SIGNAL(clicked()),
       this, SLOT(configure()) );
@@ -50,6 +51,7 @@ MainWidget::MainWidget()
   mic = new Microphone( &settings, this );
 
   waiting = false;
+  trayIcon = NULL;
 
   hLine = new ScanLine( this, HORIZONTAL, kbd );
   vLine = new ScanLine( this, VERTICAL, kbd );
@@ -63,6 +65,8 @@ MainWidget::MainWidget()
 
   loadInitialSettings();
   loadSettings();
+  if(showTrayIcon)
+      createTrayIcon();
   scan();
 
   if( hidePointer )
@@ -86,6 +90,7 @@ void MainWidget::loadSettings()
   settings.beginGroup("mainWidget");
   resize( settings.value( "size", QSize( 770, 67 ) ).toSize() );
   move( settings.value( "pos" ).toPoint() );
+  showTrayIcon = settings.value( "systray", 0 ).toBool();
   settings.endGroup();
 
   settings.beginGroup("Main");
@@ -126,6 +131,13 @@ void MainWidget::reloadSettings()
   if( oldMode != mode && mode == KEY ){
     mic->capture(false);
   };
+
+  // System tray icon
+  if(showTrayIcon)
+      (trayIcon==NULL) ? createTrayIcon() : trayIcon->show();
+
+  if(!showTrayIcon && trayIcon)
+      trayIcon->hide();
 }
 
 void MainWidget::saveSettings()
@@ -213,8 +225,9 @@ void MainWidget::grabEvent()
 {
   switch( kbd->grabEvent() ){
     case 2://escape key
-      forceClosing = true;
-      close();
+     // QApplication::setQuitOnLastWindowClosed(false);
+    //  forceClosing = true;
+      exit(0);
       break;
     case 1://any other key
       if( mode == KEY )
@@ -239,7 +252,9 @@ void MainWidget::stop()
 
 void MainWidget::configure( void )
 {
-  confWidget = new ConfWidget( this, mic );
+  if(!confWidget)
+    confWidget = new ConfWidget( this, mic );
+
   confWidget->show();
 }
 
@@ -356,6 +371,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
   if( forceClosing ) {
     mic->capture( false );
     e->accept();
+    exit(0);
   }
   else {
     QMessageBox msgBox;
@@ -368,12 +384,63 @@ void MainWidget::closeEvent(QCloseEvent *e)
       case QMessageBox::Yes:
         mic->capture( false );
         e->accept();
+        exit(0);
         break;
       case QMessageBox::No:
         e->ignore();
         break;
     };
   }
+}
+
+void MainWidget::createTrayIcon()
+{
+    // Actions
+    restoreAction = new QAction(tr("&Restaurar"), this);
+    connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+    restoreAction->setIcon(QIcon(":/images/images/nadir.png"));
+
+    configAction = new QAction(trUtf8("&Configuración"), this);
+    connect(configAction, SIGNAL(triggered()), this, SLOT(configure()));
+    configAction->setIcon(QIcon(":/images/images/menu-configure.png"));
+
+    quitAction = new QAction(tr("&Salir"), this);
+    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+    quitAction->setIcon(QIcon(":/images/images/menu-quit.png"));
+
+    // Menu
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addAction(configAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+
+    // Icon
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setIcon(QIcon(":/images/images/nadir.png"));
+    trayIcon->setContextMenu(trayIconMenu);
+    trayIcon->setToolTip("Barrido de pantalla Nadir" );
+
+    // Signals
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+                 this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+
+    // Show
+    trayIcon->show();
+}
+
+void MainWidget::iconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    case QSystemTrayIcon::Trigger:
+    case QSystemTrayIcon::DoubleClick:
+        (isVisible()) ? hide() : showNormal();
+        break;
+    case QSystemTrayIcon::MiddleClick:
+        break;
+    default:
+        ;
+    }
 }
 
 MainWidget::~MainWidget()
