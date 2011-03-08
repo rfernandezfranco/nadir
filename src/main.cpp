@@ -23,7 +23,7 @@
 #include <QTranslator>
 #include <QLocale>
 
-#define DEBUG
+//#define DEBUG
 
 using namespace std;
 
