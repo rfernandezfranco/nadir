@@ -24,8 +24,24 @@
 #define KEYPRESSTIME 250
 #define KEYPRESSTIME2 100
 
+#define BIT(c, x)   ( c[x/8]&(1<<(x%8)) )
+#define KEYSYM_STRLEN   64
+#define SHIFT_DOWN  1
+#define LOCK_DOWN   5
+#define CONTROL_DOWN    3
+#define ISO3_DOWN    4
+#define MODE_DOWN    5
+/* I think it is pretty standard */
+#define SHIFT_INDEX 1  /*index for XKeycodeToKeySym(), for shifted keys*/
+#define MODE_INDEX 2
+#define MODESHIFT_INDEX 3
+#define ISO3_INDEX 4 //TODO geht leider nicht??
+#define ISO3SHIFT_INDEX 4
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
@@ -58,6 +74,10 @@ class Grabber {
     void setEscapeCode( int i );
     Display *getDisplay();
 
+   int StrToChar(char *data);
+   char *KeyCodeToStr(int code, int down, int mod);
+   int KeyModifiers(char *keys);
+
   private:
     Display *disp;
     int screen;
@@ -75,6 +95,13 @@ class Grabber {
     fd_set in_fds;
     struct timeval tv;
     bool grabbed;
+
+    int i;
+   char    *char_ptr,
+           buf1[32],   buf2[32],
+           *keys,
+           *saved;
+   int PrintUp;
 };
 
 #endif // GRABBERCLASS_H

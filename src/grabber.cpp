@@ -22,6 +22,7 @@
 Grabber::Grabber()
 {
   keyString = (char *)malloc( 20 * sizeof(char));
+PrintUp  =FALSE;
 }
 
 bool Grabber::start()
@@ -32,11 +33,17 @@ bool Grabber::start()
   if( disp == NULL )
     return false;
 
-  x11_fd = ConnectionNumber(disp);
-  XFlush(disp);
+  //x11_fd = ConnectionNumber(disp);
+  //XFlush(disp);
   grabbed = false;
   
-  snoop();
+  //snoop();
+  XSynchronize(disp, TRUE);
+
+  /* setup buffers */
+  saved=buf1;
+  keys=buf2;
+  XQueryKeymap(disp, saved);
 
   return true;
 }
@@ -123,6 +130,7 @@ char *Grabber::TranslateKeyCode(XEvent *ev)
 /* Return 0:No event, 1:Key event, 2:Scape */
 unsigned int Grabber::grabEvent()
 {
+  /*
   // Create a File Description Set containing x11_fd
   FD_ZERO(&in_fds);
   FD_SET(x11_fd, &in_fds);
@@ -174,6 +182,167 @@ unsigned int Grabber::grabEvent()
   // Return 0 if no key has been pressed
   else
     return 0;
+    */
+  
+  /* find changed keys */
+  XQueryKeymap(disp, keys);
+  int event = 0;
+
+  for (i=0; i<32*8; i++) {
+     if (BIT(keys, i)!=BIT(saved, i)) {
+       // printf("keys:%s\n",keys);
+        register char *str;
+        str=(char *)KeyCodeToStr(i, BIT(keys, i), KeyModifiers(keys));
+        if (BIT(keys, i)!=0 || PrintUp){
+         event++;
+         printf("> '%s'\n",str);
+        };
+        fflush(stdout); /* in case user is writing to a pipe */
+        //event++;
+     }
+  }
+
+  /* swap buffers */
+  char_ptr=saved;
+  saved=keys;
+  keys=char_ptr;
+  if(event>0)
+    return 1;
+  else
+    return 0;
+
+  //usleep(delay);
+}
+
+/* This part takes the keycode and makes an output string. */
+
+/*
+   Have a keycode, Look up keysym for it.
+   Convert keysym into its string representation.
+   if string is more than one character try to reduce it to one.
+   if string still is more than one character, put it into the form
+   (+string) or (-string) depending on whether the key is up or down.
+   print out the string.
+*/
+
+struct conv {char from[20], to[5];} conv_table[] = {
+   /* shift & control replaced with nothing, since they are appearent
+      from the output */
+   {"return",""},    {"escape","^["},    {"delete", "^H"},
+   {"shift",""},       {"control",""},     {"tab","\t"},
+   {"space", " "},     {"exclam", "!"},    {"quotedbl", "\""}, 
+   {"numbersign", "#"},{"dollar", "$"},    {"percent", "%"},
+   {"ampersand", "&"}, {"apostrophe", "'"},{"parenleft", "("}, 
+   {"parenright", ")"},{"asterisk", "*"},  {"plus", "+"},
+   {"comma", ","},     {"minus", "-"},     {"period", "."},    
+   {"slash", "/"},     {"colon", ":"},     {"semicolon", ";"}, 
+   {"less", "<"},      {"equal", "="},     {"greater", ">"},   
+   {"question", "?"},  {"at", "@"},        {"bracketleft", "["},
+   {"backslash", "\\"},{"bracketright", "]"},{"asciicircum", "^"},   
+   {"underscore", "_"},{"grave", "`"},     {"braceleft", "{"}, 
+   {"bar", "|"},       {"braceright", "}"},{"asciitilde", "~"},    
+   {"odiaeresis","ö"},{"udiaeresis","ü"},{"adiaeresis","ä"},{"",""}
+};
+
+int Grabber::StrToChar(char *data) {
+   int i=0;
+   while (conv_table[i].from[0]!=0 || conv_table[i].to[0]!=0) {
+      if (!strncasecmp(data,conv_table[i].from,
+                       strlen(conv_table[i].from)) ) {
+         strcpy(data,  conv_table[i].to);
+         return TRUE;
+      }
+      i++;
+   }
+   return FALSE;
+}
+
+char *Grabber::KeyCodeToStr(int code, int down, int mod) {
+   static char *str, buf[KEYSYM_STRLEN+1];
+   int index;
+   KeySym  keysym;
+   /* get the keysym for the appropriate case */
+	switch (mod) {
+		case SHIFT_DOWN:
+			index=SHIFT_INDEX;
+			break;
+		case ISO3_DOWN:
+			index=ISO3_INDEX;
+			break;
+		case MODE_DOWN:
+			index=MODE_INDEX;
+			break;
+		default:
+			index=0;
+	}
+
+
+   keysym=XKeycodeToKeysym(disp, code, index);
+   if (NoSymbol==keysym) return "";
+
+   /* convert keysym to a string, copy it to a local area */
+   str=XKeysymToString(keysym);
+
+   if (strcmp(str,"ISO_Level3_Shift") == 0) {
+		keysym=XKeycodeToKeysym(disp, code, ISO3_INDEX);
+		str=XKeysymToString(keysym);
+   }
+
+   if (NULL==str) return "";
+   strncpy(buf, str, KEYSYM_STRLEN); buf[KEYSYM_STRLEN]=0;
+
+   /* try to reduce strings to character equivalents */
+   if (buf[1]!=0 && !StrToChar(buf)) {
+	if (strcmp(buf, "Caps_Lock") == 0) return "";
+      /* still a string, so put it in form (+str) or (-str) */
+      if (down) strcpy(buf, "(+");
+      else      strcpy(buf, "(-");
+      strcat(buf, str);
+      strcat(buf, ")");
+      return buf;
+   }
+   if (buf[0]==0) return "";
+   if (mod==CONTROL_DOWN) {
+      buf[2]=0;
+      buf[1]=toupper(buf[0]);
+      buf[0]='^';
+   }
+   if (mod==LOCK_DOWN) {buf[0]=toupper(buf[0]);}
+   return buf;
+}
+
+
+/* returns which modifier is down, shift/caps or control */
+int Grabber::KeyModifiers(char *keys) {
+   static int setup=TRUE;
+   static int width;
+   static XModifierKeymap *mmap;
+   int i;
+
+   if (setup) {
+      setup=FALSE;
+      mmap=XGetModifierMapping(disp);
+      width=mmap->max_keypermod;
+   }
+   for (i=0; i<width; i++) {
+      KeyCode code;
+
+      code=mmap->modifiermap[ControlMapIndex*width+i];
+      if (code && 0!=BIT(keys, code)) {return CONTROL_DOWN;}
+
+      code=mmap->modifiermap[ShiftMapIndex*width  +i];
+      if (code && 0!=BIT(keys, code)) {return SHIFT_DOWN;}
+
+      code=mmap->modifiermap[LockMapIndex*width   +i];
+      if (code && 0!=BIT(keys, code)) {return LOCK_DOWN;}
+      
+			code=mmap->modifiermap[Mod3MapIndex*width   +i];
+      if (code && 0!=BIT(keys, code)) {return ISO3_DOWN;}
+      
+			code=mmap->modifiermap[Mod5MapIndex*width   +i];
+      if (code && 0!=BIT(keys, code)) {return MODE_DOWN;}
+   }
+   return 0;
 }
 
 void Grabber::stop()
