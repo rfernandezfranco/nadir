@@ -6,3 +6,9 @@ qrc_*
 Makefile
 nadir
 *.pro.user
+.pc
+debian/files
+debian/*debhelper*
+debian/*.substvars
+debian/patches
+obj-i486-linux-gnu
