@@ -20,7 +20,7 @@
 #ifndef GRABBERCLASS_H
 #define GRABBERCLASS_H
 
-#define KEYCODE 65
+#define KEYCODE 72 // Tecla F6
 #define KEYPRESSTIME 250
 #define KEYPRESSTIME2 100
 

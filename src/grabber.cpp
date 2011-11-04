@@ -129,76 +129,22 @@ char *Grabber::TranslateKeyCode(XEvent *ev)
 
 /* Return 0:No event, 1:Key event, 2:Scape */
 unsigned int Grabber::grabEvent()
-{
-  /*
-  // Create a File Description Set containing x11_fd
-  FD_ZERO(&in_fds);
-  FD_SET(x11_fd, &in_fds);
-
-  // Set timer
-  tv.tv_usec = 100;
-  tv.tv_sec = 0;
-
-  // Wait for X Event or a Timer
-  grabbed = (select(x11_fd+1, &in_fds, 0, 0, &tv)) ? true : false;
-
-  XGrabKey(disp, KEYCODE, KeyPress, DefaultRootWindow(disp), TRUE, GrabModeAsync, GrabModeAsync);
-
-  // Handle XEvents and flush the input 
-  while(XPending(disp))
-      XNextEvent(disp, &xe);
-
-  if( grabbed ){
-    iKeyCode = xe.xkey.keycode;
-    iKeyState = xe.xkey.state;
-    iKeyTime = xe.xkey.time;
-    iKeyType = xe.type;
- 
-#ifdef DEBUG
-      switch (iKeyType) {
-        case KeyPress:
-          fprintf(stderr, "Key pressed: ");
-          break;
-        case KeyRelease:
-          fprintf(stderr, "key released: ");
-          break;
-      };
-#endif
-
-    keysym = XKeycodeToKeysym(disp, iKeyCode, 0);
-    keyString = XKeysymToString(keysym);
-    fprintf(stderr, "%s - %i\n", keyString, iKeyCode );
-    
-    // Return 2 when pressing escape key
-    if( iKeyCode == escapeCode ){
-      return 2;
-    };
-    snoop();
-  };
-
-  // Return 1 when pressing any key but escape key
-  if( grabbed && iKeyType == KeyPress)
-    return 1;
-  // Return 0 if no key has been pressed
-  else
-    return 0;
-    */
-  
+{  
   /* find changed keys */
   XQueryKeymap(disp, keys);
   int event = 0;
 
   for (i=0; i<32*8; i++) {
      if (BIT(keys, i)!=BIT(saved, i)) {
-       // printf("keys:%s\n",keys);
         register char *str;
         str=(char *)KeyCodeToStr(i, BIT(keys, i), KeyModifiers(keys));
         if (BIT(keys, i)!=0 || PrintUp){
-         event++;
-         printf("> '%s'\n",str);
+          if(i==KEYCODE){
+            event++;
+            //printf("codigo %d > tecla '%s'\n",i, str);
+          }
         };
         fflush(stdout); /* in case user is writing to a pipe */
-        //event++;
      }
   }
 
