@@ -3,8 +3,10 @@ nadir (0.3-1) unstable; urgency=low
   * Key mode bug fixed when context menu is shown.
     XGrabKey replaced by XQueryKeyMap.
     Code taken from xspy (Jon A. Maxwell <jmaxwell@acm.vt.edu>)
+  * KEYCODE set to F6 code 
+  * Nadir is now able to work along with a virtual keyboard
 
- -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Sat, 12 Mar 2011 18:17:52 +0100
+ -- Juan Roldan Ruiz <jroldan@cpmti.es>  Fri, 04 Nov 2011 18:43:42 +0100
 
 nadir (0.2-1) unstable; urgency=low
 

@@ -12,3 +12,4 @@ debian/*debhelper*
 debian/*.substvars
 debian/patches
 obj-i486-linux-gnu
+src/deb/
