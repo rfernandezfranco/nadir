@@ -37,7 +37,9 @@ else (XTST_LIBRARY)
     MESSAGE(FATAL_ERROR "Looking for Xtst - not found.")
 endif (XTST_LIBRARY)
 
+# Source code and images
 add_subdirectory(src)
+add_subdirectory(src/images)
 
 set(DESKTOP_ENTRY nadir.desktop)
 set(APP_ICON nadir.png)
