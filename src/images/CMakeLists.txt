@@ -6,4 +6,4 @@ set(IMAGES
       preferences.svg
    )
 
-install(FILES ${CMAKE_SOURCE_DIR}/images/${IMAGES} DESTINATION share/share/pixmaps/nadir)
+install(FILES ${CMAKE_SOURCE_DIR}/src/images/${IMAGES} DESTINATION share/share/pixmaps/nadir)
