@@ -27,3 +27,42 @@ nadir (0.1-1) unstable; urgency=low
   * debian directory
 
  -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Fri, 04 Mar 2011 19:44:29 +0100
+
+nadir (0.1-alpha4) unstable; urgency=low
+
+  * Improved keyboard grabber
+  * Fixed focus problem
+
+ -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Fri, 02 Feb 2010 22:21:34 +0100
+
+
+nadir (0.1-alpha3) unstable; urgency=low
+
+  * Changing among modes is performed correctly.
+  * Scape key works in any mode
+  * Pointer can be hidden in any mode
+  * Mic configuration is disabled if mic mode isn't enabled.
+  * Waiting time can be set dinamically in mic mode.
+  * Single, double and right click seem to work in KDE
+  * Minor changes
+
+ -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Fri, 12 Nov 2009 13:00:39 +0100
+
+nadir (0.1-alpha2) unstable; urgency=low
+
+  * User can set scanning parameters with a configuration widget.
+  * Settings are stored in config file.
+  * Xevie extension has been replaced with Xlib.
+  * Achieved Microphone mode.
+  * Enabled more mouse events.
+  * Added option to start the application minimized.
+  * Added option to hide pointer after mouse event.
+  * Default mouse event can be set to single or double click.
+
+ -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Fri, 10 Oct 2009 11:52:51 +0100
+
+nadir (0.1-alpha1) unstable; urgency=low
+
+  * Achieved scan functionality by pressing the space bar.
+
+ -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Fri, 03 Jun 2009 17:51:25 +0100
