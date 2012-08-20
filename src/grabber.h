@@ -38,19 +38,19 @@
 #define ISO3_INDEX 4 //TODO geht leider nicht??
 #define ISO3SHIFT_INDEX 4
 
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
-#include <X11/keysymdef.h>
-#include <X11/XKBlib.h>
 #include <X11/Intrinsic.h>
-#include <X11/StringDefs.h>
-#include <X11/Xutil.h>
+#include <X11/keysymdef.h>
 #include <X11/Shell.h>
+#include <X11/StringDefs.h>
+#include <X11/X.h>
+#include <X11/XKBlib.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 class Grabber {
   public:

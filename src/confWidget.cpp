@@ -18,16 +18,10 @@
  */
  
 #include <QtGui>
-#include <QStringList>
-#include <QSettings>
 #include <QColorDialog>
+#include <QSettings>
+#include <QStringList>
 #include "confWidget.h"
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-
-
-using namespace std;
 
 ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   QWidget( parent )

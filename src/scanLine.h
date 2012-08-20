@@ -22,9 +22,9 @@
 
 #include <QMainWindow>
 #include <QtGui/QWidget>
-#include <X11/Xlib.h>
 #include <QTimer>
 #include <QWidget>
+#include <X11/Xlib.h>
 #include "grabber.h"
 
 enum lineType { HORIZONTAL=0, VERTICAL };

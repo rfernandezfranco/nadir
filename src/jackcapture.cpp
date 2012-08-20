@@ -20,7 +20,6 @@
 #include "jackcapture.h"
 #include "config.h"
 
-
 JackCapture::JackCapture(SettingsData *settings)
 {
     channels = settings->getChannels();
@@ -38,7 +37,6 @@ JackCapture::~JackCapture()
         jack_handle = 0; 
     }
 }
-
 
 int JackCapture::initJack()
 {
@@ -130,4 +128,3 @@ int JackCapture::jack_capture(jack_nframes_t nframes)
     ringBuffer->endWrite(writeOfs);
     return(0);
 }
-

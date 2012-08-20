@@ -23,7 +23,6 @@
 #include <qobject.h>
 #include <qvector.h>
 #include <jack/jack.h>
-
 #include "settings.h"
 #include "ringbuffer.h"
 

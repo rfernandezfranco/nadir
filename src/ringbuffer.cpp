@@ -225,4 +225,3 @@ void RingBuffer::discardBuffer()
     readOfs += q_atomic_set_int(&fillRate, 0);
 #endif
 }
-

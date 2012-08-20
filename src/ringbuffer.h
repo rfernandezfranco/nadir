@@ -20,9 +20,9 @@
 #ifndef RINGBUFFER_H
 #define RINGBUFFER_H
 
+#include <QMutex>
 #include <QObject>
 #include <QVector>
-#include <QMutex>
 #include <QWaitCondition>
 #include <limits.h>
 

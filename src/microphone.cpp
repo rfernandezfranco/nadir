@@ -19,8 +19,6 @@
  
 #include "microphone.h"
 
-using namespace std;
-
 Microphone::Microphone(SettingsData* p_settings, QWidget *parent)
 {
     jackCapture = NULL;
@@ -168,4 +166,3 @@ void Microphone::stop()
     }
     capturing = false;
 }
-

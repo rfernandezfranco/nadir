@@ -20,14 +20,14 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
-#include "ui_mainWidget.h"
-#include "scanLine.h"
+#include <QSystemTrayIcon>
+#include "config.h"
 #include "confWidget.h"
 #include "grabber.h"
 #include "microphone.h"
+#include "scanLine.h"
 #include "settings.h"
-#include "config.h"
-#include <QSystemTrayIcon>
+#include "ui_mainWidget.h"
 
 class QAction;
 class QMenu;

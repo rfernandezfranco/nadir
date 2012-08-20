@@ -20,10 +20,6 @@
 #include <math.h>
 #include "meter.h"
 
-#include <iostream>
-
-using namespace std;
-
 Meter::Meter(tickType p_tick, RingBuffer *p_ringbuffer, int channelIndex,
              int p_sampleSize, int p_minDB, QWidget* parent) : QWidget (parent)
 {

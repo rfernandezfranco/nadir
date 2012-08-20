@@ -20,9 +20,7 @@
 #include <sched.h>
 #include <sys/mman.h>
 #include <qwaitcondition.h>
-
 #include "capture.h"
-
 
 Capture::Capture(SettingsData *settings, RingBuffer *p_ringBuffer) 
 {

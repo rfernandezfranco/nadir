@@ -19,10 +19,10 @@
  
 #include <QDebug>
 #include <QDir>
-#include <QSettings>
-#include "mainWidget.h"
-#include <QTranslator>
 #include <QLocale>
+#include <QSettings>
+#include <QTranslator>
+#include "mainWidget.h"
 
 //#define DEBUG
 

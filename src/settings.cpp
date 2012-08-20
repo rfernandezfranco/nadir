@@ -19,7 +19,6 @@
  
 #include <stdlib.h>
 #include <getopt.h>
-
 #include "settings.h"
 #include "microphone.h"
 

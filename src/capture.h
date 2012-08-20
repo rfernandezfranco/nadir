@@ -23,7 +23,6 @@
 #include <QString>
 #include <QThread>
 #include <alsa/asoundlib.h>
-
 #include "ringbuffer.h"
 #include "settings.h"
 

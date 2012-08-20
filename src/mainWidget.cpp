@@ -17,12 +17,9 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <iostream>
 #include <QtGui>
 #include <QSound>
 #include "mainWidget.h"
-
-using namespace std;
 
 MainWidget::MainWidget()
 {

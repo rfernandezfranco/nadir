@@ -20,19 +20,18 @@
 #ifndef MICROPHONE_H
 #define MICROPHONE_H
 
-#include <QMainWindow>
-#include <QString>
-#include <QLabel>
-#include <QMessageBox>
-#include <QCheckBox>
-#include <QList>
-#include <QVector>
-#include <QTimer>
-#include <QMainWindow>
 #include <QApplication>
-#include <alsa/asoundlib.h>
+#include <QCheckBox>
+#include <QLabel>
+#include <QList>
+#include <QMainWindow>
+#include <QMainWindow>
+#include <QMessageBox>
 #include <QSocketNotifier>
-
+#include <QString>
+#include <QTimer>
+#include <QVector>
+#include <alsa/asoundlib.h>
 #include "capture.h"
 #include "jackcapture.h"
 #include "ringbuffer.h"

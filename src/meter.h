@@ -20,13 +20,12 @@
 #ifndef METER_H
 #define METER_H
 
-#include <qwidget.h>
-#include <qstring.h>
 #include <qlabel.h>
-#include <qtimer.h>
-#include <qsizepolicy.h>
 #include <qsize.h>
-
+#include <qsizepolicy.h>
+#include <qstring.h>
+#include <qtimer.h>
+#include <qwidget.h>
 #include "ringbuffer.h"
 
 #define METER_MINIMUM_WIDTH        300

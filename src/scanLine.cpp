@@ -18,18 +18,13 @@
  */
  
 #include <QtGui>
+#include <QDesktopWidget>
 #include "mainWidget.h"
 #include "scanLine.h"
-#include <QDesktopWidget>
-#include <iostream>
-#include <stdio.h>
-
-using namespace std;
 
 ScanLine::ScanLine( QWidget *parent, lineType type, Grabber *grabber ):
   QWidget( parent )
 {
-
   Qt::WindowFlags flags;
   flags |= Qt::ToolTip;
   flags |= Qt::WindowStaysOnTopHint;

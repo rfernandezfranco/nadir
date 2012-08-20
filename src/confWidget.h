@@ -20,8 +20,8 @@
 #ifndef CONFWIDGET_H
 #define CONFWIDGET_H
 
-#include <QMainWindow>
 #include <QtGui/QWidget>
+#include <QMainWindow>
 #include <QWidget>
 #include <math.h>
 #include "microphone.h"
