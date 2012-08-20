@@ -5,6 +5,7 @@ nadir (0.3-1) unstable; urgency=low
     Code taken from xspy (Jon A. Maxwell <jmaxwell@acm.vt.edu>)
   * KEYCODE set to F7 code 
   * Nadir is now able to work along with a virtual keyboard
+  * Qt dialog translation 
 
  -- Juan Roldan Ruiz <juan@shoden.es>  Fri, 04 Nov 2011 18:43:42 +0100
 
