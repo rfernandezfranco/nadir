@@ -18,6 +18,7 @@
  */
  
 #include <QDebug>
+#include <QDir>
 #include <QSettings>
 #include "mainWidget.h"
 #include <QTranslator>
@@ -32,9 +33,11 @@ int main(int argc, char *argv[])
   QApplication app(argc, argv);
 
   // Internationalitation
-  QString locale = QLocale::system().name();
   QTranslator translator;
-  translator.load(QString("i18n/") + locale);
+  translator.load(QString("i18n/") + QLocale::system().name());
+  translator.load(QString( "qt_") + QLocale::system().name(),
+                  QString(getenv("QTDIR")) + QDir::separator() +
+                  "translations");
   app.installTranslator(&translator);
   
   QApplication::setQuitOnLastWindowClosed(false);
