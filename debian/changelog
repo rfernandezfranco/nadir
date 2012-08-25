@@ -6,6 +6,8 @@ nadir (0.3-1) unstable; urgency=low
   * Nadir is now able to work along with a virtual keyboard
   * Qt dialog translation 
   * User may change key 
+  * Exit button deleted from main widget 
+  * Exit confirmation from tray icon
 
  -- Juan Roldan Ruiz <juan@shoden.es>  Fri, 04 Nov 2011 18:43:42 +0100
 

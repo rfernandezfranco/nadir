@@ -28,8 +28,6 @@ MainWidget::MainWidget()
 
   connect( ui.confButton, SIGNAL(clicked()),
       this, SLOT(configure()) );
-  connect( ui.exitButton, SIGNAL(clicked()),
-      this, SLOT(close()) );
   connect( ui.clickButton, SIGNAL(clicked()),
       this, SLOT(setEvent()) );
   connect( ui.dbClickButton, SIGNAL(clicked()),
@@ -401,7 +399,7 @@ void MainWidget::createTrayIcon()
     configAction->setIcon(QIcon(":/images/images/menu-configure.png"));
 
     quitAction = new QAction(tr("&Salir"), this);
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
     quitAction->setIcon(QIcon(":/images/images/menu-quit.png"));
 
     // Menu

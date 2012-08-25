@@ -24,8 +24,8 @@
     <normaloff>:/images/images/nadir.png</normaloff>:/images/images/nadir.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QPushButton" name="clickButton">
+   <item row="0" column="1">
+    <widget class="QPushButton" name="dbClickButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
@@ -33,29 +33,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Izquierdo</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-     <property name="autoExclusive">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QPushButton" name="rightClickButton">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Derecho</string>
+      <string>Doble</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -123,8 +101,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="8">
-    <widget class="QPushButton" name="exitButton">
+   <item row="0" column="0">
+    <widget class="QPushButton" name="clickButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
@@ -132,12 +110,21 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Salir</string>
+      <string>Izquierdo</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QPushButton" name="dbClickButton">
+   <item row="0" column="2">
+    <widget class="QPushButton" name="rightClickButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
@@ -145,7 +132,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Doble</string>
+      <string>Derecho</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
