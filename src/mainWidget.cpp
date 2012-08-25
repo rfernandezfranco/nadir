@@ -67,6 +67,7 @@ MainWidget::MainWidget()
 
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );
+
 }
 
 void MainWidget::loadInitialSettings()
@@ -258,18 +259,21 @@ void MainWidget::changeState()
     case STOP:
       state = SCAN1;
       break;
+
     case SCAN1:
       kbd->snoop();
       hLine->startScan();
       hLine->show();
       state = SCAN2;
       break;
+
     case SCAN2:
       hLine->stopScan();
       vLine->startScan();
       vLine->show();
       state = EVENT;
       break;
+
     case EVENT:
       kbd->noSnoop();
       hLine->hide();
@@ -301,6 +305,7 @@ void MainWidget::setMode( int i )
     case 0:
       mode = KEY;
       break;
+
     case 1:
       mode = MIC;
       break;
@@ -319,18 +324,22 @@ void MainWidget::doEvent()
     case LEFT:
       kbd->click();
       break;
+
     case DOUBLE:
       kbd->doubleClick();
       break;
+
     case RIGHT:
       kbd->rightClick();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
       break;
+
     case DRAG:
       kbd->drag();
       mouseEvent = DROP;
       break;
+
     case DROP:
       kbd->drop();
       mouseEvent = defaultEvent;
@@ -380,6 +389,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
         e->accept();
         exit(0);
         break;
+
       case QMessageBox::No:
         e->ignore();
         break;

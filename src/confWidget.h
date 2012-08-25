@@ -24,12 +24,10 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <math.h>
-#include "microphone.h"
-#include "ui_confWidget.h"
-
 #include "keyboard.h"
 #include "key.h"
-
+#include "microphone.h"
+#include "ui_confWidget.h"
 
 class ConfWidget : public QWidget
 {

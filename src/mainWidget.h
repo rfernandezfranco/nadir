@@ -100,7 +100,6 @@ class MainWidget : public QWidget
     ScanLine *hLine;
     ScanLine *vLine;
     ConfWidget *confWidget;
-
     QAction *restoreAction;
     QAction *configAction;
     QAction *quitAction;

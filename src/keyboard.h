@@ -32,12 +32,12 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
+// This header solves a X11-Qt header issue
 #include <fixx11h.h>
 
 #include <QCoreApplication>
 #include <QSettings>
 #include <QDebug>
-
 
 class Keyboard
 {
@@ -64,10 +64,9 @@ class Keyboard
     void setKeyCode(int i);
     Display *getDisplay();
 
-   int StrToChar(char *data);
-   char *KeyCodeToStr(int code, int down, int mod);
-   char *keyCodeToKeySym(int code);
-   int KeyModifiers(char *keys);
+    int StrToChar(char *data);
+    char *KeyCodeToStr(int code, int down, int mod);
+    int KeyModifiers(char *keys);
 
   private:
     Display *disp;
@@ -89,11 +88,8 @@ class Keyboard
     bool grabbed;
 
     int i;
-   char    *char_ptr,
-           buf1[32],   buf2[32],
-           *keys,
-           *saved;
-   int PrintUp;
+    char *char_ptr, buf1[32], buf2[32], *keys, *saved;
+    int PrintUp;
 };
 
 #endif // KEYBOARD_H

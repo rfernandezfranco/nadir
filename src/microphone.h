@@ -50,7 +50,6 @@ static const char ABOUTMSG[] = "Captura\n"
 			  "(C) 2009 Guido Scholz\n\n"
                           " is licensed under the GPL.\n";
 
-
 class Microphone : public QWidget 
 {
   Q_OBJECT

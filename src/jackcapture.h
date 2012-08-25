@@ -28,17 +28,13 @@
 
 class JackCapture : public QObject
 {
-
   private:
     static int capture_callback(jack_nframes_t nframes, void *arg);
     int jack_capture(jack_nframes_t nframes);
-
     int samplesize, framesize, channels;
     int rate;
     bool jackRunning;
-
     RingBuffer* ringBuffer;
-
     jack_client_t *jack_handle;
     QVector<jack_port_t*> jack_in;
     jack_default_audio_sample_t **jackdata;

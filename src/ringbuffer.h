@@ -53,6 +53,7 @@ class RingBuffer : public QObject
     int channels, sampleSize;
     QVector<QAtomicInt> max;
     void updateMax(long startpos, long endpos);
+
   public:
     RingBuffer(long size, int channelCount, bool enable32bit);
     ~RingBuffer();
@@ -66,7 +67,6 @@ class RingBuffer : public QObject
     unsigned char* beginRead(long& curPos, long& size, bool waitIfEmpty);
     void endRead(long curPos);
     void discardBuffer();
-
 };
 
 #endif

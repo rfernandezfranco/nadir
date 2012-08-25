@@ -28,7 +28,6 @@
 
 class Capture : public QThread
 {
-
   private:
     RingBuffer *ringBuffer;
     unsigned char *periodBuf;
@@ -45,7 +44,6 @@ class Capture : public QThread
     ~Capture();
     virtual void run();                    
     void stop();
-
 };
   
 #endif

@@ -250,41 +250,37 @@ char *Keyboard::KeyCodeToStr(int code, int down, int mod) {
    return buf;
 }
 
-char *Keyboard::keyCodeToKeySym(int code)
-{
-}
-
 /* returns which modifier is down, shift/caps or control */
 int Keyboard::KeyModifiers(char *keys) {
-   static int setup=TRUE;
-   static int width;
-   static XModifierKeymap *mmap;
-   int i;
+  static int setup=TRUE;
+  static int width;
+  static XModifierKeymap *mmap;
+  int i;
 
-   if (setup) {
-      setup=FALSE;
-      mmap=XGetModifierMapping(disp);
-      width=mmap->max_keypermod;
-   }
-   for (i=0; i<width; i++) {
-      KeyCode code;
+  if (setup) {
+    setup=FALSE;
+    mmap=XGetModifierMapping(disp);
+    width=mmap->max_keypermod;
+  }
+  for (i=0; i<width; i++) {
+    KeyCode code;
 
-      code=mmap->modifiermap[ControlMapIndex*width+i];
-      if (code && 0!=BIT(keys, code)) {return CONTROL_DOWN;}
+    code=mmap->modifiermap[ControlMapIndex*width+i];
+    if (code && 0!=BIT(keys, code)) {return CONTROL_DOWN;}
 
-      code=mmap->modifiermap[ShiftMapIndex*width  +i];
-      if (code && 0!=BIT(keys, code)) {return SHIFT_DOWN;}
+    code=mmap->modifiermap[ShiftMapIndex*width  +i];
+    if (code && 0!=BIT(keys, code)) {return SHIFT_DOWN;}
 
-      code=mmap->modifiermap[LockMapIndex*width   +i];
-      if (code && 0!=BIT(keys, code)) {return LOCK_DOWN;}
+    code=mmap->modifiermap[LockMapIndex*width   +i];
+    if (code && 0!=BIT(keys, code)) {return LOCK_DOWN;}
 
-      code=mmap->modifiermap[Mod3MapIndex*width   +i];
-      if (code && 0!=BIT(keys, code)) {return ISO3_DOWN;}
+    code=mmap->modifiermap[Mod3MapIndex*width   +i];
+    if (code && 0!=BIT(keys, code)) {return ISO3_DOWN;}
 
-      code=mmap->modifiermap[Mod5MapIndex*width   +i];
-      if (code && 0!=BIT(keys, code)) {return MODE_DOWN;}
-   }
-   return 0;
+    code=mmap->modifiermap[Mod5MapIndex*width   +i];
+    if (code && 0!=BIT(keys, code)) {return MODE_DOWN;}
+  }
+  return 0;
 }
 
 void Keyboard::stop()
