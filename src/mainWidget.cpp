@@ -94,7 +94,6 @@ void MainWidget::loadSettings()
   speed = settings.value( "speed", 30 ).toInt();
   setMode( settings.value( "mode", 0 ).toInt() );
   continuous = settings.value( "continuous", 0 ).toBool();
-  active = settings.value( "active", 1 ).toBool();
   escapeCode = settings.value( "escape", 9 ).toInt();
   ui.clickButton->setChecked( !settings.value( "click", 0 ).toBool() );
   ui.dbClickButton->setChecked( settings.value( "click", 0 ).toBool() );

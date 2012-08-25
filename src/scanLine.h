@@ -55,7 +55,6 @@ class ScanLine : public QWidget
 
   protected:
     //void paintEvent( QPaintEvent * );
-    bool active;
     bool continuous;
     enum { LEFT=0, RIGHT, DOUBLE, DRAG, DROP } mouseEvent;
 

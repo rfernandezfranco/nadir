@@ -95,7 +95,6 @@ class MainWidget : public QWidget
     int count;
     QTimer *scanTimer;
     bool hidePointer;
-    bool active;
     bool continuous;
     ScanLine *hLine;
     ScanLine *vLine;
