@@ -4,16 +4,34 @@ DEPENDPATH += .
 INCLUDEPATH += .
 LIBS += -lX11 -lXtst -L/usr/X11R6/lib -ljack -lasound -lpthread
 
-# Input
-HEADERS += mainWidget.h confWidget.h scanLine.h grabber.h \
-           capture.h config.h jackcapture.h microphone.h meter.h \
-           ringbuffer.h settings.h
+HEADERS += capture.h \
+           config.h \
+           confWidget.h \
+           jackcapture.h \
+           key.h \
+           keyboard.h \
+           mainWidget.h \
+           meter.h \
+           microphone.h \
+           ringbuffer.h \
+           scanLine.h \
+           settings.h
 
-FORMS += confWidget.ui mainWidget.ui
+FORMS += confWidget.ui \
+         mainWidget.ui
 
-SOURCES += main.cpp mainWidget.cpp confWidget.cpp scanLine.cpp grabber.cpp \
-           capture.cpp jackcapture.cpp microphone.cpp meter.cpp \
-           ringbuffer.cpp settings.cpp
+SOURCES += capture.cpp \
+           confWidget.cpp \
+           jackcapture.cpp \
+           key.cpp \
+           keyboard.cpp \
+           main.cpp \
+           mainWidget.cpp \
+           meter.cpp \
+           microphone.cpp \
+           ringbuffer.cpp \
+           scanLine.cpp \
+           settings.cpp
 
 RESOURCES += nadir.qrc
 

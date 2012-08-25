@@ -23,7 +23,7 @@
 #include <QStringList>
 #include "confWidget.h"
 
-ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
+ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   QWidget( parent )
 {
   setWindowFlags( Qt::Window );
@@ -51,12 +51,17 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
   connect(ui.hiddenBox, SIGNAL(toggled(bool)),
       this, SLOT(hiddenBoxToggled()));
 
+  connect(ui.changeKeyButton, SIGNAL(clicked()),
+          this, SLOT(changeKey()));
+
   myMic = mic;
   if( myMic->isCapturing() ){
     connect(myMic, SIGNAL(doEvent(double)),
         this, SLOT(updateAudioSlider(double)));
     ui.micWidget->setCurrentIndex( 1 );
   }
+
+  myKbd = kbd;
 
   QCoreApplication::setOrganizationName( "siesta" );
   QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
@@ -77,6 +82,8 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic ):
       this, SLOT(setWaitTime(int)) );
 
   waiting = false;
+
+  ui.pressKeyLabel->setVisible(false);
 
   // Shrink window to minimum needed size
   resize(0,0);
@@ -117,6 +124,8 @@ void ConfWidget::loadSettings()
   ui.audioBar->setValue( threshold );
   setWaitTime( settings.value( "waitTime", 1000 ).toInt() );
   ui.audioBar->setValue( threshold );
+  ui.keyCodeField->setText( settings.value( "keycode", 65).toString() );
+  ui.keySymField->setText( settings.value( "keysym", "ESPACIO").toString() );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
@@ -170,6 +179,8 @@ void ConfWidget::save()
   settings.setValue( "color", lineColor );
   settings.setValue( "audioThreshold", threshold );
   settings.setValue( "waitTime", waitTime );
+  settings.setValue( "keycode", ui.keyCodeField->text().toInt());
+  settings.setValue( "keysym", ui.keySymField->text());
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
@@ -185,6 +196,8 @@ void ConfWidget::save()
   settings.setValue( "size", size() );
   settings.setValue( "pos", pos() );
   settings.endGroup();
+
+  myKbd->setKeyCode(ui.keyCodeField->text().toInt());
 
   emit closing();
   close();
@@ -240,8 +253,8 @@ QString ConfWidget::backgroundColor()
 
 void ConfWidget::showAboutText()
 {
-    showNormal();
-    ui.tabWidget->setCurrentWidget(ui.aboutTab);
+  showNormal();
+  ui.tabWidget->setCurrentWidget(ui.aboutTab);
 }
 
 void ConfWidget::closeEvent()
@@ -254,3 +267,22 @@ void ConfWidget::closeEvent()
   settings.endGroup();
 }
 
+void ConfWidget::changeKey()
+{
+  ui.keyGroupBox->setVisible(false);
+  ui.pressKeyLabel->setVisible(true);
+  ui.pressKeyLabel->setFocus();
+}
+
+void ConfWidget::keyPressEvent(QKeyEvent *e)
+{
+  if(ui.pressKeyLabel->isVisible()){
+    QString s = e->text();
+    Key::getSym(e->nativeScanCode(), &s);
+    ui.keySymField->setText(s);
+    ui.keyCodeField->setText(QString::number(e->nativeScanCode()));
+
+    ui.pressKeyLabel->setVisible(false);
+    ui.keyGroupBox->setVisible(true);
+  }
+}

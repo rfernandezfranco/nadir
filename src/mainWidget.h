@@ -23,7 +23,7 @@
 #include <QSystemTrayIcon>
 #include "config.h"
 #include "confWidget.h"
-#include "grabber.h"
+#include "keyboard.h"
 #include "microphone.h"
 #include "scanLine.h"
 #include "settings.h"
@@ -78,7 +78,7 @@ class MainWidget : public QWidget
     MouseEvent defaultEvent;
     State state;
     Mode mode;
-    Grabber *kbd;
+    Keyboard *kbd;
     Microphone *mic;
     double threshold;
     bool waiting;

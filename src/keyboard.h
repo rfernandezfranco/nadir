@@ -1,26 +1,6 @@
-/*
- * Copyright (C) 2009-2011 Juan Roldan Ruiz <juan.roldan@gmail.com>
- *  
- * This file is part of Nadir.
- * 
- * Nadir is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * Nadir is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
- */
- 
-#ifndef GRABBERCLASS_H
-#define GRABBERCLASS_H
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
 
-#define KEYCODE 73 // F7 key
 #define KEYPRESSTIME 250
 #define KEYPRESSTIME2 100
 
@@ -52,10 +32,18 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
-class Grabber {
+#include <fixx11h.h>
+
+#include <QCoreApplication>
+#include <QSettings>
+#include <QDebug>
+
+
+class Keyboard
+{
   public:
-    Grabber();
-    ~Grabber();
+    Keyboard();
+    ~Keyboard();
     void snoop();
     void noSnoop();
     bool start();
@@ -72,10 +60,13 @@ class Grabber {
     void drag();
     void drop();
     void setEscapeCode( int i );
+    void loadKeyCode();
+    void setKeyCode(int i);
     Display *getDisplay();
 
    int StrToChar(char *data);
    char *KeyCodeToStr(int code, int down, int mod);
+   char *keyCodeToKeySym(int code);
    int KeyModifiers(char *keys);
 
   private:
@@ -90,6 +81,7 @@ class Grabber {
     KeySym keysym;
     char *keyString;
     int escapeCode;
+    int keyCode;
 
     int x11_fd;
     fd_set in_fds;
@@ -104,5 +96,4 @@ class Grabber {
    int PrintUp;
 };
 
-#endif // GRABBERCLASS_H
-
+#endif // KEYBOARD_H

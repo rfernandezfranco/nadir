@@ -27,12 +27,16 @@
 #include "microphone.h"
 #include "ui_confWidget.h"
 
+#include "keyboard.h"
+#include "key.h"
+
+
 class ConfWidget : public QWidget
 {
   Q_OBJECT
 
   public:
-    ConfWidget( QWidget *parent = 0, Microphone *mic = 0 );
+    ConfWidget( QWidget *parent = 0, Microphone *mic = 0, Keyboard *kbd = 0 );
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
@@ -49,6 +53,10 @@ class ConfWidget : public QWidget
     void setWaitTime( int i );
     void minimizedBoxToggled();
     void hiddenBoxToggled();
+    void changeKey();
+
+  protected slots:
+    void keyPressEvent(QKeyEvent *);
 
   public slots:
     void showAboutText();
@@ -57,6 +65,7 @@ class ConfWidget : public QWidget
     Ui::ConfWidget ui;
     QString lineColor;
     Microphone *myMic;
+    Keyboard *myKbd;
     int threshold;
     unsigned int waitTime;
     bool waiting;

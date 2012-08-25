@@ -1,8 +1,9 @@
 set(SOURCES
       capture.cpp
       confWidget.cpp
-      grabber.cpp
       jackcapture.cpp
+      key.cpp
+      keyboard.cpp
       main.cpp
       mainWidget.cpp
       meter.cpp
@@ -16,8 +17,9 @@ set(HEADERS
       capture.h
       config.h
       confWidget.h
-      grabber.h
       jackcapture.h
+      key.h
+      keyboard.h
       mainWidget.h
       meter.h
       microphone.h

@@ -22,7 +22,7 @@
 #include "mainWidget.h"
 #include "scanLine.h"
 
-ScanLine::ScanLine( QWidget *parent, lineType type, Grabber *grabber ):
+ScanLine::ScanLine( QWidget *parent, lineType type, Keyboard *kbd ):
   QWidget( parent )
 {
   Qt::WindowFlags flags;
@@ -40,7 +40,7 @@ ScanLine::ScanLine( QWidget *parent, lineType type, Grabber *grabber ):
   loadSettings();
   step = 2;
   init( type );
-  kbdGrabber = grabber;
+  myKbd = kbd;
 }
 
 void ScanLine::loadSettings()
@@ -177,8 +177,8 @@ void ScanLine::hScan( void )
   if( y0 < ( y1 - _thickness ) )
     y0 += step;
   else{
-    kbdGrabber->stop();
-    kbdGrabber->start();
+    myKbd->stop();
+    myKbd->start();
     y0 = 0;
   }
 
@@ -190,8 +190,8 @@ void ScanLine::vScan( void )
   if( x0 < ( x1 - _thickness ) )
     x0 += step;
   else{
-    kbdGrabber->stop();
-    kbdGrabber->start();
+    myKbd->stop();
+    myKbd->start();
     x0 = 0;
   }
 

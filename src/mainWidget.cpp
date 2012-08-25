@@ -39,7 +39,7 @@ MainWidget::MainWidget()
   connect( ui.dragButton, SIGNAL(clicked()),
       this, SLOT(setEvent()) );
 
-  kbd = new Grabber();
+  kbd = new Keyboard();
   if ( !kbd->start() )
     close();
 
@@ -250,11 +250,7 @@ void MainWidget::stop()
 
 void MainWidget::configure( void )
 {
-  if(firstConf){
-    confWidget = new ConfWidget( this, mic );
-    firstConf = false;
-  };
-
+  confWidget = new ConfWidget( this, mic, kbd );
   confWidget->show();
 }
 
@@ -376,7 +372,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
   else {
     QMessageBox msgBox;
     msgBox.setWindowTitle("Nadir");
-    msgBox.setText("Seguro que desea salir?");
+    msgBox.setText(QString::fromUtf8("¿Seguro que desea salir?"));
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
 
