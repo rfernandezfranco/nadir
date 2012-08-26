@@ -2,7 +2,6 @@ INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
 TRANSLATIONS += \
-    nadir_en.ts \
     nadir_es.ts
 
 isEmpty(QMAKE_LRELEASE) {

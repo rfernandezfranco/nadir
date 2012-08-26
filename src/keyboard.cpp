@@ -9,9 +9,9 @@ Keyboard::Keyboard()
 
 void Keyboard::loadKeyCode()
 {
-  QCoreApplication::setOrganizationName( ORG_NAME );
-  QCoreApplication::setOrganizationDomain( ORG_DOMAIN );
-  QCoreApplication::setApplicationName( APP_NAME );
+  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
+  QCoreApplication::setApplicationName( APPLICATION_NAME );
 
   QSettings settings;
 

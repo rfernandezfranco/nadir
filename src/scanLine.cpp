@@ -33,9 +33,9 @@ ScanLine::ScanLine( QWidget *parent, lineType type, Keyboard *kbd ):
   setAttribute( Qt::WA_ShowWithoutActivating );
   setFocusPolicy( Qt::NoFocus );
 
-  QCoreApplication::setOrganizationName( ORG_NAME );
-  QCoreApplication::setOrganizationDomain( ORG_DOMAIN );
-  QCoreApplication::setApplicationName( APP_NAME );
+  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
+  QCoreApplication::setApplicationName( APPLICATION_NAME );
 
   loadSettings();
   step = 2;

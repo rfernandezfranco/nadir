@@ -39,5 +39,5 @@ RESOURCES += nadir.qrc
 TRANSLATIONS = translations/nadir_es.ts \
                translations/nadir_en.ts
 
-include(translations/translations.pri)
+# include(translations/translations.pri)
 

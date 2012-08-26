@@ -30,269 +30,272 @@
     </message>
     <message>
         <location filename="../confWidget.ui" line="109"/>
+        <source>Confirm on exit</source>
+        <translation>Confirmar al salir</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="119"/>
         <source>Continuous mode</source>
         <translation>Modo continuo</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="119"/>
         <source>Scape key</source>
-        <translation>Tecla de escape</translation>
+        <translation type="obsolete">Tecla de escape</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="134"/>
         <source>ESCAPE</source>
-        <translation>ESCAPE</translation>
+        <translation type="obsolete">ESCAPE</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="144"/>
+        <location filename="../confWidget.ui" line="129"/>
         <source>Hide mouse pointer</source>
         <translation>Ocultar cursor</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="154"/>
+        <location filename="../confWidget.ui" line="139"/>
         <source>Start minimized</source>
         <translation>Comenzar minimizado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="161"/>
+        <location filename="../confWidget.ui" line="146"/>
         <source>Start hidden</source>
         <translation>Comenzar oculto</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="168"/>
+        <location filename="../confWidget.ui" line="153"/>
         <source>Show system tray icon</source>
         <translation>Icono en bandeja de sistema</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="186"/>
+        <location filename="../confWidget.ui" line="171"/>
         <source>Visual help</source>
         <translation>Ayuda visual</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="195"/>
+        <location filename="../confWidget.ui" line="180"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="202"/>
+        <location filename="../confWidget.ui" line="187"/>
         <source>Thickness</source>
         <translation>Grosor</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="209"/>
+        <location filename="../confWidget.ui" line="194"/>
         <source>Speed</source>
         <translation>Velocidad</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="216"/>
+        <location filename="../confWidget.ui" line="201"/>
         <source>fast</source>
         <translation>rápido</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="251"/>
+        <location filename="../confWidget.ui" line="236"/>
         <source>slow</source>
         <translation>lento</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="258"/>
-        <location filename="../confWidget.ui" line="288"/>
+        <location filename="../confWidget.ui" line="243"/>
+        <location filename="../confWidget.ui" line="273"/>
         <source>Decrease</source>
         <translation>Disminuir</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="265"/>
-        <location filename="../confWidget.ui" line="295"/>
+        <location filename="../confWidget.ui" line="250"/>
+        <location filename="../confWidget.ui" line="280"/>
         <source>Increase</source>
         <translation>Aumentar</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="323"/>
+        <location filename="../confWidget.ui" line="308"/>
         <source>Sound help</source>
         <translation>Ayuda auditiva</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="329"/>
+        <location filename="../confWidget.ui" line="314"/>
         <source>Play sound</source>
         <translation>Reproducir sonido</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="351"/>
+        <location filename="../confWidget.ui" line="336"/>
         <source>Scan mode</source>
         <translation>Modo de barrido</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="357"/>
+        <location filename="../confWidget.ui" line="342"/>
         <source>Keyboard</source>
         <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="367"/>
+        <location filename="../confWidget.ui" line="352"/>
         <source>Microphone</source>
         <translation>Micrófono</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="377"/>
+        <location filename="../confWidget.ui" line="362"/>
         <source>Default click</source>
         <translation>Clic por defecto</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="383"/>
+        <location filename="../confWidget.ui" line="368"/>
         <source>Simple</source>
         <translation>Simple</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="393"/>
+        <location filename="../confWidget.ui" line="378"/>
         <source>Double</source>
         <translation>Doble</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="408"/>
+        <location filename="../confWidget.ui" line="393"/>
         <source>&amp;Keyboard</source>
         <translation>&amp;Teclado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="419"/>
+        <location filename="../confWidget.ui" line="404"/>
         <source>Control screen scanner with the keyboard</source>
         <translation>Control del barrido mediante teclado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="484"/>
+        <location filename="../confWidget.ui" line="469"/>
         <source>Used key</source>
         <translation>Tecla a usar</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="493"/>
+        <location filename="../confWidget.ui" line="478"/>
         <source>Symbol</source>
         <translation>Símbolo</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="512"/>
-        <location filename="../confWidget.ui" line="541"/>
+        <location filename="../confWidget.ui" line="497"/>
+        <location filename="../confWidget.ui" line="526"/>
         <source>ANY</source>
         <translation>CUALQUIERA</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="528"/>
+        <location filename="../confWidget.ui" line="513"/>
         <source>Code</source>
         <translation>Código</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="554"/>
+        <location filename="../confWidget.ui" line="539"/>
         <source>Change</source>
         <translation>Cambiar</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="564"/>
+        <location filename="../confWidget.ui" line="549"/>
         <source>Press a key...</source>
         <translation>Pulse una tecla...</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="579"/>
+        <location filename="../confWidget.ui" line="564"/>
         <source>&amp;Mouse</source>
         <translation>&amp;Ratón</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="590"/>
+        <location filename="../confWidget.ui" line="575"/>
         <source>Control screen scanner with the mouse</source>
         <translation>Controlar barrido mediante el ratón</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="613"/>
+        <location filename="../confWidget.ui" line="598"/>
         <source>Button to use</source>
         <translation>Botón a usar</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="638"/>
+        <location filename="../confWidget.ui" line="623"/>
         <source>Micro&amp;phone</source>
         <translation>Micró&amp;fono</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="676"/>
+        <location filename="../confWidget.ui" line="661"/>
         <source>Microphone is disabled</source>
         <translation>El micrófono está deshabilitado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="690"/>
+        <location filename="../confWidget.ui" line="675"/>
         <source>In order to enable the microphone, please follow these steps:</source>
         <translation>Para habilitar el micrófono, siga los siguientes pasos:</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="710"/>
+        <location filename="../confWidget.ui" line="695"/>
         <source>   - Selet Microphone option in Settings tab</source>
         <translation>   - Seleccione la opción Micrófono en la pestaña Preferencias</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="730"/>
+        <location filename="../confWidget.ui" line="715"/>
         <source>   - Click Save button</source>
         <translation>   - Pulse el botón Guardar</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="750"/>
+        <location filename="../confWidget.ui" line="735"/>
         <source>In order to configure the microphone, go to the Microphone tab</source>
         <translation>Para configurar el micrófono, dirígase a la pestaña Micrófono</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="764"/>
+        <location filename="../confWidget.ui" line="749"/>
         <source>once you have made the previous steps.</source>
         <translation>una vez que haya realizado los pasos anteriores.</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="782"/>
+        <location filename="../confWidget.ui" line="767"/>
         <source>Control screen scanner with sound</source>
         <translation>Control del barrido mediante sonido</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="857"/>
+        <location filename="../confWidget.ui" line="842"/>
         <source>Minimum threshold</source>
         <translation>Umbral mínimo</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="940"/>
+        <location filename="../confWidget.ui" line="925"/>
         <source>Waiting time</source>
         <translation>Tiempo de espera</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1029"/>
+        <location filename="../confWidget.ui" line="1014"/>
         <source>Sound input</source>
         <translation>Entrada de sonido</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1060"/>
+        <location filename="../confWidget.ui" line="1045"/>
         <source>0 dB</source>
         <translation>0 db</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1078"/>
+        <location filename="../confWidget.ui" line="1063"/>
         <source>1 second(s)</source>
         <translation>1 segundo(s)</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1145"/>
+        <location filename="../confWidget.ui" line="1130"/>
         <source>Ca&amp;mera</source>
         <translation>Cá&amp;mara</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1156"/>
+        <location filename="../confWidget.ui" line="1141"/>
         <source>Control screen scanner with body movements</source>
         <translation>Control del barrido mediante movimientos corporales</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1185"/>
+        <location filename="../confWidget.ui" line="1170"/>
         <source>Device</source>
         <translation>Dispositivo</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1192"/>
+        <location filename="../confWidget.ui" line="1177"/>
         <source>Threshold</source>
         <translation>Umbral</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1227"/>
+        <location filename="../confWidget.ui" line="1212"/>
         <source>About</source>
         <translation>Acerca de</translation>
     </message>
     <message utf8="true">
-        <location filename="../confWidget.ui" line="1233"/>
+        <location filename="../confWidget.ui" line="1218"/>
         <source>    Nadir. Multimodal screen scanner.
 
     http://sourceforge.net/projects/nadir/
@@ -378,7 +381,7 @@ p, li { white-space: pre-wrap; }
     En caso contrario, consulte &lt;http://www.gnu.org/licenses/&gt;.</translation>
     </message>
     <message>
-        <location filename="../confWidget.cpp" line="159"/>
+        <location filename="../confWidget.cpp" line="160"/>
         <source> second(s)</source>
         <translation> segundo(s)</translation>
     </message>
@@ -599,27 +602,27 @@ p, li { white-space: pre-wrap; }
         <translation>Derecho</translation>
     </message>
     <message>
-        <location filename="../mainWidget.cpp" line="381"/>
+        <location filename="../mainWidget.cpp" line="383"/>
         <source>Are you sure you want to exit?</source>
         <translation>¿Seguro que quiere salir?</translation>
     </message>
     <message>
-        <location filename="../mainWidget.cpp" line="402"/>
+        <location filename="../mainWidget.cpp" line="407"/>
         <source>&amp;Restore</source>
         <translation>&amp;Restaurar</translation>
     </message>
     <message>
-        <location filename="../mainWidget.cpp" line="406"/>
+        <location filename="../mainWidget.cpp" line="411"/>
         <source>&amp;Settings</source>
         <translation>&amp;Preferencias</translation>
     </message>
     <message>
-        <location filename="../mainWidget.cpp" line="410"/>
+        <location filename="../mainWidget.cpp" line="415"/>
         <source>&amp;Exit</source>
         <translation>&amp;Salir</translation>
     </message>
     <message>
-        <location filename="../mainWidget.cpp" line="425"/>
+        <location filename="../mainWidget.cpp" line="430"/>
         <source>Nadir Multimodal Screen Scanner</source>
         <translation>Barrido multimodal Nadir</translation>
     </message>

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>756</width>
-    <height>540</height>
+    <width>743</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -103,6 +103,16 @@
           <string>Main options</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_9">
+          <item row="6" column="0">
+           <widget class="QCheckBox" name="confirmOnExitBox">
+            <property name="text">
+             <string>Confirm on exit</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QCheckBox" name="continuousBox">
             <property name="text">
@@ -110,31 +120,6 @@
             </property>
             <property name="checked">
              <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="label_28">
-            <property name="text">
-             <string>Scape key</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QLineEdit" name="lineEdit_3">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="font">
-             <font>
-              <italic>false</italic>
-             </font>
-            </property>
-            <property name="text">
-             <string>ESCAPE</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>

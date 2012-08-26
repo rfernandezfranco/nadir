@@ -63,9 +63,9 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
 
   myKbd = kbd;
 
-  QCoreApplication::setOrganizationName( ORG_NAME );
-  QCoreApplication::setOrganizationDomain( ORG_DOMAIN );
-  QCoreApplication::setApplicationName( APP_NAME );
+  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
+  QCoreApplication::setApplicationName( APPLICATION_NAME );
 
   loadSettings();
 
@@ -126,6 +126,7 @@ void ConfWidget::loadSettings()
   ui.audioBar->setValue( threshold );
   ui.keyCodeField->setText( settings.value( "keycode", 65).toString() );
   ui.keySymField->setText( settings.value( "keysym", "ESPACIO").toString() );
+  ui.confirmOnExitBox->setChecked( settings.value( "confirmOnExit", 1).toBool() );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );
@@ -181,6 +182,7 @@ void ConfWidget::save()
   settings.setValue( "waitTime", waitTime );
   settings.setValue( "keycode", ui.keyCodeField->text().toInt());
   settings.setValue( "keysym", ui.keySymField->text());
+  settings.setValue( "confirmOnExit", ui.confirmOnExitBox->isChecked() ? 1 : 0  );
   settings.endGroup();
 
   settings.beginGroup( "mainWidget" );

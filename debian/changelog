@@ -9,6 +9,7 @@ nadir (0.3) unstable; urgency=low
   * Exit confirmation from tray icon
   * Internationalization support
   * Spanish translation 
+  * Optional confirmation on exit 
 
  -- Juan Roldan Ruiz <juan@shoden.es>  Sun, 26 Aug 2012 19:28:20 +0200
 

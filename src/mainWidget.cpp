@@ -55,9 +55,9 @@ MainWidget::MainWidget()
   scanTimer = new QTimer(this);
   connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
 
-  QCoreApplication::setOrganizationName( ORG_NAME );
-  QCoreApplication::setOrganizationDomain( ORG_DOMAIN );
-  QCoreApplication::setApplicationName( APP_NAME );
+  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
+  QCoreApplication::setApplicationName( APPLICATION_NAME );
 
   loadInitialSettings();
   loadSettings();
@@ -101,6 +101,7 @@ void MainWidget::loadSettings()
   setDefaultEvent( settings.value( "click", 0 ).toInt() );
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   waitTime = settings.value( "waitTime", 1000 ).toInt();
+  confirmOnExit = settings.value( "confirmOnExit", 1).toBool();
   settings.endGroup();
 
   getScreenSize();
@@ -376,23 +377,27 @@ void MainWidget::closeEvent(QCloseEvent *e)
     exit(0);
   }
   else {
-    QMessageBox msgBox;
-    msgBox.setWindowTitle("Nadir");
-    msgBox.setText(trUtf8("Are you sure you want to exit?"));
-    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::No);
+    if(confirmOnExit){
+      QMessageBox msgBox;
+      msgBox.setWindowTitle("Nadir");
+      msgBox.setText(trUtf8("Are you sure you want to exit?"));
+      msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+      msgBox.setDefaultButton(QMessageBox::No);
 
-    switch( msgBox.exec() ){
-      case QMessageBox::Yes:
-        mic->capture( false );
-        e->accept();
-        exit(0);
-        break;
+      switch( msgBox.exec() ){
+        case QMessageBox::Yes:
+          mic->capture( false );
+          e->accept();
+          exit(0);
+          break;
 
-      case QMessageBox::No:
-        e->ignore();
-        break;
-    };
+        case QMessageBox::No:
+          e->ignore();
+          break;
+      };
+    }
+    else
+      exit(0);
   }
 }
 
