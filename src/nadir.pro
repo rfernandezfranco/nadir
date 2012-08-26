@@ -37,3 +37,6 @@ RESOURCES += nadir.qrc
 
 TRANSLATIONS = i18n/es.ts \
                i18n/en.ts
+
+include(i18n/i18n.pri)
+
