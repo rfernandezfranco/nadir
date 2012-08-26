@@ -55,7 +55,7 @@ MainWidget::MainWidget()
   scanTimer = new QTimer(this);
   connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
 
-  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
   QCoreApplication::setApplicationName( APPLICATION_NAME );
 

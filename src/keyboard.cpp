@@ -9,7 +9,7 @@ Keyboard::Keyboard()
 
 void Keyboard::loadKeyCode()
 {
-  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
   QCoreApplication::setApplicationName( APPLICATION_NAME );
 

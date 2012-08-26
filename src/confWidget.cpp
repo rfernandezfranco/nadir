@@ -63,7 +63,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
 
   myKbd = kbd;
 
-  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
   QCoreApplication::setApplicationName( APPLICATION_NAME );
 

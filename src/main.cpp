@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
   MainWidget win;
   QSettings settings;
 
-  QCoreApplication::setOrganizationName( ORGANIATION_NAME );
+  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
   QCoreApplication::setApplicationName( APPLICATION_NAME );
   
