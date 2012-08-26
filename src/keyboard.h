@@ -39,6 +39,8 @@
 #include <QSettings>
 #include <QDebug>
 
+#include "common.h"
+
 class Keyboard
 {
   public:

@@ -24,6 +24,7 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <math.h>
+#include "common.h"
 #include "keyboard.h"
 #include "key.h"
 #include "microphone.h"

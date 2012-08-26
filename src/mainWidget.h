@@ -21,6 +21,7 @@
 #define MAINWIDGET_H
 
 #include <QSystemTrayIcon>
+#include "common.h"
 #include "config.h"
 #include "confWidget.h"
 #include "keyboard.h"

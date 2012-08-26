@@ -63,9 +63,9 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
 
   myKbd = kbd;
 
-  QCoreApplication::setOrganizationName( "siesta" );
-  QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-  QCoreApplication::setApplicationName( "nadir" );
+  QCoreApplication::setOrganizationName( ORG_NAME );
+  QCoreApplication::setOrganizationDomain( ORG_DOMAIN );
+  QCoreApplication::setApplicationName( APP_NAME );
 
   loadSettings();
 

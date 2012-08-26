@@ -15,7 +15,8 @@ HEADERS += capture.h \
            microphone.h \
            ringbuffer.h \
            scanLine.h \
-           settings.h
+           settings.h \
+    common.h
 
 FORMS += confWidget.ui \
          mainWidget.ui

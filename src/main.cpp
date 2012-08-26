@@ -23,6 +23,7 @@
 #include <QSettings>
 #include <QTranslator>
 #include "mainWidget.h"
+#include "common.h"
 
 //#define DEBUG
 
@@ -53,9 +54,9 @@ int main(int argc, char *argv[])
   MainWidget win;
   QSettings settings;
 
-  QCoreApplication::setOrganizationName( "siesta" );
-  QCoreApplication::setOrganizationDomain( "nadir.sourceforge.net" );
-  QCoreApplication::setApplicationName( "nadir" );
+  QCoreApplication::setOrganizationName( ORG_NAME );
+  QCoreApplication::setOrganizationDomain( ORG_DOMAIN );
+  QCoreApplication::setApplicationName( APP_NAME );
   
   settings.beginGroup( "mainWidget" );
   bool min = settings.value( "minimized", false ).toBool();
