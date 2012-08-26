@@ -33,7 +33,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Doble</string>
+      <string>Double</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -52,7 +52,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Arrastrar</string>
+      <string>Drag</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -78,7 +78,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Configuración</string>
+      <string>Settings</string>
      </property>
     </widget>
    </item>
@@ -91,7 +91,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Izquierdo</string>
+      <string>Left</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -113,7 +113,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Derecho</string>
+      <string>Right</string>
      </property>
      <property name="checkable">
       <bool>true</bool>

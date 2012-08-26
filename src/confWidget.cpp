@@ -156,7 +156,7 @@ void ConfWidget::setWaitTime( int i )
   QString w;
   float t = floor((float)waitTime/10)/100;
   w.setNum( t );
-  w.append( trUtf8(" segundo(s)"));
+  w.append( trUtf8(" second(s)"));
   ui.waitLabel->setText( w );
 }
 

@@ -38,16 +38,25 @@ set(RC_FILES
       nadir.qrc
    )
 
+set(TRANS
+      i18n/en.ts
+      i18n/es.ts
+   )
+
 qt4_wrap_cpp(MOC_SOURCES ${HEADERS})
 qt4_wrap_ui(UI_HEADERS ${UI_FILES})
 qt4_add_resources(RC_SOURCES ${RC_FILES})
 include_directories(${CMAKE_BINARY_DIR}/src)
+
+QT4_ADD_TRANSLATION(QM ${TRANS})
+
 
 add_executable(nadir
                  ${SOURCES}
                  ${MOC_SOURCES}
                  ${UI_HEADERS}
                  ${RC_SOURCES}
+                 ${QM}
               )
 
 target_link_libraries(nadir 

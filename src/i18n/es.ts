@@ -1,323 +1,386 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="es_ES" sourcelanguage="en">
 <context>
     <name>ConfWidget</name>
     <message>
-        <location filename="../confWidget.ui" line="92"/>
-        <source>&amp;Preferencias</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../confWidget.ui" line="103"/>
-        <source>Opciones generales</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="109"/>
-        <source>Modo contínuo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../confWidget.ui" line="154"/>
-        <source>Iniciar minimizado</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../confWidget.ui" line="144"/>
-        <source>Esconder cursor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
         <location filename="../confWidget.ui" line="23"/>
-        <source>Configuración</source>
-        <translation type="unfinished"></translation>
+        <source>Settings</source>
+        <translation>Configuración</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="39"/>
-        <source>&amp;Guardar</source>
-        <translation type="unfinished"></translation>
+        <source>Save</source>
+        <translation>Guardar</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="65"/>
-        <source>&amp;Cancelar</source>
-        <translation type="unfinished"></translation>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="92"/>
+        <source>&amp;Settings</source>
+        <translation>&amp;Configuración</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="103"/>
+        <source>Main options</source>
+        <translation>Opciones generales</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="109"/>
+        <source>Continuous mode</source>
+        <translation>Modo continuo</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="119"/>
-        <source>Tecla de escape</source>
-        <translation type="unfinished"></translation>
+        <source>Scape key</source>
+        <translation>Tecla de escape</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="134"/>
         <source>ESCAPE</source>
-        <translation type="unfinished"></translation>
+        <translation>ESCAPE</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="144"/>
+        <source>Hide mouse pointer</source>
+        <translation>Ocultar cursor</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="154"/>
+        <source>Start minimized</source>
+        <translation>Comenzar minimizado</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="161"/>
-        <source>Iniciar oculto</source>
-        <translation type="unfinished"></translation>
+        <source>Start hidden</source>
+        <translation>Comenzar oculto</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="168"/>
-        <source>Icono en bandeja del sistema</source>
-        <translation type="unfinished"></translation>
+        <source>Show system tray icon</source>
+        <translation>Icono en bandeja de sistema</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="186"/>
-        <source>Ayuda visual</source>
-        <translation type="unfinished"></translation>
+        <source>Visual help</source>
+        <translation>Ayuda visual</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="195"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="202"/>
-        <source>Grosor</source>
-        <translation type="unfinished"></translation>
+        <source>Thickness</source>
+        <translation>Grosor</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="209"/>
-        <source>Velocidad</source>
-        <translation type="unfinished"></translation>
+        <source>Speed</source>
+        <translation>Velocidad</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../confWidget.ui" line="216"/>
-        <source>rápida</source>
-        <translation type="unfinished"></translation>
+        <source>fast</source>
+        <translation>rápido</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="251"/>
-        <source>lenta</source>
-        <translation type="unfinished"></translation>
+        <source>slow</source>
+        <translation>lento</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="258"/>
         <location filename="../confWidget.ui" line="288"/>
-        <source>Disminuir</source>
-        <translation type="unfinished"></translation>
+        <source>Decrease</source>
+        <translation>Disminuir</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="265"/>
         <location filename="../confWidget.ui" line="295"/>
-        <source>Aumentar</source>
-        <translation type="unfinished"></translation>
+        <source>Increase</source>
+        <translation>Aumentar</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="323"/>
-        <source>Ayuda auditiva</source>
-        <translation type="unfinished"></translation>
+        <source>Sound help</source>
+        <translation>Ayuda auditiva</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="329"/>
-        <source>Reproducir sonido</source>
-        <translation type="unfinished"></translation>
+        <source>Play sound</source>
+        <translation>Reproducir sonido</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="346"/>
-        <source>Modo de barrido</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="351"/>
+        <source>Scan mode</source>
+        <translation>Modo de barrido</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="352"/>
-        <source>Teclado</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="362"/>
-        <source>Micrófono</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="357"/>
+        <source>Keyboard</source>
+        <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="372"/>
-        <source>Clic por defecto</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="367"/>
+        <source>Microphone</source>
+        <translation>Micrófono</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="378"/>
+        <location filename="../confWidget.ui" line="377"/>
+        <source>Default click</source>
+        <translation>Clic por defecto</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="383"/>
         <source>Simple</source>
-        <translation type="unfinished"></translation>
+        <translation>Simple</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="388"/>
-        <source>Doble</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="393"/>
+        <source>Double</source>
+        <translation>Doble</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="403"/>
-        <source>&amp;Teclado</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="408"/>
+        <source>&amp;Keyboard</source>
+        <translation>&amp;Teclado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="414"/>
-        <source>Control del barrido mediante el teclado</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="419"/>
+        <source>Control screen scanner with the keyboard</source>
+        <translation>Control del barrido mediante teclado</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="479"/>
-        <source>Tecla a utilizar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="488"/>
-        <source>Símbolo</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="484"/>
+        <source>Used key</source>
+        <translation>Tecla a usar</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="507"/>
-        <location filename="../confWidget.ui" line="536"/>
-        <source>CUALQUIERA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="523"/>
-        <source>Código</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="493"/>
+        <source>Symbol</source>
+        <translation>Símbolo</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="549"/>
-        <source>Cambiar</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="512"/>
+        <location filename="../confWidget.ui" line="541"/>
+        <source>ANY</source>
+        <translation>CUALQUIERA</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="559"/>
-        <source>Pulse una tecla...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="574"/>
-        <source>&amp;Ratón</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="585"/>
-        <source>Control del barrido mediante el ratón</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="608"/>
-        <source>Botón a utilizar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="633"/>
-        <source>Micróf&amp;ono</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="671"/>
-        <source>Micrófono deshabilitado.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="685"/>
-        <source>Para habilitar el micrófono siga los siguientes pasos:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="705"/>
-        <source>   - Seleccione la opción Micrófono en la pestaña Preferencias</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="725"/>
-        <source>   - Pulse el botón Guardar de esta ventana de configuración</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="745"/>
-        <source>Para configurar el micrófono, regrese de nuevo a esta pestaña</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="528"/>
+        <source>Code</source>
+        <translation>Código</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="759"/>
-        <source>una vez realizados los pasos anteriores.</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="554"/>
+        <source>Change</source>
+        <translation>Cambiar</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="777"/>
-        <source>Control del barrido mediante la voz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../confWidget.ui" line="852"/>
-        <location filename="../confWidget.ui" line="1187"/>
-        <source>Umbral mínimo</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="564"/>
+        <source>Press a key...</source>
+        <translation>Pulse una tecla...</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="935"/>
-        <source>Tiempo de espera</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="579"/>
+        <source>&amp;Mouse</source>
+        <translation>&amp;Ratón</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1024"/>
-        <source>Entrada de sonido</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="590"/>
+        <source>Control screen scanner with the mouse</source>
+        <translation>Controlar barrido mediante el ratón</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1055"/>
+        <location filename="../confWidget.ui" line="613"/>
+        <source>Button to use</source>
+        <translation>Botón a usar</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="638"/>
+        <source>Micro&amp;phone</source>
+        <translation>Micró&amp;fono</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="676"/>
+        <source>Microphone is disabled</source>
+        <translation>El micrófono está deshabilitado</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="690"/>
+        <source>In order to enable the microphone, please follow these steps:</source>
+        <translation>Para habilitar el micrófono, siga los siguientes pasos:</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="710"/>
+        <source>   - Selet Microphone option in Settings tab</source>
+        <translation>   - Seleccione la opción Micrófono en la pestaña Preferencias</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="730"/>
+        <source>   - Click Save button</source>
+        <translation>   - Pulse el botón Guardar</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="750"/>
+        <source>In order to configure the microphone, go to the Microphone tab</source>
+        <translation>Para configurar el micrófono, dirígase a la pestaña Micrófono</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="764"/>
+        <source>once you have made the previous steps.</source>
+        <translation>una vez que haya realizado los pasos anteriores.</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="782"/>
+        <source>Control screen scanner with sound</source>
+        <translation>Control del barrido mediante sonido</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="857"/>
+        <source>Minimum threshold</source>
+        <translation>Umbral mínimo</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="940"/>
+        <source>Waiting time</source>
+        <translation>Tiempo de espera</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="1029"/>
+        <source>Sound input</source>
+        <translation>Entrada de sonido</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="1060"/>
         <source>0 dB</source>
-        <translation type="unfinished"></translation>
+        <translation>0 db</translation>
     </message>
     <message>
-        <location filename="../confWidget.ui" line="1073"/>
-        <source>1 segundo(s)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="1078"/>
+        <source>1 second(s)</source>
+        <translation>1 segundo(s)</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="1145"/>
+        <source>Ca&amp;mera</source>
+        <translation>Cá&amp;mara</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="1156"/>
+        <source>Control screen scanner with body movements</source>
+        <translation>Control del barrido mediante movimientos corporales</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="1185"/>
+        <source>Device</source>
+        <translation>Dispositivo</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="1192"/>
+        <source>Threshold</source>
+        <translation>Umbral</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="1227"/>
+        <source>About</source>
+        <translation>Acerca de</translation>
     </message>
     <message utf8="true">
-        <location filename="../confWidget.ui" line="1140"/>
-        <source>Cá&amp;mara</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../confWidget.ui" line="1151"/>
-        <source>Control del barrido mediante movimientos corporales</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../confWidget.ui" line="1180"/>
-        <source>Dispositivo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../confWidget.ui" line="1222"/>
-        <source>Acerca &amp;de</source>
-        <translation type="unfinished"></translation>
+        <location filename="../confWidget.ui" line="1233"/>
+        <source>    Nadir. Multimodal screen scanner.
+
+    http://sourceforge.net/projects/nadir/
+
+    Copyright (C) 2009-2012 Juan Roldán Ruiz &lt;juan.roldan@gmail.com&gt;
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</source>
+        <translation>    Nadir. Barrido de pantalla multimodal.
+
+    http://sourceforge.net/projects/nadir/
+
+    Copyright (C) 2009-2012 Juan Roldán Ruiz &lt;juan.roldan@gmail.com&gt;
+
+    Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
+    bajo los términos de la Licencia Pública General GNU publicada 
+    por la Fundación para el Software Libre, ya sea la versión 3 
+    de la Licencia, o (a su elección) cualquier versión posterior.
+
+    Este programa se distribuye con la esperanza de que sea útil, pero 
+    SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
+    MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
+    Consulte los detalles de la Licencia Pública General GNU para obtener 
+    una información más detallada. 
+
+    Debería haber recibido una copia de la Licencia Pública General GNU 
+    junto a este programa. 
+    En caso contrario, consulte &lt;http://www.gnu.org/licenses/&gt;.</translation>
     </message>
     <message utf8="true">
-        <location filename="../confWidget.ui" line="1234"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;; font-weight:600;&quot;&gt;    http://sourceforge.net/projects/nadir/&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    Nadir. Barrido de pantalla multimodal.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    Copyright (C) 2009-2011 Juan Roldán Ruiz &amp;lt;juan.roldan@gmail.com&amp;gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Courier New,courier&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    Este programa es software libre: usted puede redistribuirlo y/o modificarlo &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    bajo los términos de la Licencia Pública General GNU publicada &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    por la Fundación para el Software Libre, ya sea la versión 3 &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    de la Licencia, o (a su elección) cualquier versión posterior.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Courier New,courier&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    Este programa se distribuye con la esperanza de que sea útil, pero &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    Consulte los detalles de la Licencia Pública General GNU para obtener &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    una información más detallada. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Courier New,courier&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    Debería haber recibido una copia de la Licencia Pública General GNU &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    junto a este programa. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Courier New,courier&apos;;&quot;&gt;    En caso contrario, consulte &amp;lt;http://www.gnu.org/licenses/&amp;gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    Nadir. Multimodal screen scanner.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    &lt;/span&gt;&lt;a href=&quot;http://sourceforge.net/projects/nadir/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://sourceforge.net/projects/nadir/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    Copyright (C) 2009-2011 Juan Roldán Ruiz &amp;lt;juan.roldan@gmail.com&amp;gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    This program is free software: you can redistribute it and/or modify&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    it under the terms of the GNU General Public License as published by&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    the Free Software Foundation, either version 3 of the License, or&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    (at your option) any later version.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    This program is distributed in the hope that it will be useful,&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    but WITHOUT ANY WARRANTY; without even the implied warranty of&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    GNU General Public License for more details.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    You should have received a copy of the GNU General Public License&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;    along with this program.  If not, see &amp;lt;http://www.gnu.org/licenses/&amp;gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="obsolete">    Nadir. Barrido de pantalla multimodal.
+
+    http://sourceforge.net/projects/nadir/
+
+    Copyright (C) 2009-2011 Juan Roldán Ruiz &lt;juan.roldan@gmail.com&gt;
+
+    Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
+    bajo los términos de la Licencia Pública General GNU publicada 
+    por la Fundación para el Software Libre, ya sea la versión 3 
+    de la Licencia, o (a su elección) cualquier versión posterior.
+
+    Este programa se distribuye con la esperanza de que sea útil, pero 
+    SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
+    MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
+    Consulte los detalles de la Licencia Pública General GNU para obtener 
+    una información más detallada. 
+
+    Debería haber recibido una copia de la Licencia Pública General GNU 
+    junto a este programa. 
+    En caso contrario, consulte &lt;http://www.gnu.org/licenses/&gt;.</translation>
     </message>
     <message>
         <location filename="../confWidget.cpp" line="159"/>
-        <source> segundo(s)</source>
-        <translation type="unfinished"></translation>
+        <source> second(s)</source>
+        <translation> segundo(s)</translation>
     </message>
 </context>
 <context>
@@ -325,182 +388,182 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../key.cpp" line="13"/>
         <source>ESCAPE</source>
-        <translation type="unfinished"></translation>
+        <translation>ESCAPE</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../key.cpp" line="14"/>
-        <source>ATRÁS</source>
-        <translation type="unfinished"></translation>
+        <source>BACKSPACE</source>
+        <translation>ATRÁS</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="15"/>
-        <source>INTRO</source>
-        <translation type="unfinished"></translation>
+        <source>ENTER</source>
+        <translation>INTRO</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="16"/>
-        <source>CONTROL IZQUIERDA</source>
-        <translation type="unfinished"></translation>
+        <source>CONTROL LEFT</source>
+        <translation>CONTROL IZQUIERDA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="17"/>
-        <source>SHIFT IZQUIERDA</source>
-        <translation type="unfinished"></translation>
+        <source>SHIFT LEFT</source>
+        <translation>SHIFT IZQUIERDA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="18"/>
-        <source>SHIFT DERECHA</source>
-        <translation type="unfinished"></translation>
+        <source>SHIFT RIGHT</source>
+        <translation>SHIFT DERECHA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="19"/>
-        <source>ALT IZQUIERDA</source>
-        <translation type="unfinished"></translation>
+        <source>ALT LEFT</source>
+        <translation>ALT IZQUIERDA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="20"/>
-        <source>ESPACIO</source>
-        <translation type="unfinished"></translation>
+        <source>SPACE</source>
+        <translation>ESPACIO</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../key.cpp" line="21"/>
-        <source>BLOQUEO MAYÚSCULAS</source>
-        <translation type="unfinished"></translation>
+        <source>CAPS LOCK</source>
+        <translation>BLOQUEO MAYÚSCULAS</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="22"/>
         <source>F1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="23"/>
         <source>F2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="24"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="25"/>
         <source>F4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="26"/>
         <source>F5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="27"/>
         <source>F6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="28"/>
         <source>F7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="29"/>
         <source>F8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="30"/>
         <source>F9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="31"/>
         <source>F10</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="32"/>
         <source>F11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="33"/>
         <source>F12</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../key.cpp" line="34"/>
-        <source>CONTROL DERECHA</source>
-        <translation type="unfinished"></translation>
+        <source>CONTROL RIGHT</source>
+        <translation>CONTROL DERECHA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="35"/>
-        <source>IMPRIMIR PANTALLA</source>
-        <translation type="unfinished"></translation>
+        <source>PRINT SCREEN</source>
+        <translation>IMPRIMIR PANTALLA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="36"/>
         <source>ALT GR</source>
-        <translation type="unfinished"></translation>
+        <translation>ALT GR</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="37"/>
-        <source>INICIO</source>
-        <translation type="unfinished"></translation>
+        <source>HOME</source>
+        <translation>INICIO</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="38"/>
-        <source>ARRIBA</source>
-        <translation type="unfinished"></translation>
+        <source>UP</source>
+        <translation>ARRIBA</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../key.cpp" line="39"/>
-        <source>PÁGINA ANTERIOR</source>
-        <translation type="unfinished"></translation>
+        <source>PAGE UP</source>
+        <translation>PÁGINA ANTERIOR</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="40"/>
-        <source>IZQUIERDA</source>
-        <translation type="unfinished"></translation>
+        <source>LEFT</source>
+        <translation>IZQUIERDA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="41"/>
-        <source>DERECHA</source>
-        <translation type="unfinished"></translation>
+        <source>RIGHT</source>
+        <translation>DERECHA</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="42"/>
-        <source>FIN</source>
-        <translation type="unfinished"></translation>
+        <source>END</source>
+        <translation>FIN</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="43"/>
-        <source>ABAJO</source>
-        <translation type="unfinished"></translation>
+        <source>DOWN</source>
+        <translation>ABAJO</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../key.cpp" line="44"/>
-        <source>PÁGINA SIGUIENTE</source>
-        <translation type="unfinished"></translation>
+        <source>PAGE DOWN</source>
+        <translation>PÁGINA SIGUIENTE</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="45"/>
-        <source>INSERTAR</source>
-        <translation type="unfinished"></translation>
+        <source>INSERT</source>
+        <translation>INSERTAR</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="46"/>
-        <source>SUPRIMIR</source>
-        <translation type="unfinished"></translation>
+        <source>DELETE</source>
+        <translation>ELIMINAR</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="47"/>
         <source>MENU</source>
-        <translation type="unfinished"></translation>
+        <translation>MENU</translation>
     </message>
     <message>
         <location filename="../key.cpp" line="48"/>
         <source>SUPER</source>
-        <translation type="unfinished"></translation>
+        <translation>SUPER</translation>
     </message>
 </context>
 <context>
@@ -508,57 +571,57 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainWidget.ui" line="20"/>
         <source>Nadir</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadir</translation>
     </message>
     <message>
         <location filename="../mainWidget.ui" line="36"/>
-        <source>Doble</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainWidget.ui" line="81"/>
-        <source>Configuración</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainWidget.ui" line="94"/>
-        <source>Izquierdo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainWidget.ui" line="116"/>
-        <source>Derecho</source>
-        <translation type="unfinished"></translation>
+        <source>Double</source>
+        <translation>Doble</translation>
     </message>
     <message>
         <location filename="../mainWidget.ui" line="55"/>
-        <source>Arrastrar</source>
-        <translation type="unfinished"></translation>
+        <source>Drag</source>
+        <translation>Arrastrar</translation>
     </message>
-    <message utf8="true">
+    <message>
+        <location filename="../mainWidget.ui" line="81"/>
+        <source>Settings</source>
+        <translation>Preferencias</translation>
+    </message>
+    <message>
+        <location filename="../mainWidget.ui" line="94"/>
+        <source>Left</source>
+        <translation>Izquierdo</translation>
+    </message>
+    <message>
+        <location filename="../mainWidget.ui" line="116"/>
+        <source>Right</source>
+        <translation>Derecho</translation>
+    </message>
+    <message>
         <location filename="../mainWidget.cpp" line="381"/>
-        <source>¿Seguro que desea salir?</source>
-        <translation type="unfinished"></translation>
+        <source>Are you sure you want to exit?</source>
+        <translation>¿Seguro que quiere salir?</translation>
     </message>
     <message>
         <location filename="../mainWidget.cpp" line="402"/>
-        <source>&amp;Restaurar</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Restore</source>
+        <translation>&amp;Restaurar</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../mainWidget.cpp" line="406"/>
-        <source>&amp;Configuración</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Settings</source>
+        <translation>&amp;Preferencias</translation>
     </message>
     <message>
         <location filename="../mainWidget.cpp" line="410"/>
-        <source>&amp;Salir</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Exit</source>
+        <translation>&amp;Salir</translation>
     </message>
     <message>
         <location filename="../mainWidget.cpp" line="425"/>
-        <source>Barrido de pantalla Nadir</source>
-        <translation type="unfinished"></translation>
+        <source>Nadir Multimodal Screen Scanner</source>
+        <translation>Barrido multimodal Nadir</translation>
     </message>
 </context>
 </TS>

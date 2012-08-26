@@ -20,7 +20,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Configuración</string>
+   <string>Settings</string>
   </property>
   <property name="windowIcon">
    <iconset resource="nadir.qrc">
@@ -36,7 +36,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&amp;Guardar</string>
+      <string>Save</string>
      </property>
     </widget>
    </item>
@@ -62,7 +62,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&amp;Cancelar</string>
+      <string>Cancel</string>
      </property>
     </widget>
    </item>
@@ -89,24 +89,24 @@
         <normaloff>:/images/images/preferences.svg</normaloff>:/images/images/preferences.svg</iconset>
       </attribute>
       <attribute name="title">
-       <string>&amp;Preferencias</string>
+       <string>&amp;Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="1" rowspan="2" colspan="2">
         <widget class="QGroupBox" name="groupBox_3">
          <property name="font">
           <font>
-           <italic>true</italic>
+           <italic>false</italic>
           </font>
          </property>
          <property name="title">
-          <string>Opciones generales</string>
+          <string>Main options</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_9">
           <item row="1" column="0">
            <widget class="QCheckBox" name="continuousBox">
             <property name="text">
-             <string>Modo contínuo</string>
+             <string>Continuous mode</string>
             </property>
             <property name="checked">
              <bool>false</bool>
@@ -116,7 +116,7 @@
           <item row="6" column="0">
            <widget class="QLabel" name="label_28">
             <property name="text">
-             <string>Tecla de escape</string>
+             <string>Scape key</string>
             </property>
            </widget>
           </item>
@@ -141,7 +141,7 @@
           <item row="4" column="0">
            <widget class="QCheckBox" name="hidePointerBox">
             <property name="text">
-             <string>Esconder cursor</string>
+             <string>Hide mouse pointer</string>
             </property>
            </widget>
           </item>
@@ -151,21 +151,21 @@
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Iniciar minimizado</string>
+             <string>Start minimized</string>
             </property>
            </widget>
           </item>
           <item row="3" column="0">
            <widget class="QCheckBox" name="hiddenBox">
             <property name="text">
-             <string>Iniciar oculto</string>
+             <string>Start hidden</string>
             </property>
            </widget>
           </item>
           <item row="5" column="0" colspan="2">
            <widget class="QCheckBox" name="systrayBox">
             <property name="text">
-             <string>Icono en bandeja del sistema</string>
+             <string>Show system tray icon</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -179,11 +179,11 @@
         <widget class="QGroupBox" name="groupBox">
          <property name="font">
           <font>
-           <italic>true</italic>
+           <italic>false</italic>
           </font>
          </property>
          <property name="title">
-          <string>Ayuda visual</string>
+          <string>Visual help</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
           <item row="0" column="0">
@@ -199,21 +199,21 @@
           <item row="1" column="0">
            <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>Grosor</string>
+             <string>Thickness</string>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_13">
             <property name="text">
-             <string>Velocidad</string>
+             <string>Speed</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="label_15">
             <property name="text">
-             <string>rápida</string>
+             <string>fast</string>
             </property>
            </widget>
           </item>
@@ -248,21 +248,21 @@
              <enum>Qt::RightToLeft</enum>
             </property>
             <property name="text">
-             <string>lenta</string>
+             <string>slow</string>
             </property>
            </widget>
           </item>
           <item row="1" column="5">
            <widget class="QPushButton" name="thickDownButton">
             <property name="text">
-             <string>Disminuir</string>
+             <string>Decrease</string>
             </property>
            </widget>
           </item>
           <item row="1" column="4">
            <widget class="QPushButton" name="thickUpButton">
             <property name="text">
-             <string>Aumentar</string>
+             <string>Increase</string>
             </property>
            </widget>
           </item>
@@ -285,14 +285,14 @@
           <item row="2" column="5">
            <widget class="QPushButton" name="speedDownButton">
             <property name="text">
-             <string>Disminuir</string>
+             <string>Decrease</string>
             </property>
            </widget>
           </item>
           <item row="2" column="4">
            <widget class="QPushButton" name="speedUpButton">
             <property name="text">
-             <string>Aumentar</string>
+             <string>Increase</string>
             </property>
            </widget>
           </item>
@@ -316,17 +316,17 @@
          </property>
          <property name="font">
           <font>
-           <italic>true</italic>
+           <italic>false</italic>
           </font>
          </property>
          <property name="title">
-          <string>Ayuda auditiva</string>
+          <string>Sound help</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <widget class="QLabel" name="label_14">
             <property name="text">
-             <string>Reproducir sonido</string>
+             <string>Play sound</string>
             </property>
            </widget>
           </item>
@@ -342,14 +342,19 @@
        </item>
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox_5">
+         <property name="font">
+          <font>
+           <italic>false</italic>
+          </font>
+         </property>
          <property name="title">
-          <string>Modo de barrido</string>
+          <string>Scan mode</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QRadioButton" name="keyMode">
             <property name="text">
-             <string>Teclado</string>
+             <string>Keyboard</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -359,7 +364,7 @@
           <item>
            <widget class="QRadioButton" name="micMode">
             <property name="text">
-             <string>Micrófono</string>
+             <string>Microphone</string>
             </property>
            </widget>
           </item>
@@ -369,7 +374,7 @@
        <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
-          <string>Clic por defecto</string>
+          <string>Default click</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -385,7 +390,7 @@
           <item>
            <widget class="QRadioButton" name="doubleClickBox">
             <property name="text">
-             <string>Doble</string>
+             <string>Double</string>
             </property>
            </widget>
           </item>
@@ -400,7 +405,7 @@
         <normaloff>:/images/images/keyboard.svg</normaloff>:/images/images/keyboard.svg</iconset>
       </attribute>
       <attribute name="title">
-       <string>&amp;Teclado</string>
+       <string>&amp;Keyboard</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_16">
        <item row="0" column="0" colspan="3">
@@ -411,7 +416,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Control del barrido mediante el teclado</string>
+          <string>Control screen scanner with the keyboard</string>
          </property>
         </widget>
        </item>
@@ -476,7 +481,7 @@
        <item row="2" column="1">
         <widget class="QGroupBox" name="keyGroupBox">
          <property name="title">
-          <string>Tecla a utilizar</string>
+          <string>Used key</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
@@ -485,7 +490,7 @@
              <bool>true</bool>
             </property>
             <property name="text">
-             <string>Símbolo</string>
+             <string>Symbol</string>
             </property>
            </widget>
           </item>
@@ -504,7 +509,7 @@
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>CUALQUIERA</string>
+             <string>ANY</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -520,7 +525,7 @@
              <bool>true</bool>
             </property>
             <property name="text">
-             <string>Código</string>
+             <string>Code</string>
             </property>
            </widget>
           </item>
@@ -533,7 +538,7 @@
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>CUALQUIERA</string>
+             <string>ANY</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -546,7 +551,7 @@
           <item row="2" column="0" colspan="2">
            <widget class="QPushButton" name="changeKeyButton">
             <property name="text">
-             <string>Cambiar</string>
+             <string>Change</string>
             </property>
            </widget>
           </item>
@@ -556,7 +561,7 @@
        <item row="3" column="1">
         <widget class="QLabel" name="pressKeyLabel">
          <property name="text">
-          <string>Pulse una tecla...</string>
+          <string>Press a key...</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -571,7 +576,7 @@
         <normaloff>:/images/images/mouse.svg</normaloff>:/images/images/mouse.svg</iconset>
       </attribute>
       <attribute name="title">
-       <string>&amp;Ratón</string>
+       <string>&amp;Mouse</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="1" column="0" colspan="2">
@@ -582,7 +587,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Control del barrido mediante el ratón</string>
+          <string>Control screen scanner with the mouse</string>
          </property>
         </widget>
        </item>
@@ -605,7 +610,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Botón a utilizar</string>
+          <string>Button to use</string>
          </property>
         </widget>
        </item>
@@ -630,7 +635,7 @@
         <normaloff>:/images/images/audio-input-microphone.svg</normaloff>:/images/images/audio-input-microphone.svg</iconset>
       </attribute>
       <attribute name="title">
-       <string>Micróf&amp;ono</string>
+       <string>Micro&amp;phone</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_14">
        <item row="1" column="0">
@@ -668,7 +673,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Micrófono deshabilitado.</string>
+              <string>Microphone is disabled</string>
              </property>
             </widget>
            </item>
@@ -682,7 +687,7 @@
            <item row="3" column="1" colspan="2">
             <widget class="QLabel" name="label_18">
              <property name="text">
-              <string>Para habilitar el micrófono siga los siguientes pasos:</string>
+              <string>In order to enable the microphone, please follow these steps:</string>
              </property>
             </widget>
            </item>
@@ -702,7 +707,7 @@
            <item row="4" column="1" colspan="2">
             <widget class="QLabel" name="label_19">
              <property name="text">
-              <string>   - Seleccione la opción Micrófono en la pestaña Preferencias</string>
+              <string>   - Selet Microphone option in Settings tab</string>
              </property>
             </widget>
            </item>
@@ -722,7 +727,7 @@
            <item row="5" column="1" colspan="2">
             <widget class="QLabel" name="label_23">
              <property name="text">
-              <string>   - Pulse el botón Guardar de esta ventana de configuración</string>
+              <string>   - Click Save button</string>
              </property>
             </widget>
            </item>
@@ -742,7 +747,7 @@
            <item row="7" column="1" colspan="2">
             <widget class="QLabel" name="label_25">
              <property name="text">
-              <string>Para configurar el micrófono, regrese de nuevo a esta pestaña</string>
+              <string>In order to configure the microphone, go to the Microphone tab</string>
              </property>
             </widget>
            </item>
@@ -756,7 +761,7 @@
            <item row="8" column="1">
             <widget class="QLabel" name="label_27">
              <property name="text">
-              <string>una vez realizados los pasos anteriores.</string>
+              <string>once you have made the previous steps.</string>
              </property>
             </widget>
            </item>
@@ -774,7 +779,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Control del barrido mediante la voz</string>
+              <string>Control screen scanner with sound</string>
              </property>
             </widget>
            </item>
@@ -849,7 +854,7 @@
               <item row="1" column="0" colspan="3">
                <widget class="QLabel" name="label">
                 <property name="text">
-                 <string>Umbral mínimo</string>
+                 <string>Minimum threshold</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -932,7 +937,7 @@
               <item row="1" column="0" colspan="3">
                <widget class="QLabel" name="label_9">
                 <property name="text">
-                 <string>Tiempo de espera</string>
+                 <string>Waiting time</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -1021,7 +1026,7 @@
               <item row="1" column="0" colspan="3">
                <widget class="QLabel" name="label_16">
                 <property name="text">
-                 <string>Entrada de sonido</string>
+                 <string>Sound input</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -1070,7 +1075,7 @@
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="text">
-              <string>1 segundo(s)</string>
+              <string>1 second(s)</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -1137,7 +1142,7 @@
         <normaloff>:/images/images/camera.svg</normaloff>:/images/images/camera.svg</iconset>
       </attribute>
       <attribute name="title">
-       <string>Cá&amp;mara</string>
+       <string>Ca&amp;mera</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0" colspan="3">
@@ -1148,7 +1153,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Control del barrido mediante movimientos corporales</string>
+          <string>Control screen scanner with body movements</string>
          </property>
         </widget>
        </item>
@@ -1177,14 +1182,14 @@
        <item row="2" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Dispositivo</string>
+          <string>Device</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QLabel" name="label_22">
          <property name="text">
-          <string>Umbral mínimo</string>
+          <string>Threshold</string>
          </property>
         </widget>
        </item>
@@ -1219,43 +1224,58 @@
         <normaloff>:/images/images/about.svg</normaloff>:/images/images/about.svg</iconset>
       </attribute>
       <attribute name="title">
-       <string>Acerca &amp;de</string>
+       <string>About</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_10">
-       <item row="0" column="0">
-        <widget class="QTextEdit" name="aboutText">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="html">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif';&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; font-weight:600;&quot;&gt;    http://sourceforge.net/projects/nadir/&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    Nadir. Barrido de pantalla multimodal.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    Copyright (C) 2009-2011 Juan Roldán Ruiz &amp;lt;juan.roldan@gmail.com&amp;gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier New,courier';&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    Este programa es software libre: usted puede redistribuirlo y/o modificarlo &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    bajo los términos de la Licencia Pública General GNU publicada &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    por la Fundación para el Software Libre, ya sea la versión 3 &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    de la Licencia, o (a su elección) cualquier versión posterior.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier New,courier';&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    Este programa se distribuye con la esperanza de que sea útil, pero &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    Consulte los detalles de la Licencia Pública General GNU para obtener &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    una información más detallada. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier New,courier';&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    Debería haber recibido una copia de la Licencia Pública General GNU &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    junto a este programa. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;    En caso contrario, consulte &amp;lt;http://www.gnu.org/licenses/&amp;gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <item row="0" column="1">
+        <widget class="QLabel" name="aboutLabel">
+         <property name="text">
+          <string>    Nadir. Multimodal screen scanner.
+
+    http://sourceforge.net/projects/nadir/
+
+    Copyright (C) 2009-2012 Juan Roldán Ruiz &lt;juan.roldan@gmail.com&gt;
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</string>
          </property>
         </widget>
+       </item>
+       <item row="0" column="0">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer_12">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>

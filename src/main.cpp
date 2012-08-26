@@ -34,10 +34,17 @@ int main(int argc, char *argv[])
 
   // Internationalitation
   QTranslator translator;
+
+  // Load application translations
   translator.load(QString("i18n/") + QLocale::system().name());
-  translator.load(QString( "qt_") + QLocale::system().name(),
-                  QString(getenv("QTDIR")) + QDir::separator() +
-                  "translations");
+  app.installTranslator(&translator);
+
+  // Load Qt translations
+  //translator.load(QString( "qt_") + QLocale::system().name(),
+  //                QString(getenv("QTDIR")) + QDir::separator() +
+  //                "translations");
+
+  // Apply translations
   app.installTranslator(&translator);
   
   QApplication::setQuitOnLastWindowClosed(false);

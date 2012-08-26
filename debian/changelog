@@ -4,10 +4,11 @@ nadir (0.3-1) unstable; urgency=low
     XGrabKey replaced by XQueryKeyMap.
     Code taken from xspy (Jon A. Maxwell <jmaxwell@acm.vt.edu>)
   * Nadir is now able to work along with a virtual keyboard
-  * Qt dialog translation 
   * User may change key 
   * Exit button deleted from main widget 
   * Exit confirmation from tray icon
+  * Internationalization support
+  * Spanish translation 
 
  -- Juan Roldan Ruiz <juan@shoden.es>  Fri, 04 Nov 2011 18:43:42 +0100
 
