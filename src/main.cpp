@@ -36,7 +36,8 @@ int main(int argc, char *argv[])
   QTranslator translator;
 
   // Load application translations
-  translator.load(QString("i18n/") + QLocale::system().name());
+  translator.load(QString("/usr/share/nadir/translations/nadir_") 
+                          + QLocale::system().name());
   app.installTranslator(&translator);
 
   // Load Qt translations

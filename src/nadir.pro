@@ -35,8 +35,8 @@ SOURCES += capture.cpp \
 
 RESOURCES += nadir.qrc
 
-TRANSLATIONS = i18n/es.ts \
-               i18n/en.ts
+TRANSLATIONS = translations/nadir_es.ts \
+               translations/nadir_en.ts
 
-include(i18n/i18n.pri)
+include(translations/translations.pri)
 

@@ -38,9 +38,9 @@ set(RC_FILES
       nadir.qrc
    )
 
-set(TRANS
-      i18n/en.ts
-      i18n/es.ts
+ set(TS_FILES
+      translations/nadir_en.ts
+      translations/nadir_es.ts
    )
 
 qt4_wrap_cpp(MOC_SOURCES ${HEADERS})
@@ -48,15 +48,14 @@ qt4_wrap_ui(UI_HEADERS ${UI_FILES})
 qt4_add_resources(RC_SOURCES ${RC_FILES})
 include_directories(${CMAKE_BINARY_DIR}/src)
 
-QT4_ADD_TRANSLATION(QM ${TRANS})
-
+QT4_CREATE_TRANSLATION(TRANSLATION ${TS_FILES})
 
 add_executable(nadir
                  ${SOURCES}
                  ${MOC_SOURCES}
                  ${UI_HEADERS}
                  ${RC_SOURCES}
-                 ${QM}
+                 ${TRANSLATION}
               )
 
 target_link_libraries(nadir 
@@ -67,4 +66,13 @@ target_link_libraries(nadir
                  ${XTST_LIBRARY}
               )
 
+# Main binary
 install(TARGETS nadir DESTINATION bin)
+
+# Translations
+install(FILES
+        ${CMAKE_BINARY_DIR}/src/nadir_en.qm
+        ${CMAKE_BINARY_DIR}/src/nadir_es.qm
+        DESTINATION share/nadir/translations
+        )
+
