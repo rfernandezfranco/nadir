@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2011 Juan Roldan Ruiz <juan.roldan@gmail.com>
+ * Copyright (C) 2009-2012 Juan Roldan Ruiz <juan.roldan@gmail.com>
  *  
  * This file is part of Nadir.
  * 

@@ -1,9 +1,9 @@
 Source: nadir
 Section: x11
 Priority: extra
-Maintainer: Juan Roldan Ruiz <juan.roldan@gmail.com>
+Maintainer: Juan Roldan Ruiz <juan@shoden.es>
 Build-Depends: debhelper (>= 7), cmake, libqt4-dev, libasound2-dev, libjack-dev, libxtst-dev, libxt-dev
-Standards-Version: 3.8.4
+Standards-Version: 3.9.3
 Homepage: http://sourceforge.net/projects/nadir
 
 Package: nadir

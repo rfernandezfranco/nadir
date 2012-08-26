@@ -1,4 +1,4 @@
-nadir (0.3-1) unstable; urgency=low
+nadir (0.3) unstable; urgency=low
 
   * Key mode bug fixed when context menu is shown.
     XGrabKey replaced by XQueryKeyMap.
@@ -10,9 +10,9 @@ nadir (0.3-1) unstable; urgency=low
   * Internationalization support
   * Spanish translation 
 
- -- Juan Roldan Ruiz <juan@shoden.es>  Fri, 04 Nov 2011 18:43:42 +0100
+ -- Juan Roldan Ruiz <juan@shoden.es>  Sun, 26 Aug 2012 19:28:20 +0200
 
-nadir (0.2-1) unstable; urgency=low
+nadir (0.2) unstable; urgency=low
 
   * Fixed Compiz error
   * Hidden version in configuration window 
@@ -25,7 +25,7 @@ nadir (0.2-1) unstable; urgency=low
 
  -- Juan Roldan Ruiz <juan.roldan@gmail.com>  Mon, 07 Mar 2011 18:23:10 +0100
 
-nadir (0.1-1) unstable; urgency=low
+nadir (0.1) unstable; urgency=low
 
   * CMake configuration files
   * debian directory

@@ -1,6 +1,6 @@
 This work was packaged for Debian by:
 
-    Juan Roldan Ruiz <juan.roldan@gmail.com> on Fri, 04 Mar 2011 19:44:29 +0100
+    Juan Roldan Ruiz <juan.roldan@gmail.com> on Fri, 04 Mar 2012 19:44:29 +0100
 
 It was downloaded from:
 
@@ -12,7 +12,7 @@ Upstream Author(s):
 
 Copyright:
 
-    <Copyright (C) 2009-2011 Juan Roldan Ruiz>
+    <Copyright (C) 2009-2012 Juan Roldan Ruiz>
 
 License:
 
@@ -34,7 +34,7 @@ Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
 
 The Debian packaging is:
 
-    Copyright (C) 2011 Juan Roldan Ruiz <juan.roldan@gmail.com>
+    Copyright (C) 2012 Juan Roldan Ruiz <juan.roldan@gmail.com>
 
 and is licensed under the GPL version 3, see above.
 
