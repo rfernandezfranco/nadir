@@ -378,7 +378,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
   else {
     QMessageBox msgBox;
     msgBox.setWindowTitle("Nadir");
-    msgBox.setText(QString::fromUtf8("¿Seguro que desea salir?"));
+    msgBox.setText(trUtf8("¿Seguro que desea salir?"));
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
 
@@ -399,7 +399,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
 void MainWidget::createTrayIcon()
 {
     // Actions
-    restoreAction = new QAction(tr("&Restaurar"), this);
+    restoreAction = new QAction(trUtf8("&Restaurar"), this);
     connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
     restoreAction->setIcon(QIcon(":/images/images/nadir.png"));
 
@@ -407,7 +407,7 @@ void MainWidget::createTrayIcon()
     connect(configAction, SIGNAL(triggered()), this, SLOT(configure()));
     configAction->setIcon(QIcon(":/images/images/menu-configure.png"));
 
-    quitAction = new QAction(tr("&Salir"), this);
+    quitAction = new QAction(trUtf8("&Salir"), this);
     connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
     quitAction->setIcon(QIcon(":/images/images/menu-quit.png"));
 
@@ -422,7 +422,7 @@ void MainWidget::createTrayIcon()
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(QIcon(":/images/images/nadir.png"));
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setToolTip("Barrido de pantalla Nadir" );
+    trayIcon->setToolTip(trUtf8("Barrido de pantalla Nadir"));
 
     // Signals
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
