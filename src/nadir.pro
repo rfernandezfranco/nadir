@@ -7,6 +7,7 @@ LIBS += -lX11 -lXtst -L/usr/X11R6/lib -ljack -lasound -lpthread
 HEADERS += capture.h \
            config.h \
            confWidget.h \
+           fixx11h.h \
            jackcapture.h \
            key.h \
            keyboard.h \

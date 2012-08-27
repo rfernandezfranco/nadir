@@ -17,6 +17,7 @@ set(HEADERS
       capture.h
       config.h
       confWidget.h
+      fixx11h.h
       jackcapture.h
       key.h
       keyboard.h

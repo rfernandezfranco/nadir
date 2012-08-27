@@ -33,7 +33,7 @@
 #include <X11/Xutil.h>
 
 // This header solves a X11-Qt header issue
-#include <fixx11h.h>
+#include "fixx11h.h"
 
 #include <QCoreApplication>
 #include <QSettings>
