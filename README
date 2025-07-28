@@ -36,6 +36,8 @@ INSTALL
 
     cmake          - A cross-platform, open-source make system
     qtbase5-dev    - Qt 5 development files
+    qttools5-dev   - Qt 5 Linguist development files
+    qttools5-dev-tools - Qt 5 translation utilities
     libjack-dev    - JACK Audio Connection Kit (development files)
     libasound2-dev - ALSA library development files
     libxtst-dev    - X11 Record extension library (development files)

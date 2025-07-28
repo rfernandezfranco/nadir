@@ -49,14 +49,14 @@ qt5_wrap_ui(UI_HEADERS ${UI_FILES})
 qt5_add_resources(RC_SOURCES ${RC_FILES})
 include_directories(${CMAKE_BINARY_DIR}/src)
 
-qt5_create_translation(TRANSLATION ${TS_FILES})
+qt5_add_translation(QM_FILES ${TS_FILES})
 
 add_executable(nadir
                  ${SOURCES}
                  ${MOC_SOURCES}
                  ${UI_HEADERS}
                  ${RC_SOURCES}
-                 ${TRANSLATION}
+                 ${QM_FILES}
               )
 
 target_link_libraries(nadir
@@ -72,8 +72,7 @@ install(TARGETS nadir DESTINATION bin)
 
 # Translations
 install(FILES
-        ${CMAKE_BINARY_DIR}/src/nadir_en.qm
-        ${CMAKE_BINARY_DIR}/src/nadir_es.qm
+        ${QM_FILES}
         DESTINATION share/nadir/translations
         )
 
