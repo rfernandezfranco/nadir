@@ -28,7 +28,7 @@ DEALINGS IN THE SOFTWARE.
 
 #include <QtCore/QtGlobal>
 
-#ifdef Q_WS_X11
+#if defined(Q_WS_X11) || defined(Q_OS_UNIX)
 
 /* Usage:
 
