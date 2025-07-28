@@ -384,7 +384,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
     if(confirmOnExit){
       QMessageBox msgBox;
       msgBox.setWindowTitle("Nadir");
-      msgBox.setText(trUtf8("Are you sure you want to exit?"));
+      msgBox.setText(tr("Are you sure you want to exit?"));
       msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
       msgBox.setDefaultButton(QMessageBox::No);
 
@@ -408,15 +408,15 @@ void MainWidget::closeEvent(QCloseEvent *e)
 void MainWidget::createTrayIcon()
 {
     // Actions
-    restoreAction = new QAction(trUtf8("&Restore"), this);
+    restoreAction = new QAction(tr("&Restore"), this);
     connect(restoreAction, &QAction::triggered, this, &MainWidget::showNormal);
     restoreAction->setIcon(QIcon(":/images/images/nadir.png"));
 
-    configAction = new QAction(trUtf8("&Settings"), this);
+    configAction = new QAction(tr("&Settings"), this);
     connect(configAction, &QAction::triggered, this, &MainWidget::configure);
     configAction->setIcon(QIcon(":/images/images/menu-configure.png"));
 
-    quitAction = new QAction(trUtf8("&Exit"), this);
+    quitAction = new QAction(tr("&Exit"), this);
     connect(quitAction, &QAction::triggered, this, &MainWidget::close);
     quitAction->setIcon(QIcon(":/images/images/menu-quit.png"));
 
@@ -431,7 +431,7 @@ void MainWidget::createTrayIcon()
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(QIcon(":/images/images/nadir.png"));
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setToolTip(trUtf8("Nadir Multimodal Screen Scanner"));
+    trayIcon->setToolTip(tr("Nadir Multimodal Screen Scanner"));
 
     // Signals
     connect(trayIcon, &QSystemTrayIcon::activated,

@@ -159,7 +159,7 @@ void ConfWidget::setWaitTime( int i )
   QString w;
   float t = floor((float)waitTime/10)/100;
   w.setNum( t );
-  w.append( trUtf8(" second(s)"));
+  w.append( tr(" second(s)"));
   ui.waitLabel->setText( w );
 }
 
@@ -225,19 +225,17 @@ void ConfWidget::updateAudioSlider( double d )
 
 void ConfWidget::setColor()
 {
-  bool ok;
   QString s;
-  QStringList l = lineColor.split( "," ); 
-  QRgb rgb = QColorDialog::getRgba( QColor::fromRgb(l.at(0).toInt(),
-                                    l.at(1).toInt(),
-                                    l.at(2).toInt()).rgb(), &ok ); 
-  if( ok ){
+  QStringList l = lineColor.split( "," );
+  QColor base(l.at(0).toInt(), l.at(1).toInt(), l.at(2).toInt());
+  QColor newColor = QColorDialog::getColor(base, this);
+  if( newColor.isValid() ){
     lineColor.clear();
-    lineColor.append( s.setNum(qRed(rgb)) );
+    lineColor.append( s.setNum(newColor.red()) );
     lineColor.append( "," );
-    lineColor.append( s.setNum(qGreen(rgb)) );
+    lineColor.append( s.setNum(newColor.green()) );
     lineColor.append( "," );
-    lineColor.append( s.setNum(qBlue(rgb)) );
+    lineColor.append( s.setNum(newColor.blue()) );
 
     ui.colorButton->setStyleSheet( backgroundColor() );
   };
