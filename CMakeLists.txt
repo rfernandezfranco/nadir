@@ -1,9 +1,12 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 project(nadir)
 
-find_package(Qt4 REQUIRED)
-include( ${QT_USE_FILE} )
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+find_package(Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 
 MESSAGE(STATUS "Looking for libasound2")
 find_library(ASOUND2_LIBRARY asound)

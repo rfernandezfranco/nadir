@@ -44,12 +44,12 @@ set(RC_FILES
       translations/nadir_es.ts
    )
 
-qt4_wrap_cpp(MOC_SOURCES ${HEADERS})
-qt4_wrap_ui(UI_HEADERS ${UI_FILES})
-qt4_add_resources(RC_SOURCES ${RC_FILES})
+qt5_wrap_cpp(MOC_SOURCES ${HEADERS})
+qt5_wrap_ui(UI_HEADERS ${UI_FILES})
+qt5_add_resources(RC_SOURCES ${RC_FILES})
 include_directories(${CMAKE_BINARY_DIR}/src)
 
-QT4_CREATE_TRANSLATION(TRANSLATION ${TS_FILES})
+qt5_create_translation(TRANSLATION ${TS_FILES})
 
 add_executable(nadir
                  ${SOURCES}
@@ -59,8 +59,8 @@ add_executable(nadir
                  ${TRANSLATION}
               )
 
-target_link_libraries(nadir 
-                 ${QT_LIBRARIES}
+target_link_libraries(nadir
+                 Qt5::Widgets
                  ${ASOUND2_LIBRARY}
                  ${JACK_LIBRARY}
                  ${X11_LIBRARY}

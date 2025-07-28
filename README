@@ -15,7 +15,7 @@ screen and virtually produce any mouse event (click, drag...) in that location.
   - Making a certain movement (head or body) by using a webcam (NOT IMPLEMENTED)
   - Producing a sound by using a microphone
 
-  This software is being developed with C++, Qt4 and OpenCV
+  This software is being developed with C++, Qt5 and OpenCV
 
   Desktop: X11 Operating system: All POSIX Development: Pre-Alpha
 

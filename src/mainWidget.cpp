@@ -17,8 +17,7 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
-#include <QSound>
+#include <QtWidgets>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -49,8 +48,8 @@ MainWidget::MainWidget()
   trayIcon = NULL;
   firstConf = true;
 
-  hLine = new ScanLine( this, HORIZONTAL, kbd );
-  vLine = new ScanLine( this, VERTICAL, kbd );
+  hLine = new ScanLine( nullptr, HORIZONTAL, kbd );
+  vLine = new ScanLine( nullptr, VERTICAL, kbd );
 
   scanTimer = new QTimer(this);
   connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
