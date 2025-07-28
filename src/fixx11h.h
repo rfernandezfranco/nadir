@@ -191,6 +191,17 @@ const int Success = XSuccess;
 #endif
 
 // Affects: Should be without side effects.
+#ifdef Expose
+#ifndef FIXX11H_Expose
+#define FIXX11H_Expose
+const int XExpose = Expose;
+#undef Expose
+const int Expose = XExpose;
+#endif
+#undef Expose
+#endif
+
+// Affects: Should be without side effects.
 #ifdef GrayScale
 #ifndef FIXX11H_GrayScale
 #define FIXX11H_GrayScale
