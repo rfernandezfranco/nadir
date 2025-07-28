@@ -20,7 +20,7 @@
 #ifndef CONFWIDGET_H
 #define CONFWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QMainWindow>
 #include <QWidget>
 #include <math.h>
