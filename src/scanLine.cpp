@@ -17,7 +17,7 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
+#include <QtWidgets>
 #include <QDesktopWidget>
 #include "mainWidget.h"
 #include "scanLine.h"
@@ -29,6 +29,7 @@ ScanLine::ScanLine( QWidget *parent, lineType type, Keyboard *kbd ):
   flags |= Qt::ToolTip;
   flags |= Qt::WindowStaysOnTopHint;
   flags |= Qt::FramelessWindowHint;
+  flags |= Qt::X11BypassWindowManagerHint;
   setWindowFlags( flags );
   setAttribute( Qt::WA_ShowWithoutActivating );
   setFocusPolicy( Qt::NoFocus );

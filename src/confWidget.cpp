@@ -17,7 +17,7 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
+#include <QtWidgets>
 #include <QColorDialog>
 #include <QSettings>
 #include <QStringList>
