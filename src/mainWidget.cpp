@@ -17,8 +17,9 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
-#include <QSound>
+#include <QtWidgets>
+#include <QScreen>
+#include <QGuiApplication>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -26,16 +27,16 @@ MainWidget::MainWidget()
   ui.setupUi(this);
   setWindowFlags(Qt::Window);
 
-  connect( ui.confButton, SIGNAL(clicked()),
-      this, SLOT(configure()) );
-  connect( ui.clickButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
-  connect( ui.dbClickButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
-  connect( ui.rightClickButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
-  connect( ui.dragButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
+  connect(ui.confButton, &QPushButton::clicked,
+          this, &MainWidget::configure);
+  connect(ui.clickButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
+  connect(ui.dbClickButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
+  connect(ui.rightClickButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
+  connect(ui.dragButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
 
   kbd = new Keyboard();
   if ( !kbd->start() )
@@ -49,11 +50,11 @@ MainWidget::MainWidget()
   trayIcon = NULL;
   firstConf = true;
 
-  hLine = new ScanLine( this, HORIZONTAL, kbd );
-  vLine = new ScanLine( this, VERTICAL, kbd );
+  hLine = new ScanLine( nullptr, HORIZONTAL, kbd );
+  vLine = new ScanLine( nullptr, VERTICAL, kbd );
 
   scanTimer = new QTimer(this);
-  connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
+  connect(scanTimer, &QTimer::timeout, this, &MainWidget::grabEvent);
 
   QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
@@ -168,9 +169,12 @@ void MainWidget::endWait()
 
 void MainWidget::getScreenSize()
 {
-  QDesktopWidget *desk = QApplication::desktop();
-  setScreenWidth( desk->width() );
-  setScreenHeight( desk->height() );
+  QScreen *screen = QGuiApplication::primaryScreen();
+  if(screen) {
+    QSize size = screen->geometry().size();
+    setScreenWidth(size.width());
+    setScreenHeight(size.height());
+  }
 }
 
 void MainWidget::setScreenWidth( int w )
@@ -405,15 +409,15 @@ void MainWidget::createTrayIcon()
 {
     // Actions
     restoreAction = new QAction(trUtf8("&Restore"), this);
-    connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+    connect(restoreAction, &QAction::triggered, this, &MainWidget::showNormal);
     restoreAction->setIcon(QIcon(":/images/images/nadir.png"));
 
     configAction = new QAction(trUtf8("&Settings"), this);
-    connect(configAction, SIGNAL(triggered()), this, SLOT(configure()));
+    connect(configAction, &QAction::triggered, this, &MainWidget::configure);
     configAction->setIcon(QIcon(":/images/images/menu-configure.png"));
 
     quitAction = new QAction(trUtf8("&Exit"), this);
-    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
+    connect(quitAction, &QAction::triggered, this, &MainWidget::close);
     quitAction->setIcon(QIcon(":/images/images/menu-quit.png"));
 
     // Menu
@@ -430,8 +434,8 @@ void MainWidget::createTrayIcon()
     trayIcon->setToolTip(trUtf8("Nadir Multimodal Screen Scanner"));
 
     // Signals
-    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-                 this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+    connect(trayIcon, &QSystemTrayIcon::activated,
+                 this, &MainWidget::iconActivated);
 
     // Show
     trayIcon->show();
