@@ -131,8 +131,7 @@ unsigned int Keyboard::grabEvent()
 
   for (i=0; i<32*8; i++) {
      if (BIT(keys, i)!=BIT(saved, i)) {
-        register char *str;
-        str=(char *)KeyCodeToStr(i, BIT(keys, i), KeyModifiers(keys));
+       const char *str = KeyCodeToStr(i, BIT(keys, i), KeyModifiers(keys));
         if (BIT(keys, i)!=0 || PrintUp){
           if(i==keyCode){
             event++;
@@ -197,8 +196,9 @@ int Keyboard::StrToChar(char *data) {
    return FALSE;
 }
 
-char *Keyboard::KeyCodeToStr(int code, int down, int mod) {
-   static char *str, buf[KEYSYM_STRLEN+1];
+const char *Keyboard::KeyCodeToStr(int code, int down, int mod) {
+   static const char *str;
+   static char buf[KEYSYM_STRLEN+1];
    int index;
    KeySym  keysym;
    /* get the keysym for the appropriate case */

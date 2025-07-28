@@ -17,20 +17,24 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
-#include <QDesktopWidget>
+#include <QtWidgets>
+#include <QScreen>
+#include <QGuiApplication>
 #include "mainWidget.h"
 #include "scanLine.h"
 
 ScanLine::ScanLine( QWidget *parent, lineType type, Keyboard *kbd ):
   QWidget( parent )
 {
-  Qt::WindowFlags flags;
-  flags |= Qt::ToolTip;
+  Qt::WindowFlags flags = Qt::Tool;
   flags |= Qt::WindowStaysOnTopHint;
   flags |= Qt::FramelessWindowHint;
+  flags |= Qt::X11BypassWindowManagerHint;
   setWindowFlags( flags );
   setAttribute( Qt::WA_ShowWithoutActivating );
+  setAttribute( Qt::WA_NoSystemBackground );
+  setAttribute( Qt::WA_TransparentForMouseEvents );
+  setAttribute( Qt::WA_TranslucentBackground );
   setFocusPolicy( Qt::NoFocus );
 
   QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
@@ -108,6 +112,8 @@ void ScanLine::startScan( void )
   x0 = 0;
   y0 = 0;
   timer->start(speed);
+  show();
+  raise();
 }
 
 void ScanLine::stopScan( void )
@@ -117,9 +123,12 @@ void ScanLine::stopScan( void )
 
 void ScanLine::getScreenSize()
 {
-  QDesktopWidget *desk = QApplication::desktop();
-  setScreenWidth( desk->width() );
-  setScreenHeight( desk->height() );
+  QScreen *screen = QGuiApplication::primaryScreen();
+  if(screen) {
+    QSize size = screen->geometry().size();
+    setScreenWidth(size.width());
+    setScreenHeight(size.height());
+  }
 }
 
 void ScanLine::setScreenWidth( int w )
