@@ -35,7 +35,7 @@ INSTALL
 - Dependencies (packages names may change depending on your system):
 
     cmake          - A cross-platform, open-source make system
-    libqt4-dev     - Qt 4 development files
+    qtbase5-dev    - Qt 5 development files
     libjack-dev    - JACK Audio Connection Kit (development files)
     libasound2-dev - ALSA library development files
     libxtst-dev    - X11 Record extension library (development files)
@@ -51,7 +51,7 @@ INSTALL
 
     # make install
 
-- Unnstalling the application (as root):
+- Uninstalling the application (as root):
 
     # make uninstall
 

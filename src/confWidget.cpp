@@ -22,6 +22,7 @@
 #include <QSettings>
 #include <QStringList>
 #include "confWidget.h"
+#include "mainWidget.h"
 
 ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   QWidget( parent )
@@ -33,31 +34,32 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   ui.tabWidget->removeTab(2);
   ui.tabWidget->removeTab(3);
 
-  connect( ui.colorButton, SIGNAL(clicked()),
-      this, SLOT(setColor()) );
+  connect(ui.colorButton, &QPushButton::clicked,
+          this, &ConfWidget::setColor);
 
-  connect( ui.cancelButton, SIGNAL(clicked()),
-      this, SLOT(close()) );
+  connect(ui.cancelButton, &QPushButton::clicked,
+          this, &ConfWidget::close);
 
-  connect( ui.saveButton, SIGNAL(clicked()),
-      this, SLOT(save()) );
+  connect(ui.saveButton, &QPushButton::clicked,
+          this, &ConfWidget::save);
 
-  connect( this, SIGNAL(closing()),
-      parentWidget(), SLOT(reloadSettings()) );
+  if(auto parent = qobject_cast<MainWidget*>(parentWidget()))
+      connect(this, &ConfWidget::closing,
+              parent, &MainWidget::reloadSettings);
 
-  connect(ui.minimizedBox, SIGNAL(toggled(bool)),
-      this, SLOT(minimizedBoxToggled()));
+  connect(ui.minimizedBox, &QCheckBox::toggled,
+          this, &ConfWidget::minimizedBoxToggled);
 
-  connect(ui.hiddenBox, SIGNAL(toggled(bool)),
-      this, SLOT(hiddenBoxToggled()));
+  connect(ui.hiddenBox, &QCheckBox::toggled,
+          this, &ConfWidget::hiddenBoxToggled);
 
-  connect(ui.changeKeyButton, SIGNAL(clicked()),
-          this, SLOT(changeKey()));
+  connect(ui.changeKeyButton, &QPushButton::clicked,
+          this, &ConfWidget::changeKey);
 
   myMic = mic;
   if( myMic->isCapturing() ){
-    connect(myMic, SIGNAL(doEvent(double)),
-        this, SLOT(updateAudioSlider(double)));
+    connect(myMic, &Microphone::doEvent,
+            this, &ConfWidget::updateAudioSlider);
     ui.micWidget->setCurrentIndex( 1 );
   }
 
@@ -76,10 +78,10 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   ui.audioBar->setMinimum( -40.0 );
   ui.audioBar->setMaximum( 1.0 );
 
-  connect( ui.audioSlider, SIGNAL(valueChanged(int)),
-      this, SLOT(setThreshold(int)) );
-  connect( ui.waitSlider, SIGNAL(valueChanged(int)),
-      this, SLOT(setWaitTime(int)) );
+  connect(ui.audioSlider, &QSlider::valueChanged,
+          this, &ConfWidget::setThreshold);
+  connect(ui.waitSlider, &QSlider::valueChanged,
+          this, &ConfWidget::setWaitTime);
 
   waiting = false;
 
