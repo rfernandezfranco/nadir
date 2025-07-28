@@ -26,13 +26,13 @@
 ScanLine::ScanLine( QWidget *parent, lineType type, Keyboard *kbd ):
   QWidget( parent )
 {
-  Qt::WindowFlags flags;
-  flags |= Qt::ToolTip;
+  Qt::WindowFlags flags = Qt::Tool;
   flags |= Qt::WindowStaysOnTopHint;
   flags |= Qt::FramelessWindowHint;
   flags |= Qt::X11BypassWindowManagerHint;
   setWindowFlags( flags );
   setAttribute( Qt::WA_ShowWithoutActivating );
+  setAttribute( Qt::WA_NoSystemBackground );
   setAttribute( Qt::WA_TransparentForMouseEvents );
   setAttribute( Qt::WA_TranslucentBackground );
   setFocusPolicy( Qt::NoFocus );
@@ -112,6 +112,8 @@ void ScanLine::startScan( void )
   x0 = 0;
   y0 = 0;
   timer->start(speed);
+  show();
+  raise();
 }
 
 void ScanLine::stopScan( void )
