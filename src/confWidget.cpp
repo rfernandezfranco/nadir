@@ -39,17 +39,24 @@ static QString mouseButtonName(int x11Button)
 
 static int qtToX11Button(Qt::MouseButton btn)
 {
-  switch(btn){
-    case Qt::LeftButton: return 1;
-    case Qt::MiddleButton: return 2;
-    case Qt::RightButton: return 3;
-    case Qt::BackButton: return 8;
-    case Qt::ForwardButton: return 9;
-    case Qt::TaskButton: return 7;
+  switch (btn) {
+    case Qt::LeftButton:    return 1;
+    case Qt::MiddleButton:  return 2;
+    case Qt::RightButton:   return 3;
+    case Qt::BackButton:    return 8;   // XButton1
+    case Qt::ForwardButton: return 9;   // XButton2
+    case Qt::TaskButton:    return 10;  // first extra after Back/Forward
     default:
-      if(btn >= Qt::ExtraButton3){
-        int idx = static_cast<int>(btn) - static_cast<int>(Qt::ExtraButton3);
-        return 10 + idx;
+      if (btn >= Qt::ExtraButton4) {
+        int index = 0;
+        int code = static_cast<int>(Qt::ExtraButton4);
+        int target = static_cast<int>(btn);
+        while (code < target && code <= static_cast<int>(Qt::ExtraButton24)) {
+          code <<= 1;
+          ++index;
+        }
+        if (code == target)
+          return 11 + index;
       }
       break;
   }
