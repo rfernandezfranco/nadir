@@ -20,7 +20,7 @@
 #ifndef CONFWIDGET_H
 #define CONFWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QMainWindow>
 #include <QWidget>
 #include <math.h>
@@ -39,6 +39,7 @@ class ConfWidget : public QWidget
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
+    void updateColorButton();
 
   signals:
     void closing();
@@ -53,6 +54,7 @@ class ConfWidget : public QWidget
     void minimizedBoxToggled();
     void hiddenBoxToggled();
     void changeKey();
+    void scanModeChanged();
 
   protected slots:
     void keyPressEvent(QKeyEvent *);
