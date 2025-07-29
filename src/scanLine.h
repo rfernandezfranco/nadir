@@ -21,7 +21,7 @@
 #define SCANLINE_H
 
 #include <QMainWindow>
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QWidget>
 #include <X11/Xlib.h>
