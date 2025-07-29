@@ -24,16 +24,36 @@
 #include "confWidget.h"
 #include "mainWidget.h"
 
-static QString mouseButtonName(int button)
+static QString mouseButtonName(int x11Button)
 {
-  switch(button){
-    case Qt::LeftButton: return QObject::tr("Left");
-    case Qt::RightButton: return QObject::tr("Right");
-    case Qt::MiddleButton: return QObject::tr("Middle");
-    case Qt::XButton1: return QObject::tr("X1");
-    case Qt::XButton2: return QObject::tr("X2");
-    default: return QString::number(button);
+  switch(x11Button){
+    case 1: return QObject::tr("Left");
+    case 2: return QObject::tr("Middle");
+    case 3: return QObject::tr("Right");
+    case 4: return QObject::tr("Scroll up");
+    case 5: return QObject::tr("Scroll down");
+    default:
+      return QObject::tr("Button %1").arg(x11Button);
   }
+}
+
+static int qtToX11Button(Qt::MouseButton btn)
+{
+  switch(btn){
+    case Qt::LeftButton: return 1;
+    case Qt::MiddleButton: return 2;
+    case Qt::RightButton: return 3;
+    case Qt::BackButton: return 8;
+    case Qt::ForwardButton: return 9;
+    case Qt::TaskButton: return 7;
+    default:
+      if(btn >= Qt::ExtraButton3){
+        int idx = static_cast<int>(btn) - static_cast<int>(Qt::ExtraButton3);
+        return 10 + idx;
+      }
+      break;
+  }
+  return 0;
 }
 
 ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
@@ -94,6 +114,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   }
 
   myKbd = kbd;
+  mouseButtonCount = myKbd ? myKbd->getButtonCount() : 0;
 
   QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
@@ -356,7 +377,7 @@ void ConfWidget::keyPressEvent(QKeyEvent *e)
 void ConfWidget::mousePressEvent(QMouseEvent *e)
 {
   if(ui.pressButtonLabel->isVisible()){
-    mouseButton = static_cast<int>(e->button());
+    mouseButton = qtToX11Button(e->button());
     ui.mouseButtonField->setText(mouseButtonName(mouseButton));
 
     ui.pressButtonLabel->setVisible(false);

@@ -160,14 +160,8 @@ unsigned int Keyboard::grabButtonEvent()
                 &rx, &ry, &wx, &wy, &mask);
 
   unsigned int bmask = 0;
-  switch(buttonCode){
-    case 1: bmask = Button1Mask; break;
-    case 2: bmask = Button2Mask; break;
-    case 3: bmask = Button3Mask; break;
-    case 4: bmask = Button4Mask; break;
-    case 5: bmask = Button5Mask; break;
-    default: break;
-  }
+  if(buttonCode >= 1 && buttonCode <= 32)
+      bmask = 1U << (buttonCode + 7);
 
   unsigned int event = 0;
   if((mask & bmask) && !(lastMask & bmask))
@@ -324,6 +318,13 @@ void Keyboard::setKeyCode( int i )
 void Keyboard::setButtonCode( int i )
 {
   buttonCode = i;
+}
+
+int Keyboard::getButtonCount() const
+{
+  unsigned char map[256];
+  int count = XGetPointerMapping(disp, map, sizeof(map));
+  return count;
 }
 
 void Keyboard::move( int x, int y )
