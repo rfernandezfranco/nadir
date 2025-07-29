@@ -252,16 +252,10 @@ QString ConfWidget::backgroundColor()
 
 void ConfWidget::updateColorButton()
 {
-  ui.colorButton->setStyleSheet(backgroundColor());
-
-  QStringList l = lineColor.split(',');
-  if(l.size() >= 3) {
-    QColor c(l.at(0).toInt(), l.at(1).toInt(), l.at(2).toInt());
-    QPalette pal = ui.colorButton->palette();
-    pal.setColor(QPalette::Button, c);
-    ui.colorButton->setAutoFillBackground(true);
-    ui.colorButton->setPalette(pal);
-  }
+  QString style = QString("QPushButton { background-color: rgb(%1); border: 1px solid black; }")
+                        .arg(lineColor);
+  ui.colorButton->setStyleSheet(style);
+  ui.colorButton->setAutoFillBackground(true);
   ui.colorButton->update();
 }
 
