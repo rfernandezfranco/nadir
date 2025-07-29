@@ -42,8 +42,8 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
 
-  // Temporally remove Camera Tab
-  // ui.tabWidget->removeTab(3);
+  // Hide camera tab until feature is ready
+  ui.tabWidget->removeTab(ui.tabWidget->indexOf(ui.camTab));
 
   connect(ui.colorButton, &QPushButton::clicked,
           this, &ConfWidget::setColor);
