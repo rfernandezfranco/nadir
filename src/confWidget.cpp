@@ -323,7 +323,11 @@ QString ConfWidget::backgroundColor()
 
 void ConfWidget::updateColorButton()
 {
-  ui.colorButton->setStyleSheet(backgroundColor());
+  QString style = QString("QPushButton { background-color: rgb(%1); border: 1px solid black; }")
+                        .arg(lineColor);
+  ui.colorButton->setStyleSheet(style);
+  ui.colorButton->setAutoFillBackground(true);
+  ui.colorButton->update();
 }
 
 void ConfWidget::showAboutText()
