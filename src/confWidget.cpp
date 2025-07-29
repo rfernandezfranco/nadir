@@ -262,10 +262,8 @@ QString ConfWidget::backgroundColor()
 
 void ConfWidget::updateColorButton()
 {
-  QString style = QString("QPushButton { background-color: rgb(%1); }")
+  QString style = QString("QPushButton { background-color: rgb(%1); border: 1px solid black; }")
                         .arg(lineColor);
-  ui.colorButton->setMinimumSize(ui.speedUpButton->size());
-  ui.colorButton->setMaximumSize(ui.speedUpButton->size());
   ui.colorButton->setStyleSheet(style);
   ui.colorButton->setAutoFillBackground(true);
   ui.colorButton->update();
