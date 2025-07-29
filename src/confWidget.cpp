@@ -56,6 +56,16 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   connect(ui.changeKeyButton, &QPushButton::clicked,
           this, &ConfWidget::changeKey);
 
+  connect(ui.speedUpButton, &QPushButton::clicked, this, [this]{
+    int step = ui.speedSlider->singleStep();
+    ui.speedSlider->setValue(ui.speedSlider->value() - step);
+  });
+
+  connect(ui.speedDownButton, &QPushButton::clicked, this, [this]{
+    int step = ui.speedSlider->singleStep();
+    ui.speedSlider->setValue(ui.speedSlider->value() + step);
+  });
+
   myMic = mic;
   if( myMic->isCapturing() ){
     connect(myMic, &Microphone::doEvent,
@@ -252,8 +262,10 @@ QString ConfWidget::backgroundColor()
 
 void ConfWidget::updateColorButton()
 {
-  QString style = QString("QPushButton { background-color: rgb(%1); border: 1px solid black; }")
+  QString style = QString("QPushButton { background-color: rgb(%1); }")
                         .arg(lineColor);
+  ui.colorButton->setMinimumSize(ui.speedUpButton->size());
+  ui.colorButton->setMaximumSize(ui.speedUpButton->size());
   ui.colorButton->setStyleSheet(style);
   ui.colorButton->setAutoFillBackground(true);
   ui.colorButton->update();
