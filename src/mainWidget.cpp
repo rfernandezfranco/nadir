@@ -125,8 +125,8 @@ void MainWidget::reloadSettings()
     scan();
   };
 
-  // From mic mode to key mode
-  if( oldMode != mode && mode == KEY ){
+  // From mic mode to other modes
+  if( oldMode != mode && mode != MIC ){
     mic->capture(false);
   };
 
@@ -219,24 +219,22 @@ void MainWidget::scan()
       mic->capture( true );
       scanTimer->start( speed );
       break;
+    case MOUSE:
+       scanTimer->start( speed );
+       break;
   };
 }
 
 void MainWidget::grabEvent()
 {
-  switch( kbd->grabEvent() ){
-    case 2://escape key
-     // QApplication::setQuitOnLastWindowClosed(false);
-    //  forceClosing = true;
-      exit(0);
-      break;
-    case 1://any other key
-      if( mode == KEY )
-        changeState();
-      break;
-    default://no key
-      break;
-  };
+  unsigned int e = 0;
+  if(mode == KEY)
+      e = kbd->grabKeyEvent();
+  else if(mode == MOUSE)
+      e = kbd->grabButtonEvent();
+
+  if(e)
+      changeState();
 }
 
 void MainWidget::stop()
@@ -248,6 +246,9 @@ void MainWidget::stop()
     case MIC:
       mic->capture(false);
       break;
+    case MOUSE:
+       scanTimer->stop();
+       break;
   };
 }
 
@@ -312,6 +313,9 @@ void MainWidget::setMode( int i )
 
     case 1:
       mode = MIC;
+      break;
+    case 2:
+      mode = MOUSE;
       break;
   };
 }

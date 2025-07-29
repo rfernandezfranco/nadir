@@ -24,15 +24,26 @@
 #include "confWidget.h"
 #include "mainWidget.h"
 
+static QString mouseButtonName(int button)
+{
+  switch(button){
+    case Qt::LeftButton: return QObject::tr("Left");
+    case Qt::RightButton: return QObject::tr("Right");
+    case Qt::MiddleButton: return QObject::tr("Middle");
+    case Qt::XButton1: return QObject::tr("X1");
+    case Qt::XButton2: return QObject::tr("X2");
+    default: return QString::number(button);
+  }
+}
+
 ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   QWidget( parent )
 {
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
 
-  // Temporally remove Mouse and Camera Tabs
-  ui.tabWidget->removeTab(2);
-  ui.tabWidget->removeTab(3);
+  // Temporally remove Camera Tab
+  // ui.tabWidget->removeTab(3);
 
   connect(ui.colorButton, &QPushButton::clicked,
           this, &ConfWidget::setColor);
@@ -55,10 +66,14 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
 
   connect(ui.changeKeyButton, &QPushButton::clicked,
           this, &ConfWidget::changeKey);
+  connect(ui.changeButtonButton, &QPushButton::clicked,
+          this, &ConfWidget::changeButton);
 
   connect(ui.micMode, &QRadioButton::toggled,
           this, &ConfWidget::scanModeChanged);
   connect(ui.keyMode, &QRadioButton::toggled,
+          this, &ConfWidget::scanModeChanged);
+  connect(ui.mouseMode, &QRadioButton::toggled,
           this, &ConfWidget::scanModeChanged);
 
   connect(ui.speedUpButton, &QPushButton::clicked, this, [this]{
@@ -101,6 +116,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   waiting = false;
 
   ui.pressKeyLabel->setVisible(false);
+  ui.pressButtonLabel->setVisible(false);
 
   // Shrink window to minimum needed size
   resize(0,0);
@@ -133,7 +149,10 @@ void ConfWidget::loadSettings()
   ui.continuousBox->setChecked( settings.value( "continuous", 0 ).toBool() );
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
-  ui.micMode->setChecked( settings.value( "mode", 0 ).toBool() );
+  int modeVal = settings.value("mode", 0).toInt();
+  ui.keyMode->setChecked(modeVal == 0);
+  ui.micMode->setChecked(modeVal == 1);
+  ui.mouseMode->setChecked(modeVal == 2);
   lineColor = settings.value( "color", "255,0,0" ).toString();
   updateColorButton();
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
@@ -142,6 +161,8 @@ void ConfWidget::loadSettings()
   ui.audioBar->setValue( threshold );
   ui.keyCodeField->setText( settings.value( "keycode", 65).toString() );
   ui.keySymField->setText( settings.value( "keysym", "ESPACIO").toString() );
+  mouseButton = settings.value("mouseButton", 1).toInt();
+  ui.mouseButtonField->setText(mouseButtonName(mouseButton));
   ui.confirmOnExitBox->setChecked( settings.value( "confirmOnExit", 1).toBool() );
   settings.endGroup();
 
@@ -187,7 +208,12 @@ void ConfWidget::save()
   settings.setValue( "thickness",  ui.thickBox->value() );
   int i = ( ui.continuousBox->isChecked() ) ? 1 : 0;
   settings.setValue( "continuous", i );
-  i = ( ui.keyMode->isChecked() ) ? 0 : 1;
+  if(ui.keyMode->isChecked())
+    i = 0;
+  else if(ui.micMode->isChecked())
+    i = 1;
+  else
+    i = 2;
   settings.setValue( "mode", i );
   i = ( ui.simpleClickBox->isChecked() ) ? 0 : 1;
   settings.setValue( "click", i );
@@ -198,6 +224,7 @@ void ConfWidget::save()
   settings.setValue( "waitTime", waitTime );
   settings.setValue( "keycode", ui.keyCodeField->text().toInt());
   settings.setValue( "keysym", ui.keySymField->text());
+  settings.setValue( "mouseButton", mouseButton );
   settings.setValue( "confirmOnExit", ui.confirmOnExitBox->isChecked() ? 1 : 0  );
   settings.endGroup();
 
@@ -217,6 +244,7 @@ void ConfWidget::save()
   settings.sync();
 
   myKbd->setKeyCode(ui.keyCodeField->text().toInt());
+  myKbd->setButtonCode(mouseButton);
 
   emit closing();
   close();
@@ -297,6 +325,13 @@ void ConfWidget::changeKey()
   ui.pressKeyLabel->setFocus();
 }
 
+void ConfWidget::changeButton()
+{
+  ui.mouseGroupBox->setVisible(false);
+  ui.pressButtonLabel->setVisible(true);
+  ui.pressButtonLabel->setFocus();
+}
+
 void ConfWidget::scanModeChanged()
 {
   if (ui.micMode->isChecked())
@@ -315,5 +350,18 @@ void ConfWidget::keyPressEvent(QKeyEvent *e)
 
     ui.pressKeyLabel->setVisible(false);
     ui.keyGroupBox->setVisible(true);
+  }
+}
+
+void ConfWidget::mousePressEvent(QMouseEvent *e)
+{
+  if(ui.pressButtonLabel->isVisible()){
+    mouseButton = static_cast<int>(e->button());
+    ui.mouseButtonField->setText(mouseButtonName(mouseButton));
+
+    ui.pressButtonLabel->setVisible(false);
+    ui.mouseGroupBox->setVisible(true);
+  } else {
+    QWidget::mousePressEvent(e);
   }
 }

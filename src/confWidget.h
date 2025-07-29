@@ -21,6 +21,7 @@
 #define CONFWIDGET_H
 
 #include <QtWidgets/QWidget>
+#include <QMouseEvent>
 #include <QMainWindow>
 #include <QWidget>
 #include <math.h>
@@ -54,10 +55,12 @@ class ConfWidget : public QWidget
     void minimizedBoxToggled();
     void hiddenBoxToggled();
     void changeKey();
+    void changeButton();
     void scanModeChanged();
 
   protected slots:
     void keyPressEvent(QKeyEvent *);
+    void mousePressEvent(QMouseEvent *);
 
   public slots:
     void showAboutText();
@@ -70,6 +73,7 @@ class ConfWidget : public QWidget
     int threshold;
     unsigned int waitTime;
     bool waiting;
+    int mouseButton;
 };
 
 #endif // CONFWIDGET_H

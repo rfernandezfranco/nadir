@@ -53,7 +53,8 @@ class Keyboard
     void flush();
     void snoop_all_windows(Window root, unsigned long type);
     char *TranslateKeyCode(XEvent *ev);
-    unsigned int grabEvent();
+    unsigned int grabKeyEvent();
+    unsigned int grabButtonEvent();
     void move( int x, int y );
     void key( int k );
     void click();
@@ -64,6 +65,7 @@ class Keyboard
     void setEscapeCode( int i );
     void loadKeyCode();
     void setKeyCode(int i);
+    void setButtonCode(int i);
     Display *getDisplay();
 
     int StrToChar(char *data);
@@ -83,6 +85,8 @@ class Keyboard
     char *keyString;
     int escapeCode;
     int keyCode;
+    int buttonCode;
+    unsigned int lastMask;
 
     int x11_fd;
     fd_set in_fds;
