@@ -100,12 +100,14 @@ snd_pcm_t *Capture::open_pcm()
         qWarning("Error setting channels (%s).", snd_strerror(err));
         return(NULL);
     }
-    err = snd_pcm_hw_params_set_periods(pcm_handle, hwparams, periods, 0);
+    unsigned int tmpPeriods = periods;
+    err = snd_pcm_hw_params_set_periods_near(pcm_handle, hwparams, &tmpPeriods, 0);
     if (err < 0) {
         snd_pcm_close(pcm_handle);
         qWarning("Error setting periods (%s).", snd_strerror(err));
         return(NULL);
     }
+    periods = tmpPeriods;
     buffersize_return = periodsize * periods;
     err = snd_pcm_hw_params_set_buffer_size_near(pcm_handle, hwparams, 
                     &buffersize_return);
