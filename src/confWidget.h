@@ -54,6 +54,7 @@ class ConfWidget : public QWidget
     void minimizedBoxToggled();
     void hiddenBoxToggled();
     void changeKey();
+    void scanModeChanged();
 
   protected slots:
     void keyPressEvent(QKeyEvent *);

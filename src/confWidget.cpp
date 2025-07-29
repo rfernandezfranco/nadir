@@ -56,6 +56,11 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   connect(ui.changeKeyButton, &QPushButton::clicked,
           this, &ConfWidget::changeKey);
 
+  connect(ui.micMode, &QRadioButton::toggled,
+          this, &ConfWidget::scanModeChanged);
+  connect(ui.keyMode, &QRadioButton::toggled,
+          this, &ConfWidget::scanModeChanged);
+
   connect(ui.speedUpButton, &QPushButton::clicked, this, [this]{
     int step = ui.speedSlider->singleStep();
     ui.speedSlider->setValue(ui.speedSlider->value() - step);
@@ -290,6 +295,14 @@ void ConfWidget::changeKey()
   ui.keyGroupBox->setVisible(false);
   ui.pressKeyLabel->setVisible(true);
   ui.pressKeyLabel->setFocus();
+}
+
+void ConfWidget::scanModeChanged()
+{
+  if (ui.micMode->isChecked())
+    ui.micWidget->setCurrentIndex(1);
+  else
+    ui.micWidget->setCurrentIndex(0);
 }
 
 void ConfWidget::keyPressEvent(QKeyEvent *e)
