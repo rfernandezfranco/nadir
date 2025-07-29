@@ -42,6 +42,14 @@ bool Keyboard::start()
   keys=buf2;
   XQueryKeymap(disp, saved);
 
+  if(buttonCode > 0){
+    XGrabButton(disp, buttonCode, AnyModifier,
+                DefaultRootWindow(disp), False,
+                ButtonPressMask, GrabModeAsync, GrabModeAsync,
+                None, None);
+    grabbed = true;
+  }
+
   return true;
 }
 
@@ -153,20 +161,13 @@ unsigned int Keyboard::grabKeyEvent()
 /* Return 0:No event, 1:Button event */
 unsigned int Keyboard::grabButtonEvent()
 {
-  Window root, child;
-  int rx, ry, wx, wy;
-  unsigned int mask;
-  XQueryPointer(disp, DefaultRootWindow(disp), &root, &child,
-                &rx, &ry, &wx, &wy, &mask);
-
-  unsigned int bmask = 0;
-  if(buttonCode >= 1 && buttonCode <= 32)
-      bmask = 1U << (buttonCode + 7);
-
   unsigned int event = 0;
-  if((mask & bmask) && !(lastMask & bmask))
-      event = 1;
-  lastMask = mask;
+  while(XPending(disp)){
+    XEvent ev;
+    XNextEvent(disp, &ev);
+    if(ev.type == ButtonPress && ev.xbutton.button == buttonCode)
+        event = 1;
+  }
   return event;
 }
 
@@ -302,6 +303,8 @@ int Keyboard::KeyModifiers(char *keys) {
 
 void Keyboard::stop()
 {
+  if(grabbed && buttonCode > 0)
+    XUngrabButton(disp, buttonCode, AnyModifier, DefaultRootWindow(disp));
   XCloseDisplay(disp);
 }
 
