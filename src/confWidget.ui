@@ -1304,37 +1304,5 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>speedUpButton</sender>
-   <signal>clicked()</signal>
-   <receiver>speedSlider</receiver>
-   <slot>subtractStep()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>394</x>
-     <y>473</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>468</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>speedDownButton</sender>
-   <signal>clicked()</signal>
-   <receiver>speedSlider</receiver>
-   <slot>addStep()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>485</x>
-     <y>473</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>468</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
 </ui>
