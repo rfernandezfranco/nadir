@@ -30,12 +30,11 @@ ScanLine::ScanLine( QWidget *parent, lineType type, Keyboard *kbd ):
   flags |= Qt::WindowStaysOnTopHint;
   flags |= Qt::FramelessWindowHint;
   flags |= Qt::X11BypassWindowManagerHint;
-  setWindowFlags( flags );
-  setAttribute( Qt::WA_ShowWithoutActivating );
-  setAttribute( Qt::WA_NoSystemBackground );
-  setAttribute( Qt::WA_TransparentForMouseEvents );
-  setAttribute( Qt::WA_TranslucentBackground );
-  setFocusPolicy( Qt::NoFocus );
+  setWindowFlags(flags);
+  setAttribute(Qt::WA_ShowWithoutActivating);
+  setAttribute(Qt::WA_TransparentForMouseEvents);
+  setAttribute(Qt::WA_StyledBackground);
+  setFocusPolicy(Qt::NoFocus);
 
   QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);

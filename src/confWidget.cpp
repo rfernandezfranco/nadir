@@ -200,6 +200,7 @@ void ConfWidget::save()
   settings.setValue( "size", size() );
   settings.setValue( "pos", pos() );
   settings.endGroup();
+  settings.sync();
 
   myKbd->setKeyCode(ui.keyCodeField->text().toInt());
 
