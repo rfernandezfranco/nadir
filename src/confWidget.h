@@ -39,6 +39,7 @@ class ConfWidget : public QWidget
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
+    void updateColorButton();
 
   signals:
     void closing();

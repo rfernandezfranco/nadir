@@ -119,9 +119,8 @@ void ConfWidget::loadSettings()
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
   ui.micMode->setChecked( settings.value( "mode", 0 ).toBool() );
-  lineColor.clear();
-  lineColor.append( settings.value( "color", "255,0,0").toString() );
-  ui.colorButton->setStyleSheet( backgroundColor() );
+  lineColor = settings.value( "color", "255,0,0" ).toString();
+  updateColorButton();
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   ui.audioBar->setValue( threshold );
   setWaitTime( settings.value( "waitTime", 1000 ).toInt() );
@@ -231,14 +230,11 @@ void ConfWidget::setColor()
   QColor base(l.at(0).toInt(), l.at(1).toInt(), l.at(2).toInt());
   QColor newColor = QColorDialog::getColor(base, this);
   if( newColor.isValid() ){
-    lineColor.clear();
-    lineColor.append( s.setNum(newColor.red()) );
-    lineColor.append( "," );
-    lineColor.append( s.setNum(newColor.green()) );
-    lineColor.append( "," );
-    lineColor.append( s.setNum(newColor.blue()) );
+    lineColor = QString::number(newColor.red()) + "," +
+                QString::number(newColor.green()) + "," +
+                QString::number(newColor.blue());
 
-    ui.colorButton->setStyleSheet( backgroundColor() );
+    updateColorButton();
   };
 }
 
@@ -252,6 +248,21 @@ QString ConfWidget::backgroundColor()
   s.append( ");" );
 
   return s;
+}
+
+void ConfWidget::updateColorButton()
+{
+  ui.colorButton->setStyleSheet(backgroundColor());
+
+  QStringList l = lineColor.split(',');
+  if(l.size() >= 3) {
+    QColor c(l.at(0).toInt(), l.at(1).toInt(), l.at(2).toInt());
+    QPalette pal = ui.colorButton->palette();
+    pal.setColor(QPalette::Button, c);
+    ui.colorButton->setAutoFillBackground(true);
+    ui.colorButton->setPalette(pal);
+  }
+  ui.colorButton->update();
 }
 
 void ConfWidget::showAboutText()
