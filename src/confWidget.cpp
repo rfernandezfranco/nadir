@@ -17,11 +17,12 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
+#include <QtWidgets>
 #include <QColorDialog>
 #include <QSettings>
 #include <QStringList>
 #include "confWidget.h"
+#include "mainWidget.h"
 
 ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   QWidget( parent )
@@ -33,31 +34,32 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   ui.tabWidget->removeTab(2);
   ui.tabWidget->removeTab(3);
 
-  connect( ui.colorButton, SIGNAL(clicked()),
-      this, SLOT(setColor()) );
+  connect(ui.colorButton, &QPushButton::clicked,
+          this, &ConfWidget::setColor);
 
-  connect( ui.cancelButton, SIGNAL(clicked()),
-      this, SLOT(close()) );
+  connect(ui.cancelButton, &QPushButton::clicked,
+          this, &ConfWidget::close);
 
-  connect( ui.saveButton, SIGNAL(clicked()),
-      this, SLOT(save()) );
+  connect(ui.saveButton, &QPushButton::clicked,
+          this, &ConfWidget::save);
 
-  connect( this, SIGNAL(closing()),
-      parentWidget(), SLOT(reloadSettings()) );
+  if(auto parent = qobject_cast<MainWidget*>(parentWidget()))
+      connect(this, &ConfWidget::closing,
+              parent, &MainWidget::reloadSettings);
 
-  connect(ui.minimizedBox, SIGNAL(toggled(bool)),
-      this, SLOT(minimizedBoxToggled()));
+  connect(ui.minimizedBox, &QCheckBox::toggled,
+          this, &ConfWidget::minimizedBoxToggled);
 
-  connect(ui.hiddenBox, SIGNAL(toggled(bool)),
-      this, SLOT(hiddenBoxToggled()));
+  connect(ui.hiddenBox, &QCheckBox::toggled,
+          this, &ConfWidget::hiddenBoxToggled);
 
-  connect(ui.changeKeyButton, SIGNAL(clicked()),
-          this, SLOT(changeKey()));
+  connect(ui.changeKeyButton, &QPushButton::clicked,
+          this, &ConfWidget::changeKey);
 
   myMic = mic;
   if( myMic->isCapturing() ){
-    connect(myMic, SIGNAL(doEvent(double)),
-        this, SLOT(updateAudioSlider(double)));
+    connect(myMic, &Microphone::doEvent,
+            this, &ConfWidget::updateAudioSlider);
     ui.micWidget->setCurrentIndex( 1 );
   }
 
@@ -76,10 +78,10 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   ui.audioBar->setMinimum( -40.0 );
   ui.audioBar->setMaximum( 1.0 );
 
-  connect( ui.audioSlider, SIGNAL(valueChanged(int)),
-      this, SLOT(setThreshold(int)) );
-  connect( ui.waitSlider, SIGNAL(valueChanged(int)),
-      this, SLOT(setWaitTime(int)) );
+  connect(ui.audioSlider, &QSlider::valueChanged,
+          this, &ConfWidget::setThreshold);
+  connect(ui.waitSlider, &QSlider::valueChanged,
+          this, &ConfWidget::setWaitTime);
 
   waiting = false;
 
@@ -117,9 +119,8 @@ void ConfWidget::loadSettings()
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
   ui.micMode->setChecked( settings.value( "mode", 0 ).toBool() );
-  lineColor.clear();
-  lineColor.append( settings.value( "color", "255,0,0").toString() );
-  ui.colorButton->setStyleSheet( backgroundColor() );
+  lineColor = settings.value( "color", "255,0,0" ).toString();
+  updateColorButton();
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   ui.audioBar->setValue( threshold );
   setWaitTime( settings.value( "waitTime", 1000 ).toInt() );
@@ -157,7 +158,7 @@ void ConfWidget::setWaitTime( int i )
   QString w;
   float t = floor((float)waitTime/10)/100;
   w.setNum( t );
-  w.append( trUtf8(" second(s)"));
+  w.append( tr(" second(s)"));
   ui.waitLabel->setText( w );
 }
 
@@ -198,6 +199,7 @@ void ConfWidget::save()
   settings.setValue( "size", size() );
   settings.setValue( "pos", pos() );
   settings.endGroup();
+  settings.sync();
 
   myKbd->setKeyCode(ui.keyCodeField->text().toInt());
 
@@ -223,21 +225,16 @@ void ConfWidget::updateAudioSlider( double d )
 
 void ConfWidget::setColor()
 {
-  bool ok;
   QString s;
-  QStringList l = lineColor.split( "," ); 
-  QRgb rgb = QColorDialog::getRgba( QColor::fromRgb(l.at(0).toInt(),
-                                    l.at(1).toInt(),
-                                    l.at(2).toInt()).rgb(), &ok ); 
-  if( ok ){
-    lineColor.clear();
-    lineColor.append( s.setNum(qRed(rgb)) );
-    lineColor.append( "," );
-    lineColor.append( s.setNum(qGreen(rgb)) );
-    lineColor.append( "," );
-    lineColor.append( s.setNum(qBlue(rgb)) );
+  QStringList l = lineColor.split( "," );
+  QColor base(l.at(0).toInt(), l.at(1).toInt(), l.at(2).toInt());
+  QColor newColor = QColorDialog::getColor(base, this);
+  if( newColor.isValid() ){
+    lineColor = QString::number(newColor.red()) + "," +
+                QString::number(newColor.green()) + "," +
+                QString::number(newColor.blue());
 
-    ui.colorButton->setStyleSheet( backgroundColor() );
+    updateColorButton();
   };
 }
 
@@ -251,6 +248,15 @@ QString ConfWidget::backgroundColor()
   s.append( ");" );
 
   return s;
+}
+
+void ConfWidget::updateColorButton()
+{
+  QString style = QString("QPushButton { background-color: rgb(%1); border: 1px solid black; }")
+                        .arg(lineColor);
+  ui.colorButton->setStyleSheet(style);
+  ui.colorButton->setAutoFillBackground(true);
+  ui.colorButton->update();
 }
 
 void ConfWidget::showAboutText()

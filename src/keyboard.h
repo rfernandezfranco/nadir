@@ -67,7 +67,7 @@ class Keyboard
     Display *getDisplay();
 
     int StrToChar(char *data);
-    char *KeyCodeToStr(int code, int down, int mod);
+    const char *KeyCodeToStr(int code, int down, int mod);
     int KeyModifiers(char *keys);
 
   private:
