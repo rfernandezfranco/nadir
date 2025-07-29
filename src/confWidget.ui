@@ -346,14 +346,21 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QRadioButton" name="micMode">
-            <property name="text">
-             <string>Microphone</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+           <item>
+            <widget class="QRadioButton" name="micMode">
+             <property name="text">
+              <string>Microphone</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="mouseMode">
+             <property name="text">
+              <string>Mouse</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
         </widget>
        </item>
        <item row="1" column="0">
@@ -589,21 +596,63 @@
          </property>
         </spacer>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Button to use</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Button to use</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QGroupBox" name="mouseGroupBox">
+          <property name="title">
+           <string>Used button</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_mouse">
+           <item row="0" column="0">
+            <widget class="QLineEdit" name="mouseButtonField">
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>ANY</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="changeButtonButton">
+             <property name="text">
+              <string>Change</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="pressButtonLabel">
+          <property name="text">
+           <string>Press a button...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>40</width>
@@ -1301,38 +1350,6 @@
     <hint type="destinationlabel">
      <x>249</x>
      <y>438</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>speedUpButton</sender>
-   <signal>clicked()</signal>
-   <receiver>speedSlider</receiver>
-   <slot>subtractStep()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>394</x>
-     <y>473</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>468</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>speedDownButton</sender>
-   <signal>clicked()</signal>
-   <receiver>speedSlider</receiver>
-   <slot>addStep()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>485</x>
-     <y>473</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>468</y>
     </hint>
    </hints>
   </connection>

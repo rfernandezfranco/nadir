@@ -17,8 +17,10 @@ void Keyboard::loadKeyCode()
 
   settings.beginGroup( "Main" );
   keyCode = settings.value( "keycode", 65).toInt();
+  buttonCode = settings.value( "mouseButton", 1).toInt();
   settings.endGroup();
- }
+  lastMask = 0;
+}
 
 bool Keyboard::start()
 {
@@ -122,8 +124,8 @@ char *Keyboard::TranslateKeyCode(XEvent *ev)
     return NULL;
 }
 
-/* Return 0:No event, 1:Key event, 2:Scape */
-unsigned int Keyboard::grabEvent()
+/* Return 0:No event, 1:Key event */
+unsigned int Keyboard::grabKeyEvent()
 {
   /* find changed keys */
   XQueryKeymap(disp, keys);
@@ -131,8 +133,7 @@ unsigned int Keyboard::grabEvent()
 
   for (i=0; i<32*8; i++) {
      if (BIT(keys, i)!=BIT(saved, i)) {
-        register char *str;
-        str=(char *)KeyCodeToStr(i, BIT(keys, i), KeyModifiers(keys));
+       const char *str = KeyCodeToStr(i, BIT(keys, i), KeyModifiers(keys));
         if (BIT(keys, i)!=0 || PrintUp){
           if(i==keyCode){
             event++;
@@ -146,12 +147,33 @@ unsigned int Keyboard::grabEvent()
   char_ptr=saved;
   saved=keys;
   keys=char_ptr;
-  if(event>0)
-    return 1;
-  else
-    return 0;
+  return event>0 ? 1 : 0;
+}
 
-  //usleep(delay);
+/* Return 0:No event, 1:Button event */
+unsigned int Keyboard::grabButtonEvent()
+{
+  Window root, child;
+  int rx, ry, wx, wy;
+  unsigned int mask;
+  XQueryPointer(disp, DefaultRootWindow(disp), &root, &child,
+                &rx, &ry, &wx, &wy, &mask);
+
+  unsigned int bmask = 0;
+  switch(buttonCode){
+    case 1: bmask = Button1Mask; break;
+    case 2: bmask = Button2Mask; break;
+    case 3: bmask = Button3Mask; break;
+    case 4: bmask = Button4Mask; break;
+    case 5: bmask = Button5Mask; break;
+    default: break;
+  }
+
+  unsigned int event = 0;
+  if((mask & bmask) && !(lastMask & bmask))
+      event = 1;
+  lastMask = mask;
+  return event;
 }
 
 /* This part takes the keycode and makes an output string. */
@@ -197,8 +219,9 @@ int Keyboard::StrToChar(char *data) {
    return FALSE;
 }
 
-char *Keyboard::KeyCodeToStr(int code, int down, int mod) {
-   static char *str, buf[KEYSYM_STRLEN+1];
+const char *Keyboard::KeyCodeToStr(int code, int down, int mod) {
+   static const char *str;
+   static char buf[KEYSYM_STRLEN+1];
    int index;
    KeySym  keysym;
    /* get the keysym for the appropriate case */
@@ -296,6 +319,11 @@ void Keyboard::setEscapeCode( int i )
 void Keyboard::setKeyCode( int i )
 {
   keyCode = i;
+}
+
+void Keyboard::setButtonCode( int i )
+{
+  buttonCode = i;
 }
 
 void Keyboard::move( int x, int y )

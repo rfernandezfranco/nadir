@@ -134,6 +134,11 @@
         <translation>Micrófono</translation>
     </message>
     <message>
+        <location filename="../confWidget.ui" line="358"/>
+        <source>Mouse</source>
+        <translation>Ratón</translation>
+    </message>
+    <message>
         <location filename="../confWidget.ui" line="362"/>
         <source>Default click</source>
         <translation>Clic por defecto</translation>
@@ -203,6 +208,16 @@
         <location filename="../confWidget.ui" line="598"/>
         <source>Button to use</source>
         <translation>Botón a usar</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="612"/>
+        <source>Used button</source>
+        <translation>Botón usado</translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="612"/>
+        <source>Press a button...</source>
+        <translation>Pulse un botón...</translation>
     </message>
     <message>
         <location filename="../confWidget.ui" line="623"/>

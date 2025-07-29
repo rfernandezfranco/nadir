@@ -28,7 +28,7 @@ DEALINGS IN THE SOFTWARE.
 
 #include <QtCore/QtGlobal>
 
-#ifdef Q_WS_X11
+#if defined(Q_WS_X11) || defined(Q_OS_UNIX)
 
 /* Usage:
 
@@ -188,6 +188,17 @@ const int XSuccess = Success;
 const int Success = XSuccess;
 #endif
 #undef Success
+#endif
+
+// Affects: Should be without side effects.
+#ifdef Expose
+#ifndef FIXX11H_Expose
+#define FIXX11H_Expose
+const int XExpose = Expose;
+#undef Expose
+const int Expose = XExpose;
+#endif
+#undef Expose
 #endif
 
 // Affects: Should be without side effects.
