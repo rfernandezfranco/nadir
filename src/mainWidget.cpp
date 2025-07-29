@@ -17,8 +17,9 @@
  * along with Nadir.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include <QtGui>
-#include <QSound>
+#include <QtWidgets>
+#include <QScreen>
+#include <QGuiApplication>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -26,16 +27,16 @@ MainWidget::MainWidget()
   ui.setupUi(this);
   setWindowFlags(Qt::Window);
 
-  connect( ui.confButton, SIGNAL(clicked()),
-      this, SLOT(configure()) );
-  connect( ui.clickButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
-  connect( ui.dbClickButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
-  connect( ui.rightClickButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
-  connect( ui.dragButton, SIGNAL(clicked()),
-      this, SLOT(setEvent()) );
+  connect(ui.confButton, &QPushButton::clicked,
+          this, &MainWidget::configure);
+  connect(ui.clickButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
+  connect(ui.dbClickButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
+  connect(ui.rightClickButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
+  connect(ui.dragButton, &QPushButton::clicked,
+          this, &MainWidget::setEvent);
 
   kbd = new Keyboard();
   if ( !kbd->start() )
@@ -49,11 +50,11 @@ MainWidget::MainWidget()
   trayIcon = NULL;
   firstConf = true;
 
-  hLine = new ScanLine( this, HORIZONTAL, kbd );
-  vLine = new ScanLine( this, VERTICAL, kbd );
+  hLine = new ScanLine( nullptr, HORIZONTAL, kbd );
+  vLine = new ScanLine( nullptr, VERTICAL, kbd );
 
   scanTimer = new QTimer(this);
-  connect(scanTimer, SIGNAL(timeout()), this, SLOT( grabEvent() ));
+  connect(scanTimer, &QTimer::timeout, this, &MainWidget::grabEvent);
 
   QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
@@ -124,8 +125,8 @@ void MainWidget::reloadSettings()
     scan();
   };
 
-  // From mic mode to key mode
-  if( oldMode != mode && mode == KEY ){
+  // From mic mode to other modes
+  if( oldMode != mode && mode != MIC ){
     mic->capture(false);
   };
 
@@ -168,9 +169,12 @@ void MainWidget::endWait()
 
 void MainWidget::getScreenSize()
 {
-  QDesktopWidget *desk = QApplication::desktop();
-  setScreenWidth( desk->width() );
-  setScreenHeight( desk->height() );
+  QScreen *screen = QGuiApplication::primaryScreen();
+  if(screen) {
+    QSize size = screen->geometry().size();
+    setScreenWidth(size.width());
+    setScreenHeight(size.height());
+  }
 }
 
 void MainWidget::setScreenWidth( int w )
@@ -215,24 +219,22 @@ void MainWidget::scan()
       mic->capture( true );
       scanTimer->start( speed );
       break;
+    case MOUSE:
+       scanTimer->start( speed );
+       break;
   };
 }
 
 void MainWidget::grabEvent()
 {
-  switch( kbd->grabEvent() ){
-    case 2://escape key
-     // QApplication::setQuitOnLastWindowClosed(false);
-    //  forceClosing = true;
-      exit(0);
-      break;
-    case 1://any other key
-      if( mode == KEY )
-        changeState();
-      break;
-    default://no key
-      break;
-  };
+  unsigned int e = 0;
+  if(mode == KEY)
+      e = kbd->grabKeyEvent();
+  else if(mode == MOUSE)
+      e = kbd->grabButtonEvent();
+
+  if(e)
+      changeState();
 }
 
 void MainWidget::stop()
@@ -244,6 +246,9 @@ void MainWidget::stop()
     case MIC:
       mic->capture(false);
       break;
+    case MOUSE:
+       scanTimer->stop();
+       break;
   };
 }
 
@@ -308,6 +313,9 @@ void MainWidget::setMode( int i )
 
     case 1:
       mode = MIC;
+      break;
+    case 2:
+      mode = MOUSE;
       break;
   };
 }
@@ -380,7 +388,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
     if(confirmOnExit){
       QMessageBox msgBox;
       msgBox.setWindowTitle("Nadir");
-      msgBox.setText(trUtf8("Are you sure you want to exit?"));
+      msgBox.setText(tr("Are you sure you want to exit?"));
       msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
       msgBox.setDefaultButton(QMessageBox::No);
 
@@ -404,16 +412,16 @@ void MainWidget::closeEvent(QCloseEvent *e)
 void MainWidget::createTrayIcon()
 {
     // Actions
-    restoreAction = new QAction(trUtf8("&Restore"), this);
-    connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+    restoreAction = new QAction(tr("&Restore"), this);
+    connect(restoreAction, &QAction::triggered, this, &MainWidget::showNormal);
     restoreAction->setIcon(QIcon(":/images/images/nadir.png"));
 
-    configAction = new QAction(trUtf8("&Settings"), this);
-    connect(configAction, SIGNAL(triggered()), this, SLOT(configure()));
+    configAction = new QAction(tr("&Settings"), this);
+    connect(configAction, &QAction::triggered, this, &MainWidget::configure);
     configAction->setIcon(QIcon(":/images/images/menu-configure.png"));
 
-    quitAction = new QAction(trUtf8("&Exit"), this);
-    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
+    quitAction = new QAction(tr("&Exit"), this);
+    connect(quitAction, &QAction::triggered, this, &MainWidget::close);
     quitAction->setIcon(QIcon(":/images/images/menu-quit.png"));
 
     // Menu
@@ -427,11 +435,11 @@ void MainWidget::createTrayIcon()
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(QIcon(":/images/images/nadir.png"));
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setToolTip(trUtf8("Nadir Multimodal Screen Scanner"));
+    trayIcon->setToolTip(tr("Nadir Multimodal Screen Scanner"));
 
     // Signals
-    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-                 this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+    connect(trayIcon, &QSystemTrayIcon::activated,
+                 this, &MainWidget::iconActivated);
 
     // Show
     trayIcon->show();
