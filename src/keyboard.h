@@ -1,22 +1,30 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#define KEYPRESSTIME 250
-#define KEYPRESSTIME2 100
+#include <array>
 
-#define BIT(c, x)   ( c[x/8]&(1<<(x%8)) )
-#define KEYSYM_STRLEN   64
-#define SHIFT_DOWN  1
-#define LOCK_DOWN   5
-#define CONTROL_DOWN    3
-#define ISO3_DOWN    4
-#define MODE_DOWN    5
-/* I think it is pretty standard */
-#define SHIFT_INDEX 1  /*index for XKeycodeToKeySym(), for shifted keys*/
-#define MODE_INDEX 2
-#define MODESHIFT_INDEX 3
-#define ISO3_INDEX 4 //TODO geht leider nicht??
-#define ISO3SHIFT_INDEX 4
+/// Delay used for simulated key presses (milliseconds)
+constexpr int KEY_PRESS_TIME = 250;
+/// Delay used for simulated double click (milliseconds)
+constexpr int KEY_PRESS_TIME2 = 100;
+
+inline bool bit(const char *c, int x) { return c[x / 8] & (1 << (x % 8)); }
+
+constexpr int KEYSYM_STRLEN = 64;
+
+// Modifier return values
+constexpr int SHIFT_DOWN = 1;
+constexpr int LOCK_DOWN  = 5;
+constexpr int CONTROL_DOWN = 3;
+constexpr int ISO3_DOWN = 4;
+constexpr int MODE_DOWN = 5;
+
+// Indexes for XKeycodeToKeysym()
+constexpr int SHIFT_INDEX = 1;      ///< shifted keys
+constexpr int MODE_INDEX = 2;
+constexpr int MODESHIFT_INDEX = 3;
+constexpr int ISO3_INDEX = 4;        ///< TODO does not work?
+constexpr int ISO3SHIFT_INDEX = 4;
 
 #include <ctype.h>
 #include <stdio.h>
@@ -64,8 +72,6 @@ class Keyboard
     void setEscapeCode( int i );
     void loadKeyCode();
     void setKeyCode(int i);
-    void setButtonCode(int i);
-    int getButtonCount() const;
     Display *getDisplay();
 
     int StrToChar(char *data);
@@ -75,23 +81,15 @@ class Keyboard
   private:
     Display *disp;
     int screen;
-    XEvent xe;
-    XKeyEvent *ke;
-    int iKeyCode;
-    int iKeyState;
-    int iKeyTime;
-    int iKeyType;
-    KeySym keysym;
-    char *keyString;
     int escapeCode;
     int keyCode;
-    int x11_fd;
-    fd_set in_fds;
-    struct timeval tv;
 
-    int i;
-    char *char_ptr, buf1[32], buf2[32], *keys, *saved;
-    int PrintUp;
+    // key state buffers used by grabKeyEvent
+    char buf1[32], buf2[32];
+    char *keys{buf1};
+    char *saved{buf2};
+
+    bool printUp;
 };
 
 #endif // KEYBOARD_H
