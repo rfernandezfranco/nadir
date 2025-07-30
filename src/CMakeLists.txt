@@ -4,6 +4,7 @@ set(SOURCES
       jackcapture.cpp
       key.cpp
       keyboard.cpp
+      mouse.cpp
       main.cpp
       mainWidget.cpp
       meter.cpp
@@ -21,6 +22,7 @@ set(HEADERS
       jackcapture.h
       key.h
       keyboard.h
+      mouse.h
       mainWidget.h
       meter.h
       microphone.h

@@ -25,6 +25,7 @@
 #include "config.h"
 #include "confWidget.h"
 #include "keyboard.h"
+#include "mouse.h"
 #include "microphone.h"
 #include "scanLine.h"
 #include "settings.h"
@@ -80,6 +81,7 @@ class MainWidget : public QWidget
     State state;
     Mode mode;
     Keyboard *kbd;
+    Mouse *mouse;
     Microphone *mic;
     double threshold;
     bool waiting;

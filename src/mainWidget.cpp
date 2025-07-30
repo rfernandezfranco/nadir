@@ -39,7 +39,8 @@ MainWidget::MainWidget()
           this, &MainWidget::setEvent);
 
   kbd = new Keyboard();
-  if ( !kbd->start() )
+  mouse = new Mouse();
+  if ( !kbd->start() || !mouse->start() )
     close();
 
   SettingsData settings;
@@ -231,7 +232,7 @@ void MainWidget::grabEvent()
   if(mode == KEY)
       e = kbd->grabKeyEvent();
   else if(mode == MOUSE)
-      e = kbd->grabButtonEvent();
+      e = mouse->grabButtonEvent();
 
   if(e)
       changeState();
@@ -254,7 +255,7 @@ void MainWidget::stop()
 
 void MainWidget::configure( void )
 {
-  confWidget = new ConfWidget( this, mic, kbd );
+  confWidget = new ConfWidget( this, mic, kbd, mouse );
   confWidget->show();
 }
 
@@ -461,5 +462,13 @@ void MainWidget::iconActivated(QSystemTrayIcon::ActivationReason reason)
 
 MainWidget::~MainWidget()
 {
+  if(mouse){
+      mouse->stop();
+      delete mouse;
+  }
+  if(kbd){
+      kbd->stop();
+      delete kbd;
+  }
 }
 

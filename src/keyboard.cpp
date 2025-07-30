@@ -19,7 +19,6 @@ void Keyboard::loadKeyCode()
   keyCode = settings.value( "keycode", 65).toInt();
   buttonCode = settings.value( "mouseButton", 1).toInt();
   settings.endGroup();
-  lastMask = 0;
 }
 
 bool Keyboard::start()
@@ -32,7 +31,6 @@ bool Keyboard::start()
 
   //x11_fd = ConnectionNumber(disp);
   //XFlush(disp);
-  grabbed = false;
 
   //snoop();
   XSynchronize(disp, TRUE);
@@ -41,14 +39,6 @@ bool Keyboard::start()
   saved=buf1;
   keys=buf2;
   XQueryKeymap(disp, saved);
-
-  if(buttonCode > 0){
-    XGrabButton(disp, buttonCode, AnyModifier,
-                DefaultRootWindow(disp), False,
-                ButtonPressMask, GrabModeAsync, GrabModeAsync,
-                None, None);
-    grabbed = true;
-  }
 
   return true;
 }
@@ -159,17 +149,7 @@ unsigned int Keyboard::grabKeyEvent()
 }
 
 /* Return 0:No event, 1:Button event */
-unsigned int Keyboard::grabButtonEvent()
-{
-  unsigned int event = 0;
-  while(XPending(disp)){
-    XEvent ev;
-    XNextEvent(disp, &ev);
-    if(ev.type == ButtonPress && ev.xbutton.button == buttonCode)
-        event = 1;
-  }
-  return event;
-}
+
 
 /* This part takes the keycode and makes an output string. */
 
@@ -316,31 +296,6 @@ void Keyboard::setEscapeCode( int i )
 void Keyboard::setKeyCode( int i )
 {
   keyCode = i;
-}
-
-void Keyboard::setButtonCode( int i )
-{
-  if(grabbed && buttonCode > 0 && disp){
-    XUngrabButton(disp, buttonCode, AnyModifier, DefaultRootWindow(disp));
-    grabbed = false;
-  }
-
-  buttonCode = i;
-
-  if(buttonCode > 0 && disp){
-    XGrabButton(disp, buttonCode, AnyModifier,
-                DefaultRootWindow(disp), False,
-                ButtonPressMask, GrabModeAsync, GrabModeAsync,
-                None, None);
-    grabbed = true;
-  }
-}
-
-int Keyboard::getButtonCount() const
-{
-  unsigned char map[256];
-  int count = XGetPointerMapping(disp, map, sizeof(map));
-  return count;
 }
 
 void Keyboard::move( int x, int y )

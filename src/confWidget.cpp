@@ -63,7 +63,7 @@ static int qtToX11Button(Qt::MouseButton btn)
   return 0;
 }
 
-ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
+ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *mouse ):
   QWidget( parent )
 {
   setWindowFlags( Qt::Window );
@@ -121,7 +121,8 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd ):
   }
 
   myKbd = kbd;
-  mouseButtonCount = myKbd ? myKbd->getButtonCount() : 0;
+  myMouse = mouse;
+  mouseButtonCount = myMouse ? myMouse->getButtonCount() : 0;
 
   QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
   QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
@@ -273,7 +274,8 @@ void ConfWidget::save()
   settings.sync();
 
   myKbd->setKeyCode(ui.keyCodeField->text().toInt());
-  myKbd->setButtonCode(mouseButton);
+  if(myMouse)
+      myMouse->setButtonCode(mouseButton);
   originalMouseButton = mouseButton;
 
   emit closing();
@@ -347,8 +349,8 @@ void ConfWidget::closeEvent()
   settings.setValue( "pos", pos() );
   settings.endGroup();
 
-  if(myKbd)
-      myKbd->setButtonCode(originalMouseButton);
+  if(myMouse)
+      myMouse->setButtonCode(originalMouseButton);
 }
 
 void ConfWidget::changeKey()
@@ -360,8 +362,8 @@ void ConfWidget::changeKey()
 
 void ConfWidget::changeButton()
 {
-  if(myKbd)
-      myKbd->setButtonCode(0); // release current grab so we receive the click
+  if(myMouse)
+      myMouse->setButtonCode(0); // release current grab so we receive the click
   ui.mouseGroupBox->setVisible(false);
   ui.pressButtonLabel->setVisible(true);
   ui.pressButtonLabel->setFocus();

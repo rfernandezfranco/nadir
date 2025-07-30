@@ -27,6 +27,7 @@
 #include <math.h>
 #include "common.h"
 #include "keyboard.h"
+#include "mouse.h"
 #include "key.h"
 #include "microphone.h"
 #include "ui_confWidget.h"
@@ -36,7 +37,7 @@ class ConfWidget : public QWidget
   Q_OBJECT
 
   public:
-    ConfWidget( QWidget *parent = 0, Microphone *mic = 0, Keyboard *kbd = 0 );
+    ConfWidget( QWidget *parent = 0, Microphone *mic = 0, Keyboard *kbd = 0, Mouse *mouse = 0 );
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
@@ -70,6 +71,7 @@ class ConfWidget : public QWidget
     QString lineColor;
     Microphone *myMic;
     Keyboard *myKbd;
+    Mouse *myMouse;
     int threshold;
     unsigned int waitTime;
     bool waiting;
