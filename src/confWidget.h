@@ -38,6 +38,7 @@ class ConfWidget : public QWidget
 
   public:
     ConfWidget( QWidget *parent = 0, Microphone *mic = 0, Keyboard *kbd = 0, Mouse *mouse = 0 );
+    ~ConfWidget();
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
@@ -75,6 +76,7 @@ class ConfWidget : public QWidget
     int threshold;
     unsigned int waitTime;
     bool waiting;
+    bool startedMicCapture;
     int mouseButton;
     int originalMouseButton;
     int mouseButtonCount;
