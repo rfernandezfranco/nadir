@@ -95,7 +95,7 @@ void SettingsData::setDefault()
     rate = 44100;
     alsaPeriods = 2;
     alsaPeriodsize = 2048;
-    alsaPcmName = "plughw:0";
+    alsaPcmName = "default";
 }
 
 int SettingsData::parseCmdLine(int argc, char *argv[])

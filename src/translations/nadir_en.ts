@@ -126,6 +126,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../confWidget.ui" line="358"/>
+        <source>Mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../confWidget.ui" line="362"/>
         <source>Default click</source>
         <translation type="unfinished"></translation>
@@ -194,6 +199,16 @@
     <message>
         <location filename="../confWidget.ui" line="598"/>
         <source>Button to use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="612"/>
+        <source>Used button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../confWidget.ui" line="612"/>
+        <source>Press a button...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
