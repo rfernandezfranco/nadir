@@ -51,7 +51,7 @@ int JackCapture::initJack()
     rate = jack_get_sample_rate(jack_handle);
     for (l1 = 0; l1 < channels; l1++) {
         jack_in.append(jack_port_register(jack_handle,
-            QString("in_%1").arg(l1).toAscii().constData(),
+            QString("in_%1").arg(l1).toLatin1().constData(),
             JACK_DEFAULT_AUDIO_TYPE, JackPortIsInput, 0));
     }
     return(0);

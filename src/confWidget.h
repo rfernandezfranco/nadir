@@ -20,12 +20,14 @@
 #ifndef CONFWIDGET_H
 #define CONFWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
+#include <QMouseEvent>
 #include <QMainWindow>
 #include <QWidget>
 #include <math.h>
 #include "common.h"
 #include "keyboard.h"
+#include "mouse.h"
 #include "key.h"
 #include "microphone.h"
 #include "ui_confWidget.h"
@@ -35,10 +37,11 @@ class ConfWidget : public QWidget
   Q_OBJECT
 
   public:
-    ConfWidget( QWidget *parent = 0, Microphone *mic = 0, Keyboard *kbd = 0 );
+    ConfWidget( QWidget *parent = 0, Microphone *mic = 0, Keyboard *kbd = 0, Mouse *mouse = 0 );
     void loadSettings();
     void closeEvent();
     QString backgroundColor();
+    void updateColorButton();
 
   signals:
     void closing();
@@ -53,9 +56,12 @@ class ConfWidget : public QWidget
     void minimizedBoxToggled();
     void hiddenBoxToggled();
     void changeKey();
+    void changeButton();
+    void scanModeChanged();
 
   protected slots:
     void keyPressEvent(QKeyEvent *);
+    void mousePressEvent(QMouseEvent *);
 
   public slots:
     void showAboutText();
@@ -65,9 +71,13 @@ class ConfWidget : public QWidget
     QString lineColor;
     Microphone *myMic;
     Keyboard *myKbd;
+    Mouse *myMouse;
     int threshold;
     unsigned int waitTime;
     bool waiting;
+    int mouseButton;
+    int originalMouseButton;
+    int mouseButtonCount;
 };
 
 #endif // CONFWIDGET_H
