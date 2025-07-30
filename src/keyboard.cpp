@@ -39,6 +39,8 @@ bool Keyboard::start()
   keys=buf2;
   XQueryKeymap(disp, saved);
 
+
+
   return true;
 }
 
@@ -294,6 +296,8 @@ void Keyboard::setKeyCode( int i )
 {
   keyCode = i;
 }
+
+
 
 void Keyboard::move( int x, int y )
 {

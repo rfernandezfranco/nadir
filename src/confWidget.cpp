@@ -24,6 +24,7 @@
 #include "confWidget.h"
 #include "mainWidget.h"
 
+// Return a human friendly name for an X11 button number
 static QString mouseButtonName(int x11Button)
 {
   switch(x11Button){
@@ -37,6 +38,7 @@ static QString mouseButtonName(int x11Button)
   }
 }
 
+// Convert a Qt mouse button to its X11 button index
 static int qtToX11Button(Qt::MouseButton btn)
 {
   switch (btn) {

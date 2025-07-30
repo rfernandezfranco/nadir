@@ -1,5 +1,7 @@
 #include "mouse.h"
 
+// Basic wrapper around Xlib button grabbing used for mouse-based scan mode
+
 Mouse::Mouse()
 {
     grabbed = false;
@@ -20,14 +22,14 @@ void Mouse::loadButtonCode()
 
 bool Mouse::start()
 {
-    disp = XOpenDisplay(nullptr);
-    if (!disp)
+    display = XOpenDisplay(nullptr);
+    if (!display)
         return false;
-    screen = DefaultScreen(disp);
+    screenNumber = DefaultScreen(display);
     grabbed = false;
     if(buttonCode > 0){
-        XGrabButton(disp, buttonCode, AnyModifier,
-                    DefaultRootWindow(disp), False,
+        XGrabButton(display, buttonCode, AnyModifier,
+                    DefaultRootWindow(display), False,
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
         grabbed = true;
@@ -38,33 +40,33 @@ bool Mouse::start()
 void Mouse::stop()
 {
     if(grabbed && buttonCode > 0)
-        XUngrabButton(disp, buttonCode, AnyModifier, DefaultRootWindow(disp));
-    if(disp)
-        XCloseDisplay(disp);
+        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+    if(display)
+        XCloseDisplay(display);
 }
 
 unsigned int Mouse::grabButtonEvent()
 {
-    unsigned int event = 0;
-    while(XPending(disp)){
+    unsigned int result = 0;
+    while (XPending(display)) {
         XEvent ev;
-        XNextEvent(disp, &ev);
-        if(ev.type == ButtonPress && ev.xbutton.button == buttonCode)
-            event = 1;
+        XNextEvent(display, &ev);
+        if (ev.type == ButtonPress && ev.xbutton.button == buttonCode)
+            result = 1;
     }
-    return event;
+    return result;
 }
 
 void Mouse::setButtonCode(int i)
 {
-    if(grabbed && buttonCode > 0 && disp){
-        XUngrabButton(disp, buttonCode, AnyModifier, DefaultRootWindow(disp));
+    if(grabbed && buttonCode > 0 && display){
+        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
         grabbed = false;
     }
     buttonCode = i;
-    if(buttonCode > 0 && disp){
-        XGrabButton(disp, buttonCode, AnyModifier,
-                    DefaultRootWindow(disp), False,
+    if(buttonCode > 0 && display){
+        XGrabButton(display, buttonCode, AnyModifier,
+                    DefaultRootWindow(display), False,
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
         grabbed = true;
@@ -74,10 +76,11 @@ void Mouse::setButtonCode(int i)
 int Mouse::getButtonCount() const
 {
     unsigned char map[256];
-    return XGetPointerMapping(disp, map, sizeof(map));
+    return XGetPointerMapping(display, map, sizeof(map));
 }
 
 Mouse::~Mouse()
 {
+    stop();
 }
 
