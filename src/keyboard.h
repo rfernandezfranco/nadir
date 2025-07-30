@@ -73,6 +73,8 @@ class Keyboard
     void loadKeyCode();
     void setKeyCode(int i);
     Display *getDisplay();
+    /// Release all currently pressed keys
+    void releasePressedKeys();
 
     int StrToChar(char *data);
     const char *KeyCodeToStr(int code, int down, int mod);
