@@ -70,6 +70,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 {
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
+  setAttribute(Qt::WA_DeleteOnClose);
 
   // Hide camera tab until feature is ready
   ui.tabWidget->removeTab(ui.tabWidget->indexOf(ui.camTab));
@@ -356,6 +357,11 @@ void ConfWidget::closeEvent()
   settings.setValue( "size", size() );
   settings.setValue( "pos", pos() );
   settings.endGroup();
+
+  if(startedMicCapture && myMic){
+      myMic->capture(false);
+      startedMicCapture = false;
+  }
 
   if(myMouse)
       myMouse->setButtonCode(originalMouseButton);
