@@ -302,14 +302,28 @@ void Keyboard::key( int k )
   XTestFakeKeyEvent( disp, k, False, KEY_PRESS_TIME );
 }
 
+void Keyboard::releasePressedKeys()
+{
+  if (!disp)
+    return;
+  char pressed[32];
+  XQueryKeymap(disp, pressed);
+  for (int idx = 0; idx < 32 * 8; ++idx) {
+    if (bit(pressed, idx))
+      XTestFakeKeyEvent(disp, idx, False, 0);
+  }
+}
+
 void Keyboard::click(void)
 {
+  releasePressedKeys();
   XTestFakeButtonEvent( disp, 1, True, 0 );
   XTestFakeButtonEvent( disp, 1, False, KEY_PRESS_TIME );
 }
 
 void Keyboard::doubleClick(void)
 {
+  releasePressedKeys();
   XTestFakeButtonEvent( disp, 1, True, KEY_PRESS_TIME2 );
   XTestFakeButtonEvent( disp, 1, False, KEY_PRESS_TIME2 );
   XTestFakeButtonEvent( disp, 1, True, KEY_PRESS_TIME2 );
@@ -318,17 +332,20 @@ void Keyboard::doubleClick(void)
 
 void Keyboard::rightClick(void)
 {
+  releasePressedKeys();
   XTestFakeButtonEvent( disp, 3, True, 0 );
   XTestFakeButtonEvent( disp, 3, False, KEY_PRESS_TIME );
 }
 
 void Keyboard::drag(void)
 {
+  releasePressedKeys();
   XTestFakeButtonEvent( disp, 1, True, 0 );
 }
 
 void Keyboard::drop(void)
 {
+  releasePressedKeys();
   XTestFakeButtonEvent( disp, 1, False, KEY_PRESS_TIME );
 }
 
