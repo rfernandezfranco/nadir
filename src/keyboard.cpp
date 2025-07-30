@@ -2,8 +2,7 @@
 
 Keyboard::Keyboard()
 {
-  keyString = (char *)malloc( 20 * sizeof(char));
-  PrintUp  =FALSE;
+  printUp = false;
   loadKeyCode();
 }
 
@@ -22,16 +21,12 @@ void Keyboard::loadKeyCode()
 
 bool Keyboard::start()
 {
-  disp = XOpenDisplay(NULL);
+  disp = XOpenDisplay(nullptr);
+  if (!disp)
+    return false;
   screen = DefaultScreen(disp);
 
-  if( disp == NULL )
-    return false;
-
-  //x11_fd = ConnectionNumber(disp);
-  //XFlush(disp);
-
-  //snoop();
+  //XSynchronize(disp, TRUE) ensures events are processed sequentially
   XSynchronize(disp, TRUE);
 
   /* setup buffers */
@@ -66,12 +61,9 @@ Display *Keyboard::getDisplay()
 
 void Keyboard::snoop_all_windows(Window root, unsigned long type)
 {
-  static int level = 0;
   Window parent, *children;
-  unsigned int i, nchildren;
+  unsigned int nchildren;
   int stat;
-
-  level++;
 
   stat = XQueryTree(disp, root, &root, &parent, &children, &nchildren);
   if (stat == FALSE)
@@ -85,11 +77,10 @@ void Keyboard::snoop_all_windows(Window root, unsigned long type)
 
   XSelectInput(disp, root, type);
 
-  for(i=0; i < nchildren; i++)
-   {
-     XSelectInput(disp, children[i], type);
-     snoop_all_windows(children[i], type);
-   }
+  for (unsigned int idx = 0; idx < nchildren; ++idx) {
+    XSelectInput(disp, children[idx], type);
+    snoop_all_windows(children[idx], type);
+  }
 
   XFree((char *)children);
 }
@@ -130,22 +121,21 @@ unsigned int Keyboard::grabKeyEvent()
   XQueryKeymap(disp, keys);
   int event = 0;
 
-  for (i=0; i<32*8; i++) {
-     if (BIT(keys, i)!=BIT(saved, i)) {
-       const char *str = KeyCodeToStr(i, BIT(keys, i), KeyModifiers(keys));
-        if (BIT(keys, i)!=0 || PrintUp){
-          if(i==keyCode){
-            event++;
-          }
-        };
-        fflush(stdout); /* in case user is writing to a pipe */
-     }
+  for (int idx = 0; idx < 32 * 8; ++idx) {
+    if (bit(keys, idx) != bit(saved, idx)) {
+      if (bit(keys, idx) != 0 || printUp) {
+        if (idx == keyCode) {
+          event++;
+        }
+      }
+      fflush(stdout); /* in case user is writing to a pipe */
+    }
   }
 
   /* swap buffers */
-  char_ptr=saved;
-  saved=keys;
-  keys=char_ptr;
+  char *tmp = saved;
+  saved = keys;
+  keys = tmp;
   return event>0 ? 1 : 0;
 }
 
@@ -251,40 +241,42 @@ const char *Keyboard::KeyCodeToStr(int code, int down, int mod) {
 
 /* returns which modifier is down, shift/caps or control */
 int Keyboard::KeyModifiers(char *keys) {
-  static int setup=TRUE;
+  static bool setup = true;
   static int width;
   static XModifierKeymap *mmap;
-  int i;
 
   if (setup) {
-    setup=FALSE;
-    mmap=XGetModifierMapping(disp);
-    width=mmap->max_keypermod;
+    setup = false;
+    mmap = XGetModifierMapping(disp);
+    width = mmap->max_keypermod;
   }
-  for (i=0; i<width; i++) {
+  for (int idx = 0; idx < width; ++idx) {
     KeyCode code;
 
-    code=mmap->modifiermap[ControlMapIndex*width+i];
-    if (code && 0!=BIT(keys, code)) {return CONTROL_DOWN;}
+    code = mmap->modifiermap[ControlMapIndex * width + idx];
+    if (code && bit(keys, code)) { return CONTROL_DOWN; }
 
-    code=mmap->modifiermap[ShiftMapIndex*width  +i];
-    if (code && 0!=BIT(keys, code)) {return SHIFT_DOWN;}
+    code = mmap->modifiermap[ShiftMapIndex * width + idx];
+    if (code && bit(keys, code)) { return SHIFT_DOWN; }
 
-    code=mmap->modifiermap[LockMapIndex*width   +i];
-    if (code && 0!=BIT(keys, code)) {return LOCK_DOWN;}
+    code = mmap->modifiermap[LockMapIndex * width + idx];
+    if (code && bit(keys, code)) { return LOCK_DOWN; }
 
-    code=mmap->modifiermap[Mod3MapIndex*width   +i];
-    if (code && 0!=BIT(keys, code)) {return ISO3_DOWN;}
+    code = mmap->modifiermap[Mod3MapIndex * width + idx];
+    if (code && bit(keys, code)) { return ISO3_DOWN; }
 
-    code=mmap->modifiermap[Mod5MapIndex*width   +i];
-    if (code && 0!=BIT(keys, code)) {return MODE_DOWN;}
+    code = mmap->modifiermap[Mod5MapIndex * width + idx];
+    if (code && bit(keys, code)) { return MODE_DOWN; }
   }
   return 0;
 }
 
 void Keyboard::stop()
 {
-  XCloseDisplay(disp);
+  if (disp) {
+    XCloseDisplay(disp);
+    disp = nullptr;
+  }
 }
 
 void Keyboard::setEscapeCode( int i )
@@ -307,27 +299,27 @@ void Keyboard::move( int x, int y )
 void Keyboard::key( int k )
 {
   XTestFakeKeyEvent( disp, k, True, 0 );
-  XTestFakeKeyEvent( disp, k, False, KEYPRESSTIME );
+  XTestFakeKeyEvent( disp, k, False, KEY_PRESS_TIME );
 }
 
 void Keyboard::click(void)
 {
   XTestFakeButtonEvent( disp, 1, True, 0 );
-  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME );
+  XTestFakeButtonEvent( disp, 1, False, KEY_PRESS_TIME );
 }
 
 void Keyboard::doubleClick(void)
 {
-  XTestFakeButtonEvent( disp, 1, True, KEYPRESSTIME2 );
-  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME2 );
-  XTestFakeButtonEvent( disp, 1, True, KEYPRESSTIME2 );
-  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME2 );
+  XTestFakeButtonEvent( disp, 1, True, KEY_PRESS_TIME2 );
+  XTestFakeButtonEvent( disp, 1, False, KEY_PRESS_TIME2 );
+  XTestFakeButtonEvent( disp, 1, True, KEY_PRESS_TIME2 );
+  XTestFakeButtonEvent( disp, 1, False, KEY_PRESS_TIME2 );
 }
 
 void Keyboard::rightClick(void)
 {
   XTestFakeButtonEvent( disp, 3, True, 0 );
-  XTestFakeButtonEvent( disp, 3, False, KEYPRESSTIME );
+  XTestFakeButtonEvent( disp, 3, False, KEY_PRESS_TIME );
 }
 
 void Keyboard::drag(void)
@@ -337,9 +329,10 @@ void Keyboard::drag(void)
 
 void Keyboard::drop(void)
 {
-  XTestFakeButtonEvent( disp, 1, False, KEYPRESSTIME );
+  XTestFakeButtonEvent( disp, 1, False, KEY_PRESS_TIME );
 }
 
 Keyboard::~Keyboard()
 {
+  stop();
 }
