@@ -17,6 +17,7 @@ void Keyboard::loadKeyCode()
 
   settings.beginGroup( "Main" );
   keyCode = settings.value( "keycode", 65).toInt();
+  buttonCode = settings.value( "mouseButton", 1).toInt();
   settings.endGroup();
 }
 
@@ -38,8 +39,6 @@ bool Keyboard::start()
   saved=buf1;
   keys=buf2;
   XQueryKeymap(disp, saved);
-
-
 
   return true;
 }
@@ -284,6 +283,8 @@ int Keyboard::KeyModifiers(char *keys) {
 
 void Keyboard::stop()
 {
+  if(grabbed && buttonCode > 0)
+    XUngrabButton(disp, buttonCode, AnyModifier, DefaultRootWindow(disp));
   XCloseDisplay(disp);
 }
 
@@ -296,8 +297,6 @@ void Keyboard::setKeyCode( int i )
 {
   keyCode = i;
 }
-
-
 
 void Keyboard::move( int x, int y )
 {
