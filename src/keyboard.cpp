@@ -17,7 +17,6 @@ void Keyboard::loadKeyCode()
 
   settings.beginGroup( "Main" );
   keyCode = settings.value( "keycode", 65).toInt();
-  buttonCode = settings.value( "mouseButton", 1).toInt();
   settings.endGroup();
 }
 
