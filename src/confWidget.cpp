@@ -190,6 +190,7 @@ void ConfWidget::loadSettings()
   ui.keyCodeField->setText( settings.value( "keycode", 65).toString() );
   ui.keySymField->setText( settings.value( "keysym", "ESPACIO").toString() );
   mouseButton = settings.value("mouseButton", 1).toInt();
+  originalMouseButton = mouseButton;
   ui.mouseButtonField->setText(mouseButtonName(mouseButton));
   ui.confirmOnExitBox->setChecked( settings.value( "confirmOnExit", 1).toBool() );
   settings.endGroup();
@@ -273,6 +274,7 @@ void ConfWidget::save()
 
   myKbd->setKeyCode(ui.keyCodeField->text().toInt());
   myKbd->setButtonCode(mouseButton);
+  originalMouseButton = mouseButton;
 
   emit closing();
   close();
@@ -344,6 +346,9 @@ void ConfWidget::closeEvent()
   settings.setValue( "size", size() );
   settings.setValue( "pos", pos() );
   settings.endGroup();
+
+  if(myKbd)
+      myKbd->setButtonCode(originalMouseButton);
 }
 
 void ConfWidget::changeKey()
@@ -355,6 +360,8 @@ void ConfWidget::changeKey()
 
 void ConfWidget::changeButton()
 {
+  if(myKbd)
+      myKbd->setButtonCode(0); // release current grab so we receive the click
   ui.mouseGroupBox->setVisible(false);
   ui.pressButtonLabel->setVisible(true);
   ui.pressButtonLabel->setFocus();

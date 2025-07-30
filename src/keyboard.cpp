@@ -320,7 +320,20 @@ void Keyboard::setKeyCode( int i )
 
 void Keyboard::setButtonCode( int i )
 {
+  if(grabbed && buttonCode > 0 && disp){
+    XUngrabButton(disp, buttonCode, AnyModifier, DefaultRootWindow(disp));
+    grabbed = false;
+  }
+
   buttonCode = i;
+
+  if(buttonCode > 0 && disp){
+    XGrabButton(disp, buttonCode, AnyModifier,
+                DefaultRootWindow(disp), False,
+                ButtonPressMask, GrabModeAsync, GrabModeAsync,
+                None, None);
+    grabbed = true;
+  }
 }
 
 int Keyboard::getButtonCount() const

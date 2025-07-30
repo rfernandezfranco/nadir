@@ -74,6 +74,7 @@ class ConfWidget : public QWidget
     unsigned int waitTime;
     bool waiting;
     int mouseButton;
+    int originalMouseButton;
     int mouseButtonCount;
 };
 
