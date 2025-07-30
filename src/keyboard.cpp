@@ -283,8 +283,6 @@ int Keyboard::KeyModifiers(char *keys) {
 
 void Keyboard::stop()
 {
-  if(grabbed && buttonCode > 0)
-    XUngrabButton(disp, buttonCode, AnyModifier, DefaultRootWindow(disp));
   XCloseDisplay(disp);
 }
 
