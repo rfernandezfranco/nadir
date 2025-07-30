@@ -64,6 +64,8 @@ class Keyboard
     void setEscapeCode( int i );
     void loadKeyCode();
     void setKeyCode(int i);
+    void setButtonCode(int i);
+    int getButtonCount() const;
     Display *getDisplay();
 
     int StrToChar(char *data);
