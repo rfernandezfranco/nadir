@@ -291,6 +291,12 @@ void ConfWidget::save()
       myMouse->setButtonCode(mouseButton);
   originalMouseButton = mouseButton;
 
+  bool micModeSelected = ui.micMode->isChecked();
+  if(startedMicCapture && myMic && !micModeSelected){
+      myMic->capture(false);
+  }
+  startedMicCapture = false;
+
   emit closing();
   close();
 }
