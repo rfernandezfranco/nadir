@@ -32,6 +32,8 @@
 #include "microphone.h"
 #include "ui_confWidget.h"
 
+class MainWidget;
+
 class ConfWidget : public QWidget
 {
   Q_OBJECT
@@ -73,6 +75,7 @@ class ConfWidget : public QWidget
     Microphone *myMic;
     Keyboard *myKbd;
     Mouse *myMouse;
+    MainWidget *mainWidget;
     int threshold;
     unsigned int waitTime;
     bool waiting;

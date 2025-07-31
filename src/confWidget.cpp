@@ -117,6 +117,10 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   });
 
   myMic = mic;
+  mainWidget = qobject_cast<MainWidget*>(parent);
+  if(mainWidget)
+      disconnect(myMic, &Microphone::doEvent,
+                 mainWidget, &MainWidget::micEvent);
   startedMicCapture = false;
   connect(myMic, &Microphone::doEvent,
           this, &ConfWidget::updateAudioSlider);
@@ -362,6 +366,10 @@ void ConfWidget::closeEvent()
       myMic->capture(false);
       startedMicCapture = false;
   }
+
+  if(mainWidget)
+      connect(myMic, &Microphone::doEvent,
+              mainWidget, &MainWidget::micEvent);
 
   if(myMouse)
       myMouse->setButtonCode(originalMouseButton);
