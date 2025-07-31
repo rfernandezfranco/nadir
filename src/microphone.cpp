@@ -142,8 +142,12 @@ void Microphone::capture(bool on)
         if (capturing) {
             capturing = false;
             if (!jackMode) {
+                // Temporarily block finished() so the stop() slot does not
+                // interpret this controlled shutdown as a failure.
+                bool blocked = alsaCapture->blockSignals(true);
                 alsaCapture->stop();
                 alsaCapture->wait();
+                alsaCapture->blockSignals(blocked);
             }
             ringBuffer->reset();
             for (l1 = 0; l1 < meters.size(); l1++) {
