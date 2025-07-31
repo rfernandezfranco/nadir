@@ -120,6 +120,15 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   startedMicCapture = false;
   connect(myMic, &Microphone::doEvent,
           this, &ConfWidget::updateAudioSlider);
+
+  // Always show microphone configuration and preview audio activity. If
+  // capture isn't already running (for example when another scan mode is
+  // active), start it temporarily so the level meter updates while the
+  // settings window is open.
+  if(myMic && !myMic->isCapturing()){
+      myMic->capture(true);
+      startedMicCapture = true;
+  }
   ui.micWidget->setCurrentIndex(1);
 
   myKbd = kbd;
