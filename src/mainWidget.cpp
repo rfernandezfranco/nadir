@@ -255,6 +255,7 @@ void MainWidget::stop()
 
 void MainWidget::configure( void )
 {
+  stop();
   confWidget = new ConfWidget( this, mic, kbd, mouse );
   confWidget->show();
 }
