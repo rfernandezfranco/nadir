@@ -121,7 +121,6 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   if(mainWidget)
       QObject::disconnect(myMic, SIGNAL(doEvent(double)),
                           mainWidget, SLOT(micEvent(double)));
-  startedMicCapture = false;
   connect(myMic, &Microphone::doEvent,
           this, &ConfWidget::updateAudioSlider);
   if( myMic->isCapturing() )
@@ -158,11 +157,8 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   resize(0,0);
 }
 
-ConfWidget::~ConfWidget()
-{
-  if(startedMicCapture && myMic)
-      myMic->capture(false);
-}
+
+ConfWidget::~ConfWidget() {}
 
 void ConfWidget::minimizedBoxToggled()
 {
@@ -291,11 +287,7 @@ void ConfWidget::save()
       myMouse->setButtonCode(mouseButton);
   originalMouseButton = mouseButton;
 
-  bool micModeSelected = ui.micMode->isChecked();
-  if(startedMicCapture && myMic && !micModeSelected){
-      myMic->capture(false);
-  }
-  startedMicCapture = false;
+
 
   emit closing();
   close();
@@ -368,10 +360,7 @@ void ConfWidget::closeEvent()
   settings.setValue( "pos", pos() );
   settings.endGroup();
 
-  if(startedMicCapture && myMic){
-      myMic->capture(false);
-      startedMicCapture = false;
-  }
+
 
   if(mainWidget)
       QObject::connect(myMic, SIGNAL(doEvent(double)),
@@ -401,16 +390,8 @@ void ConfWidget::scanModeChanged()
 {
   if (ui.micMode->isChecked()) {
     ui.micWidget->setCurrentIndex(1);
-    if(!myMic->isCapturing()) {
-        myMic->capture(true);
-        startedMicCapture = true;
-    }
   } else {
     ui.micWidget->setCurrentIndex(0);
-    if(startedMicCapture) {
-        myMic->capture(false);
-        startedMicCapture = false;
-    }
   }
 }
 
