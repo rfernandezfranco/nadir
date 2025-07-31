@@ -120,8 +120,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   startedMicCapture = false;
   connect(myMic, &Microphone::doEvent,
           this, &ConfWidget::updateAudioSlider);
-  if( myMic->isCapturing() )
-    ui.micWidget->setCurrentIndex( 1 );
+  ui.micWidget->setCurrentIndex(1);
 
   myKbd = kbd;
   myMouse = mouse;
@@ -385,18 +384,8 @@ void ConfWidget::changeButton()
 
 void ConfWidget::scanModeChanged()
 {
-  if (ui.micMode->isChecked()) {
-    if(myMic->isCapturing())
-        ui.micWidget->setCurrentIndex(1);
-    else
-        ui.micWidget->setCurrentIndex(0);
-  } else {
-    ui.micWidget->setCurrentIndex(0);
-    if(startedMicCapture) {
-        myMic->capture(false);
-        startedMicCapture = false;
-    }
-  }
+  // Microphone settings remain visible regardless of the selected mode.
+  // Capture will start after saving if microphone mode is chosen.
 }
 
 void ConfWidget::keyPressEvent(QKeyEvent *e)
