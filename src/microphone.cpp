@@ -140,6 +140,8 @@ void Microphone::capture(bool on)
         capturing = false;
         if (!jackMode) {
             alsaCapture->stop();
+            if(alsaCapture->isRunning())
+                alsaCapture->wait();
         }
         ringBuffer->reset();
         for (l1 = 0; l1 < meters.size(); l1++) {
