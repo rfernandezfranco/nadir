@@ -124,37 +124,36 @@ int Microphone::open_seq(snd_seq_t **seq_handle, int in_ports[],
 
 void Microphone::capture(bool on)
 {
-    int l1;
-
     if (on) {
-        if (!capturing) {
-            capturing = true;
-            if (!jackMode) {
-                if (!alsaCapture->isRunning()) {
-                     alsaCapture->start();
-                }
-            }
-            for (l1 = 0; l1 < meters.size(); l1++) {
-                meters[l1]->start();
-            }
-        }
-    } else {
-        if (capturing) {
-            capturing = false;
-            if (!jackMode) {
-                // Temporarily block finished() so the stop() slot does not
-                // interpret this controlled shutdown as a failure.
-                bool blocked = alsaCapture->blockSignals(true);
-                alsaCapture->stop();
-                alsaCapture->wait();
-                alsaCapture->blockSignals(blocked);
-            }
-            ringBuffer->reset();
-            for (l1 = 0; l1 < meters.size(); l1++) {
-                meters[l1]->resetGlobalMax();
-                meters[l1]->stop();
-            }
-        }
+        if (capturing)
+            return;
+
+        capturing = true;
+        if (!jackMode && !alsaCapture->isRunning())
+            alsaCapture->start();
+
+        for (int idx = 0; idx < meters.size(); ++idx)
+            meters[idx]->start();
+        return;
+    }
+
+    if (!capturing)
+        return;
+
+    capturing = false;
+    if (!jackMode) {
+        // Temporarily block finished() so the stop() slot does not
+        // interpret this controlled shutdown as a failure.
+        bool blocked = alsaCapture->blockSignals(true);
+        alsaCapture->stop();
+        alsaCapture->wait();
+        alsaCapture->blockSignals(blocked);
+    }
+
+    ringBuffer->reset();
+    for (int idx = 0; idx < meters.size(); ++idx) {
+        meters[idx]->resetGlobalMax();
+        meters[idx]->stop();
     }
 }
 

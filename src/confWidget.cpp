@@ -117,7 +117,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   });
 
   myMic = mic;
-  startedMicCapture = false;
+  previewCaptureStarted = false;
   connect(myMic, &Microphone::doEvent,
           this, &ConfWidget::updateAudioSlider);
 
@@ -127,7 +127,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   // settings window is open.
   if(myMic && !myMic->isCapturing()){
       myMic->capture(true);
-      startedMicCapture = true;
+      previewCaptureStarted = true;
   }
   ui.micWidget->setCurrentIndex(1);
 
@@ -164,7 +164,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 
 ConfWidget::~ConfWidget()
 {
-  if(startedMicCapture && myMic)
+  if(previewCaptureStarted && myMic)
       myMic->capture(false);
 }
 
@@ -297,7 +297,7 @@ void ConfWidget::save()
 
   emit closing();
   if(ui.micMode->isChecked())
-      startedMicCapture = false; // keep capture running after settings are saved
+      previewCaptureStarted = false; // keep capture running after settings are saved
   close();
 }
 
@@ -368,9 +368,9 @@ void ConfWidget::closeEvent()
   settings.setValue( "pos", pos() );
   settings.endGroup();
 
-  if(startedMicCapture && myMic){
+  if(previewCaptureStarted && myMic){
       myMic->capture(false);
-      startedMicCapture = false;
+      previewCaptureStarted = false;
   }
 
   if(myMouse)
