@@ -32,6 +32,7 @@ Meter::Meter(tickType p_tick, RingBuffer *p_ringbuffer, int channelIndex,
     globalMax = 0;
     timer = new QTimer(this);
     wait = false;
+    _dB = p_minDB; // initialize with minimum value so the meter starts at zero
     connect(timer, SIGNAL(timeout()), this, SLOT(updateMeter()));
     connect(this, SIGNAL(dBUpdated(double)), parent, SLOT(getDb(double)));
 }
@@ -50,9 +51,11 @@ void Meter::setDb()
     meter_over = (sampleSize == 2) ? METER_OVER : METER_OVER32;
 
     if (max > 0) {
-        _dB = 20.0 * log((double)max/meter_over)/log(10.0);  
+        _dB = 20.0 * log((double)max/meter_over)/log(10.0);
         if (_dB < minDB)
-            _dB = minDB;  
+            _dB = minDB;
+    } else {
+        _dB = minDB;
     }
 
     emit dBUpdated( _dB );

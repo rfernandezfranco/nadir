@@ -35,7 +35,7 @@
 #define METER_OVER_WIDTH            30
 #define METER_TICK_WIDTH            25
 
-#define CAPTURE_TIME               150
+#define CAPTURE_TIME                50
 
 enum tickType { TICK_UP, TICK_DOWN };
 

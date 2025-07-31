@@ -70,6 +70,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 {
   setWindowFlags( Qt::Window );
   ui.setupUi(this);
+  setAttribute(Qt::WA_DeleteOnClose);
 
   // Hide camera tab until feature is ready
   ui.tabWidget->removeTab(ui.tabWidget->indexOf(ui.camTab));
@@ -116,11 +117,11 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   });
 
   myMic = mic;
-  if( myMic->isCapturing() ){
-    connect(myMic, &Microphone::doEvent,
-            this, &ConfWidget::updateAudioSlider);
+  startedMicCapture = false;
+  connect(myMic, &Microphone::doEvent,
+          this, &ConfWidget::updateAudioSlider);
+  if( myMic->isCapturing() )
     ui.micWidget->setCurrentIndex( 1 );
-  }
 
   myKbd = kbd;
   myMouse = mouse;
@@ -151,6 +152,12 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 
   // Shrink window to minimum needed size
   resize(0,0);
+}
+
+ConfWidget::~ConfWidget()
+{
+  if(startedMicCapture && myMic)
+      myMic->capture(false);
 }
 
 void ConfWidget::minimizedBoxToggled()
@@ -351,6 +358,11 @@ void ConfWidget::closeEvent()
   settings.setValue( "pos", pos() );
   settings.endGroup();
 
+  if(startedMicCapture && myMic){
+      myMic->capture(false);
+      startedMicCapture = false;
+  }
+
   if(myMouse)
       myMouse->setButtonCode(originalMouseButton);
 }
@@ -373,10 +385,19 @@ void ConfWidget::changeButton()
 
 void ConfWidget::scanModeChanged()
 {
-  if (ui.micMode->isChecked())
+  if (ui.micMode->isChecked()) {
     ui.micWidget->setCurrentIndex(1);
-  else
+    if(!myMic->isCapturing()) {
+        myMic->capture(true);
+        startedMicCapture = true;
+    }
+  } else {
     ui.micWidget->setCurrentIndex(0);
+    if(startedMicCapture) {
+        myMic->capture(false);
+        startedMicCapture = false;
+    }
+  }
 }
 
 void ConfWidget::keyPressEvent(QKeyEvent *e)
