@@ -296,6 +296,8 @@ void ConfWidget::save()
   originalMouseButton = mouseButton;
 
   emit closing();
+  if(ui.micMode->isChecked())
+      startedMicCapture = false; // keep capture running after settings are saved
   close();
 }
 
