@@ -386,11 +386,10 @@ void ConfWidget::changeButton()
 void ConfWidget::scanModeChanged()
 {
   if (ui.micMode->isChecked()) {
-    ui.micWidget->setCurrentIndex(1);
-    if(!myMic->isCapturing()) {
-        myMic->capture(true);
-        startedMicCapture = true;
-    }
+    if(myMic->isCapturing())
+        ui.micWidget->setCurrentIndex(1);
+    else
+        ui.micWidget->setCurrentIndex(0);
   } else {
     ui.micWidget->setCurrentIndex(0);
     if(startedMicCapture) {
