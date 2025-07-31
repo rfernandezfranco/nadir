@@ -79,6 +79,7 @@ class ConfWidget : public QWidget
     int threshold;
     unsigned int waitTime;
     bool waiting;
+    bool startedMicCapture;
     int mouseButton;
     int originalMouseButton;
     int mouseButtonCount;

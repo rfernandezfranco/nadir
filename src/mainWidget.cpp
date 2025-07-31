@@ -118,13 +118,16 @@ void MainWidget::loadSettings()
 void MainWidget::reloadSettings()
 {
   Mode oldMode = mode;
+  bool wasCapturing = mic->isCapturing();
   loadSettings();
 
   // Any case but continuing in mic mode
   if( !( oldMode == mode && mode == MIC ) ){
     stop();
     scan();
-  };
+  } else if( !wasCapturing ) {
+    scan();
+  }
 
   // From mic mode to other modes
   if( oldMode != mode && mode != MIC ){
