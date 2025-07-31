@@ -127,24 +127,29 @@ void Microphone::capture(bool on)
     int l1;
 
     if (on) {
-        capturing = true;
-        if (!jackMode) {
-            if (!alsaCapture->isRunning()) {
-                 alsaCapture->start();
+        if (!capturing) {
+            capturing = true;
+            if (!jackMode) {
+                if (!alsaCapture->isRunning()) {
+                     alsaCapture->start();
+                }
+            }
+            for (l1 = 0; l1 < meters.size(); l1++) {
+                meters[l1]->start();
             }
         }
-        for (l1 = 0; l1 < meters.size(); l1++) {
-            meters[l1]->start();
-        }
     } else {
-        capturing = false;
-        if (!jackMode) {
-            alsaCapture->stop();
-        }
-        ringBuffer->reset();
-        for (l1 = 0; l1 < meters.size(); l1++) {
-            meters[l1]->resetGlobalMax();
-            meters[l1]->stop();
+        if (capturing) {
+            capturing = false;
+            if (!jackMode) {
+                alsaCapture->stop();
+                alsaCapture->wait();
+            }
+            ringBuffer->reset();
+            for (l1 = 0; l1 < meters.size(); l1++) {
+                meters[l1]->resetGlobalMax();
+                meters[l1]->stop();
+            }
         }
     }
 }
