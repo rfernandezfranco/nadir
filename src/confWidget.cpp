@@ -117,11 +117,19 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   });
 
   myMic = mic;
-  startedMicCapture = false;
+  previewCaptureStarted = false;
   connect(myMic, &Microphone::doEvent,
           this, &ConfWidget::updateAudioSlider);
-  if( myMic->isCapturing() )
-    ui.micWidget->setCurrentIndex( 1 );
+
+  // Always show microphone configuration and preview audio activity. If
+  // capture isn't already running (for example when another scan mode is
+  // active), start it temporarily so the level meter updates while the
+  // settings window is open.
+  if(myMic && !myMic->isCapturing()){
+      myMic->capture(true);
+      previewCaptureStarted = true;
+  }
+  ui.micWidget->setCurrentIndex(1);
 
   myKbd = kbd;
   myMouse = mouse;
@@ -156,7 +164,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 
 ConfWidget::~ConfWidget()
 {
-  if(startedMicCapture && myMic)
+  if(previewCaptureStarted && myMic)
       myMic->capture(false);
 }
 
@@ -288,6 +296,8 @@ void ConfWidget::save()
   originalMouseButton = mouseButton;
 
   emit closing();
+  if(ui.micMode->isChecked())
+      previewCaptureStarted = false; // keep capture running after settings are saved
   close();
 }
 
@@ -358,9 +368,9 @@ void ConfWidget::closeEvent()
   settings.setValue( "pos", pos() );
   settings.endGroup();
 
-  if(startedMicCapture && myMic){
+  if(previewCaptureStarted && myMic){
       myMic->capture(false);
-      startedMicCapture = false;
+      previewCaptureStarted = false;
   }
 
   if(myMouse)
@@ -385,19 +395,8 @@ void ConfWidget::changeButton()
 
 void ConfWidget::scanModeChanged()
 {
-  if (ui.micMode->isChecked()) {
-    ui.micWidget->setCurrentIndex(1);
-    if(!myMic->isCapturing()) {
-        myMic->capture(true);
-        startedMicCapture = true;
-    }
-  } else {
-    ui.micWidget->setCurrentIndex(0);
-    if(startedMicCapture) {
-        myMic->capture(false);
-        startedMicCapture = false;
-    }
-  }
+  // Microphone settings remain visible regardless of the selected mode.
+  // Capture will start after saving if microphone mode is chosen.
 }
 
 void ConfWidget::keyPressEvent(QKeyEvent *e)

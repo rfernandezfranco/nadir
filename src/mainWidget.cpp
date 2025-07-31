@@ -156,6 +156,8 @@ void MainWidget::setThreshold( int i )
 
 void MainWidget::micEvent( double d )
 {
+  if(mode != MIC)
+    return;
   if( d > threshold  && !waiting ) {
     changeState();
     waiting = true;
