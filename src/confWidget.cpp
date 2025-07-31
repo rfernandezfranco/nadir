@@ -117,7 +117,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   });
 
   myMic = mic;
-  startedMicCapture = false;
+  // microphone preview disabled when configuring
   mainWidget = qobject_cast<MainWidget*>(parent);
   if(mainWidget)
       QObject::disconnect(myMic, SIGNAL(doEvent(double)),
@@ -159,11 +159,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 }
 
 
-ConfWidget::~ConfWidget()
-{
-  if(startedMicCapture && myMic)
-      myMic->capture(false);
-}
+
 
 void ConfWidget::minimizedBoxToggled()
 {
@@ -371,11 +367,7 @@ void ConfWidget::closeEvent()
       QObject::connect(myMic, SIGNAL(doEvent(double)),
                        mainWidget, SLOT(micEvent(double)));
 
-  if(startedMicCapture && myMic){
-      if(!ui.micMode->isChecked())
-          myMic->capture(false);
-      startedMicCapture = false;
-  }
+  // preview capture is disabled, no need to stop here
 
   if(myMouse)
       myMouse->setButtonCode(originalMouseButton);
@@ -401,16 +393,8 @@ void ConfWidget::scanModeChanged()
 {
   if (ui.micMode->isChecked()) {
     ui.micWidget->setCurrentIndex(1);
-    if(!myMic->isCapturing()) {
-        myMic->capture(true);
-        startedMicCapture = true;
-    }
   } else {
     ui.micWidget->setCurrentIndex(0);
-    if(startedMicCapture) {
-        myMic->capture(false);
-        startedMicCapture = false;
-    }
   }
 }
 
