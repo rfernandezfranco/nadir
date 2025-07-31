@@ -372,7 +372,8 @@ void ConfWidget::closeEvent()
                        mainWidget, SLOT(micEvent(double)));
 
   if(startedMicCapture && myMic){
-      myMic->capture(false);
+      if(!ui.micMode->isChecked())
+          myMic->capture(false);
       startedMicCapture = false;
   }
 
