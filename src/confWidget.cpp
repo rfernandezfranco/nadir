@@ -372,7 +372,7 @@ void ConfWidget::showAboutText()
   ui.tabWidget->setCurrentWidget(ui.aboutTab);
 }
 
-void ConfWidget::closeEvent()
+void ConfWidget::closeEvent(QCloseEvent *e)
 {
   QSettings settings;
 
@@ -392,6 +392,8 @@ void ConfWidget::closeEvent()
       else
           myMouse->setButtonCode(0);
   }
+
+  QWidget::closeEvent(e);
 }
 
 void ConfWidget::changeKey()
