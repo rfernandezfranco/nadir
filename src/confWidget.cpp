@@ -197,6 +197,8 @@ void ConfWidget::loadSettings()
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
   int modeVal = settings.value("mode", 0).toInt();
+  mouseButton = settings.value("mouseButton", 1).toInt();
+  originalMouseButton = mouseButton;
   ui.keyMode->setChecked(modeVal == 0);
   ui.micMode->setChecked(modeVal == 1);
   ui.mouseMode->setChecked(modeVal == 2);
@@ -209,8 +211,6 @@ void ConfWidget::loadSettings()
   ui.audioBar->setValue( threshold );
   ui.keyCodeField->setText( settings.value( "keycode", 65).toString() );
   ui.keySymField->setText( settings.value( "keysym", "ESPACIO").toString() );
-  mouseButton = settings.value("mouseButton", 1).toInt();
-  originalMouseButton = mouseButton;
   ui.mouseButtonField->setText(mouseButtonName(mouseButton));
   ui.confirmOnExitBox->setChecked( settings.value( "confirmOnExit", 1).toBool() );
   settings.endGroup();
