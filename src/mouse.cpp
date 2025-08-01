@@ -41,7 +41,11 @@ bool Mouse::start()
 void Mouse::stop()
 {
     if(grabbed && buttonCode > 0){
-        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+        XUngrabButton(display, buttonCode, AnyModifier,
+                      DefaultRootWindow(display));
+        // Release any active pointer grab so synthetic events reach
+        // the target window even if the physical button is still pressed
+        XUngrabPointer(display, CurrentTime);
         XFlush(display);
     }
     if(display)
@@ -63,7 +67,9 @@ unsigned int Mouse::grabButtonEvent()
 void Mouse::setButtonCode(int i)
 {
     if(grabbed && buttonCode > 0 && display){
-        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+        XUngrabButton(display, buttonCode, AnyModifier,
+                      DefaultRootWindow(display));
+        XUngrabPointer(display, CurrentTime);
         XFlush(display);
         grabbed = false;
     }
