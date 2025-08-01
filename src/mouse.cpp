@@ -33,7 +33,7 @@ bool Mouse::start()
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
         grabbed = true;
-        XFlush(display);
+        XSync(display, False);
     }
     return true;
 }
@@ -46,7 +46,7 @@ void Mouse::stop()
         // Release any active pointer grab so synthetic events reach
         // the target window even if the physical button is still pressed
         XUngrabPointer(display, CurrentTime);
-        XFlush(display);
+        XSync(display, False);
     }
     if(display)
         XCloseDisplay(display);
@@ -70,7 +70,7 @@ void Mouse::setButtonCode(int i)
         XUngrabButton(display, buttonCode, AnyModifier,
                       DefaultRootWindow(display));
         XUngrabPointer(display, CurrentTime);
-        XFlush(display);
+        XSync(display, False);
         grabbed = false;
     }
     buttonCode = i;
@@ -79,7 +79,7 @@ void Mouse::setButtonCode(int i)
                     DefaultRootWindow(display), False,
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
-        XFlush(display);
+        XSync(display, False);
         grabbed = true;
     }
 }
