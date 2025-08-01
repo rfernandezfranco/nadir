@@ -304,15 +304,31 @@ void MainWidget::changeState()
 
 void MainWidget::setEvent()
 {
-  QObject *button = sender();
-  if (button == ui.clickButton)
+  QObject* obj = sender();
+  if (!obj)
+    return;
+
+  if (obj == ui.clickButton) {
     mouseEvent = LEFT;
-  else if (button == ui.dbClickButton)
+    ui.dbClickButton->setChecked(false);
+    ui.rightClickButton->setChecked(false);
+    ui.dragButton->setChecked(false);
+  } else if (obj == ui.dbClickButton) {
     mouseEvent = DOUBLE;
-  else if (button == ui.rightClickButton)
+    ui.clickButton->setChecked(false);
+    ui.rightClickButton->setChecked(false);
+    ui.dragButton->setChecked(false);
+  } else if (obj == ui.rightClickButton) {
     mouseEvent = RIGHT;
-  else if (button == ui.dragButton)
+    ui.clickButton->setChecked(false);
+    ui.dbClickButton->setChecked(false);
+    ui.dragButton->setChecked(false);
+  } else if (obj == ui.dragButton) {
     mouseEvent = DRAG;
+    ui.clickButton->setChecked(false);
+    ui.dbClickButton->setChecked(false);
+    ui.rightClickButton->setChecked(false);
+  }
 }
 
 void MainWidget::setMode( int i )
