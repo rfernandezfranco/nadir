@@ -27,14 +27,8 @@ bool Mouse::start()
         return false;
     screenNumber = DefaultScreen(display);
     grabbed = false;
-    if(buttonCode > 0){
-        XGrabButton(display, buttonCode, AnyModifier,
-                    DefaultRootWindow(display), False,
-                    ButtonPressMask, GrabModeAsync, GrabModeAsync,
-                    None, None);
-        grabbed = true;
-        XSync(display, False);
-    }
+    // Button grabs are now performed explicitly via setButtonCode()
+    // once the application knows which scan mode is active.
     return true;
 }
 
