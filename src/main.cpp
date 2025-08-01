@@ -33,6 +33,10 @@ int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
 
+  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
+  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN );
+  QCoreApplication::setApplicationName( APPLICATION_NAME );
+
   // Internationalitation
   QTranslator translator;
 
@@ -53,10 +57,6 @@ int main(int argc, char *argv[])
 
   MainWidget win;
   QSettings settings;
-
-  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
-  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
-  QCoreApplication::setApplicationName( APPLICATION_NAME );
   
   settings.beginGroup( "mainWidget" );
   bool min = settings.value( "minimized", false ).toBool();

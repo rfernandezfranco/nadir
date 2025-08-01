@@ -27,20 +27,21 @@ bool Mouse::start()
         return false;
     screenNumber = DefaultScreen(display);
     grabbed = false;
-    if(buttonCode > 0){
-        XGrabButton(display, buttonCode, AnyModifier,
-                    DefaultRootWindow(display), False,
-                    ButtonPressMask, GrabModeAsync, GrabModeAsync,
-                    None, None);
-        grabbed = true;
-    }
+    // Button grabs are now performed explicitly via setButtonCode()
+    // once the application knows which scan mode is active.
     return true;
 }
 
 void Mouse::stop()
 {
-    if(grabbed && buttonCode > 0)
-        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+    if(grabbed && buttonCode > 0){
+        XUngrabButton(display, buttonCode, AnyModifier,
+                      DefaultRootWindow(display));
+        // Release any active pointer grab so synthetic events reach
+        // the target window even if the physical button is still pressed
+        XUngrabPointer(display, CurrentTime);
+        XSync(display, False);
+    }
     if(display)
         XCloseDisplay(display);
 }
@@ -60,7 +61,10 @@ unsigned int Mouse::grabButtonEvent()
 void Mouse::setButtonCode(int i)
 {
     if(grabbed && buttonCode > 0 && display){
-        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+        XUngrabButton(display, buttonCode, AnyModifier,
+                      DefaultRootWindow(display));
+        XUngrabPointer(display, CurrentTime);
+        XSync(display, False);
         grabbed = false;
     }
     buttonCode = i;
@@ -69,6 +73,7 @@ void Mouse::setButtonCode(int i)
                     DefaultRootWindow(display), False,
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
+        XSync(display, False);
         grabbed = true;
     }
 }

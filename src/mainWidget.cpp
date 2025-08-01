@@ -20,6 +20,7 @@
 #include <QtWidgets>
 #include <QScreen>
 #include <QGuiApplication>
+#include <QCursor>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -104,9 +105,15 @@ void MainWidget::loadSettings()
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   waitTime = settings.value( "waitTime", 1000 ).toInt();
   confirmOnExit = settings.value( "confirmOnExit", 1).toBool();
+  int loadedMouseButton = settings.value("mouseButton", 1).toInt();
   settings.endGroup();
 
   getScreenSize();
+
+  if(mode == MOUSE)
+      mouse->setButtonCode(loadedMouseButton);
+  else
+      mouse->setButtonCode(0);
 
   kbd->setEscapeCode( escapeCode );
   hLine->loadSettings();
@@ -331,6 +338,25 @@ void MainWidget::setDefaultEvent( int i )
 
 void MainWidget::doEvent()
 {
+  int oldButton = 0;
+  if(mode == MOUSE && mouse){
+      oldButton = mouse->getButtonCode();
+      mouse->setButtonCode(0); // allow fake clicks to propagate
+  }
+
+  // If the pointer is over Nadir's control panel, this click is meant to
+  // activate one of the UI buttons rather than execute the currently
+  // selected action. Just send a normal left click so the button receives
+  // the event and skip the action logic.
+  QPoint globalPos = QCursor::pos();
+  if(rect().contains(mapFromGlobal(globalPos))){
+      kbd->click();
+      kbd->flush();
+      if(mode == MOUSE && mouse)
+          mouse->setButtonCode(oldButton);
+      return;
+  }
+
   switch( mouseEvent ){
     case LEFT:
       kbd->click();
@@ -359,6 +385,9 @@ void MainWidget::doEvent()
   };
 
   kbd->flush();
+
+  if(mode == MOUSE && mouse)
+      mouse->setButtonCode(oldButton);
 
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );

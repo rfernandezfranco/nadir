@@ -26,6 +26,8 @@ public:
     void setButtonCode(int i);
     // Read the button from persistent settings
     void loadButtonCode();
+    // Currently active button number
+    int getButtonCode() const { return buttonCode; }
     // Returns the number of available mouse buttons
     int getButtonCount() const;
 

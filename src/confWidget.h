@@ -40,7 +40,7 @@ class ConfWidget : public QWidget
     ConfWidget( QWidget *parent = 0, Microphone *mic = 0, Keyboard *kbd = 0, Mouse *mouse = 0 );
     ~ConfWidget();
     void loadSettings();
-    void closeEvent();
+    void closeEvent(QCloseEvent *e) override;
     QString backgroundColor();
     void updateColorButton();
 
@@ -77,6 +77,7 @@ class ConfWidget : public QWidget
     unsigned int waitTime;
     bool waiting;
     bool previewCaptureStarted;
+    int originalMode; // scan mode when dialog opened
     int mouseButton;
     int originalMouseButton;
     int mouseButtonCount;

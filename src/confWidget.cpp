@@ -118,6 +118,7 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 
   myMic = mic;
   previewCaptureStarted = false;
+  originalMode = 0;
   connect(myMic, &Microphone::doEvent,
           this, &ConfWidget::updateAudioSlider);
 
@@ -140,6 +141,12 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   QCoreApplication::setApplicationName( APPLICATION_NAME );
 
   loadSettings();
+
+  // If the current scan mode is not mouse-based, make sure no button
+  // remains grabbed while the settings window is open. This avoids
+  // blocking the configured mouse button in the rest of the system.
+  if(myMouse && !ui.mouseMode->isChecked())
+      myMouse->setButtonCode(0);
 
   ui.audioSlider->setMinimum( -40.0 );
   ui.audioSlider->setMaximum( 1.0 );
@@ -196,9 +203,12 @@ void ConfWidget::loadSettings()
   ui.doubleClickBox->setChecked( settings.value( "click", 0 ).toBool() );
   ui.hidePointerBox->setChecked( settings.value( "hide", 0 ).toBool() );
   int modeVal = settings.value("mode", 0).toInt();
+  mouseButton = settings.value("mouseButton", 1).toInt();
+  originalMouseButton = mouseButton;
   ui.keyMode->setChecked(modeVal == 0);
   ui.micMode->setChecked(modeVal == 1);
   ui.mouseMode->setChecked(modeVal == 2);
+  originalMode = modeVal;
   lineColor = settings.value( "color", "255,0,0" ).toString();
   updateColorButton();
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
@@ -207,8 +217,6 @@ void ConfWidget::loadSettings()
   ui.audioBar->setValue( threshold );
   ui.keyCodeField->setText( settings.value( "keycode", 65).toString() );
   ui.keySymField->setText( settings.value( "keysym", "ESPACIO").toString() );
-  mouseButton = settings.value("mouseButton", 1).toInt();
-  originalMouseButton = mouseButton;
   ui.mouseButtonField->setText(mouseButtonName(mouseButton));
   ui.confirmOnExitBox->setChecked( settings.value( "confirmOnExit", 1).toBool() );
   settings.endGroup();
@@ -262,6 +270,7 @@ void ConfWidget::save()
   else
     i = 2;
   settings.setValue( "mode", i );
+  originalMode = i; // update for closeEvent
   i = ( ui.simpleClickBox->isChecked() ) ? 0 : 1;
   settings.setValue( "click", i );
   i = ( ui.hidePointerBox->isChecked() ) ? 1 : 0;
@@ -291,8 +300,12 @@ void ConfWidget::save()
   settings.sync();
 
   myKbd->setKeyCode(ui.keyCodeField->text().toInt());
-  if(myMouse)
-      myMouse->setButtonCode(mouseButton);
+  if(myMouse){
+      if(ui.mouseMode->isChecked())
+          myMouse->setButtonCode(mouseButton);
+      else
+          myMouse->setButtonCode(0);
+  }
   originalMouseButton = mouseButton;
 
   emit closing();
@@ -359,7 +372,7 @@ void ConfWidget::showAboutText()
   ui.tabWidget->setCurrentWidget(ui.aboutTab);
 }
 
-void ConfWidget::closeEvent()
+void ConfWidget::closeEvent(QCloseEvent *e)
 {
   QSettings settings;
 
@@ -373,8 +386,14 @@ void ConfWidget::closeEvent()
       previewCaptureStarted = false;
   }
 
-  if(myMouse)
-      myMouse->setButtonCode(originalMouseButton);
+  if(myMouse){
+      if(originalMode == 2)
+          myMouse->setButtonCode(originalMouseButton);
+      else
+          myMouse->setButtonCode(0);
+  }
+
+  QWidget::closeEvent(e);
 }
 
 void ConfWidget::changeKey()
@@ -395,6 +414,13 @@ void ConfWidget::changeButton()
 
 void ConfWidget::scanModeChanged()
 {
+  if(myMouse){
+      if(ui.mouseMode->isChecked())
+          myMouse->setButtonCode(mouseButton);
+      else
+          myMouse->setButtonCode(0);
+  }
+
   // Microphone settings remain visible regardless of the selected mode.
   // Capture will start after saving if microphone mode is chosen.
 }
