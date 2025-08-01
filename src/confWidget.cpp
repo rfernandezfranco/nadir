@@ -142,6 +142,12 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
 
   loadSettings();
 
+  // If the current scan mode is not mouse-based, make sure no button
+  // remains grabbed while the settings window is open. This avoids
+  // blocking the configured mouse button in the rest of the system.
+  if(myMouse && !ui.mouseMode->isChecked())
+      myMouse->setButtonCode(0);
+
   ui.audioSlider->setMinimum( -40.0 );
   ui.audioSlider->setMaximum( 1.0 );
   ui.audioSlider->setValue( threshold );
