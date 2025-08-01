@@ -77,6 +77,7 @@ class ConfWidget : public QWidget
     unsigned int waitTime;
     bool waiting;
     bool previewCaptureStarted;
+    int originalMode; // scan mode when dialog opened
     int mouseButton;
     int originalMouseButton;
     int mouseButtonCount;
