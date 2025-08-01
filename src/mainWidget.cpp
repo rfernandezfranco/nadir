@@ -337,6 +337,12 @@ void MainWidget::setDefaultEvent( int i )
 
 void MainWidget::doEvent()
 {
+  int oldButton = 0;
+  if(mode == MOUSE && mouse){
+      oldButton = mouse->getButtonCode();
+      mouse->setButtonCode(0); // allow fake clicks to propagate
+  }
+
   switch( mouseEvent ){
     case LEFT:
       kbd->click();
@@ -365,6 +371,9 @@ void MainWidget::doEvent()
   };
 
   kbd->flush();
+
+  if(mode == MOUSE && mouse)
+      mouse->setButtonCode(oldButton);
 
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );
