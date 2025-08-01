@@ -395,16 +395,25 @@ void MainWidget::doEvent()
 
 void MainWidget::checkDefaultEventButton()
 {
-  switch( defaultEvent ){
+  // Manually clear all check marks before setting the one
+  // corresponding to the default event. The automatic exclusivity of
+  // the buttons only applies when they are clicked by the user, not
+  // when their state is changed programmatically.
+  ui.clickButton->setChecked(false);
+  ui.dbClickButton->setChecked(false);
+  ui.rightClickButton->setChecked(false);
+  ui.dragButton->setChecked(false);
+
+  switch (defaultEvent) {
     case LEFT:
-      ui.clickButton->setChecked( true );
+      ui.clickButton->setChecked(true);
       break;
     case DOUBLE:
-      ui.dbClickButton->setChecked( true );
+      ui.dbClickButton->setChecked(true);
       break;
     default:
       break;
-  };
+  }
 }
 
 void MainWidget::closeEvent(QCloseEvent *e)
