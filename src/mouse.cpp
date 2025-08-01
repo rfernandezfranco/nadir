@@ -33,14 +33,17 @@ bool Mouse::start()
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
         grabbed = true;
+        XFlush(display);
     }
     return true;
 }
 
 void Mouse::stop()
 {
-    if(grabbed && buttonCode > 0)
+    if(grabbed && buttonCode > 0){
         XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+        XFlush(display);
+    }
     if(display)
         XCloseDisplay(display);
 }
@@ -61,6 +64,7 @@ void Mouse::setButtonCode(int i)
 {
     if(grabbed && buttonCode > 0 && display){
         XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+        XFlush(display);
         grabbed = false;
     }
     buttonCode = i;
@@ -69,6 +73,7 @@ void Mouse::setButtonCode(int i)
                     DefaultRootWindow(display), False,
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
+        XFlush(display);
         grabbed = true;
     }
 }
