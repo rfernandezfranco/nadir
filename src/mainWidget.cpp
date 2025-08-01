@@ -20,6 +20,7 @@
 #include <QtWidgets>
 #include <QScreen>
 #include <QGuiApplication>
+#include <QCursor>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -341,6 +342,19 @@ void MainWidget::doEvent()
   if(mode == MOUSE && mouse){
       oldButton = mouse->getButtonCode();
       mouse->setButtonCode(0); // allow fake clicks to propagate
+  }
+
+  // If the pointer is over Nadir's control panel, this click is meant to
+  // activate one of the UI buttons rather than execute the currently
+  // selected action. Just send a normal left click so the button receives
+  // the event and skip the action logic.
+  QPoint globalPos = QCursor::pos();
+  if(rect().contains(mapFromGlobal(globalPos))){
+      kbd->click();
+      kbd->flush();
+      if(mode == MOUSE && mouse)
+          mouse->setButtonCode(oldButton);
+      return;
   }
 
   switch( mouseEvent ){
