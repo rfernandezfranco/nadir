@@ -104,9 +104,15 @@ void MainWidget::loadSettings()
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   waitTime = settings.value( "waitTime", 1000 ).toInt();
   confirmOnExit = settings.value( "confirmOnExit", 1).toBool();
+  int loadedMouseButton = settings.value("mouseButton", 1).toInt();
   settings.endGroup();
 
   getScreenSize();
+
+  if(mode == MOUSE)
+      mouse->setButtonCode(loadedMouseButton);
+  else
+      mouse->setButtonCode(0);
 
   kbd->setEscapeCode( escapeCode );
   hLine->loadSettings();

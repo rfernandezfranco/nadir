@@ -291,8 +291,12 @@ void ConfWidget::save()
   settings.sync();
 
   myKbd->setKeyCode(ui.keyCodeField->text().toInt());
-  if(myMouse)
-      myMouse->setButtonCode(mouseButton);
+  if(myMouse){
+      if(ui.mouseMode->isChecked())
+          myMouse->setButtonCode(mouseButton);
+      else
+          myMouse->setButtonCode(0);
+  }
   originalMouseButton = mouseButton;
 
   emit closing();
@@ -373,8 +377,12 @@ void ConfWidget::closeEvent()
       previewCaptureStarted = false;
   }
 
-  if(myMouse)
-      myMouse->setButtonCode(originalMouseButton);
+  if(myMouse){
+      if(ui.mouseMode->isChecked())
+          myMouse->setButtonCode(originalMouseButton);
+      else
+          myMouse->setButtonCode(0);
+  }
 }
 
 void ConfWidget::changeKey()
