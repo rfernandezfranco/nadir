@@ -19,6 +19,7 @@
  
 #include <QtWidgets>
 #include <QScreen>
+#include <unistd.h>
 #include <QGuiApplication>
 #include <QCursor>
 #include "mainWidget.h"
@@ -242,6 +243,12 @@ void MainWidget::grabEvent()
       e = kbd->grabKeyEvent();
   else if(mode == MOUSE) {
       if (state == WAIT_FOR_DROP_TRIGGER) {
+          // A synthetic drag event may have interfered with the mouse button
+          // grab. Flush the event queue, wait a moment, and re-grab the
+          // button to ensure the user's trigger click can be detected.
+          if(mouse && mouse->getDisplay())
+            XFlush(mouse->getDisplay());
+          usleep(10000); // 10ms delay
           mouse->setButtonCode(mouse->getButtonCode());
       }
       e = mouse->grabButtonEvent();
@@ -359,17 +366,12 @@ void MainWidget::doEvent()
 
   // If the pointer is over Nadir's control panel, this click is meant to
   // activate one of the UI buttons rather than execute the currently
-  // selected action. Find the button under the cursor and click it
-  // programmatically, which is more reliable than a synthetic event.
+  // selected action. Just send a normal left click so the button receives
+  // the event and skip the action logic.
   QPoint globalPos = QCursor::pos();
   if(rect().contains(mapFromGlobal(globalPos))){
-      QWidget* widget = QApplication::widgetAt(globalPos);
-      if (widget) {
-          QPushButton* button = qobject_cast<QPushButton*>(widget);
-          if (button)
-              button->click();
-      }
-
+      kbd->click();
+      kbd->flush();
       if(mode == MOUSE && mouse)
           mouse->setButtonCode(oldButton);
       return;

@@ -30,6 +30,8 @@ public:
     int getButtonCode() const { return buttonCode; }
     // Returns the number of available mouse buttons
     int getButtonCount() const;
+    // Return a pointer to the X display
+    Display *getDisplay() { return display; }
 
 private:
     Display *display;      // connection to the X server
