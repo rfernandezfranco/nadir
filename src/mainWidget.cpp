@@ -21,6 +21,8 @@
 #include <QScreen>
 #include <QGuiApplication>
 #include <QCursor>
+#include <QApplication>
+#include <QPushButton>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -346,11 +348,18 @@ void MainWidget::doEvent()
 
   // If the pointer is over Nadir's control panel, this click is meant to
   // activate one of the UI buttons rather than execute the currently
-  // selected action. Just send a normal left click so the button receives
-  // the event and skip the action logic.
+  // selected action. Simulate a normal button click using Qt's API so
+  // autoExclusive buttons update correctly.
   QPoint globalPos = QCursor::pos();
   if(rect().contains(mapFromGlobal(globalPos))){
-      kbd->click();
+      if(QWidget *w = QApplication::widgetAt(globalPos)){
+          if(auto *btn = qobject_cast<QPushButton*>(w))
+              btn->click();
+          else
+              kbd->click();
+      } else {
+          kbd->click();
+      }
       kbd->flush();
       if(mode == MOUSE && mouse)
           mouse->setButtonCode(oldButton);
