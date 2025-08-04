@@ -136,10 +136,6 @@ ConfWidget::ConfWidget( QWidget *parent, Microphone *mic, Keyboard *kbd, Mouse *
   myMouse = mouse;
   mouseButtonCount = myMouse ? myMouse->getButtonCount() : 0;
 
-  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
-  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
-  QCoreApplication::setApplicationName( APPLICATION_NAME );
-
   loadSettings();
 
   // If the current scan mode is not mouse-based, make sure no button
@@ -214,7 +210,6 @@ void ConfWidget::loadSettings()
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   ui.audioBar->setValue( threshold );
   setWaitTime( settings.value( "waitTime", 1000 ).toInt() );
-  ui.audioBar->setValue( threshold );
   ui.keyCodeField->setText( settings.value( "keycode", 65).toString() );
   ui.keySymField->setText( settings.value( "keysym", "ESPACIO").toString() );
   ui.mouseButtonField->setText(mouseButtonName(mouseButton));
@@ -414,12 +409,8 @@ void ConfWidget::changeButton()
 
 void ConfWidget::scanModeChanged()
 {
-  if(myMouse){
-      if(ui.mouseMode->isChecked())
-          myMouse->setButtonCode(mouseButton);
-      else
-          myMouse->setButtonCode(0);
-  }
+  if(myMouse)
+      myMouse->setButtonCode(ui.mouseMode->isChecked() ? mouseButton : 0);
 
   // Microphone settings remain visible regardless of the selected mode.
   // Capture will start after saving if microphone mode is chosen.

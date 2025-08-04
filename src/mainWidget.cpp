@@ -60,10 +60,6 @@ MainWidget::MainWidget()
   scanTimer = new QTimer(this);
   connect(scanTimer, &QTimer::timeout, this, &MainWidget::grabEvent);
 
-  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
-  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
-  QCoreApplication::setApplicationName( APPLICATION_NAME );
-
   loadInitialSettings();
   loadSettings();
   if(showTrayIcon)
@@ -239,13 +235,13 @@ void MainWidget::scan()
 
 void MainWidget::grabEvent()
 {
-  unsigned int e = 0;
+  bool pressed = false;
   if(mode == KEY)
-      e = kbd->grabKeyEvent();
+      pressed = kbd->grabKeyEvent();
   else if(mode == MOUSE)
-      e = mouse->grabButtonEvent();
+      pressed = mouse->grabButtonEvent();
 
-  if(e)
+  if(pressed)
       changeState();
 }
 

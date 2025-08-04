@@ -10,10 +10,6 @@ Mouse::Mouse()
 
 void Mouse::loadButtonCode()
 {
-    QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
-    QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN );
-    QCoreApplication::setApplicationName( APPLICATION_NAME );
-
     QSettings settings;
     settings.beginGroup("Main");
     buttonCode = settings.value("mouseButton", 1).toInt();
@@ -34,39 +30,42 @@ bool Mouse::start()
 
 void Mouse::stop()
 {
-    if(grabbed && buttonCode > 0){
+    ungrabButton();
+    if(display)
+        XCloseDisplay(display);
+}
+
+bool Mouse::grabButtonEvent()
+{
+    bool pressed = false;
+    while (XPending(display)) {
+        XEvent ev;
+        XNextEvent(display, &ev);
+        if (ev.type == ButtonPress && ev.xbutton.button == buttonCode)
+            pressed = true;
+    }
+    return pressed;
+}
+
+void Mouse::ungrabButton()
+{
+    if(grabbed && buttonCode > 0 && display){
         XUngrabButton(display, buttonCode, AnyModifier,
                       DefaultRootWindow(display));
         // Release any active pointer grab so synthetic events reach
         // the target window even if the physical button is still pressed
         XUngrabPointer(display, CurrentTime);
         XSync(display, False);
+        grabbed = false;
     }
-    if(display)
-        XCloseDisplay(display);
-}
-
-unsigned int Mouse::grabButtonEvent()
-{
-    unsigned int result = 0;
-    while (XPending(display)) {
-        XEvent ev;
-        XNextEvent(display, &ev);
-        if (ev.type == ButtonPress && ev.xbutton.button == buttonCode)
-            result = 1;
-    }
-    return result;
 }
 
 void Mouse::setButtonCode(int i)
 {
-    if(grabbed && buttonCode > 0 && display){
-        XUngrabButton(display, buttonCode, AnyModifier,
-                      DefaultRootWindow(display));
-        XUngrabPointer(display, CurrentTime);
-        XSync(display, False);
-        grabbed = false;
-    }
+    if(buttonCode == i)
+        return;
+
+    ungrabButton();
     buttonCode = i;
     if(buttonCode > 0 && display){
         XGrabButton(display, buttonCode, AnyModifier,

@@ -4,7 +4,6 @@
 #include <X11/extensions/XTest.h>
 #include <X11/Xlib.h>
 #include "fixx11h.h"
-#include <QCoreApplication>
 #include <QSettings>
 #include "common.h"
 
@@ -15,13 +14,13 @@ public:
     Mouse();
     ~Mouse();
 
-    // Open the X11 display and grab the configured button
+    // Open the X11 display
     bool start();
     // Release the grab and close the display
     void stop();
 
     // Check for a press of the selected button
-    unsigned int grabButtonEvent();
+    bool grabButtonEvent();
     // Change the button number while running
     void setButtonCode(int i);
     // Read the button from persistent settings
@@ -36,6 +35,8 @@ private:
     int screenNumber;      // default screen index
     bool grabbed;          // whether the button is currently grabbed
     int buttonCode;        // X11 button number to watch
+
+    void ungrabButton();   // helper to release current grab
 };
 
 #endif // MOUSE_H
