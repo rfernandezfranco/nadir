@@ -35,8 +35,10 @@ private:
     int screenNumber;      // default screen index
     bool grabbed;          // whether the button is currently grabbed
     int buttonCode;        // X11 button number to watch
+    bool lastDown;         // last known state of the watched button
 
     void ungrabButton();   // helper to release current grab
+    unsigned int buttonMask() const; // mask for XQueryPointer
 };
 
 #endif // MOUSE_H

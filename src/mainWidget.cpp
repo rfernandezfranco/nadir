@@ -293,9 +293,19 @@ void MainWidget::changeState()
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
-      state = (mouseEvent == DROP) ? SCAN1 : ((continuous) ? SCAN1 : STOP);
-      kbd->snoop();
-      changeState();
+      if (mouseEvent == DROP) {
+        // After initiating a drag the mouse button remains pressed. Keep the
+        // scan stopped so the user can manually restart it to choose the drop
+        // location.
+        state = SCAN1;
+        kbd->snoop();
+        // Do not call changeState(), leaving the system idle until the user
+        // triggers the next scan cycle.
+      } else {
+        state = (continuous) ? SCAN1 : STOP;
+        kbd->snoop();
+        changeState();
+      }
       break;
   };
 }

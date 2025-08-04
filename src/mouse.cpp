@@ -5,6 +5,7 @@
 Mouse::Mouse()
 {
     grabbed = false;
+    lastDown = false;
     loadButtonCode();
 }
 
@@ -37,14 +38,33 @@ void Mouse::stop()
 
 bool Mouse::grabButtonEvent()
 {
-    bool pressed = false;
+    bool triggered = false;
+
     while (XPending(display)) {
         XEvent ev;
         XNextEvent(display, &ev);
-        if (ev.type == ButtonPress && ev.xbutton.button == buttonCode)
-            pressed = true;
+        if (ev.type == ButtonPress && ev.xbutton.button == buttonCode) {
+            triggered = !lastDown;
+            lastDown = true;
+        } else if (ev.type == ButtonRelease && ev.xbutton.button == buttonCode) {
+            lastDown = false;
+        }
     }
-    return pressed;
+
+    if (!triggered && display && buttonCode > 0) {
+        Window root_return, child_return;
+        int root_x, root_y, win_x, win_y;
+        unsigned int mask_return;
+        XQueryPointer(display, DefaultRootWindow(display),
+                      &root_return, &child_return,
+                      &root_x, &root_y, &win_x, &win_y,
+                      &mask_return);
+        bool down = mask_return & buttonMask();
+        triggered = down && !lastDown;
+        lastDown = down;
+    }
+
+    return triggered;
 }
 
 void Mouse::ungrabButton()
@@ -67,6 +87,7 @@ void Mouse::setButtonCode(int i)
 
     ungrabButton();
     buttonCode = i;
+    lastDown = false;
     if(buttonCode > 0 && display){
         XGrabButton(display, buttonCode, AnyModifier,
                     DefaultRootWindow(display), False,
@@ -74,6 +95,18 @@ void Mouse::setButtonCode(int i)
                     None, None);
         XSync(display, False);
         grabbed = true;
+    }
+}
+
+unsigned int Mouse::buttonMask() const
+{
+    switch(buttonCode){
+        case 1: return Button1Mask;
+        case 2: return Button2Mask;
+        case 3: return Button3Mask;
+        case 4: return Button4Mask;
+        case 5: return Button5Mask;
+        default: return 0;
     }
 }
 
