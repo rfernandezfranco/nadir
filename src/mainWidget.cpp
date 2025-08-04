@@ -240,8 +240,12 @@ void MainWidget::grabEvent()
   unsigned int e = 0;
   if(mode == KEY)
       e = kbd->grabKeyEvent();
-  else if(mode == MOUSE)
+  else if(mode == MOUSE) {
+      if (state == WAIT_FOR_DROP_TRIGGER) {
+          mouse->setButtonCode(mouse->getButtonCode());
+      }
       e = mouse->grabButtonEvent();
+  }
 
   if(e)
       changeState();
@@ -295,11 +299,17 @@ void MainWidget::changeState()
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
-      if (mouseEvent == DROP)
-        state = SCAN1;
-      else
+      if (mouseEvent == DROP) {
+        state = WAIT_FOR_DROP_TRIGGER;
+      } else {
         state = (continuous) ? SCAN1 : STOP;
-      kbd->snoop();
+        kbd->snoop();
+        changeState();
+      }
+      break;
+
+    case WAIT_FOR_DROP_TRIGGER:
+      state = SCAN1;
       changeState();
       break;
   };
