@@ -304,31 +304,14 @@ void MainWidget::changeState()
 
 void MainWidget::setEvent()
 {
-  QObject* obj = sender();
-  if (!obj)
-    return;
-
-  if (obj == ui.clickButton) {
+  if( ui.clickButton->isChecked() )
     mouseEvent = LEFT;
-    ui.dbClickButton->setChecked(false);
-    ui.rightClickButton->setChecked(false);
-    ui.dragButton->setChecked(false);
-  } else if (obj == ui.dbClickButton) {
+  else if( ui.dbClickButton->isChecked() )
     mouseEvent = DOUBLE;
-    ui.clickButton->setChecked(false);
-    ui.rightClickButton->setChecked(false);
-    ui.dragButton->setChecked(false);
-  } else if (obj == ui.rightClickButton) {
+  else if( ui.rightClickButton->isChecked() )
     mouseEvent = RIGHT;
-    ui.clickButton->setChecked(false);
-    ui.dbClickButton->setChecked(false);
-    ui.dragButton->setChecked(false);
-  } else if (obj == ui.dragButton) {
+  else if( ui.dragButton->isChecked() )
     mouseEvent = DRAG;
-    ui.clickButton->setChecked(false);
-    ui.dbClickButton->setChecked(false);
-    ui.rightClickButton->setChecked(false);
-  }
 }
 
 void MainWidget::setMode( int i )
@@ -363,12 +346,17 @@ void MainWidget::doEvent()
 
   // If the pointer is over Nadir's control panel, this click is meant to
   // activate one of the UI buttons rather than execute the currently
-  // selected action. Just send a normal left click so the button receives
-  // the event and skip the action logic.
+  // selected action. Find the button under the cursor and click it
+  // programmatically, which is more reliable than a synthetic event.
   QPoint globalPos = QCursor::pos();
   if(rect().contains(mapFromGlobal(globalPos))){
-      kbd->click();
-      kbd->flush();
+      QWidget* widget = QApplication::widgetAt(globalPos);
+      if (widget) {
+          QPushButton* button = qobject_cast<QPushButton*>(widget);
+          if (button)
+              button->click();
+      }
+
       if(mode == MOUSE && mouse)
           mouse->setButtonCode(oldButton);
       return;
