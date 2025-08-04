@@ -29,6 +29,8 @@ public:
     int getButtonCode() const { return buttonCode; }
     // Returns the number of available mouse buttons
     int getButtonCount() const;
+    // Wait until the watched button is released
+    void waitForRelease();
 
 private:
     Display *display;      // connection to the X server

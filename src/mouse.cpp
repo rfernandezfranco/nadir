@@ -1,4 +1,5 @@
 #include "mouse.h"
+#include <unistd.h>
 
 // Basic wrapper around Xlib button grabbing used for mouse-based scan mode
 
@@ -78,6 +79,36 @@ void Mouse::ungrabButton()
         XSync(display, False);
         grabbed = false;
     }
+}
+
+void Mouse::waitForRelease()
+{
+    if(!display || buttonCode <= 0)
+        return;
+
+    Window root_return, child_return;
+    int root_x, root_y, win_x, win_y;
+    unsigned int mask_return;
+
+    do {
+        while(XPending(display)) {
+            XEvent ev;
+            XNextEvent(display, &ev);
+            if(ev.type == ButtonRelease && ev.xbutton.button == buttonCode)
+                lastDown = false;
+            else if(ev.type == ButtonPress && ev.xbutton.button == buttonCode)
+                lastDown = true;
+        }
+
+        XQueryPointer(display, DefaultRootWindow(display),
+                      &root_return, &child_return,
+                      &root_x, &root_y, &win_x, &win_y,
+                      &mask_return);
+        if(mask_return & buttonMask())
+            usleep(1000);
+    } while(mask_return & buttonMask());
+
+    lastDown = false;
 }
 
 void Mouse::setButtonCode(int i)

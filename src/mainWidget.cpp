@@ -349,6 +349,7 @@ void MainWidget::doEvent()
   int oldButton = 0;
   if(mode == MOUSE && mouse){
       oldButton = mouse->getButtonCode();
+      mouse->waitForRelease();
       mouse->setButtonCode(0); // allow fake clicks to propagate
   }
 
