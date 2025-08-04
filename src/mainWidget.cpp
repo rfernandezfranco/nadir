@@ -295,7 +295,10 @@ void MainWidget::changeState()
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
-      state = (continuous) ? SCAN1 : STOP;
+      if (mouseEvent == DROP)
+        state = SCAN1;
+      else
+        state = (continuous) ? SCAN1 : STOP;
       kbd->snoop();
       changeState();
       break;
