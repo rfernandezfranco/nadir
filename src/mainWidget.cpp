@@ -238,25 +238,13 @@ void MainWidget::scan()
 void MainWidget::grabEvent()
 {
   unsigned int e = 0;
-  if(mode == KEY) {
+  if(mode == KEY)
       e = kbd->grabKeyEvent();
-  } else if(mode == MOUSE) {
-      if (state == WAIT_FOR_DROP_TRIGGER) {
-          e = mouse->snoopButtonEvent();
-      } else {
-          e = mouse->grabButtonEvent();
-      }
-  }
+  else if(mode == MOUSE)
+      e = mouse->grabButtonEvent();
 
-  if(e) {
-      if (mode == MOUSE && state == WAIT_FOR_DROP_TRIGGER) {
-          QSettings settings;
-          settings.beginGroup("Main");
-          int loadedMouseButton = settings.value("mouseButton", 1).toInt();
-          mouse->setButtonCode(loadedMouseButton);
-      }
+  if(e)
       changeState();
-  }
 }
 
 void MainWidget::stop()
@@ -307,21 +295,8 @@ void MainWidget::changeState()
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
-      if (mouseEvent == DROP) {
-        state = WAIT_FOR_DROP_TRIGGER;
-      } else {
-        state = (continuous) ? SCAN1 : STOP;
-        kbd->snoop();
-        changeState();
-      }
-      break;
-
-    case WAIT_FOR_DROP_TRIGGER:
-      if (mode == MOUSE)
-        mouse->snoop();
-      else
-        kbd->snoop();
-      state = SCAN1;
+      state = (continuous) ? SCAN1 : STOP;
+      kbd->snoop();
       changeState();
       break;
   };
@@ -366,10 +341,13 @@ void MainWidget::doEvent()
   int oldButton = 0;
   if(mode == MOUSE && mouse){
       oldButton = mouse->getButtonCode();
+      mouse->setButtonCode(0); // allow fake clicks to propagate
   }
 
   // If the pointer is over Nadir's control panel, this click is meant to
-  // activate one of the UI buttons. Use programmatic click for this.
+  // activate one of the UI buttons rather than execute the currently
+  // selected action. Find the button under the cursor and click it
+  // programmatically, which is more reliable than a synthetic event.
   QPoint globalPos = QCursor::pos();
   if(rect().contains(mapFromGlobal(globalPos))){
       QWidget* widget = QApplication::widgetAt(globalPos);
@@ -378,6 +356,9 @@ void MainWidget::doEvent()
           if (button)
               button->click();
       }
+
+      if(mode == MOUSE && mouse)
+          mouse->setButtonCode(oldButton);
       return;
   }
 
@@ -397,9 +378,6 @@ void MainWidget::doEvent()
       break;
 
     case DRAG:
-      // Ungrab the mouse to allow snooping for the drop trigger
-      if(mode == MOUSE && mouse)
-        mouse->setButtonCode(0);
       kbd->drag();
       mouseEvent = DROP;
       break;
@@ -412,6 +390,9 @@ void MainWidget::doEvent()
   };
 
   kbd->flush();
+
+  if(mode == MOUSE && mouse)
+      mouse->setButtonCode(oldButton);
 
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );

@@ -30,10 +30,6 @@ public:
     int getButtonCode() const { return buttonCode; }
     // Returns the number of available mouse buttons
     int getButtonCount() const;
-    // Check for any button press, without a grab
-    unsigned int snoopButtonEvent();
-    // Enable listening for button events on the root window
-    void snoop();
 
 private:
     Display *display;      // connection to the X server

@@ -84,28 +84,6 @@ int Mouse::getButtonCount() const
     return XGetPointerMapping(display, map, sizeof(map));
 }
 
-unsigned int Mouse::snoopButtonEvent()
-{
-    // Ensure all pending events are processed
-    XSync(display, False);
-    while (XPending(display)) {
-        XEvent ev;
-        XNextEvent(display, &ev);
-        if (ev.type == ButtonPress) {
-            // To avoid consuming the event, put it back in the queue
-            XPutBackEvent(display, &ev);
-            return ev.xbutton.button;
-        }
-    }
-    return 0;
-}
-
-void Mouse::snoop()
-{
-    XSelectInput(display, DefaultRootWindow(display), ButtonPressMask);
-    XSync(display, False);
-}
-
 Mouse::~Mouse()
 {
     stop();
