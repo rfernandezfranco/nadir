@@ -21,7 +21,6 @@
 #include <QScreen>
 #include <QGuiApplication>
 #include <QCursor>
-#include <QTimer>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -296,19 +295,8 @@ void MainWidget::changeState()
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
-      if (mouseEvent == DROP) {
-        state = WAIT_FOR_DROP_TRIGGER;
-      } else {
-        state = (continuous) ? SCAN1 : STOP;
-        kbd->snoop();
-        changeState();
-      }
-      break;
-
-    case WAIT_FOR_DROP_TRIGGER:
-      if (mode == MOUSE)
-        QTimer::singleShot(10, this, SLOT(regrabMouse()));
-      state = SCAN1;
+      state = (continuous) ? SCAN1 : STOP;
+      kbd->snoop();
       changeState();
       break;
   };
@@ -353,10 +341,13 @@ void MainWidget::doEvent()
   int oldButton = 0;
   if(mode == MOUSE && mouse){
       oldButton = mouse->getButtonCode();
-      mouse->setButtonCode(0); // Ungrab to allow fake events
+      mouse->setButtonCode(0); // allow fake clicks to propagate
   }
 
-  // If the pointer is over Nadir's control panel, handle UI click
+  // If the pointer is over Nadir's control panel, this click is meant to
+  // activate one of the UI buttons rather than execute the currently
+  // selected action. Find the button under the cursor and click it
+  // programmatically, which is more reliable than a synthetic event.
   QPoint globalPos = QCursor::pos();
   if(rect().contains(mapFromGlobal(globalPos))){
       QWidget* widget = QApplication::widgetAt(globalPos);
@@ -365,30 +356,38 @@ void MainWidget::doEvent()
           if (button)
               button->click();
       }
-      // Re-grab immediately after UI click
+
       if(mode == MOUSE && mouse)
           mouse->setButtonCode(oldButton);
       return;
   }
 
-  bool is_drag_op = (mouseEvent == DRAG);
-
   switch( mouseEvent ){
     case LEFT:
       kbd->click();
       break;
+
     case DOUBLE:
       kbd->doubleClick();
       break;
+
     case RIGHT:
       kbd->rightClick();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
       break;
+
     case DRAG:
-      kbd->drag();
-      mouseEvent = DROP;
+      if (mode == MOUSE) {
+        // In mouse mode, we just release the grab and let the user
+        // perform the drag manually. We don't change the event state.
+        mouse->setButtonCode(0);
+      } else {
+        kbd->drag();
+        mouseEvent = DROP;
+      }
       break;
+
     case DROP:
       kbd->drop();
       mouseEvent = defaultEvent;
@@ -398,10 +397,8 @@ void MainWidget::doEvent()
 
   kbd->flush();
 
-  // Re-grab the mouse button unless we just started a drag operation
-  if(mode == MOUSE && mouse && !is_drag_op){
+  if(mode == MOUSE && mouse)
       mouse->setButtonCode(oldButton);
-  }
 
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );
@@ -512,12 +509,6 @@ void MainWidget::iconActivated(QSystemTrayIcon::ActivationReason reason)
     default:
         ;
     }
-}
-
-void MainWidget::regrabMouse()
-{
-    if (mouse)
-        mouse->setButtonCode(mouse->getButtonCode());
 }
 
 MainWidget::~MainWidget()
