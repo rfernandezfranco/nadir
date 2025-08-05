@@ -52,7 +52,7 @@ class MainWidget : public QWidget
     void changeState();
     void doEvent();
     enum MouseEvent { LEFT=0, DOUBLE, RIGHT, DRAG, DROP };
-    enum State { STOP=0, SCAN1, SCAN2, EVENT };
+    enum State { STOP=0, SCAN1, SCAN2, EVENT, WAIT_FOR_DROP_TRIGGER };
     enum Mode { KEY=0, MIC, MOUSE };
     void checkDefaultEventButton();
     void setMode( int i );
@@ -73,6 +73,7 @@ class MainWidget : public QWidget
     void setThreshold( int i );
     void createTrayIcon();
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
+    void regrabMouse();
 
   private:
     Ui::MainWidget ui;
