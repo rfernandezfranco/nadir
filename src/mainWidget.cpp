@@ -366,12 +366,17 @@ void MainWidget::doEvent()
 
   // If the pointer is over Nadir's control panel, this click is meant to
   // activate one of the UI buttons rather than execute the currently
-  // selected action. Just send a normal left click so the button receives
-  // the event and skip the action logic.
+  // selected action. Find the button under the cursor and click it
+  // programmatically, which is more reliable than a synthetic event.
   QPoint globalPos = QCursor::pos();
   if(rect().contains(mapFromGlobal(globalPos))){
-      kbd->click();
-      kbd->flush();
+      QWidget* widget = QApplication::widgetAt(globalPos);
+      if (widget) {
+          QPushButton* button = qobject_cast<QPushButton*>(widget);
+          if (button)
+              button->click();
+      }
+
       if(mode == MOUSE && mouse)
           mouse->setButtonCode(oldButton);
       return;
