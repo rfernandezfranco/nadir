@@ -390,11 +390,15 @@ void MainWidget::doEvent()
 
     case DRAG:
       kbd->drag();
+      if(mode == MOUSE && mouse)
+          mouse->ungrabPointer();
       mouseEvent = DROP;
       break;
 
     case DROP:
       kbd->drop();
+      if(mode == MOUSE && mouse)
+          mouse->ungrabPointer();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
       break;

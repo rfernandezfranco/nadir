@@ -31,6 +31,8 @@ public:
     int getButtonCount() const;
     // Wait until the watched button is released
     void waitForRelease();
+    // Release any active pointer grab without altering the button grab
+    void ungrabPointer();
 
 private:
     Display *display;      // connection to the X server

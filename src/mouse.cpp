@@ -81,6 +81,14 @@ void Mouse::ungrabButton()
     }
 }
 
+void Mouse::ungrabPointer()
+{
+    if(display){
+        XUngrabPointer(display, CurrentTime);
+        XSync(display, False);
+    }
+}
+
 void Mouse::waitForRelease()
 {
     if(!display || buttonCode <= 0)
