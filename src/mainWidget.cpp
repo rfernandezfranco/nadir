@@ -20,6 +20,9 @@
 #include <QtWidgets>
 #include <QScreen>
 #include <QGuiApplication>
+#include <QCursor>
+#include <QApplication>
+#include <QPushButton>
 #include "mainWidget.h"
 
 MainWidget::MainWidget()
@@ -56,10 +59,6 @@ MainWidget::MainWidget()
 
   scanTimer = new QTimer(this);
   connect(scanTimer, &QTimer::timeout, this, &MainWidget::grabEvent);
-
-  QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
-  QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN);
-  QCoreApplication::setApplicationName( APPLICATION_NAME );
 
   loadInitialSettings();
   loadSettings();
@@ -104,9 +103,15 @@ void MainWidget::loadSettings()
   setThreshold( settings.value( "audioThreshold", 0 ).toInt() );
   waitTime = settings.value( "waitTime", 1000 ).toInt();
   confirmOnExit = settings.value( "confirmOnExit", 1).toBool();
+  int loadedMouseButton = settings.value("mouseButton", 1).toInt();
   settings.endGroup();
 
   getScreenSize();
+
+  if(mode == MOUSE)
+      mouse->setButtonCode(loadedMouseButton);
+  else
+      mouse->setButtonCode(0);
 
   kbd->setEscapeCode( escapeCode );
   hLine->loadSettings();
@@ -230,13 +235,13 @@ void MainWidget::scan()
 
 void MainWidget::grabEvent()
 {
-  unsigned int e = 0;
+  bool pressed = false;
   if(mode == KEY)
-      e = kbd->grabKeyEvent();
+      pressed = kbd->grabKeyEvent();
   else if(mode == MOUSE)
-      e = mouse->grabButtonEvent();
+      pressed = mouse->grabButtonEvent();
 
-  if(e)
+  if(pressed)
       changeState();
 }
 
@@ -288,9 +293,19 @@ void MainWidget::changeState()
       vLine->hide();
       kbd->move( vLine->getX(), hLine->getY() );
       doEvent();
-      state = (continuous) ? SCAN1 : STOP;
-      kbd->snoop();
-      changeState();
+      if (mouseEvent == DROP) {
+        // After initiating a drag the mouse button remains pressed. Keep the
+        // scan stopped so the user can manually restart it to choose the drop
+        // location.
+        state = SCAN1;
+        kbd->snoop();
+        // Do not call changeState(), leaving the system idle until the user
+        // triggers the next scan cycle.
+      } else {
+        state = (continuous) ? SCAN1 : STOP;
+        kbd->snoop();
+        changeState();
+      }
       break;
   };
 }
@@ -331,6 +346,33 @@ void MainWidget::setDefaultEvent( int i )
 
 void MainWidget::doEvent()
 {
+  int oldButton = 0;
+  if(mode == MOUSE && mouse){
+      oldButton = mouse->getButtonCode();
+      mouse->waitForRelease();
+      mouse->setButtonCode(0); // allow fake clicks to propagate
+  }
+
+  // If the pointer is over Nadir's control panel, this click is meant to
+  // activate one of the UI buttons rather than execute the currently
+  // selected action. Simulate a normal button click using Qt's API so
+  // autoExclusive buttons update correctly.
+  QPoint globalPos = QCursor::pos();
+  if(rect().contains(mapFromGlobal(globalPos))){
+      if(QWidget *w = QApplication::widgetAt(globalPos)){
+          if(auto *btn = qobject_cast<QPushButton*>(w))
+              btn->click();
+          else
+              kbd->click();
+      } else {
+          kbd->click();
+      }
+      kbd->flush();
+      if(mode == MOUSE && mouse)
+          mouse->setButtonCode(oldButton);
+      return;
+  }
+
   switch( mouseEvent ){
     case LEFT:
       kbd->click();
@@ -348,11 +390,15 @@ void MainWidget::doEvent()
 
     case DRAG:
       kbd->drag();
+      if(mode == MOUSE && mouse)
+          mouse->ungrabPointer();
       mouseEvent = DROP;
       break;
 
     case DROP:
       kbd->drop();
+      if(mode == MOUSE && mouse)
+          mouse->ungrabPointer();
       mouseEvent = defaultEvent;
       checkDefaultEventButton();
       break;
@@ -360,22 +406,34 @@ void MainWidget::doEvent()
 
   kbd->flush();
 
+  if(mode == MOUSE && mouse)
+      mouse->setButtonCode(oldButton);
+
   if( hidePointer )
     kbd->move( getScreenWidth(), getScreenHeight() );
 }
 
 void MainWidget::checkDefaultEventButton()
 {
-  switch( defaultEvent ){
+  // Manually clear all check marks before setting the one
+  // corresponding to the default event. The automatic exclusivity of
+  // the buttons only applies when they are clicked by the user, not
+  // when their state is changed programmatically.
+  ui.clickButton->setChecked(false);
+  ui.dbClickButton->setChecked(false);
+  ui.rightClickButton->setChecked(false);
+  ui.dragButton->setChecked(false);
+
+  switch (defaultEvent) {
     case LEFT:
-      ui.clickButton->setChecked( true );
+      ui.clickButton->setChecked(true);
       break;
     case DOUBLE:
-      ui.dbClickButton->setChecked( true );
+      ui.dbClickButton->setChecked(true);
       break;
     default:
       break;
-  };
+  }
 }
 
 void MainWidget::closeEvent(QCloseEvent *e)

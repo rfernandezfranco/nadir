@@ -1,19 +1,17 @@
 #include "mouse.h"
+#include <unistd.h>
 
 // Basic wrapper around Xlib button grabbing used for mouse-based scan mode
 
 Mouse::Mouse()
 {
     grabbed = false;
+    lastDown = false;
     loadButtonCode();
 }
 
 void Mouse::loadButtonCode()
 {
-    QCoreApplication::setOrganizationName( ORGANIZATION_NAME );
-    QCoreApplication::setOrganizationDomain( ORGANIZATION_DOMAIN );
-    QCoreApplication::setApplicationName( APPLICATION_NAME );
-
     QSettings settings;
     settings.beginGroup("Main");
     buttonCode = settings.value("mouseButton", 1).toInt();
@@ -27,49 +25,128 @@ bool Mouse::start()
         return false;
     screenNumber = DefaultScreen(display);
     grabbed = false;
-    if(buttonCode > 0){
-        XGrabButton(display, buttonCode, AnyModifier,
-                    DefaultRootWindow(display), False,
-                    ButtonPressMask, GrabModeAsync, GrabModeAsync,
-                    None, None);
-        grabbed = true;
-    }
+    // Button grabs are now performed explicitly via setButtonCode()
+    // once the application knows which scan mode is active.
     return true;
 }
 
 void Mouse::stop()
 {
-    if(grabbed && buttonCode > 0)
-        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
+    ungrabButton();
     if(display)
         XCloseDisplay(display);
 }
 
-unsigned int Mouse::grabButtonEvent()
+bool Mouse::grabButtonEvent()
 {
-    unsigned int result = 0;
+    bool triggered = processButtonEvents();
+
+    if (!triggered && display && buttonCode > 0) {
+        bool down = isButtonDown();
+        triggered = down && !lastDown;
+        lastDown = down;
+    }
+
+    return triggered;
+}
+
+bool Mouse::processButtonEvents()
+{
+    bool triggered = false;
+    if (!display || buttonCode <= 0)
+        return false;
+
     while (XPending(display)) {
         XEvent ev;
         XNextEvent(display, &ev);
-        if (ev.type == ButtonPress && ev.xbutton.button == buttonCode)
-            result = 1;
+        if (ev.type == ButtonPress && ev.xbutton.button == buttonCode) {
+            triggered = !lastDown;
+            lastDown = true;
+        } else if (ev.type == ButtonRelease && ev.xbutton.button == buttonCode) {
+            lastDown = false;
+        }
     }
-    return result;
+
+    return triggered;
+}
+
+bool Mouse::isButtonDown() const
+{
+    if (!display || buttonCode <= 0)
+        return false;
+
+    Window root_return, child_return;
+    int root_x, root_y, win_x, win_y;
+    unsigned int mask_return;
+    XQueryPointer(display, DefaultRootWindow(display),
+                  &root_return, &child_return,
+                  &root_x, &root_y, &win_x, &win_y,
+                  &mask_return);
+    return mask_return & buttonMask();
+}
+
+void Mouse::ungrabButton()
+{
+    if(grabbed && buttonCode > 0 && display){
+        XUngrabButton(display, buttonCode, AnyModifier,
+                      DefaultRootWindow(display));
+        // Release any active pointer grab so synthetic events reach
+        // the target window even if the physical button is still pressed
+        XUngrabPointer(display, CurrentTime);
+        XSync(display, False);
+        grabbed = false;
+    }
+}
+
+void Mouse::ungrabPointer()
+{
+    if(display){
+        XUngrabPointer(display, CurrentTime);
+        XSync(display, False);
+    }
+}
+
+void Mouse::waitForRelease()
+{
+    if(!display || buttonCode <= 0)
+        return;
+    while (true) {
+        processButtonEvents();
+        if (!isButtonDown())
+            break;
+        usleep(1000);
+    }
+
+    lastDown = false;
 }
 
 void Mouse::setButtonCode(int i)
 {
-    if(grabbed && buttonCode > 0 && display){
-        XUngrabButton(display, buttonCode, AnyModifier, DefaultRootWindow(display));
-        grabbed = false;
-    }
+    if(buttonCode == i)
+        return;
+
+    ungrabButton();
     buttonCode = i;
+    lastDown = false;
     if(buttonCode > 0 && display){
         XGrabButton(display, buttonCode, AnyModifier,
                     DefaultRootWindow(display), False,
                     ButtonPressMask, GrabModeAsync, GrabModeAsync,
                     None, None);
+        XSync(display, False);
         grabbed = true;
+    }
+}
+
+unsigned int Mouse::buttonMask() const
+{
+    switch(buttonCode){
+        case 1: return Button1Mask;
+        case 2: return Button2Mask;
+        case 3: return Button3Mask;
+        case 4: return Button4Mask;
+        case 5: return Button5Mask;
+        default: return 0;
     }
 }
 
