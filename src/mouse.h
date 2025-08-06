@@ -33,7 +33,6 @@ public:
     void waitForRelease();
     // Release any active pointer grab without altering the button grab
     void ungrabPointer();
-
 private:
     Display *display;      // connection to the X server
     int screenNumber;      // default screen index
@@ -43,6 +42,11 @@ private:
 
     void ungrabButton();   // helper to release current grab
     unsigned int buttonMask() const; // mask for XQueryPointer
+    // Process pending X events and update button state; returns true if a new
+    // press was detected
+    bool processButtonEvents();
+    // Query the current physical state of the watched button
+    bool isButtonDown() const;
 };
 
 #endif // MOUSE_H

@@ -39,7 +39,22 @@ void Mouse::stop()
 
 bool Mouse::grabButtonEvent()
 {
+    bool triggered = processButtonEvents();
+
+    if (!triggered && display && buttonCode > 0) {
+        bool down = isButtonDown();
+        triggered = down && !lastDown;
+        lastDown = down;
+    }
+
+    return triggered;
+}
+
+bool Mouse::processButtonEvents()
+{
     bool triggered = false;
+    if (!display || buttonCode <= 0)
+        return false;
 
     while (XPending(display)) {
         XEvent ev;
@@ -52,20 +67,22 @@ bool Mouse::grabButtonEvent()
         }
     }
 
-    if (!triggered && display && buttonCode > 0) {
-        Window root_return, child_return;
-        int root_x, root_y, win_x, win_y;
-        unsigned int mask_return;
-        XQueryPointer(display, DefaultRootWindow(display),
-                      &root_return, &child_return,
-                      &root_x, &root_y, &win_x, &win_y,
-                      &mask_return);
-        bool down = mask_return & buttonMask();
-        triggered = down && !lastDown;
-        lastDown = down;
-    }
-
     return triggered;
+}
+
+bool Mouse::isButtonDown() const
+{
+    if (!display || buttonCode <= 0)
+        return false;
+
+    Window root_return, child_return;
+    int root_x, root_y, win_x, win_y;
+    unsigned int mask_return;
+    XQueryPointer(display, DefaultRootWindow(display),
+                  &root_return, &child_return,
+                  &root_x, &root_y, &win_x, &win_y,
+                  &mask_return);
+    return mask_return & buttonMask();
 }
 
 void Mouse::ungrabButton()
@@ -93,28 +110,12 @@ void Mouse::waitForRelease()
 {
     if(!display || buttonCode <= 0)
         return;
-
-    Window root_return, child_return;
-    int root_x, root_y, win_x, win_y;
-    unsigned int mask_return;
-
-    do {
-        while(XPending(display)) {
-            XEvent ev;
-            XNextEvent(display, &ev);
-            if(ev.type == ButtonRelease && ev.xbutton.button == buttonCode)
-                lastDown = false;
-            else if(ev.type == ButtonPress && ev.xbutton.button == buttonCode)
-                lastDown = true;
-        }
-
-        XQueryPointer(display, DefaultRootWindow(display),
-                      &root_return, &child_return,
-                      &root_x, &root_y, &win_x, &win_y,
-                      &mask_return);
-        if(mask_return & buttonMask())
-            usleep(1000);
-    } while(mask_return & buttonMask());
+    while (true) {
+        processButtonEvents();
+        if (!isButtonDown())
+            break;
+        usleep(1000);
+    }
 
     lastDown = false;
 }
